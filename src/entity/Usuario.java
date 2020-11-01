@@ -3,16 +3,16 @@ package entity;
 public class Usuario {
 
 	private int idUsuario;
-	private String usuario;
+	private String login;
 	private String senha;
 
 	public Usuario() {
 
 	}
 
-	public Usuario(String usuario, String senha) {
+	public Usuario(String login, String senha) {
 		super();
-		this.usuario = usuario;
+		this.login = login;
 		this.senha = senha;
 	}
 
@@ -24,12 +24,12 @@ public class Usuario {
 		this.idUsuario = idUsuario;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getSenha() {
@@ -38,6 +38,11 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	@Override
+	public String toString() {
+		return "[idUsuario=" + idUsuario + ", login=" + login + ", senha=" + senha + "]";
 	}
 
 }

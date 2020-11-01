@@ -14,9 +14,9 @@ public class TelaLogin extends Application {
 	@Override
 	public void start(Stage stage) {
 		Pane painel = new Pane();
-		Scene scn = new Scene(painel, 300, 140);
+		Scene scn = new Scene(painel, 350, 140);
 		stage.setResizable(false);
-		Label lblUser = new Label("usu�rio: ");
+		Label lblUser = new Label("usuario: ");
 		lblUser.relocate(20, 14);
 		TextField txtUser = new TextField();
 		txtUser.relocate(100, 10);
@@ -30,7 +30,7 @@ public class TelaLogin extends Application {
 
 		Button btnEntrar = new Button("Entrar");
 		btnEntrar.relocate(100, 80);
-		Hyperlink hplEsqueci = new Hyperlink("Esqueci a senha?");
+		Hyperlink hplEsqueci = new Hyperlink("Esqueceu a senha?");
 
 		hplEsqueci.relocate(180, 80);
 
