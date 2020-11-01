@@ -19,7 +19,6 @@ public class UsuarioDao {
 		c = con.getConnection();
 
 	}
-	
 
 	public void insereUsuario(Usuario u) throws SQLException {
 		String sql = "INSERT INTO USUARIO VALUES(?,?,?)";
@@ -44,34 +43,29 @@ public class UsuarioDao {
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
-			
-		u.setIdUsuario(rs.getInt("ID_USUARIO"));
-		u.setLogin(rs.getString("LOGIN"));
-		u.setSenha(rs.getString("SENHA"));
-		u.setfKFuncionario(rs.getInt("FK_FUNCIONARIO_USUARIO"));
-		
+
+			u.setIdUsuario(rs.getInt("ID_USUARIO"));
+			u.setLogin(rs.getString("LOGIN"));
+			u.setSenha(rs.getString("SENHA"));
+			u.setfKFuncionario(rs.getInt("FK_FUNCIONARIO_USUARIO"));
+
 		}
-		
+
 		rs.close();
 		ps.close();
 
 		return u;
 
 	}
-	
-	public void atualizarSenha(int idUsuario, String senhaNova) throws SQLException {
 
-		Usuario u = new Usuario();
+	public void atualizarSenha(int idUsuario, String senhaNova) throws SQLException {
 
 		String sql = "UPDATE USUARIO SET SENHA = ? WHERE ID_USUARIO = ?";
 		PreparedStatement ps = c.prepareStatement(sql);
 		ps.setString(1, senhaNova);
 		ps.setInt(2, idUsuario);
 
-		
 		ps.close();
-
-		
 
 	}
 
