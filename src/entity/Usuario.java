@@ -1,6 +1,6 @@
 package entity;
 
-public class Usuario {
+public class Usuario extends Funcionario {
 
 	private int idUsuario;
 	private String login;
