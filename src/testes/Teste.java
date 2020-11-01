@@ -13,14 +13,7 @@ public class Teste {
 
 			UsuarioDao uDao = new UsuarioDao();
 
-			Usuario usuario = uDao.buscaUsuarioUsuario("joão");
-
-			if (usuario.getIdUsuario() == 0 || usuario == null) {
-				System.out.println("usuario não existe");
-			} else {
-
-				System.out.println(usuario);
-			}
+			uDao.atualizarSenha(5, "senha");
 
 		} catch (SQLException | ClassNotFoundException e) {
 			// TODO Auto-generated catch block

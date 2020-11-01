@@ -19,13 +19,14 @@ public class UsuarioDao {
 		c = con.getConnection();
 
 	}
+	
 
-	public void insereUsuario(Usuario u, int fKFuncionario) throws SQLException {
+	public void insereUsuario(Usuario u) throws SQLException {
 		String sql = "INSERT INTO USUARIO VALUES(?,?,?)";
 		PreparedStatement ps = c.prepareStatement(sql);
 		ps.setString(1, u.getLogin());
 		ps.setString(2, u.getSenha());
-		ps.setInt(3, fKFuncionario);
+		ps.setInt(3, u.getfKFuncionario());
 
 		ps.execute();
 		ps.close();
@@ -36,7 +37,7 @@ public class UsuarioDao {
 
 		Usuario u = new Usuario();
 
-		String sql = "SELECT ID_USUARIO, LOGIN, SENHA FROM USUARIO WHERE LOGIN = ?";
+		String sql = "SELECT ID_USUARIO, LOGIN, SENHA,FK_FUNCIONARIO_USUARIO FROM USUARIO WHERE LOGIN = ?";
 		PreparedStatement ps = c.prepareStatement(sql);
 		ps.setString(1, usuario);
 
@@ -47,6 +48,7 @@ public class UsuarioDao {
 		u.setIdUsuario(rs.getInt("ID_USUARIO"));
 		u.setLogin(rs.getString("LOGIN"));
 		u.setSenha(rs.getString("SENHA"));
+		u.setfKFuncionario(rs.getInt("FK_FUNCIONARIO_USUARIO"));
 		
 		}
 		
@@ -54,6 +56,22 @@ public class UsuarioDao {
 		ps.close();
 
 		return u;
+
+	}
+	
+	public void atualizarSenha(int idUsuario, String senhaNova) throws SQLException {
+
+		Usuario u = new Usuario();
+
+		String sql = "UPDATE USUARIO SET SENHA = ? WHERE ID_USUARIO = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, senhaNova);
+		ps.setInt(2, idUsuario);
+
+		
+		ps.close();
+
+		
 
 	}
 

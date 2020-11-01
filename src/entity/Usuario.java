@@ -5,6 +5,7 @@ public class Usuario {
 	private int idUsuario;
 	private String login;
 	private String senha;
+	private int fKFuncionario;
 
 	public Usuario() {
 
@@ -14,6 +15,13 @@ public class Usuario {
 		super();
 		this.login = login;
 		this.senha = senha;
+	}
+
+	public Usuario(String login, String senha, int fKFuncionario) {
+		super();
+		this.login = login;
+		this.senha = senha;
+		this.fKFuncionario = fKFuncionario;
 	}
 
 	public int getIdUsuario() {
@@ -40,9 +48,17 @@ public class Usuario {
 		this.senha = senha;
 	}
 
+	public int getfKFuncionario() {
+		return fKFuncionario;
+	}
+
+	public void setfKFuncionario(int fKFuncionario) {
+		this.fKFuncionario = fKFuncionario;
+	}
+
 	@Override
 	public String toString() {
-		return "[idUsuario=" + idUsuario + ", login=" + login + ", senha=" + senha + "]";
+		return "[idUsuario=" + idUsuario + ", login=" + login + ", senha=" + senha + ", fKFuncionario=" + fKFuncionario + "]";
 	}
 
 }
