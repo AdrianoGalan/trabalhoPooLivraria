@@ -24,5 +24,9 @@ public class Conexao {
 		
 	}
 	
+	public void closeConnection() throws SQLException {
+		c.close();
+	}
+	
 
 }

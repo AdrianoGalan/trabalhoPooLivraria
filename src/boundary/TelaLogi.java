@@ -1,10 +1,12 @@
 package boundary;
 
+import control.GetenciadorPrincipal;
+import entity.Usuario;
+
 import java.sql.SQLException;
 
 import control.ControlUsuario;
-import entity.Usuario;
-import javafx.application.Application;
+import control.ControleTelas;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -14,20 +16,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 import util.Mensagens;
 
-public class TelaLogin extends Application implements EventHandler<ActionEvent> {
+public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 
-	TextField txtUser = new TextField();
-	PasswordField txtSenha = new PasswordField();
+	private TextField txtUser = new TextField();
+	private PasswordField txtSenha = new PasswordField();
+	private GetenciadorPrincipal gp;
 
 	@Override
-	public void start(Stage stage) {
+	public Pane render() {
 
 		Pane painel = new Pane();
 		Scene scn = new Scene(painel, 350, 140);
-		stage.setResizable(false);
+		// stage.setResizable(false);
 		Label lblUser = new Label("usuario: ");
 		lblUser.relocate(20, 14);
 
@@ -49,45 +51,41 @@ public class TelaLogin extends Application implements EventHandler<ActionEvent> 
 		painel.getChildren().addAll(lblUser, txtUser, lblSenha, txtSenha, btnEntrar, hplEsqueci);
 
 		// coloca uma ação aos botões
-		btnEntrar.addEventHandler(ActionEvent.ACTION, this);
-		hplEsqueci.addEventHandler(ActionEvent.ACTION, this);
-
-		stage.setScene(scn);
-		stage.setTitle("Tela Login");
-		stage.show();
+		 btnEntrar.addEventHandler(ActionEvent.ACTION, this);
+		 hplEsqueci.addEventHandler(ActionEvent.ACTION, this);
+		return painel;
 	}
 
-	private Usuario boundaryParaUsuario() {
-		Usuario u = new Usuario();
-		u.setLogin(txtUser.getText());
-		u.setSenha(txtSenha.getText());
-		return u;
+	@Override
+	public void setGerenciadorPrincipal(GetenciadorPrincipal gp) {
+		
+		this.gp = gp;
+
 	}
 
-	// executa a ação
 	@Override
 	public void handle(ActionEvent event) {
-		
 		ControlUsuario cU = new ControlUsuario();
 
 		// verifica qual botão foi clicado
 		if (event.getTarget().toString().contains("Entrar") && veridicaCampos()) {
-			
+
 			Usuario u = boundaryParaUsuario();
 			try {
-				
-				if(cU.logarNoSistema(u)) {
-					Mensagens.informacao("Entrou", "Usuairo logado", "Q coisa linda");
+
+				if (cU.logarNoSistema(u)) {
+					gp.idFuncionari(u.getfKFuncionario());
+					gp.comando("foi");
 				}
-				
+
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Mensagens.erro("Erro conexão", "Erro ao se conectar com o banco", "Procure o administrador");
 			}
-			
+
 		}
 
 		if (event.getTarget().toString().contains("a senha")) {
@@ -112,9 +110,12 @@ public class TelaLogin extends Application implements EventHandler<ActionEvent> 
 		}
 		return true;
 	}
-
-	public static void main(String[] args) {
-		Application.launch(TelaLogin.class, args);
+	
+	private Usuario boundaryParaUsuario() {
+		Usuario u = new Usuario();
+		u.setLogin(txtUser.getText());
+		u.setSenha(txtSenha.getText());
+		return u;
 	}
 
 }

@@ -29,6 +29,7 @@ public class UsuarioDao {
 
 		ps.execute();
 		ps.close();
+		
 
 	}
 
