@@ -40,8 +40,14 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private ControleTelas telaCadastroAutor = new TelaCadastroAutor();
 	private ControleTelas telaPesquisaCliente = new TelaPesquisaCliente();
 	private ControleTelas telaPesquisaLivro = new TelaPesquisaLivro();
+	private ControleTelas telaControleRelatorio = new TelaControleRelatorio();
+	private ControleTelas telaControleEstoque = new TelaControleEstoque();
+	private ControleTelas telaVendaLivro = new TelaVendaLivro();
 
 	// itens do menu
+	private MenuItem menuInicioTelaInicio = new MenuItem("Tela Inicial");
+	private MenuItem menuInicioSair = new MenuItem("Sair");
+
 	private MenuItem menuCadastrarCliente = new MenuItem("Cliente");
 	private MenuItem menuCadastrarLivro = new MenuItem("Livro");
 	private MenuItem menuCadastrarAutor = new MenuItem("Autor");
@@ -63,6 +69,8 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 		this.stage = stage;
 
+		menuInicioTelaInicio.setOnAction(this);
+		menuInicioSair.setOnAction(this);
 		menuCadastrarCliente.setOnAction(this);
 		menuCadastrarLivro.setOnAction(this);
 		menuCadastrarAutor.setOnAction(this);
@@ -82,6 +90,11 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		telaPesquisaCliente.setGerenciadorPrincipal(this);
 		telaPesquisaLivro.setGerenciadorPrincipal(this);
 
+		telaControleEstoque.setGerenciadorPrincipal(this);
+		telaControleRelatorio.setGerenciadorPrincipal(this);
+
+		telaVendaLivro.setGerenciadorPrincipal(this);
+
 		painelLogin.setCenter(telaLogin.render());
 
 		stage.setScene(login);
@@ -97,6 +110,9 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private void setTelaPrincipal() {
 
 		MenuBar menuPrincipal = new MenuBar();
+
+		Menu menuInicio = new Menu("Inicio");
+		menuInicio.getItems().addAll(menuInicioTelaInicio, menuInicioSair);
 
 		Menu menuCadastrar = new Menu("Cadastrar");
 		menuCadastrar.getItems().addAll(menuCadastrarCliente, menuCadastrarLivro, menuCadastrarAutor);
@@ -118,7 +134,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 			menuUsuario.getItems().addAll(menuUsuarioTrocaSenha);
 		}
 
-		menuPrincipal.getMenus().addAll(menuCadastrar, menuPesquisar, menuControle, menuVenda, menuUsuario);
+		menuPrincipal.getMenus().addAll(menuInicio, menuCadastrar, menuPesquisar, menuControle, menuVenda, menuUsuario);
 
 		painelPrincipal.setTop(menuPrincipal);
 		painelPrincipal.setCenter(telaInicial.render());
@@ -151,7 +167,6 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 		if (e.getTarget() == menuCadastrarCliente) {
 			this.painelPrincipal.setCenter(telaCadastroCliente.render());
-
 		} else if (e.getTarget() == menuCadastrarLivro) {
 			this.painelPrincipal.setCenter(telaCadastroLivro.render());
 		} else if (e.getTarget() == menuCadastrarAutor) {
@@ -160,6 +175,16 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 			this.painelPrincipal.setCenter(telaPesquisaCliente.render());
 		} else if (e.getTarget() == menuPesquuisarLivro) {
 			this.painelPrincipal.setCenter(telaPesquisaLivro.render());
+		} else if (e.getTarget() == menuControleEstoque) {
+			this.painelPrincipal.setCenter(telaControleEstoque.render());
+		} else if (e.getTarget() == menuControleRelatorio) {
+			this.painelPrincipal.setCenter(telaControleRelatorio.render());
+		} else if (e.getTarget() == menuVendaLivro) {
+			this.painelPrincipal.setCenter(telaVendaLivro.render());
+		} else if (e.getTarget() == menuInicioTelaInicio) {
+			this.painelPrincipal.setCenter(telaInicial.render());
+		} else if (e.getTarget() == menuInicioSair) {
+			comando("sair");
 		}
 
 	}
@@ -170,8 +195,10 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		if (cmd.equals("telaInicial")) {
 			this.painelPrincipal.setCenter(telaInicial.render());
 			setTelaPrincipal();
-		} else if (cmd.equals("menuCadastrarCliente")) {
+		}
 
+		if (cmd.equals("sair")) {
+			System.exit(0);
 		}
 
 	}
