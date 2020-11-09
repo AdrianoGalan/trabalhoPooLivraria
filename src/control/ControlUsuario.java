@@ -8,7 +8,7 @@ import util.Mensagens;
 
 public class ControlUsuario {
 	
-	public boolean logarNoSistema(Usuario u) throws ClassNotFoundException, SQLException {
+	public Usuario logarNoSistema(Usuario u) throws ClassNotFoundException, SQLException {
 		
 		
 		UsuarioDao uDao = new UsuarioDao();
@@ -16,11 +16,11 @@ public class ControlUsuario {
 		
 		if(u.getSenha().equals(uBanco.getSenha())) {
 			
-			return true;
+			return uBanco;
 		}
 		
 		Mensagens.erro("Erro login", "Usuario ou senha invalido", "Digite usuari e senha valido");
-		return false;
+		return null;
 	}
 
 }

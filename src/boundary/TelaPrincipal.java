@@ -1,7 +1,12 @@
 package boundary;
 
 import control.GetenciadorPrincipal;
+import entity.Funcionario;
 import entity.Usuario;
+
+import java.sql.SQLException;
+
+import DAO.FuncionarioDao;
 import control.ControleTelas;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -15,8 +20,8 @@ import javafx.stage.Stage;
 
 public class TelaPrincipal extends Application implements GetenciadorPrincipal, EventHandler<ActionEvent> {
 
+	Funcionario fLogado;
 
-	
 	// painel
 	private BorderPane painelLogin = new BorderPane();
 	private BorderPane painelPrincipal = new BorderPane();
@@ -29,28 +34,55 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 	// telas
 	private ControleTelas telaLogin = new TelaLogi();
+	private ControleTelas telaInicial = new TelaInicial();
+	private ControleTelas telaCadastroCliente = new TelaCadastroCliente();
+	private ControleTelas telaCadastroLivro = new TelaCadastroLivro();
+	private ControleTelas telaCadastroAutor = new TelaCadastroAutor();
+	private ControleTelas telaPesquisaCliente = new TelaPesquisaCliente();
+	private ControleTelas telaPesquisaLivro = new TelaPesquisaLivro();
 
-	// itensa do menu
+	// itens do menu
 	private MenuItem menuCadastrarCliente = new MenuItem("Cliente");
 	private MenuItem menuCadastrarLivro = new MenuItem("Livro");
 	private MenuItem menuCadastrarAutor = new MenuItem("Autor");
+
 	private MenuItem menuPesquuisarCliente = new MenuItem("Cliente");
 	private MenuItem menuPesquuisarLivro = new MenuItem("Livro");
+
 	private MenuItem menuControleEstoque = new MenuItem("Estoque");
 	private MenuItem menuControleRelatorio = new MenuItem("Relatorio");
-	private MenuItem menuVendaLivro = new MenuItem("Livro");
-	
 
-	private ControleTelas telaAtual = telaLogin;
+	private MenuItem menuVendaLivro = new MenuItem("Livro");
+
+	private MenuItem menuUsuarioTrocaSenha = new MenuItem("Trocar Senha");
+	private MenuItem menuUsuarioCadastrar = new MenuItem("Novo");
+	private MenuItem menuUsuarioDeletar = new MenuItem("Deletar");
 
 	@Override
 	public void start(Stage stage) throws Exception {
 
 		this.stage = stage;
 
-		telaLogin.setGerenciadorPrincipal(this);
+		menuCadastrarCliente.setOnAction(this);
+		menuCadastrarLivro.setOnAction(this);
+		menuCadastrarAutor.setOnAction(this);
+		menuPesquuisarCliente.setOnAction(this);
+		menuPesquuisarLivro.setOnAction(this);
+		menuControleEstoque.setOnAction(this);
+		menuControleRelatorio.setOnAction(this);
+		menuVendaLivro.setOnAction(this);
 
-		painelLogin.setCenter(telaAtual.render());
+		telaLogin.setGerenciadorPrincipal(this);
+		telaInicial.setGerenciadorPrincipal(this);
+
+		telaCadastroCliente.setGerenciadorPrincipal(this);
+		telaCadastroLivro.setGerenciadorPrincipal(this);
+		telaCadastroAutor.setGerenciadorPrincipal(this);
+
+		telaPesquisaCliente.setGerenciadorPrincipal(this);
+		telaPesquisaLivro.setGerenciadorPrincipal(this);
+
+		painelLogin.setCenter(telaLogin.render());
 
 		stage.setScene(login);
 		stage.setTitle("Login Livraria");
@@ -74,23 +106,22 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 		Menu menuControle = new Menu("Controle");
 		menuControle.getItems().addAll(menuControleEstoque, menuControleRelatorio);
-		
+
 		Menu menuVenda = new Menu("Venda");
 		menuVenda.getItems().addAll(menuVendaLivro);
 
-		menuPrincipal.getMenus().addAll(menuCadastrar, menuPesquisar, menuControle, menuVenda);
-		
-		menuCadastrarCliente.setOnAction(this);
-		menuCadastrarLivro.setOnAction(this);
-		menuCadastrarAutor.setOnAction(this);
-		menuPesquuisarCliente.setOnAction(this);
-		menuPesquuisarLivro.setOnAction(this);
-		menuControleEstoque.setOnAction(this);
-		menuControleRelatorio.setOnAction(this);
-		menuVendaLivro.setOnAction(this);
-		
+		Menu menuUsuario = new Menu("Usuario");
+
+		if (fLogado.getCargo().equals("GERENTE")) {
+			menuUsuario.getItems().addAll(menuUsuarioCadastrar, menuUsuarioDeletar, menuUsuarioTrocaSenha);
+		} else {
+			menuUsuario.getItems().addAll(menuUsuarioTrocaSenha);
+		}
+
+		menuPrincipal.getMenus().addAll(menuCadastrar, menuPesquisar, menuControle, menuVenda, menuUsuario);
+
 		painelPrincipal.setTop(menuPrincipal);
-		
+		painelPrincipal.setCenter(telaInicial.render());
 
 		this.stage.setMaximized(true);
 		this.stage.setScene(principal);
@@ -100,36 +131,56 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 	}
 
+	private void logarFuncionario(int idFuncionario) {
+
+		try {
+			FuncionarioDao fDao = new FuncionarioDao();
+			fLogado = fDao.buscaFuncionarioId(idFuncionario);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	@Override
 	public void handle(ActionEvent e) {
-		if (e.getTarget() == menuControleRelatorio) {
-			comando("sair");
+
+		if (e.getTarget() == menuCadastrarCliente) {
+			this.painelPrincipal.setCenter(telaCadastroCliente.render());
+
+		} else if (e.getTarget() == menuCadastrarLivro) {
+			this.painelPrincipal.setCenter(telaCadastroLivro.render());
+		} else if (e.getTarget() == menuCadastrarAutor) {
+			this.painelPrincipal.setCenter(telaCadastroAutor.render());
+		} else if (e.getTarget() == menuPesquuisarCliente) {
+			this.painelPrincipal.setCenter(telaPesquisaCliente.render());
+		} else if (e.getTarget() == menuPesquuisarLivro) {
+			this.painelPrincipal.setCenter(telaPesquisaLivro.render());
 		}
-		System.out.println(e.getTarget());
 
 	}
 
 	@Override
 	public void comando(String cmd) {
 
-		if (cmd.equals("foi")) {
+		if (cmd.equals("telaInicial")) {
+			this.painelPrincipal.setCenter(telaInicial.render());
 			setTelaPrincipal();
-		}else if (cmd.equals("sair")) {
-			System.exit(0);
+		} else if (cmd.equals("menuCadastrarCliente")) {
+
 		}
 
 	}
 
 	@Override
-	public void idFuncionari(int idFuncionario) {
-	 
-		 
-		
+	public void id(int idFuncionario) {
+
+		logarFuncionario(idFuncionario);
+
 	}
 
-	
-
-	
-
-	
 }

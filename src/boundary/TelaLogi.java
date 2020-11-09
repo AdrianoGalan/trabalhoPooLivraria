@@ -71,11 +71,12 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 		if (event.getTarget().toString().contains("Entrar") && veridicaCampos()) {
 
 			Usuario u = boundaryParaUsuario();
+			
 			try {
-
-				if (cU.logarNoSistema(u)) {
-					gp.idFuncionari(u.getfKFuncionario());
-					gp.comando("foi");
+				u = cU.logarNoSistema(u);
+				if (u != null) {
+					gp.id(u.getfKFuncionario());
+					gp.comando("telaInicial");
 				}
 
 			} catch (ClassNotFoundException e) {

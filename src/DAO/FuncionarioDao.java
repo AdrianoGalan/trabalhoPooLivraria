@@ -43,7 +43,7 @@ public class FuncionarioDao {
 		String sql = "SELECT ID_FUNCIONARIO, CARGO, MATRICULA, DATA_ADMISSAO, "
 				+ "FK_PESSOA_FUNCIONARIO FROM FUNCIONARIO  WHERE ID_FUNCIONARIO = ?";
 		PreparedStatement ps = c.prepareStatement(sql);
-		ps.setInt(0, id);
+		ps.setInt(1, id);
 
 		ResultSet rs = ps.executeQuery();
 
