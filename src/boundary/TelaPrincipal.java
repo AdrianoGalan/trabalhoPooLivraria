@@ -28,7 +28,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 	// cena
 	private Scene login = new Scene(painelLogin, 350, 140);
-	private Scene principal = new Scene(painelPrincipal, 800, 600);
+	private Scene principal = new Scene(painelPrincipal, 1000, 600);
 
 	private Stage stage = new Stage();
 
@@ -126,20 +126,26 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		Menu menuVenda = new Menu("Venda");
 		menuVenda.getItems().addAll(menuVendaLivro);
 
-		Menu menuUsuario = new Menu("Usuario");
+		
 
 		if (fLogado.getCargo().equals("GERENTE")) {
+			Menu menuUsuario = new Menu("Usuario");
 			menuUsuario.getItems().addAll(menuUsuarioCadastrar, menuUsuarioDeletar, menuUsuarioTrocaSenha);
+			menuPrincipal.getMenus().addAll(menuInicio, menuCadastrar, menuPesquisar, menuControle, menuVenda, menuUsuario);
+
 		} else {
-			menuUsuario.getItems().addAll(menuUsuarioTrocaSenha);
+			menuPrincipal.getMenus().addAll(menuInicio, menuCadastrar, menuPesquisar, menuControle, menuVenda);
+
 		}
+		
+		
 
-		menuPrincipal.getMenus().addAll(menuInicio, menuCadastrar, menuPesquisar, menuControle, menuVenda, menuUsuario);
-
+		
 		painelPrincipal.setTop(menuPrincipal);
 		painelPrincipal.setCenter(telaInicial.render());
+		painelPrincipal.setLeft(telaCadastroAutor.render());
 
-		this.stage.setMaximized(true);
+		//this.stage.setMaximized(true);
 		this.stage.setScene(principal);
 		this.stage.setTitle("Sistema Livraria");
 
