@@ -43,6 +43,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private ControleTelas telaControleRelatorio = new TelaControleRelatorio();
 	private ControleTelas telaControleEstoque = new TelaControleEstoque();
 	private ControleTelas telaVendaLivro = new TelaVendaLivro();
+	private ControleTelas telaControleUsuario = new TelaControleUsuario();
 
 	// itens do menu
 	private MenuItem menuInicioTelaInicio = new MenuItem("Tela Inicial");
@@ -60,9 +61,8 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 	private MenuItem menuVendaLivro = new MenuItem("Livro");
 
-	private MenuItem menuUsuarioTrocaSenha = new MenuItem("Trocar Senha");
-	private MenuItem menuUsuarioCadastrar = new MenuItem("Novo");
-	private MenuItem menuUsuarioDeletar = new MenuItem("Deletar");
+	private MenuItem menuControleUsuario = new MenuItem("Controle de usuários");
+
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -79,6 +79,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		menuControleEstoque.setOnAction(this);
 		menuControleRelatorio.setOnAction(this);
 		menuVendaLivro.setOnAction(this);
+		menuControleUsuario.setOnAction(this);
 
 		telaLogin.setGerenciadorPrincipal(this);
 		telaInicial.setGerenciadorPrincipal(this);
@@ -89,7 +90,8 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 		telaPesquisaCliente.setGerenciadorPrincipal(this);
 		telaPesquisaLivro.setGerenciadorPrincipal(this);
-
+		
+		telaControleUsuario.setGerenciadorPrincipal(this);
 		telaControleEstoque.setGerenciadorPrincipal(this);
 		telaControleRelatorio.setGerenciadorPrincipal(this);
 
@@ -130,7 +132,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 		if (fLogado.getCargo().equals("GERENTE")) {
 			Menu menuUsuario = new Menu("Usuario");
-			menuUsuario.getItems().addAll(menuUsuarioCadastrar, menuUsuarioDeletar, menuUsuarioTrocaSenha);
+			menuUsuario.getItems().addAll(menuControleUsuario);
 			menuPrincipal.getMenus().addAll(menuInicio, menuCadastrar, menuPesquisar, menuControle, menuVenda, menuUsuario);
 
 		} else {
@@ -189,6 +191,8 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 			this.painelPrincipal.setCenter(telaVendaLivro.render());
 		} else if (e.getTarget() == menuInicioTelaInicio) {
 			this.painelPrincipal.setCenter(telaInicial.render());
+		} else if (e.getTarget() == menuControleUsuario) {
+			this.painelPrincipal.setCenter(telaControleUsuario.render());
 		} else if (e.getTarget() == menuInicioSair) {
 			comando("sair");
 		}

@@ -14,47 +14,37 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEvent>  {
-
-	@Override
-	public void handle(ActionEvent e) {
-		
-		
-	}
+public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEvent> {
+	
+	
 
 	@Override
 	public Pane render() {
 		Pane painel = new Pane();
 		
-	
+		
 		HBox hbBotao = new HBox();
-		hbBotao.setSpacing(20);
+		hbBotao.setSpacing(180);
 		
 		VBox vbEs = new VBox();
 		// new Insets(y, ?, ?, x)
 		vbEs.setPadding(new Insets(25, 0, 15, 100));
 		vbEs.setSpacing(15);
 		
-		Label lblPesquisa = new Label("Digite:");
-		TextField tfPesquisa = new TextField();
-		Button btPesquisar = new Button("Pesquisar");
 		TableView<String> tbvPesqCliente = new TableView<String>();
-		TableColumn<String, String> coluna = new TableColumn<String, String>("Cliente");
+		TableColumn<String, String> coluna = new TableColumn<String, String>("Usuario");
 		tbvPesqCliente.getColumns().add(coluna);
 		tbvPesqCliente.setPrefWidth(600);
 		
-		
-		hbBotao.getChildren().add(lblPesquisa);
-		lblPesquisa.setPadding(new Insets(5, 0, 0, 0));
-		tfPesquisa.setPrefWidth(250);
-		hbBotao.getChildren().add(tfPesquisa);
-		hbBotao.getChildren().add(btPesquisar);
-		
+		Button btNovoUsuario = new Button("Novo usuário");
+		Button btAlterar = new Button("Alterar usuário");
+		Button btExcluir = new Button("Excluir usuário");
+		hbBotao.getChildren().addAll(btNovoUsuario,btAlterar,btExcluir);
 		
 	
-		
-		vbEs.getChildren().add(hbBotao);
 		vbEs.getChildren().add(tbvPesqCliente);
+		vbEs.getChildren().add(hbBotao);
+		
 		
 		painel.getChildren().add(vbEs);
 
@@ -67,6 +57,12 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void handle(ActionEvent event) {
 		// TODO Auto-generated method stub
 		
 	}
