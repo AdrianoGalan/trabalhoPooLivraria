@@ -4,7 +4,10 @@ import control.GetenciadorPrincipal;
 import entity.Funcionario;
 import entity.Usuario;
 
+import java.awt.Dimension;
 import java.sql.SQLException;
+
+import com.sun.javafx.tk.Toolkit;
 
 import DAO.FuncionarioDao;
 import control.ControleTelas;
@@ -61,7 +64,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 	private MenuItem menuVendaLivro = new MenuItem("Livro");
 
-	private MenuItem menuControleUsuario = new MenuItem("Controle de usuários");
+	private MenuItem menuControleUsuario = new MenuItem("Controle de usuï¿½rios");
 
 
 	@Override
@@ -147,8 +150,13 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		painelPrincipal.setCenter(telaInicial.render());
 		painelPrincipal.setLeft(telaCadastroAutor.render());
 
+	
+
 		//this.stage.setMaximized(true);
 		this.stage.setScene(principal);
+		this.stage.setResizable(false);
+		this.stage.setX(50);
+		this.stage.setY(50);
 		this.stage.setTitle("Sistema Livraria");
 
 		this.stage.show();
