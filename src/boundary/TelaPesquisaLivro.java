@@ -112,16 +112,22 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 		TableColumn<Livro,String> colAno = new TableColumn<>("Ano");
 		colAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
 		
+		TableColumn<Livro,Double> colPreco = new TableColumn<>("Preço Atual");
+		colPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+		
+		
 		TableColumn<Livro,Integer> colEstoque = new TableColumn<>("Qnt estoque");
 		colEstoque.setCellValueFactory(new PropertyValueFactory<>("qtsEstoque"));
 		
 		TableColumn<Livro,String> colIdioma = new TableColumn<>("Idioma");
 		colIdioma.setCellValueFactory(new PropertyValueFactory<>("idioma"));
 		
+		
+		
 		TableColumn<Livro,String> colDescricao = new TableColumn<>("Descricao");
 		colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
 		
-		tbvPesqLivro.getColumns().addAll(colId, colTitulo, colISBN, colGenero, colEdicao, colAno, colEstoque, colIdioma,
+		tbvPesqLivro.getColumns().addAll(colId, colTitulo, colISBN, colGenero, colEdicao, colAno, colPreco,colEstoque, colIdioma, 
 				colDescricao);
 		tbvPesqLivro.setItems(controle.getLista());
 		

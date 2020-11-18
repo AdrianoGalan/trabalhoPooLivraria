@@ -43,6 +43,7 @@ public class LivroDao {
 			l.setAno(rs.getString("ANO"));
 			l.setQtsEstoque(rs.getInt("QTS_ESTOQUE"));
 			l.setIdioma(rs.getString("IDIOMA"));
+			l.setPreco(rs.getDouble("Preco_Atual"));
 			l.setDescricao(rs.getString("DESCRICAO"));
 			lista.add(l);
 			
