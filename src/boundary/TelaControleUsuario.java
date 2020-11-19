@@ -1,7 +1,11 @@
 package boundary;
 
+import java.sql.SQLException;
+
+import control.ControlUsuario;
 import control.ControleTelas;
 import control.GetenciadorPrincipal;
+import entity.Usuario;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,12 +14,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEvent> {
 	
+	private TableView<Usuario> tbvPesqCliente;
+	private Button btNovoUsuario;
+	private Button btAlterar;
+	private Button btExcluir;
+	private ControlUsuario controle = new ControlUsuario();
 	
 
 	@Override
@@ -31,14 +41,12 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 		vbEs.setPadding(new Insets(25, 0, 15, 100));
 		vbEs.setSpacing(15);
 		
-		TableView<String> tbvPesqCliente = new TableView<String>();
-		TableColumn<String, String> coluna = new TableColumn<String, String>("Usuario");
-		tbvPesqCliente.getColumns().add(coluna);
+		tbvPesqCliente = new TableView<Usuario>();
 		tbvPesqCliente.setPrefWidth(600);
 		
-		Button btNovoUsuario = new Button("Novo usuário");
-		Button btAlterar = new Button("Alterar usuário");
-		Button btExcluir = new Button("Excluir usuário");
+		btNovoUsuario = new Button("Novo usuário");
+		btAlterar = new Button("Alterar usuário");
+		btExcluir = new Button("Excluir usuário");
 		hbBotao.getChildren().addAll(btNovoUsuario,btAlterar,btExcluir);
 		
 	
@@ -47,12 +55,34 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 		
 		
 		painel.getChildren().add(vbEs);
-
+		carregaTabela();
 
 		
 
 	
 		return painel;
+	}
+	
+	
+	private void carregaTabela() {
+		
+		TableColumn<Usuario,Integer>colId = new TableColumn<>("id_Usuario");
+		colId.setCellValueFactory(new PropertyValueFactory<Usuario,Integer>("idUsuario"));
+		
+		TableColumn<Usuario,String>colLogin = new TableColumn<>("Login");
+		colLogin.setCellValueFactory(new PropertyValueFactory<Usuario,String>("login"));
+		
+		TableColumn<Usuario,String>colSenha = new TableColumn<>("Senha");
+		colSenha.setCellValueFactory(new PropertyValueFactory<Usuario,String>("senha"));
+		
+		tbvPesqCliente.getColumns().addAll(colId,colLogin,colSenha);
+		try {
+			tbvPesqCliente.setItems(controle.procurarUsuarios());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

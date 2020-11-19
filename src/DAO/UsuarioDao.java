@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import connection.Conexao;
 import entity.Usuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class UsuarioDao {
 
@@ -40,7 +42,7 @@ public class UsuarioDao {
 		String sql = "SELECT ID_USUARIO, LOGIN, SENHA,FK_FUNCIONARIO_USUARIO FROM USUARIO WHERE LOGIN = ?";
 		PreparedStatement ps = c.prepareStatement(sql);
 		ps.setString(1, usuario);
-
+		
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next()) {
@@ -57,6 +59,30 @@ public class UsuarioDao {
 
 		return u;
 
+	}
+	
+	public ObservableList<Usuario> buscaListaUsuarios() throws SQLException{
+		
+		ObservableList<Usuario> lista = FXCollections.observableArrayList();
+		String sql = "SELECT ID_USUARIO, LOGIN, SENHA,FK_FUNCIONARIO_USUARIO FROM USUARIO";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		Usuario u;
+		while (rs.next()) {
+			u = new Usuario();
+			u.setIdUsuario(rs.getInt("ID_USUARIO"));
+			u.setLogin(rs.getString("LOGIN"));
+			u.setSenha(rs.getString("SENHA"));
+			u.setfKFuncionario(rs.getInt("FK_FUNCIONARIO_USUARIO"));
+			
+			lista.add(u);
+		}
+
+		rs.close();
+		ps.close();
+
+		return lista;
+		
 	}
 
 	public void atualizarSenha(int idUsuario, String senhaNova) throws SQLException {
