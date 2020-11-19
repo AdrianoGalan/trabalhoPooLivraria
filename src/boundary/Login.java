@@ -1,3 +1,6 @@
+
+package boundary;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,7 +17,7 @@ public class Login extends Application {
 		Pane painel = new Pane();
 		Scene scn = new Scene(painel, 400, 200);
 		
-		Label lblUser = new Label("usuário: ");
+		Label lblUser = new Label("usuï¿½rio: ");
 		lblUser.relocate(20, 10);
 		TextField txtUser = new TextField();
 		txtUser.relocate(100, 10);

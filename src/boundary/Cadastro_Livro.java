@@ -1,3 +1,5 @@
+package boundary;
+
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -38,16 +40,16 @@ public class Cadastro_Livro extends Application {
 		hbBotao.getChildren().add(btOk);
 		hbBotao.getChildren().add(btCancelar);
 
-		vbEs.getChildren().add(new Label("Título:"));
+		vbEs.getChildren().add(new Label("Tï¿½tulo:"));
 		vbEs.getChildren().add(new Label("ISBN:"));
 		vbEs.getChildren().add(new Label("Autor:"));
-		vbEs.getChildren().add(new Label("Edição:"));
+		vbEs.getChildren().add(new Label("Ediï¿½ï¿½o:"));
 		vbEs.getChildren().add(new Label("Ano:"));
-		vbEs.getChildren().add(new Label("Gênero:"));
-		vbEs.getChildren().add(new Label("Descrição:"));
+		vbEs.getChildren().add(new Label("Gï¿½nero:"));
+		vbEs.getChildren().add(new Label("Descriï¿½ï¿½o:"));
 		vbEs.getChildren().add(new Label("Quantidade de livros no estoque:"));
 		vbEs.getChildren().add(new Label("Idioma:"));
-		vbEs.getChildren().add(new Label("Preço:"));
+		vbEs.getChildren().add(new Label("Preï¿½o:"));
 
 		vbEs.getChildren().add(hbBotao);
 

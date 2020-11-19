@@ -1,3 +1,5 @@
+package boundary;
+
 import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -42,7 +44,7 @@ HBox painel = new HBox();
 		vbEs.getChildren().add(new Label("Nome:"));
 		vbEs.getChildren().add(new Label("Telefone:"));
 		vbEs.getChildren().add(new Label("CPF:"));
-		vbEs.getChildren().add(new Label("Número:"));
+		vbEs.getChildren().add(new Label("Nï¿½mero:"));
 		vbEs.getChildren().add(new Label("Rua:"));
 		vbEs.getChildren().add(new Label("Logradouro:"));
 		vbEs.getChildren().add(new Label("Bairro:"));
