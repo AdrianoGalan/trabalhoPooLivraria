@@ -9,6 +9,7 @@ import entity.Usuario;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -18,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEvent> {
 	
@@ -26,6 +28,7 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 	private Button btAlterar;
 	private Button btExcluir;
 	private ControlUsuario controle = new ControlUsuario();
+	private TelaControlRegUsuario controleTelaReg = new TelaControlRegUsuario();
 	
 
 	@Override
@@ -45,6 +48,7 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 		tbvPesqCliente.setPrefWidth(600);
 		
 		btNovoUsuario = new Button("Novo usuário");
+		btNovoUsuario.addEventHandler(ActionEvent.ACTION,this);
 		btAlterar = new Button("Alterar usuário");
 		btExcluir = new Button("Excluir usuário");
 		hbBotao.getChildren().addAll(btNovoUsuario,btAlterar,btExcluir);
@@ -93,7 +97,8 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 	
 	@Override
 	public void handle(ActionEvent event) {
-		// TODO Auto-generated method stub
+		controleTelaReg.render();
+		
 		
 	}
 
