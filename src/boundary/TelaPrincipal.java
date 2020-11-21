@@ -148,7 +148,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		
 		painelPrincipal.setTop(menuPrincipal);
 		painelPrincipal.setCenter(telaInicial.render());
-		painelPrincipal.setLeft(telaCadastroAutor.render());
+//		painelPrincipal.setLeft(telaCadastroAutor.render());
 
 	
 
