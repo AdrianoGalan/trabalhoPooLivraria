@@ -5,14 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
-
 import connection.Conexao;
 import entity.Cliente;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 
-public class ClienteDao {
+public class ClienteDao implements IClienteDao{
 	private Connection c;
 
 	public ClienteDao() throws ClassNotFoundException, SQLException {
@@ -20,6 +19,22 @@ public class ClienteDao {
 		Conexao con = new Conexao();
 		c = con.getConnection();
 	}
+	
+	@Override
+	public void insereCliente(Cliente cliente) throws SQLException {
+		String sql = "INSERT INTO professor VALUES (?,?,?,?,?)";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setInt(1, cliente.getIdCliente());
+		ps.setString(2, cliente.getNome());
+		ps.setString(3, cliente.getCpf());
+		ps.setString(4, cliente.getEmail());
+		ps.setInt(5, cliente.getFkEdetecoPessoa());
+		
+
+		ps.execute();
+		ps.close();
+	}
+
 	
 	public ObservableList<Cliente> buscaClienteNome(String nome) throws SQLException {
 
