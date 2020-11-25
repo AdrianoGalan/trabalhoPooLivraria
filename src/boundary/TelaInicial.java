@@ -22,13 +22,13 @@ public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 		Label lblUser = new Label("Integrantes do Grupo: ");
 		lblUser.relocate(20, 15);
 		
-		Label lblAdriano = new Label("Adriano Galan");
+		Label lblAdriano = new Label("Adriano Galan RA: ....");
 		lblAdriano.relocate(30, 50);
 
-		Label lblGustavo = new Label("Gustavo Narciso");
+		Label lblGustavo = new Label("Gustavo Narciso RA: ...");
 		lblGustavo.relocate(30, 100);
 
-		Label lblRoberto = new Label("Roberto Mitsunari");
+		Label lblRoberto = new Label("Roberto Mitsunari RA ...");
 		lblRoberto.relocate(30, 150);
 
 

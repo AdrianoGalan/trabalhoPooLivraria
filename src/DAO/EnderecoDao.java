@@ -25,7 +25,7 @@ public class EnderecoDao {
 		ps.setString(1, e.getRua());
 		ps.setInt(2, e.getNumero());
 		ps.setString(3, e.getBairro());
-		
+		//final
 		ResultSet rs = ps.getGeneratedKeys();
 		if (rs.next()) {
 		    int lastId = rs.getInt(1);

@@ -42,8 +42,6 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	private TextField tfEmail;
 	private TextField tfDtnasc;
 	
-	
-	
 	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
 	@Override
