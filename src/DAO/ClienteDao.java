@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import connection.Conexao;
 import entity.Cliente;
 import javafx.collections.FXCollections;
@@ -58,8 +59,10 @@ public class ClienteDao {
 			cliente.setNome(rs.getString("NOME"));
 			cliente.setEmail(rs.getString("EMAIL"));
 			cliente.setCpf(rs.getString("CPF"));
+
 			cliente.setDataNascimento(rs.getDate("DATA_NASCIMENTO"));
 			cliente.setDataCadastro(rs.getDate("DATA_CADASTRO"));
+
 			cliente.setFkPessoaCliente(rs.getInt("FK_PESSOA_CLIENTE"));
 			cliente.setFkEdetecoPessoa(rs.getInt("FK_ENDERECO"));
 			lista.add(cliente);
