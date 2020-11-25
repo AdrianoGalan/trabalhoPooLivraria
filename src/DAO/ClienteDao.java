@@ -4,14 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import connection.Conexao;
 import entity.Cliente;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class ClienteDao implements IClienteDao {
+public class ClienteDao {
 	private Connection c;
 
 	public ClienteDao() throws ClassNotFoundException, SQLException {
@@ -20,18 +18,22 @@ public class ClienteDao implements IClienteDao {
 		c = con.getConnection();
 	}
 
-	@Override
-	public void insereCliente(Cliente cliente) throws SQLException {
-		String sql = "INSERT INTO professor VALUES (?,?,?,?,?)";
-		PreparedStatement ps = c.prepareStatement(sql);
-		ps.setInt(1, cliente.getIdCliente());
-		ps.setString(2, cliente.getNome());
-		ps.setString(3, cliente.getCpf());
-		ps.setString(4, cliente.getEmail());
-		ps.setInt(5, cliente.getFkEdetecoPessoa());
 
-		ps.execute();
+	public void insereCliente(Cliente cliente) throws SQLException {
+		
+		String sql = "INSERT INTO CLIENTE VALUES ( GETDATE(), ?)";
+		
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setInt(1, cliente.getFkPessoaCliente());
+	
+
+		ps.executeUpdate();
+
+	
+
 		ps.close();
+		
+		
 	}
 
 	public ObservableList<Cliente> buscaClienteNome(String nome) throws SQLException {

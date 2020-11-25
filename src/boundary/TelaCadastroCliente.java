@@ -1,10 +1,13 @@
 package boundary;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import DAO.EnderecoDao;
+import control.ControleCliente;
 import control.ControleTelas;
 import javafx.application.Application;
 import control.GetenciadorPrincipal;
@@ -50,6 +53,8 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btOk && verificaCampos()) {
 			
+		
+			addCliente();
 			
 			
 		}
@@ -64,7 +69,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		HBox painel = new HBox();
 
 		VBox vbEs = new VBox();
-		vbEs.setPadding(new Insets(15, 12, 15, 12));
+		vbEs.setPadding(new Insets(30, 12, 15, 12));
 		vbEs.setSpacing(15);
 
 		VBox vbDi = new VBox();
@@ -97,7 +102,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 		vbEs.getChildren().add(hbBotao);
 
-		TextField tfNome = new TextField();
+		tfNome = new TextField();
 		tfNome.setPrefWidth(330);
 		tfTelefone = new TextField();
 		tfCpf = new TextField();
@@ -136,7 +141,10 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 	}
 	
-	private Cliente boundaryParaCliente() {
+	private void addCliente() {
+		
+	 ControleCliente cc = new ControleCliente();
+	 
 		
 		Cliente c = new Cliente();
 		Telefone t = new Telefone();
@@ -150,13 +158,31 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		e.setComplemento(tfComplemento.getText());
 		e.setCep(tfCep.getText());
 		
+		t.setTipo("CEL");
+		t.setDdd("11");
+		t.setNumero(tfTelefone.getText());
+		
 		c.setNome(tfNome.getText());
 		c.setCpf(tfCpf.getText());
 		c.setEmail(tfEmail.getText());
+		try {
+			c.setDataNascimento(Data.parseDate(tfDtnasc.getText()));
+		} catch (ParseException e2) {
+			
+		}
 		
-
+		
+			
+			try {
+				cc.addCliente(c, e, t);
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		
 				
-		return c;
+		
 		
 	}
 
@@ -222,4 +248,6 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		return true;
 		
 	}
+	
+
 }

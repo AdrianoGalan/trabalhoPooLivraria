@@ -7,45 +7,49 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import connection.Conexao;
-import entity.Endereco;
+import entity.Pessoa;
 
-public class EnderecoDao {
+
+public class PessoaDao {
 	
 	private Connection c;
-	
-	public EnderecoDao()throws ClassNotFoundException, SQLException{
+
+	public PessoaDao() throws ClassNotFoundException, SQLException {
 		Conexao con = new Conexao();
-		
+
 		c = con.getConnection();
 	}
 
-	public int insereEndereco(Endereco e) throws SQLException{
+	public int inserePessoa(Pessoa p) throws SQLException {
 		
+		   
+        java.sql.Date sqlData = new java.sql.Date(p.getDataNascimento().getTime());
+
 		int id = -1;
+
+		String sql = "INSERT INTO PESSOA VALUES(?,?,?,?,?)";
 		
-		String sql = "INSERT INTO ENDERECO VALUES(?,?,?,?,?,?,?)";
 		PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		ps.setString(1, e.getRua());
-		ps.setInt(2, e.getNumero());
-		ps.setString(3, e.getBairro());
-		ps.setString(4, e.getCidade());
-		ps.setString(5, e.getEstado());
-		ps.setString(6, e.getComplemento());
-		ps.setString(7, e.getCep());
+		ps.setString(1, p.getNome());
+		ps.setString(2, p.getCpf());
+		ps.setString(3, p.getEmail());
+		ps.setDate(4, sqlData);
+		ps.setInt(5, p.getFkEdetecoPessoa());
 		ps.executeUpdate();
-		
-		//final
+
 		ResultSet rs = ps.getGeneratedKeys();
-		
+
 		if (rs.next()) {
 			id = rs.getInt(1);
 		}
 
 		rs.close();
 		ps.close();
-		
+
 		return id;
 	}
-	
-	
+
+
 }
+
+
