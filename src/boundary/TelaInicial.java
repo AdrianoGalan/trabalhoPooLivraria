@@ -19,10 +19,20 @@ public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 	public Pane render() {
 		Pane painel = new Pane();
 
-		Label lblUser = new Label("inicial: ");
-		lblUser.relocate(20, 14);
+		Label lblUser = new Label("Integrantes do Grupo: ");
+		lblUser.relocate(20, 15);
+		
+		Label lblAdriano = new Label("Adriano Galan");
+		lblAdriano.relocate(30, 50);
 
-		painel.getChildren().addAll(lblUser);
+		Label lblGustavo = new Label("Gustavo Narciso");
+		lblGustavo.relocate(30, 100);
+
+		Label lblRoberto = new Label("Roberto Mitsunari");
+		lblRoberto.relocate(30, 150);
+
+
+		painel.getChildren().addAll(lblUser, lblAdriano, lblGustavo, lblRoberto);
 		return painel;
 	}
 
