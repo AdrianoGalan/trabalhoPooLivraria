@@ -3,6 +3,7 @@ package boundary;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import control.ControleTelas;
 import javafx.application.Application;
@@ -23,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import util.Data;
 import util.Mensagens;
 
 public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEvent> {
@@ -42,7 +44,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	private TextField tfEmail;
 	private TextField tfDtnasc;
 	
-	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+	private GregorianCalendar data = new GregorianCalendar();
 
 	@Override
 	public void handle(ActionEvent e) {
@@ -152,17 +154,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		c.setCpf(tfCpf.getText());
 		c.setEmail(tfEmail.getText());
 		
-		Date data = new Date();
-		try {
-			data = (Date) formato.parse(tfDtnasc.getText());
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		c.setDataNascimento(data);
-		
-		t.setNumero(tfTelefone.getText());
+
 				
 		return c;
 		
@@ -216,7 +208,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 			
 			try {
 				
-				Date data = (Date) formato.parse(tfDtnasc.getText());
+				Date data = Data.parseDate(tfDtnasc.getText());
 				
 			} catch (ParseException e) {
 
