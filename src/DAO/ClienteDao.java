@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import connection.Conexao;
 import entity.Cliente;
@@ -47,8 +48,8 @@ public class ClienteDao implements IClienteDao{
 		PreparedStatement ps = c.prepareStatement(sql);
 		ps.setString(1, nome+"%");
 		ResultSet rs = ps.executeQuery();
-		GregorianCalendar cal1 = new GregorianCalendar();
-		GregorianCalendar cal2 = new GregorianCalendar();
+		Date cal1 = new Date();
+		Date cal2 = new Date();
 		while (rs.next()) {
 			cliente = new Cliente();
 			cliente.setIdCliente(rs.getInt("ID_CLIENTE"));
@@ -56,9 +57,9 @@ public class ClienteDao implements IClienteDao{
 			cliente.setNome(rs.getString("NOME"));
 			cliente.setEmail(rs.getString("EMAIL"));
 			cliente.setCpf(rs.getString("CPF"));
-			cal1.setTime(rs.getDate("DATA_NASCIMENTO"));
+			cal1 = (rs.getDate("DATA_NASCIMENTO"));
 			cliente.setDataNascimento(cal1);
-			cal2.setTime(rs.getDate("DATA_CADASTRO"));
+			cal2 = (rs.getDate("DATA_CADASTRO"));
 			cliente.setDataCadastro(cal2);
 			cliente.setFkPessoaCliente(rs.getInt("FK_PESSOA_CLIENTE"));
 			cliente.setFkEdetecoPessoa(rs.getInt("FK_ENDERECO"));
