@@ -19,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
@@ -36,31 +37,31 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	private Button btCancelar;
 	private TextField tfNome;
 	private TextField tfTelefone;
+	private TextField tfDdd;
 	private TextField tfCpf;
 	private TextField tfRua;
 	private TextField tfNum;
 	private TextField tfBairro;
 	private TextField tfCidade;
-	private TextField tfEstado;
 	private TextField tfComplemento;
 	private TextField tfCep;
 	private TextField tfEmail;
 	private TextField tfDtnasc;
-	
+	private ComboBox<String> cbEstado;
+	private ComboBox<String> cbTipoTelefone;
+
 	private GregorianCalendar data = new GregorianCalendar();
 
 	@Override
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btOk && verificaCampos()) {
-			
-		
+
 			addCliente();
-			
-			
+
 		}
-		
+
 		if (e.getTarget() == btCancelar) {
-			
+
 		}
 	}
 
@@ -88,6 +89,8 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		hbBotao.getChildren().add(btCancelar);
 
 		vbEs.getChildren().add(new Label("Nome:"));
+		vbEs.getChildren().add(new Label("Telefone tipo:"));
+		vbEs.getChildren().add(new Label("DDD"));
 		vbEs.getChildren().add(new Label("Telefone:"));
 		vbEs.getChildren().add(new Label("CPF:"));
 		vbEs.getChildren().add(new Label("Rua:"));
@@ -105,25 +108,37 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		tfNome = new TextField();
 		tfNome.setPrefWidth(330);
 		tfTelefone = new TextField();
+		tfDdd = new TextField("11");
 		tfCpf = new TextField();
 		tfRua = new TextField();
 		tfNum = new TextField();
 		tfBairro = new TextField();
 		tfCidade = new TextField();
-		tfEstado = new TextField();
 		tfComplemento = new TextField();
 		tfCep = new TextField();
 		tfEmail = new TextField();
 		tfDtnasc = new TextField();
 
+		cbEstado = new ComboBox<String>();
+		cbEstado.getItems().addAll("SP", "Rj", "MG");
+		cbEstado.setPrefWidth(80);
+		cbEstado.getSelectionModel().select(0);
+		
+		cbTipoTelefone = new ComboBox<String>();
+		cbTipoTelefone.getItems().addAll("CEL", "COM", "RES");
+		cbTipoTelefone.setPrefWidth(80);
+		cbTipoTelefone.getSelectionModel().select(0);
+
 		vbDi.getChildren().add(tfNome);
+		vbDi.getChildren().add(cbTipoTelefone);
+		vbDi.getChildren().add(tfDdd);
 		vbDi.getChildren().add(tfTelefone);
 		vbDi.getChildren().add(tfCpf);
 		vbDi.getChildren().add(tfRua);
 		vbDi.getChildren().add(tfNum);
 		vbDi.getChildren().add(tfBairro);
 		vbDi.getChildren().add(tfCidade);
-		vbDi.getChildren().add(tfEstado);
+		vbDi.getChildren().add(cbEstado);
 		vbDi.getChildren().add(tfComplemento);
 		vbDi.getChildren().add(tfCep);
 		vbDi.getChildren().add(tfEmail);
@@ -140,50 +155,43 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	private void addCliente() {
-		
-	 ControleCliente cc = new ControleCliente();
-	 
-		
+
+		ControleCliente cc = new ControleCliente();
+
 		Cliente c = new Cliente();
 		Telefone t = new Telefone();
 		Endereco e = new Endereco();
-		
+
 		e.setNumero(Integer.parseInt(tfNum.getText()));
 		e.setBairro(tfBairro.getText());
 		e.setRua(tfRua.getText());
 		e.setCidade(tfCidade.getText());
-		e.setEstado(tfEstado.getText());
+		e.setEstado(cbEstado.getSelectionModel().getSelectedItem());
 		e.setComplemento(tfComplemento.getText());
 		e.setCep(tfCep.getText());
-		
-		t.setTipo("CEL");
-		t.setDdd("11");
+
+		t.setTipo(cbTipoTelefone.getSelectionModel().getSelectedItem());
+		t.setDdd(tfDdd.getText());
 		t.setNumero(tfTelefone.getText());
-		
+
 		c.setNome(tfNome.getText());
 		c.setCpf(tfCpf.getText());
 		c.setEmail(tfEmail.getText());
 		try {
 			c.setDataNascimento(Data.parseDate(tfDtnasc.getText()));
 		} catch (ParseException e2) {
-			
+
 		}
-		
-		
-			
-			try {
-				cc.addCliente(c, e, t);
-			} catch (ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-		
-				
-		
-		
+
+		try {
+			cc.addCliente(c, e, t);
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
 	}
 
 	private boolean verificaCampos() {
@@ -231,11 +239,11 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 			return false;
 
 		} else {
-			
+
 			try {
-				
+
 				Date data = Data.parseDate(tfDtnasc.getText());
-				
+
 			} catch (ParseException e) {
 
 				Mensagens.erro("Data erro", "Data invalida", "Digite uma Data valida");
@@ -244,10 +252,9 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 			}
 		}
-		
+
 		return true;
-		
+
 	}
-	
 
 }
