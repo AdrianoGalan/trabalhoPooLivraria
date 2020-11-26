@@ -7,6 +7,9 @@ import java.sql.SQLException;
 
 import connection.Conexao;
 import entity.Funcionario;
+import entity.Usuario;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class FuncionarioDao {
@@ -29,7 +32,6 @@ public class FuncionarioDao {
 		ps.setString(2, f.getMatricula());
 		ps.setDate(3, f.getDataAsmissao());
 		ps.setInt(4, f.getFkPessoaFuncionario());
-
 		ps.execute();
 		ps.close();
 		
@@ -61,6 +63,33 @@ public class FuncionarioDao {
 		ps.close();
 
 		return f;
+
+	}
+	
+	public ObservableList<Funcionario> getListaFuncionario() throws SQLException {
+
+		
+		ObservableList<Funcionario> lista = FXCollections.observableArrayList();
+
+		String sql = "SELECT p.NOME,f.* "
+				+ " FROM FUNCIONARIO f, PESSOA p where f.FK_PESSOA_fUNCIONARIO = p.ID_PESSOA ";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			Funcionario f = new Funcionario();
+			f.setIdFuncionario(rs.getInt("ID_FUNCIONARIO"));
+			f.setNome(rs.getString("NOME"));
+			f.setCargo(rs.getString("CARGO"));
+			f.setMatricula(rs.getString("MATRICULA"));
+			f.setDataAsmissao(rs.getDate("DATA_ADMISSAO"));
+			f.setFkPessoaFuncionario(rs.getInt("FK_PESSOA_FUNCIONARIO"));
+			lista.add(f);
+		}
+
+		rs.close();
+		ps.close();
+
+		return lista;
 
 	}
 

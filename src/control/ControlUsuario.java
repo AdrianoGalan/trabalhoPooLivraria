@@ -2,18 +2,24 @@ package control;
 
 import java.sql.SQLException;
 
+import DAO.FuncionarioDao;
 import DAO.UsuarioDao;
+import entity.Funcionario;
 import entity.Usuario;
 import javafx.collections.ObservableList;
 import util.Mensagens;
 
 public class ControlUsuario {
-	private ObservableList<Usuario> lista;
+	private ObservableList<Usuario> listaUsuarios;
+	private ObservableList<Funcionario> listaFunc;
+	private FuncionarioDao fDao;
 	
+
 	public Usuario logarNoSistema(Usuario u) throws ClassNotFoundException, SQLException {
 		
 		
 		UsuarioDao uDao = new UsuarioDao();
+		
 		Usuario uBanco = uDao.buscaUsuarioUsuario(u.getLogin());
 		
 		if(u.getSenha().equals(uBanco.getSenha())) {
@@ -25,16 +31,34 @@ public class ControlUsuario {
 		return null;
 	}
 	
+	public void cadastrarUsuario(Funcionario f, String login,String senha) throws ClassNotFoundException, SQLException {
+		UsuarioDao uDao = new UsuarioDao();
+		Usuario u = new Usuario();
+		u.setLogin(login);
+		u.setSenha(senha);
+		u.setfKFuncionario(f.getIdFuncionario());
+		uDao.insereUsuario(u);
+	}
+	
 	public ObservableList<Usuario> procurarUsuarios() throws ClassNotFoundException, SQLException {
 		UsuarioDao usuDao = new UsuarioDao();
-		lista = usuDao.buscaListaUsuarios();
-		return lista;
+		listaUsuarios = usuDao.buscaListaUsuarios();
+		return listaUsuarios;
 		
 	}
 
-	public ObservableList<Usuario> getLista() {
-		return lista;
+	public ObservableList<Funcionario> getListaFuncionarios() throws ClassNotFoundException, SQLException {
+		fDao = new FuncionarioDao();
+		listaFunc = fDao.getListaFuncionario();
+		return listaFunc;
 	}
+
+	public ObservableList<Usuario> getListaUsuarios() throws ClassNotFoundException, SQLException {
+		fDao = new FuncionarioDao();
+		return listaUsuarios;
+	}
+	
+	
 	
 	
 
