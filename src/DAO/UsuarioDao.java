@@ -17,7 +17,6 @@ public class UsuarioDao {
 	public UsuarioDao() throws ClassNotFoundException, SQLException {
 
 		Conexao con = new Conexao();
-
 		c = con.getConnection();
 
 	}
