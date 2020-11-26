@@ -32,7 +32,6 @@ public class FuncionarioDao {
 		ps.setString(2, f.getMatricula());
 		ps.setDate(3, f.getDataAsmissao());
 		ps.setInt(4, f.getFkPessoaFuncionario());
-
 		ps.execute();
 		ps.close();
 		

@@ -90,7 +90,6 @@ public class UsuarioDao {
 		PreparedStatement ps = c.prepareStatement(sql);
 		ps.setString(1, senhaNova);
 		ps.setInt(2, idUsuario);
-
 		ps.close();
 
 	}

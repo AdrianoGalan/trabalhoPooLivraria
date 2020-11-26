@@ -84,6 +84,7 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 		
 	}
 	
+	
 	public void atualizaTabela() {
 		try {
 			listaUsuarios = controle.procurarUsuarios();

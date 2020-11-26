@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
 	private ControlUsuario control = new ControlUsuario();
-	private ComboBox<String> cbFuncionario;
+	private ComboBox<String> cbFuncionario; //<--- isso aqui vai pro saco, full bugado n funfa direito
 	private ObservableList<Funcionario> listaFunc;
 	private ObservableList<String> listaFuncStr;
 	private PasswordField txtSenha;
@@ -76,6 +76,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	public void render(ObservableList<Usuario> lista,TableView<Usuario> tabela) throws ClassNotFoundException, SQLException {
 
 		criarTela();
+		// isso aqui vai ser refeito ta uma merda
 		int index = tabela.getSelectionModel().getSelectedIndex();
 		int fkFunc = lista.get(index).getfKFuncionario();
 		int i = 0;
@@ -87,6 +88,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 			}
 			i++;
 		}
+		
 		txtLogin.setText(lista.get(index).getLogin());
 		txtSenha.setText(lista.get(index).getSenha());
 		
