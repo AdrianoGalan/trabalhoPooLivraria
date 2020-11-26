@@ -41,14 +41,16 @@ public class ClienteDao {
 
 		Cliente cliente;
 		ObservableList<Cliente> lista = FXCollections.observableArrayList();
-
-		String sql = " Select c.ID_CLIENTE,p.ID_PESSOA,p.NOME,p.EMAIL,p.CPF,p.DATA_NASCIMENTO, "
-				+ "c.DATA_CADASTRO, c.FK_PESSOA_CLIENTE,p.FK_EDERECO_PESSOA AS FK_ENDERECO\n" + 
-				" From CLIENTE c INNER JOIN PESSOA p \n" + 
-				" ON C.FK_PESSOA_CLIENTE = P.ID_PESSOA \n" + 
-				" WHERE p.NOME LIKE ? ";
 		
-		PreparedStatement ps = c.prepareStatement(sql);
+		StringBuilder sql = new StringBuilder();
+		sql.append(" Select c.ID_CLIENTE,p.ID_PESSOA,p.NOME,p.EMAIL,p.CPF,p.DATA_NASCIMENTO, ");
+		sql.append("c.DATA_CADASTRO, c.FK_PESSOA_CLIENTE,p.FK_EDERECO_PESSOA AS FK_ENDERECO ");
+		sql.append(" From CLIENTE c INNER JOIN PESSOA p " );
+		sql.append(" ON C.FK_PESSOA_CLIENTE = P.ID_PESSOA  ");
+		sql.append(" WHERE p.NOME LIKE ? ");
+
+	
+		PreparedStatement ps = c.prepareStatement(sql.toString());
 		ps.setString(1, "%" + nome + "%");
 		ResultSet rs = ps.executeQuery();
 		

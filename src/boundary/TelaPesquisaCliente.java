@@ -47,7 +47,7 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 		btPesquisar = new Button("Pesquisar");
 		btPesquisar.addEventHandler(ActionEvent.ACTION,this);
 		tbvPesqCliente = new TableView<Cliente>();
-		tbvPesqCliente.setPrefWidth(600);
+		tbvPesqCliente.setPrefWidth(800);
 		
 		
 		hbBotao.getChildren().add(lblPesquisa);
@@ -57,6 +57,45 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 		hbBotao.getChildren().add(btPesquisar);
 		vbEs.getChildren().add(hbBotao);
 		vbEs.getChildren().add(tbvPesqCliente);
+		
+		
+		SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
+		TableColumn<Cliente, Integer> colId = new TableColumn<>("id_Cliente");
+		colId.setCellValueFactory(new PropertyValueFactory<Cliente,Integer>("idCliente"));
+		
+		TableColumn<Cliente, String> colNome = new TableColumn<>("Nome");
+		colNome.setCellValueFactory(new PropertyValueFactory<Cliente,String>("nome"));
+		colNome.setPrefWidth(170);
+		
+		TableColumn<Cliente, String> colEmail = new TableColumn<>("Email");
+		colEmail.setCellValueFactory(new PropertyValueFactory<Cliente,String>("email"));
+		colEmail.setPrefWidth(200);
+		
+		TableColumn<Cliente, String> colCpf = new TableColumn<>("CPF");
+		colCpf.setCellValueFactory(new PropertyValueFactory<Cliente,String>("cpf"));
+		colCpf.setPrefWidth(150);
+		
+		TableColumn<Cliente, String> colDataNasc = new TableColumn<>("Data Nascimento");
+		colDataNasc.setCellValueFactory( 
+				(item) -> {
+					return new ReadOnlyStringWrapper(
+							fmt.format(item.getValue().getDataNascimento().getTime())
+							);
+				}
+		);
+		colDataNasc.setPrefWidth(100);
+		TableColumn<Cliente, String> colDataCadast = new TableColumn<>("Data Cadastro");
+		colDataCadast.setCellValueFactory( 
+				(item) -> {
+					return new ReadOnlyStringWrapper(
+							
+							fmt.format(item.getValue().getDataCadastro().getTime())
+							);
+				}
+		);
+		colDataCadast.setPrefWidth(100);
+		
+		tbvPesqCliente.getColumns().addAll(colId,colNome,colEmail,colCpf,colDataNasc,colDataCadast);
 		
 		painel.getChildren().add(vbEs);
 
@@ -77,38 +116,7 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 
 	private void carregarTabela() {
 		
-		SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
-		TableColumn<Cliente, Integer> colId = new TableColumn<>("id_Cliente");
-		colId.setCellValueFactory(new PropertyValueFactory<Cliente,Integer>("idCliente"));
-		
-		TableColumn<Cliente, String> colNome = new TableColumn<>("Nome");
-		colNome.setCellValueFactory(new PropertyValueFactory<Cliente,String>("nome"));
-		
-		TableColumn<Cliente, String> colEmail = new TableColumn<>("Email");
-		colEmail.setCellValueFactory(new PropertyValueFactory<Cliente,String>("email"));
-		
-		TableColumn<Cliente, String> colCpf = new TableColumn<>("CPF");
-		colCpf.setCellValueFactory(new PropertyValueFactory<Cliente,String>("cpf"));
-		
-		TableColumn<Cliente, String> colDataNasc = new TableColumn<>("Data Nascimento");
-		colDataNasc.setCellValueFactory( 
-				(item) -> {
-					return new ReadOnlyStringWrapper(
-							fmt.format(item.getValue().getDataNascimento().getTime())
-							);
-				}
-		);
-		TableColumn<Cliente, String> colDataCadast = new TableColumn<>("Data Cadastro");
-		colDataCadast.setCellValueFactory( 
-				(item) -> {
-					return new ReadOnlyStringWrapper(
-							
-							fmt.format(item.getValue().getDataCadastro().getTime())
-							);
-				}
-		);
-		
-		tbvPesqCliente.getColumns().addAll(colId,colNome,colEmail,colCpf,colDataNasc,colDataCadast);
+	
 		tbvPesqCliente.setItems(controle.getLista());
 	}
 

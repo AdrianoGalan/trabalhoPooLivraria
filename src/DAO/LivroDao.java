@@ -25,24 +25,27 @@ public class LivroDao {
 		ModelTabelaLivro l;
 		
 		ObservableList<ModelTabelaLivro> lista = FXCollections.observableArrayList();
-		String sql = "SELECT p.VALOR AS PRECO , l.TITULO, a.NOME AS AUTOR , l.ISBN,l.GENERO, l.EDICAO, l.ANO,l.QTS_ESTOQUE,l.IDIOMA, l.DESCRICAO "
-				+ "FROM LIVRO l INNER JOIN LIVRO_AUTOR la "
-				+ "ON l.ID_LIVRO = la.FK_LIVRO_LIVRO_AUTOR "
-				+ "INNER JOIN AUTOR a "
-				+ "ON a.ID_AUTOR = la.FK_AUTOR_LIVRO_AUTOR "
-				+ "INNER JOIN PRECO p "
-				+ "ON p.FK_LIVRO_PRECO = l.ID_LIVRO ";
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT p.VALOR AS PRECO , l.TITULO, a.NOME AS AUTOR , l.ISBN,l.GENERO, l.EDICAO, l.ANO,l.QTS_ESTOQUE,l.IDIOMA, l.DESCRICAO ");
+		sql.append("FROM LIVRO l INNER JOIN LIVRO_AUTOR la ");
+		sql.append("ON l.ID_LIVRO = la.FK_LIVRO_LIVRO_AUTOR ");
+		sql.append("INNER JOIN AUTOR a ");
+		sql.append("ON a.ID_AUTOR = la.FK_AUTOR_LIVRO_AUTOR ");
+		sql.append("INNER JOIN PRECO p ");
+		sql.append("ON p.FK_LIVRO_PRECO = l.ID_LIVRO ");
+		
+		
 		
 		
 		if(meio == 0) {
-			 sql += "WHERE l.TITULO LIKE  ?";
+			sql.append("WHERE l.TITULO LIKE  ?");
 		}else if(meio == 1) {
-			sql += " WHERE l.ISBN LIKE ? ";
+			sql.append(" WHERE l.ISBN LIKE ? ");
 		}else if(meio == 2) {
-			sql += "WHERE a.NOME LIKE ?";
+			sql.append("WHERE a.NOME LIKE ?");
 		}
 		
-		PreparedStatement ps = c.prepareStatement(sql);
+		PreparedStatement ps = c.prepareStatement(sql.toString());
 		ps.setString(1, "%"+texto+"%");
 		ResultSet rs = ps.executeQuery();
 		while(rs.next()) {
