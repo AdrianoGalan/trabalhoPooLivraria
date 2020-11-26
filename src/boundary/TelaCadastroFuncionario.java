@@ -8,11 +8,13 @@ import java.util.GregorianCalendar;
 
 import DAO.EnderecoDao;
 import control.ControleCliente;
+import control.ControleFuncionario;
 import control.ControleTelas;
 import javafx.application.Application;
 import control.GetenciadorPrincipal;
 import entity.Cliente;
 import entity.Endereco;
+import entity.Funcionario;
 import entity.Telefone;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -159,9 +161,9 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 	private void addCliente() {
 
-		ControleCliente cc = new ControleCliente();
+		ControleFuncionario cf = new ControleFuncionario();
 
-		Cliente c = new Cliente();
+		Funcionario f = new Funcionario();
 		Telefone t = new Telefone();
 		Endereco e = new Endereco();
 
@@ -177,17 +179,17 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		t.setDdd(tfDdd.getText());
 		t.setNumero(tfTelefone.getText());
 
-		c.setNome(tfNome.getText());
-		c.setCpf(tfCpf.getText());
-		c.setEmail(tfEmail.getText());
+		f.setNome(tfNome.getText());
+		f.setCpf(tfCpf.getText());
+		f.setEmail(tfEmail.getText());
 		try {
-			c.setDataNascimento(Data.parseDate(tfDtnasc.getText()));
+			f.setDataNascimento(Data.parseDate(tfDtnasc.getText()));
 		} catch (ParseException e2) {
 
 		}
 
 		try {
-			cc.addCliente(c, e, t);
+			cf.addFuncionario(f, e, t);
 		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
