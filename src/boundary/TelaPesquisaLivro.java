@@ -17,11 +17,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import tabelaModel.ModelTabelaLivro;
 
 public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEvent>  {
 
 	private ControlePesquisaLivro controle = new ControlePesquisaLivro();
-	private TableView<Livro> tbvPesqLivro;
+	private TableView<ModelTabelaLivro> tbvPesqLivro;
 	private Button btPesquisar;
 	private TextField tfPesquisa;
 	private ComboBox<String> cbOpcPesq;
@@ -37,7 +38,7 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 		lblPesqCombo.setPadding(new Insets(5, 0, 0, 0));
 		cbOpcPesq = new ComboBox<String>();
 		cbOpcPesq.getItems().addAll("Titulo","ISBN","Autor");
-		cbOpcPesq.setPrefWidth(80);
+		cbOpcPesq.setPrefWidth(200);
 		//Seleciona qual indice vai ficar selecionado, pode dar erro dps (vai saber)
 		cbOpcPesq.getSelectionModel().select(0); 
 		
@@ -56,8 +57,8 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 		tfPesquisa = new TextField();
 		btPesquisar = new Button("Pesquisar");
 		btPesquisar.addEventHandler(ActionEvent.ACTION,this);
-		tbvPesqLivro = new TableView<Livro>();
-		tbvPesqLivro.setPrefWidth(700);
+		tbvPesqLivro = new TableView<ModelTabelaLivro>();
+		tbvPesqLivro.setPrefWidth(800);
 		
 		
 		hbBotao.getChildren().add(lblPesquisa);
@@ -72,6 +73,8 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 		vbEs.getChildren().add(hbBotao);
 		vbEs.getChildren().add(tbvPesqLivro);
 		
+		carregarTela();
+		
 		painel.getChildren().add(vbEs);
 
 
@@ -82,11 +85,11 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 	@Override
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btPesquisar) {
-			int indice = cbOpcPesq.getSelectionModel().getSelectedIndex();
-			if(indice >= 0) {
-				controle.procurarLivro(tfPesquisa.getText(), indice);
-				carregarTela();
-			}
+					
+				controle.procurarLivro(tfPesquisa.getText(), cbOpcPesq.getSelectionModel().getSelectedIndex());
+				
+				tbvPesqLivro.setItems(controle.getLista());
+			
 			
 			
 		}
@@ -94,42 +97,47 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 	}
 
 	private void carregarTela() {
-		TableColumn<Livro,Integer> colId = new TableColumn<>("Id Livro");
-		colId.setCellValueFactory(new PropertyValueFactory<>("idLivro"));
 		
-		TableColumn<Livro,String> colTitulo = new TableColumn<>("Titulo");
+		TableColumn<ModelTabelaLivro,String> colPreco = new TableColumn<>("PreÃ§o");
+		colPreco.setCellValueFactory(new PropertyValueFactory<>("Preco"));
+		
+		TableColumn<ModelTabelaLivro,String> colTitulo = new TableColumn<>("Titulo");
 		colTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+		colTitulo.setPrefWidth(150);
+
+		TableColumn<ModelTabelaLivro,String> colAutor = new TableColumn<>("Autor");
+		colAutor.setCellValueFactory(new PropertyValueFactory<>("Autor"));
+		colAutor.setPrefWidth(150);
 		
-		TableColumn<Livro,String> colISBN = new TableColumn<>("ISBN");
+		TableColumn<ModelTabelaLivro,String> colISBN = new TableColumn<>("ISBN");
 		colISBN.setCellValueFactory(new PropertyValueFactory<>("isbn"));
 		
-		TableColumn<Livro,String> colGenero = new TableColumn<>("Genero");
+		TableColumn<ModelTabelaLivro,String> colGenero = new TableColumn<>("Genero");
 		colGenero.setCellValueFactory(new PropertyValueFactory<>("genero"));
 		
-		TableColumn<Livro,String> colEdicao = new TableColumn<>("Edicao");
+		TableColumn<ModelTabelaLivro,String> colEdicao = new TableColumn<>("Edicao");
 		colEdicao.setCellValueFactory(new PropertyValueFactory<>("edicao"));
+		colEdicao.setPrefWidth(80);
 		
-		TableColumn<Livro,String> colAno = new TableColumn<>("Ano");
+		TableColumn<ModelTabelaLivro,String> colAno = new TableColumn<>("Ano");
 		colAno.setCellValueFactory(new PropertyValueFactory<>("ano"));
-		
-		TableColumn<Livro,Double> colPreco = new TableColumn<>("Preço Atual");
-		colPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
-		
-		
-		TableColumn<Livro,Integer> colEstoque = new TableColumn<>("Qnt estoque");
+				
+		TableColumn<ModelTabelaLivro,Integer> colEstoque = new TableColumn<>("Qnt estoque");
 		colEstoque.setCellValueFactory(new PropertyValueFactory<>("qtsEstoque"));
 		
-		TableColumn<Livro,String> colIdioma = new TableColumn<>("Idioma");
+		TableColumn<ModelTabelaLivro,String> colIdioma = new TableColumn<>("Idioma");
 		colIdioma.setCellValueFactory(new PropertyValueFactory<>("idioma"));
 		
 		
 		
-		TableColumn<Livro,String> colDescricao = new TableColumn<>("Descricao");
+		TableColumn<ModelTabelaLivro,String> colDescricao = new TableColumn<>("Descricao");
 		colDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		colDescricao.setPrefWidth(200);
 		
-		tbvPesqLivro.getColumns().addAll(colId, colTitulo, colISBN, colGenero, colEdicao, colAno, colPreco,colEstoque, colIdioma, 
-				colDescricao);
-		tbvPesqLivro.setItems(controle.getLista());
+		tbvPesqLivro.getColumns().addAll(colPreco, colTitulo, colAutor, colISBN, colGenero, 
+				colEdicao, colAno,colEstoque, colIdioma, colDescricao);
+		
+	
 		
 
 	}
