@@ -202,7 +202,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 			return false;
 
-		} else if (tfCpf.getText().equals("")) {
+		} else if (tfCpf.getText().equals("") || tfCpf.getText().length() == 11) {
 
 			Mensagens.erro("CPF erro", "CPF invalida", "Digite um CPF");
 
@@ -220,7 +220,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 			return false;
 
-		} else if (tfNum.getText().equals("") || Integer.parseInt(tfNum.getText()) <= 0) {
+		} else if (tfNum.getText().equals("")) {
 
 			Mensagens.erro("Numero erro", "Numero invalida", "Digite um Numero");
 
