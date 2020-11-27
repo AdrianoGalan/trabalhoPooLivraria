@@ -1,33 +1,146 @@
 package boundary;
 
+import java.sql.SQLException;
+
+import control.ControleAutor;
+import control.ControleLivro;
 import control.ControleTelas;
 import control.GetenciadorPrincipal;
+import entity.Autor;
+import entity.Livro;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import util.Mensagens;
 
 public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEvent> {
 
 	private Button btOk;
 	private Button btCancelar;
+	private TextField tfTitulo; 
+	private TextField tfIsbn;                                                                  
+	private TextField tfAutor;                                                                   
+	private TextField tfEdicao;                                                                    
+	private TextField tfAno;                                                                   
+	private ComboBox<String> cbGenero;                                                                    
+	private TextField tfDescricao;                                                                   
+	private TextField tfQtd;                                                                  
+	private ComboBox<String> cbIdioma;                                                                    
+	private TextField tfPreco;                                                                  
+	
+	
+	
 
 	@Override
 	public void handle(ActionEvent e) {
 
-		if (e.getTarget() == btOk) {
-			System.out.println("Cadastro feito");
+		if (e.getTarget() == btOk && verificaCampos()) {
+			
+			addLivro();
+			
 		}
 		if (e.getTarget() == btCancelar) {
-			System.out.println("Cadastro Cancelado");
+			
 		}
 
+	}
+
+	private void addLivro() {
+		// TODO Auto-generated method stub
+		
+		ControleLivro cl = new ControleLivro();
+	
+		
+		Livro l = new Livro();
+		Autor a = new Autor();
+		
+		l.setAno(tfAno.getText());
+		l.setDescricao(tfDescricao.getText());
+		l.setEdicao(tfEdicao.getText());
+		l.setIsbn(tfIsbn.getText());
+		l.setTitulo(tfTitulo.getText());
+		l.setQtsEstoque(Integer.parseInt(tfQtd.getText()));
+		l.setPreco(Double.parseDouble(tfPreco.getText()));
+		
+		
+		l.setGenero(cbGenero.getSelectionModel().getSelectedItem());
+		l.setIdioma(cbIdioma.getSelectionModel().getSelectedItem());
+		
+		a.setNome(tfAutor.getText());
+		
+		try {
+			cl.addLivro(l, a);
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO: handle exception
+			e1.printStackTrace();
+		}
+		
+		
+	}
+
+	private boolean verificaCampos() {
+		// TODO Auto-generated method stub
+		
+		if (tfTitulo.getText().equals("")) {
+
+			Mensagens.erro("Titulo erro", "Titulo invalido", "Digite um Titulo");
+
+			return false;
+
+		} else if (tfEdicao.getText().equals("")) {
+
+			Mensagens.erro("Edicao erro", "Edicao invalida", "Digite uma Edicao");
+
+			return false;
+
+		} else if (tfDescricao.getText().equals("")) {
+
+			Mensagens.erro("Descricao erro", "Descricao invalida", "Digite uma Descricao");
+
+			return false;
+
+		} else if (tfIsbn.getText().equals("")) {
+
+			Mensagens.erro("Isbn erro", "Isbn invalido", "Digite um Isbn");
+
+			return false;
+
+		} else if (tfAno.getText().equals("") || Integer.parseInt(tfAno.getText()) <= 0) {
+
+			Mensagens.erro("Ano erro", "Ano invalido", "Digite um Ano");
+
+			return false;
+
+		} else if (tfQtd.getText().equals("") | Integer.parseInt(tfQtd.getText()) < 0) {
+
+			Mensagens.erro("Estoque erro", "Estoque invalida", "Digite uma Quantidade");
+
+			return false;
+
+		} else if (tfPreco.getText().equals("") || Double.parseDouble(tfQtd.getText()) < 0.0) {
+
+			Mensagens.erro("Preco erro", "Preco invalido", "Digite um valor");
+
+			return false;
+
+		} else if (tfAutor.getText().equals("")) {
+
+			Mensagens.erro("Autor erro", "Nome invalido", "Digite um Nome");
+
+			return false;
+
+		}
+
+		
+		return true;
 	}
 
 	@Override
@@ -69,25 +182,33 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 		TextField tfTitulo = new TextField();
 		tfTitulo.setPrefWidth(330);
-		TextField tfIsbn = new TextField();
-		TextField tfAutor = new TextField();
-		TextField tfEdicao = new TextField();
-		TextField tfAno = new TextField();
-		TextField tfGenero = new TextField();
-		TextField tfDescricao = new TextField();
-		TextField tfQtd = new TextField();
-		TextField tfIdioma = new TextField();
-		TextField tfPreco = new TextField();
+		tfIsbn = new TextField();
+		tfAutor = new TextField();
+		tfEdicao = new TextField();
+		tfAno = new TextField();
+		tfDescricao = new TextField();
+		tfQtd = new TextField();
+		tfPreco = new TextField();
+		
+		cbGenero = new ComboBox<String>();
+		cbGenero.getItems().addAll("Terror", "Aventura", "Romance", "Suspense","Ficção");
+		cbGenero.setPrefWidth(80);
+		cbGenero.getSelectionModel().select(0);
+		
+		cbIdioma = new ComboBox<String>();
+		cbIdioma.getItems().addAll("Portugues", "Ingles", "Espanhol", "Frances");
+		cbIdioma.setPrefWidth(80);
+		cbIdioma.getSelectionModel().select(0);
 
 		vbDi.getChildren().add(tfTitulo);
 		vbDi.getChildren().add(tfIsbn);
 		vbDi.getChildren().add(tfAutor);
 		vbDi.getChildren().add(tfEdicao);
 		vbDi.getChildren().add(tfAno);
-		vbDi.getChildren().add(tfGenero);
+		vbDi.getChildren().add(cbGenero);
 		vbDi.getChildren().add(tfDescricao);
 		vbDi.getChildren().add(tfQtd);
-		vbDi.getChildren().add(tfIdioma);
+		vbDi.getChildren().add(cbIdioma);
 		vbDi.getChildren().add(tfPreco);
 
 		painel.getChildren().add(vbEs);

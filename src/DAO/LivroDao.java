@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import connection.Conexao;
-
 import entity.Livro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +18,26 @@ public class LivroDao {
 		Conexao con = new Conexao();
 		c = con.getConnection();
 	}
+	
+	public void insereLivro(Livro livro) throws SQLException {
+		
+		String sql = "INSERT INTO LIVRO VALUES ( ?, ?)";
+		
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setInt(1, livro.getIdLivro());
+		
+	
+
+		ps.executeUpdate();
+
+	
+
+		ps.close();
+		
+		
+	}
+
+	
 	
 	public ObservableList<ModelTabelaLivro> buscaLivro(String texto,int meio) throws SQLException{
 		

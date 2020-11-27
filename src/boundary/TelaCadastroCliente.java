@@ -75,7 +75,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 		VBox vbDi = new VBox();
 		vbDi.setPadding(new Insets(15, 12, 15, 12));
-		vbDi.setSpacing(6.2);
+		vbDi.setSpacing(8);
 
 		HBox hbBotao = new HBox();
 		hbBotao.setSpacing(40);
@@ -220,7 +220,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 			return false;
 
-		} else if (tfNum.getText().equals("")) {
+		} else if (tfNum.getText().equals("") || Integer.parseInt(tfNum.getText()) <= 0) {
 
 			Mensagens.erro("Numero erro", "Numero invalida", "Digite um Numero");
 
