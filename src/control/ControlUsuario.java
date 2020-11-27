@@ -15,6 +15,8 @@ public class ControlUsuario {
 	private FuncionarioDao fDao;
 	
 
+	
+
 	public Usuario logarNoSistema(Usuario u) throws ClassNotFoundException, SQLException {
 		
 		
@@ -39,6 +41,22 @@ public class ControlUsuario {
 		u.setfKFuncionario(f.getIdFuncionario());
 		uDao.insereUsuario(u);
 	}
+	
+	public void alterarUsuario(Funcionario f, String login,String senha) throws ClassNotFoundException, SQLException {
+		UsuarioDao uDao = new UsuarioDao();
+		Usuario u = new Usuario();
+		u.setLogin(login);
+		u.setSenha(senha);
+		u.setfKFuncionario(f.getIdFuncionario());
+		uDao.alteraUsuario(u);
+	}
+	
+	public void deletarUsuario(int idUsu) throws SQLException, ClassNotFoundException {
+		UsuarioDao uDao = new UsuarioDao();
+		uDao.deletarUsuario(idUsu);
+	}
+	
+	
 	
 	public ObservableList<Usuario> procurarUsuarios() throws ClassNotFoundException, SQLException {
 		UsuarioDao usuDao = new UsuarioDao();

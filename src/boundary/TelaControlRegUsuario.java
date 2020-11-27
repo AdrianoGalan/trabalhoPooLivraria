@@ -27,10 +27,12 @@ import javafx.stage.Stage;
 
 public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
-	private ControlUsuario control = new ControlUsuario();
+	private ControlUsuario control;
 	private ComboBox<String> cbFuncionario; //<--- isso aqui vai pro saco, full bugado n funfa direito
+	private TextField txtFuncionario;
 	private ObservableList<Funcionario> listaFunc;
 	private ObservableList<String> listaFuncStr;
+	private Funcionario fun;
 	private PasswordField txtSenha;
 	private PasswordField txtNovamSenha;
 	private TextField txtLogin;
@@ -40,27 +42,32 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	private Pane painel;
 	private Stage stage;
 	private Scene cena;
-	private VBox vbDi;
-	
-	TelaControlRegUsuario(){
-		
-		tela = new BorderPane();
-		painel = new Pane();
 
+	
+	TelaControlRegUsuario(ControlUsuario cont){
+		control = cont;
+		tela = new BorderPane();
 		cena = new Scene(tela, 500, 250);
 		stage = new Stage();
 		stage.setScene(cena);
-		
-		vbDi = new VBox();
-		vbDi.setPadding(new Insets(15, 12, 15, 12));
-		vbDi.setSpacing(15);
-		painel.getChildren().add(vbDi);
 		
 	}
 
 	public void render() throws ClassNotFoundException, SQLException {
 		
-		criarTela();
+		VBox vbDi = new VBox();
+		HBox hbFunc = new HBox();
+		hbFunc.setSpacing(20);
+		Label lblFunc = new Label("Funcionario:");
+		hbFunc.getChildren().add(lblFunc);
+		lblFunc.setPadding(new Insets(4, 0, 0, 0));
+		cbFuncionario = new ComboBox<String>();
+		cbFuncionario.setItems(carregaComboBox());
+		hbFunc.getChildren().add(cbFuncionario);
+		vbDi.getChildren().add(hbFunc);
+		
+		criarTela(vbDi);
+		
 		HBox hbBotao = new HBox();
 		btnCadastrar = new Button("Cadastrar");
 		btnCadastrar.addEventHandler(ActionEvent.ACTION, this);
@@ -74,19 +81,27 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	}
 	
 	public void render(ObservableList<Usuario> lista,TableView<Usuario> tabela) throws ClassNotFoundException, SQLException {
-
-		criarTela();
-		// isso aqui vai ser refeito ta uma merda
+		
+		VBox vbDi = new VBox();
+		HBox hbFunc = new HBox();
+		hbFunc.setSpacing(20);
+		Label lblFunc = new Label("Funcionario:");
+		hbFunc.getChildren().add(lblFunc);
+		lblFunc.setPadding(new Insets(4, 0, 0, 0));
+		txtFuncionario = new TextField();
+		hbFunc.getChildren().add(txtFuncionario);
+		vbDi.getChildren().add(hbFunc);
+		criarTela(vbDi);
+		
+		listaFunc = control.getListaFuncionarios();
 		int index = tabela.getSelectionModel().getSelectedIndex();
 		int fkFunc = lista.get(index).getfKFuncionario();
-		int i = 0;
 		
 		for(Funcionario f:listaFunc) {
 			if(fkFunc == f.getIdFuncionario()) {
-				cbFuncionario.getSelectionModel().select(i);
-				System.out.println(cbFuncionario.getSelectionModel().getSelectedIndex());
+				txtFuncionario.setText(f.getNome());
+				fun = f;
 			}
-			i++;
 		}
 		
 		txtLogin.setText(lista.get(index).getLogin());
@@ -95,24 +110,21 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 		HBox hbBotao = new HBox();
 		btnAlterar = new Button("Alterar");
 		hbBotao.getChildren().add(btnAlterar);
+		btnAlterar.addEventHandler(ActionEvent.ACTION, this);
 		hbBotao.setPadding(new Insets(25, 0, 15, 200));
 		
 		vbDi.getChildren().addAll(hbBotao);
 		tela.setCenter(painel);
 		stage.show();
+		
 	}
 	
-	private void criarTela() throws ClassNotFoundException, SQLException {
+	private void criarTela(VBox vbDi) throws ClassNotFoundException, SQLException {
 		
-		HBox hbFunc = new HBox();
-		hbFunc.setSpacing(20);
-
-		Label lblFunc = new Label("Funcionario:");
-		hbFunc.getChildren().add(lblFunc);
-		lblFunc.setPadding(new Insets(4, 0, 0, 0));
-		cbFuncionario = new ComboBox<String>();
-		cbFuncionario.setItems(carregaComboBox());
-		hbFunc.getChildren().add(cbFuncionario);
+		painel = new Pane();
+		vbDi.setPadding(new Insets(15, 12, 15, 12));
+		vbDi.setSpacing(15);
+		painel.getChildren().add(vbDi);
 
 		HBox hbLogin = new HBox();
 		Label lblLogin = new Label("Login:");
@@ -135,7 +147,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 		hbNovamSenha.setSpacing(20);
 		hbNovamSenha.getChildren().addAll(lblNovamSenha, txtNovamSenha);
 		
-		vbDi.getChildren().addAll(hbFunc, hbLogin, hbSenha, hbNovamSenha);
+		vbDi.getChildren().addAll(hbLogin, hbSenha, hbNovamSenha);
 		
 	}
 
@@ -150,19 +162,22 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		if (event.getSource() == btnCadastrar) {
-			System.out.println(listaFunc.get(cbFuncionario.getSelectionModel().getSelectedIndex()).toString());
-			try {
+		System.out.println(event.getSource().toString());
+		try {
+			if (event.getSource() == btnCadastrar) {
 				control.cadastrarUsuario(listaFunc.get(cbFuncionario.getSelectionModel().getSelectedIndex()),
 						txtLogin.getText(), txtSenha.getText());
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}else if(event.getSource() == btnAlterar) {
+				control.alterarUsuario(fun, txtLogin.getText(), txtSenha.getText());
 			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 
 	}
 

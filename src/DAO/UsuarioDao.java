@@ -33,6 +33,31 @@ public class UsuarioDao {
 		
 
 	}
+	
+	public void alteraUsuario(Usuario u)throws SQLException {
+		
+		String sql = "update USUARIO set LOGIN = ?,SENHA = ? WHERE FK_FUNCIONARIO_USUARIO = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, u.getLogin());
+		ps.setString(2, u.getSenha());
+		ps.setInt(3, u.getfKFuncionario());
+
+		ps.execute();
+		ps.close();
+		
+
+	}
+	
+	public void deletarUsuario(int IdUsu)throws SQLException {
+		
+		String sql = "Delete from USUARIO where ID_USUARIO = ?";
+		PreparedStatement ps = c.prepareStatement(sql);;
+		ps.setInt(1, IdUsu);
+
+		ps.execute();
+		ps.close();
+		
+	}
 
 	public Usuario buscaUsuarioUsuario(String usuario) throws SQLException {
 
