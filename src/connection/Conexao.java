@@ -14,7 +14,7 @@ public class Conexao {
 		String dbName = "LIVRARIA";
 		String user = "sa";
 		String senha = "P4ssw0rd";
-
+		
 		Class.forName("net.sourceforge.jtds.jdbc.Driver");
 
 		c = DriverManager.getConnection(String.format(
