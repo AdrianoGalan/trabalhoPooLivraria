@@ -39,8 +39,7 @@ public class Cliente extends Pessoa {
 
 	@Override
 	public String toString() {
-		return "[idCliente=" + idCliente + ", dataCadastro=" + dataCadastro + ", fkPessoaCliente=" + fkPessoaCliente
-				+ "]";
+		return super.getNome();
 	}
 
 }

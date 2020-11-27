@@ -15,6 +15,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import util.Mensagens;
 
@@ -42,6 +43,10 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 		txtSenha.relocate(100, 40);
 		txtSenha.setPrefColumnCount(15);
 
+		// para não digitar todo hora
+		txtUser.setText("joao");
+		txtSenha.setText("senha");
+
 		Button btnEntrar = new Button("Entrar");
 		btnEntrar.relocate(100, 80);
 		Hyperlink hplEsqueci = new Hyperlink("Esqueceu a senha?");
@@ -51,27 +56,53 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 		painel.getChildren().addAll(lblUser, txtUser, lblSenha, txtSenha, btnEntrar, hplEsqueci);
 
 		// coloca uma ação aos botões
-		 btnEntrar.addEventHandler(ActionEvent.ACTION, this);
-		 hplEsqueci.addEventHandler(ActionEvent.ACTION, this);
+		btnEntrar.addEventHandler(ActionEvent.ACTION, this);
+		hplEsqueci.addEventHandler(ActionEvent.ACTION, this);
+
+		txtSenha.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
+
+			@Override
+			public void handle(javafx.scene.input.KeyEvent event) {
+
+				if (event.getCode() == KeyCode.ENTER) {
+					fazerLogin();
+				}
+			}
+		});
+
 		return painel;
 	}
 
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal gp) {
-		
+
 		this.gp = gp;
 
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
-		ControlUsuario cU = new ControlUsuario();
 
 		// verifica qual botão foi clicado
-		if (event.getTarget().toString().contains("Entrar") && veridicaCampos()) {
+		if (event.getTarget().toString().contains("Entrar")) {
+
+			fazerLogin();
+
+		}
+
+		if (event.getTarget().toString().contains("a senha")) {
+			System.out.println("esqueceu");
+		}
+
+	}
+
+	private void fazerLogin() {
+
+		if (veridicaCampos()) {
+			ControlUsuario cU = new ControlUsuario();
 
 			Usuario u = boundaryParaUsuario();
-			
+
 			try {
 				u = cU.logarNoSistema(u);
 				if (u != null) {
@@ -86,11 +117,6 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 				// TODO Auto-generated catch block
 				Mensagens.erro("Erro conexão", "Erro ao se conectar com o banco", "Procure o administrador");
 			}
-
-		}
-
-		if (event.getTarget().toString().contains("a senha")) {
-			System.out.println("esqueceu");
 		}
 
 	}
@@ -111,7 +137,7 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 		}
 		return true;
 	}
-	
+
 	private Usuario boundaryParaUsuario() {
 		Usuario u = new Usuario();
 		u.setLogin(txtUser.getText());

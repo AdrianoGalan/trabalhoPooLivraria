@@ -9,9 +9,20 @@ import DAO.TelefoneDao;
 import entity.Cliente;
 import entity.Endereco;
 import entity.Telefone;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 
 public class ControleCliente {
+	
+	public ObservableList<Cliente> buscaClienteNome(String nome) throws ClassNotFoundException, SQLException{
+		
+		ClienteDao cd = new ClienteDao();
+		
+		
+		return  cd.buscaClienteNome(nome);
+		
+		
+	}
 
 	public void addCliente(Cliente c, Endereco e, Telefone t) throws ClassNotFoundException, SQLException {
 

@@ -70,12 +70,12 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		HBox painel = new HBox();
 
 		VBox vbEs = new VBox();
-		vbEs.setPadding(new Insets(30, 12, 15, 12));
-		vbEs.setSpacing(15);
+		vbEs.setPadding(new Insets(15, 1, 15, 12));
+		vbEs.setSpacing(18);
 
 		VBox vbDi = new VBox();
-		vbDi.setPadding(new Insets(15, 12, 15, 12));
-		vbDi.setSpacing(8);
+		vbDi.setPadding(new Insets(15, 12, 15, 1));
+		vbDi.setSpacing(7);
 
 		HBox hbBotao = new HBox();
 		hbBotao.setSpacing(40);
@@ -208,7 +208,9 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 			return false;
 
-		} else if (tfTelefone.getText().equals("")) {
+		} else 
+			
+			if (tfTelefone.getText().equals("")) {
 
 			Mensagens.erro("Telefone erro", "Telefone invalido", "Digite um Telefone");
 

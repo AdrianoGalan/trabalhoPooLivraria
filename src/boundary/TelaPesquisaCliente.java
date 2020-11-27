@@ -18,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -98,6 +99,16 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 		tbvPesqCliente.getColumns().addAll(colId,colNome,colEmail,colCpf,colDataNasc,colDataCadast);
 		
 		painel.getChildren().add(vbEs);
+		
+		tfPesquisa.setOnKeyReleased(new EventHandler<javafx.scene.input.KeyEvent>() {
+			@Override
+			public void handle(javafx.scene.input.KeyEvent event) {
+
+					controle.procurarClientes(tfPesquisa.getText());
+					carregarTabela();;
+		
+			}
+		});
 
 
 		
