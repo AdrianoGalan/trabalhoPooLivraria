@@ -18,7 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
+
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -29,13 +29,12 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 	private Button btPesquisar;
 	private TableView<Cliente> tbvPesqCliente;
 	private TextField tfPesquisa;
-	//a
+
 	
 	@Override
 	public Pane render() {
 		Pane painel = new Pane();
 		
-	
 		HBox hbBotao = new HBox();
 		hbBotao.setSpacing(20);
 		

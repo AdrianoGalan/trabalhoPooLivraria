@@ -3,10 +3,8 @@ package control;
 import java.sql.SQLException;
 
 import DAO.AutorDao;
-import DAO.ClienteDao;
 import DAO.LivroDao;
 import entity.Autor;
-import entity.Cliente;
 import entity.Livro;
 import javafx.collections.ObservableList;
 import tabelaModel.ModelTabelaLivro;

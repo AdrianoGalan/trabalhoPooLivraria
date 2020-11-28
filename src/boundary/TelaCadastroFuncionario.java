@@ -54,6 +54,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		if (e.getTarget() == btOk && verificaCampos()) {
 			if(verificaDuplicata()) {
 				addCliente();
+				limpaCampos();
 			}
 			
 
@@ -303,9 +304,28 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 				return false;
 			}
 		}
-
+		
 		return true;
 
+	}
+	
+	public void limpaCampos() {
+		tfNome.setText("");
+		tfTelefone.setText("");
+		tfCpf.setText("");
+		tfRua.setText("");
+		tfNum.setText("");
+		tfBairro.setText("");
+		tfCidade.setText("");
+		tfComplemento.setText("");
+		tfCep.setText("");
+		tfEmail.setText("");
+		tfDtnasc.setText("");
+		tfNumMatricula.setText("");
+		tfDataAdmicao.setText("");
+		cbCargo.setValue(null);
+		cbEstado.setValue(null);
+		cbTipoTelefone.setValue(null);
 	}
 	
 	private boolean verificaDuplicata() {

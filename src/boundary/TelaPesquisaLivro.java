@@ -27,7 +27,6 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 	private Button btPesquisar;
 	private TextField tfPesquisa;
 	private ComboBox<String> cbOpcPesq;
-	//..
 
 	@Override
 	public Pane render() {

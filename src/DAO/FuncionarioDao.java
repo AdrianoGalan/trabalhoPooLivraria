@@ -32,11 +32,6 @@ public class FuncionarioDao {
 		String sql = "INSERT INTO FUNCIONARIO VALUES(?,?,?,?)";
 		PreparedStatement ps = c.prepareStatement(sql);
 		
-		System.out.println(f.getCargo());
-		System.out.println(f.getMatricula());
-		System.out.println(sqlData);
-		System.out.println(f.getFkPessoaFuncionario());
-		
 		ps.setString(1, f.getCargo());
 		ps.setString(2, f.getMatricula());
 		ps.setDate(3, sqlData);
