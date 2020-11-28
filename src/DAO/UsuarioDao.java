@@ -85,6 +85,27 @@ public class UsuarioDao {
 
 	}
 	
+	public boolean buscaUsuario(String usuario) throws SQLException {
+
+		boolean u = false;
+		String sql = "SELECT ID_USUARIO, LOGIN, SENHA,FK_FUNCIONARIO_USUARIO FROM USUARIO WHERE LOGIN = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, usuario);
+		
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next() && u == false) {
+			if(rs.getString("LOGIN").equals(usuario)) {
+				u = true;
+			}
+		}
+		rs.close();
+		ps.close();
+
+		return u;
+
+	}
+	
 	public ObservableList<Usuario> buscaListaUsuarios() throws SQLException{
 		
 		ObservableList<Usuario> lista = FXCollections.observableArrayList();

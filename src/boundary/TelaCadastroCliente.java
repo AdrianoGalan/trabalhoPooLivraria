@@ -47,7 +47,8 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	private TextField tfCep;
 	private TextField tfEmail;
 	private TextField tfDtnasc;
-	private ComboBox<String> cbEstado;
+	private TextField tfEstado;
+//	private ComboBox<String> cbEstado;
 	private ComboBox<String> cbTipoTelefone;
 
 	private GregorianCalendar data = new GregorianCalendar();
@@ -61,8 +62,30 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		}
 
 		if (e.getTarget() == btCancelar) {
+			
+			limpaCampos();
 
 		}
+	}
+
+	private void limpaCampos() {
+		
+		tfNome.setText(""); 
+		tfNome.setText("");
+		tfTelefone.setText(""); 
+		tfDdd.setText("");
+		tfCpf.setText("");
+		tfRua.setText("");
+		tfNum.setText("");
+		tfBairro.setText("");
+		tfCidade.setText("");
+		tfEstado.setText("");
+		tfComplemento.setText("");
+		tfCep.setText("");
+		tfEmail.setText("");
+		tfDtnasc.setText("");
+		
+		
 	}
 
 	@Override
@@ -75,7 +98,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 		VBox vbDi = new VBox();
 		vbDi.setPadding(new Insets(15, 12, 15, 1));
-		vbDi.setSpacing(7);
+		vbDi.setSpacing(9);
 
 		HBox hbBotao = new HBox();
 		hbBotao.setSpacing(40);
@@ -114,15 +137,16 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		tfNum = new TextField();
 		tfBairro = new TextField();
 		tfCidade = new TextField();
+		tfEstado = new TextField();
 		tfComplemento = new TextField();
 		tfCep = new TextField();
 		tfEmail = new TextField();
 		tfDtnasc = new TextField();
 
-		cbEstado = new ComboBox<String>();
+/*		cbEstado = new ComboBox<String>();
 		cbEstado.getItems().addAll("SP", "Rj", "MG");
 		cbEstado.setPrefWidth(80);
-		cbEstado.getSelectionModel().select(0);
+		cbEstado.getSelectionModel().select(0);   */
 		
 		cbTipoTelefone = new ComboBox<String>();
 		cbTipoTelefone.getItems().addAll("CEL", "COM", "RES");
@@ -138,7 +162,8 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		vbDi.getChildren().add(tfNum);
 		vbDi.getChildren().add(tfBairro);
 		vbDi.getChildren().add(tfCidade);
-		vbDi.getChildren().add(cbEstado);
+//		vbDi.getChildren().add(cbEstado);
+		vbDi.getChildren().add(tfEstado);
 		vbDi.getChildren().add(tfComplemento);
 		vbDi.getChildren().add(tfCep);
 		vbDi.getChildren().add(tfEmail);
@@ -168,7 +193,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		e.setBairro(tfBairro.getText());
 		e.setRua(tfRua.getText());
 		e.setCidade(tfCidade.getText());
-		e.setEstado(cbEstado.getSelectionModel().getSelectedItem());
+	//	e.setEstado(cbEstado.getSelectionModel().getSelectedItem());
 		e.setComplemento(tfComplemento.getText());
 		e.setCep(tfCep.getText());
 
@@ -196,47 +221,85 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 	private boolean verificaCampos() {
 
-		if (tfNome.getText().equals("")) {
+		if (tfNome.getText().equals("") || (!tfNome.getText().matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$"))) {  //"^[a-zA-Z]+$"
 
-			Mensagens.erro("Nome erro", "Nome invalido", "Digite um nome");
-
-			return false;
-
-		} else if (tfCpf.getText().equals("") || tfCpf.getText().length() == 11) {
-
-			Mensagens.erro("CPF erro", "CPF invalida", "Digite um CPF");
+			Mensagens.erro("NOME ERRO", "Nome invalido", "Digite um nome");
 
 			return false;
 
 		} else 
 			
-			if (tfTelefone.getText().equals("")) {
+			if (tfDdd.getText().equals("") || (!tfDdd.getText().matches("\\d+"))) {
 
-			Mensagens.erro("Telefone erro", "Telefone invalido", "Digite um Telefone");
-
-			return false;
-
-		} else if (tfRua.getText().equals("")) {
-
-			Mensagens.erro("Rua erro", "Rua invalida", "Digite uma Rua");
+			Mensagens.erro("DDD ERRO", "DDD invalido", "Digite um DDD");
 
 			return false;
 
-		} else if (tfNum.getText().equals("")) {
+		}else 
+			
+			if (tfTelefone.getText().equals("") || tfTelefone.getText().length() != 9 || (!tfTelefone.getText().matches("\\d+"))) {
 
-			Mensagens.erro("Numero erro", "Numero invalida", "Digite um Numero");
+			Mensagens.erro("TELEFONE ERRO", "Telefone invalido", "Digite um Telefone");
+
+			return false;
+
+		}else if (tfCpf.getText().equals("") || tfCpf.getText().length() != 11 || (!tfCpf.getText().matches("\\d+"))) {
+
+			Mensagens.erro("CPF ERRO", "CPF invalida", "Digite um CPF");
+
+			return false;
+
+		}  else if (tfRua.getText().equals("") || (!tfRua.getText().matches("^(/w|/W|[^<>+?$%{}&])+$"))) {
+
+			Mensagens.erro("RUA ERRO", "Rua invalida", "Digite uma Rua");
+
+			return false;
+
+		} else if (tfNum.getText().equals("") || (!tfNum.getText().matches("\\d+"))) {
+
+			Mensagens.erro("NUMERO ERRO", "Numero invalida", "Digite um Numero");
 
 			return false;
 
 		} else if (tfBairro.getText().equals("")) {
 
-			Mensagens.erro("Bairro erro", "Bairro invalida", "Digite um Bairro");
+			Mensagens.erro("BAIRRO ERRO", "Bairro invalida", "Digite um Bairro");
 
 			return false;
 
-		} else if (tfEmail.getText().equals("")) {
+		}else 
+			
+			if (tfCidade.getText().equals("")) {
 
-			Mensagens.erro("Email erro", "Email invalida", "Digite um Email");
+			Mensagens.erro("CIDADE ERRO", "Cidade invalida", "Digite uma Cidade");
+
+			return false;
+
+		}else 
+			
+			if (tfEstado.getText().equals("") || (!tfEstado.getText().matches("^(AC|AL|AM|AP|BA|CE|DF|ES|GO|MA|MG|MS|MT|PA|PB|PE|PI|PR|RJ|RN|RO|RR|RS|SC|SE|SP|TO)$"))) {
+
+			Mensagens.erro("ESTADO ERRO", "Estado invalida", "Digite uma UF");
+
+			return false;
+
+		}else 
+			
+			if (tfComplemento.getText().equals("")) {
+
+			Mensagens.erro("COMPLEMENTO ERRO", "Complemento invalido", "Digite um Complemento");
+
+			return false;
+
+		}else if (tfCep.getText().equals("") || tfCep.getText().length() != 8 || (!tfCep.getText().matches("\\d+"))) {
+
+			Mensagens.erro("CEP ERRO", "CEP invalido", "Digite um CEP");
+
+			return false;
+
+		} else if (tfEmail.getText().equals("") || (!tfEmail.getText().matches("^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+(?:[a-zA-Z]{2}|aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel)$"))) {
+
+			Mensagens.erro("EMAIL ERRO", "Email invalido", "Digite um Email");
 
 			return false;
 
@@ -248,7 +311,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 			} catch (ParseException e) {
 
-				Mensagens.erro("Data erro", "Data invalida", "Digite uma Data valida");
+				Mensagens.erro("DATA ERRO", "Data invalida", "Digite uma Data valida");
 
 				return false;
 

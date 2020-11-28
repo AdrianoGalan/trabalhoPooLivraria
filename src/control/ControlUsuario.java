@@ -21,7 +21,6 @@ public class ControlUsuario {
 		
 		
 		UsuarioDao uDao = new UsuarioDao();
-		
 		Usuario uBanco = uDao.buscaUsuarioUsuario(u.getLogin());
 		
 		if(u.getSenha().equals(uBanco.getSenha())) {
@@ -76,7 +75,10 @@ public class ControlUsuario {
 		return listaUsuarios;
 	}
 	
-	
+	public boolean verificaExistenciaLogin(String login) throws ClassNotFoundException, SQLException {
+		UsuarioDao usuDao = new UsuarioDao();
+		return usuDao.buscaUsuario(login);
+	}
 	
 	
 

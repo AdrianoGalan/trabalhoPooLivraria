@@ -91,49 +91,49 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		
 		if (tfTitulo.getText().equals("")) {
 
-			Mensagens.erro("Titulo erro", "Titulo invalido", "Digite um Titulo");
+			Mensagens.erro("TITULO ERRO", "Titulo invalido", "Digite um Titulo");
 
 			return false;
 
 		} else if (tfEdicao.getText().equals("")) {
 
-			Mensagens.erro("Edicao erro", "Edicao invalida", "Digite uma Edicao");
+			Mensagens.erro("EDICAO ERRO", "Edicao invalida", "Digite uma Edicao");
 
 			return false;
 
 		} else if (tfDescricao.getText().equals("")) {
 
-			Mensagens.erro("Descricao erro", "Descricao invalida", "Digite uma Descricao");
+			Mensagens.erro("DESCRICAO ERRO", "Descricao invalida", "Digite uma Descricao");
 
 			return false;
 
-		} else if (tfIsbn.getText().equals("")) {
+		} else if (tfIsbn.getText().equals("") || tfIsbn.getText().length() != 13 || (!tfIsbn.getText().matches("\\d+"))) {
 
-			Mensagens.erro("Isbn erro", "Isbn invalido", "Digite um Isbn");
-
-			return false;
-
-		} else if (tfAno.getText().equals("") || Integer.parseInt(tfAno.getText()) <= 0) {
-
-			Mensagens.erro("Ano erro", "Ano invalido", "Digite um Ano");
+			Mensagens.erro("ISBN ERRO", "Isbn invalido", "Digite um Isbn: 13 Digitos");
 
 			return false;
 
-		} else if (tfQtd.getText().equals("") | Integer.parseInt(tfQtd.getText()) < 0) {
+		} else if (tfAno.getText().equals("") || (!tfAno.getText().matches("\\d+"))) {
 
-			Mensagens.erro("Estoque erro", "Estoque invalida", "Digite uma Quantidade");
-
-			return false;
-
-		} else if (tfPreco.getText().equals("") || Double.parseDouble(tfQtd.getText()) < 0.0) {
-
-			Mensagens.erro("Preco erro", "Preco invalido", "Digite um valor");
+			Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano");
 
 			return false;
 
-		} else if (tfAutor.getText().equals("")) {
+		} else if (tfQtd.getText().equals("") || (!tfQtd.getText().matches("\\d+"))) {
 
-			Mensagens.erro("Autor erro", "Nome invalido", "Digite um Nome");
+			Mensagens.erro("ESTOQUE ERRO", "Estoque invalido", "Digite uma Quantidade");
+
+			return false;
+
+		} else if (tfPreco.getText().equals("") || (!tfPreco.getText().matches("^\\$?\\d+(\\.(\\d{2}))?$"))) {
+
+			Mensagens.erro("PRECO ERRO", "Preco invalido", "Digite um valor");
+
+			return false;
+
+		} else if (tfAutor.getText().equals("") || (!tfAutor.getText().matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$"))) {
+
+			Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
 
 			return false;
 

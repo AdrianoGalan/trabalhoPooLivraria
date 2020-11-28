@@ -28,14 +28,32 @@ public class ClienteDao {
 		PreparedStatement ps = c.prepareStatement(sql);
 		ps.setInt(1, cliente.getFkPessoaCliente());
 	
-
 		ps.executeUpdate();
 
-	
-
 		ps.close();
+	}
+	
+	public void atualizaCliente(Cliente cliente) throws SQLException {
 		
+		String sql = "UPDATE CLIENTE c SET nome = ? WHERE c.FK_PESSOA_CLIENTE = ?";
 		
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setInt(1, cliente.getFkPessoaCliente());
+
+		ps.executeUpdate();
+		
+		ps.close();
+	}
+	
+	public void excluiCliente(Cliente cliente) throws SQLException {
+		
+		String sql = "DELETE CLIENTE c WHERE c.FK_PESSOA_CLIENTE = ?";
+		
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setInt(1, cliente.getFkPessoaCliente());
+
+		ps.execute();
+		ps.close();
 	}
 
 	public ObservableList<Cliente> buscaClienteNome(String nome) throws SQLException {
