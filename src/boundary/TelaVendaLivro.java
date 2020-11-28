@@ -36,18 +36,25 @@ import util.Mensagens;
 public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> {
 
 	private TextField tfCpfCliente;
-	private ComboBox<Livro> cbLivro;
 	private TextField tfISBN;
+	private TextField tfPreco;
+	
+	private ComboBox<Livro> cbLivro;
+	private ComboBox<Cliente> cbNome;
+	
 	private TableView<ModelItensVenda> tbItes;
+	
 	private Button btnAdd;
 	private Button btnFinalizar;
 	private Button btnRemover;
 	private Button btnCancelar;
-	private ComboBox<Cliente> cbNome;
+
 	private Cliente cliente;
 	private Livro livro;
+	
 	private ControleCliente cc;
 	private ControleLivro cl;
+	
 	private ObservableList<ModelItensVenda> listaVenda;
 
 	@Override
@@ -55,10 +62,10 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 		if (e.getTarget() == cbNome && cbNome.getValue() != null) {
 
-		
+			if(listaVenda.isEmpty()) {
 				cliente = cbNome.getValue();
 				alimentaCamposCliente();
-			
+			}
 
 		} else if (e.getTarget() == cbLivro && cbLivro.getValue() != null) {
 
@@ -80,6 +87,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 	@Override
 	public Pane render() {
+		
+		// cria lista de itens
+		listaVenda = FXCollections.observableArrayList();
 
 		// cria painel principal
 		BorderPane painel = new BorderPane();
@@ -92,7 +102,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		// cria tabbela com os itens da venda
 		tbItes = new TableView<ModelItensVenda>();
 		tbItes.setPadding(new Insets(15, 15, 15, 15));
-		tbItes.setPrefWidth(500);
+		tbItes.setPrefWidth(400);
 
 		TableColumn<ModelItensVenda, String> colTitulo = new TableColumn<>("Titulo");
 		colTitulo.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, String>("Titulo"));
@@ -116,6 +126,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		vbPrincipal.setSpacing(20);
 
 		tfISBN = new TextField();
+		tfISBN.setPrefWidth(80);
+		tfPreco = new TextField();
+		tfPreco.setPrefWidth(80);
 		cbLivro = new ComboBox<>();
 		cbLivro.setEditable(true);
 		cbLivro.setOnAction(this);
@@ -132,7 +145,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		btnRemover = new Button("Remover");
 		btnRemover.setOnAction(this);
 		btnCancelar = new Button("Cancelar");
-		// btnCancelar.setPrefWidth(80);
+		
 
 		carregaCbCliente("");
 		carregaCbLivro("");
@@ -226,8 +239,10 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 		hbLivro.getChildren().add(new Label("Livro:   "));
 		hbLivro.getChildren().add(cbLivro);
-		hbLivro.getChildren().add(new Label("ISBN: "));
+		hbLivro.getChildren().add(new Label("ISBN:"));
 		hbLivro.getChildren().add(tfISBN);
+		hbLivro.getChildren().add(new Label("Preço:"));
+		hbLivro.getChildren().add(tfPreco);
 		hbLivro.getChildren().add(btnAdd);
 
 		painel.setTop(stitulo);
@@ -250,6 +265,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		tfISBN.setEditable(true);
 
 		tfISBN.setText(livro.getIsbn());
+		//tfPreco.setText(value);
 
 		tfISBN.setEditable(false);
 
@@ -289,10 +305,6 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 		if (cbNome.getValue() != null) {
 
-			if (listaVenda == null) {
-
-				listaVenda = FXCollections.observableArrayList();
-
 				ModelItensVenda miv = new ModelItensVenda();
 
 				miv.setTitulo(cbLivro.getValue().getTitulo());
@@ -302,7 +314,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 				limpaCampoLivro();
 
 				tbItes.setItems(listaVenda);
-			}
+			
 
 		} else {
 			Mensagens.erro("Erro", "Erro Cliente", "Seleciona um cliente");
