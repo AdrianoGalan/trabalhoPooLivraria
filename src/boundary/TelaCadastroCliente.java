@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import DAO.EnderecoDao;
+import DAO.PessoaDao;
 import control.ControleCliente;
 import control.ControleTelas;
 import javafx.application.Application;
@@ -57,7 +58,9 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btOk && verificaCampos()) {
 
-			addCliente();
+			if(verificaDuplicata()) {
+				addCliente();
+			}
 
 		}
 
@@ -71,9 +74,8 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	private void limpaCampos() {
 		
 		tfNome.setText(""); 
-		tfNome.setText("");
 		tfTelefone.setText(""); 
-		tfDdd.setText("");
+		tfDdd.setText("11");
 		tfCpf.setText("");
 		tfRua.setText("");
 		tfNum.setText("");
@@ -218,6 +220,28 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		}
 
 	}
+	
+	private boolean verificaDuplicata() {
+		try {
+			PessoaDao pDao = new PessoaDao();
+			if(pDao.verificaDuplicCpf(tfCpf.getText())) {
+				Mensagens.erro("Cpf erro", "Cpf inválido", "Cpf inválido ou já cadastrado");
+				return false;
+			}else if(pDao.verificaDuplicEmail(tfEmail.getText())) {
+				Mensagens.erro("Email erro", "Email inválido", "Email inválido ou já cadastrado");
+				return false;
+			}else {
+				return true;
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 
 	private boolean verificaCampos() {
 
@@ -229,7 +253,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 		} else 
 			
-			if (tfDdd.getText().equals("") || (!tfDdd.getText().matches("\\d+"))) {
+			if (tfDdd.getText().equals("") || (!tfDdd.getText().matches("\\d+")) || tfDdd.getText().length() != 2) {
 
 			Mensagens.erro("DDD ERRO", "DDD invalido", "Digite um DDD");
 
@@ -237,7 +261,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 		}else 
 			
-			if (tfTelefone.getText().equals("") || tfTelefone.getText().length() != 9 || (!tfTelefone.getText().matches("\\d+"))) {
+			if (tfTelefone.getText().equals("") || tfTelefone.getText().length() <=7 || (!tfTelefone.getText().matches("\\d+"))) {
 
 			Mensagens.erro("TELEFONE ERRO", "Telefone invalido", "Digite um Telefone");
 

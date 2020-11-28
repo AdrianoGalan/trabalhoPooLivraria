@@ -121,4 +121,28 @@ public class LivroDao {
 		return lista;
 	}
 
+
+	public boolean verificaDuplicIsbn(String isbn) throws SQLException {
+		// TODO Auto-generated method stub
+		boolean u = false;
+		String sql = "select ISBN from LIVRO where ISBN = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, isbn);
+		
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next() && u == false) {
+			if(rs.getString("ISBN").equals(isbn)) {
+				u = true;
+			}
+		}
+		
+		rs.close();
+		ps.close();
+
+		return u;
+
+		
+	}
+	
 }
