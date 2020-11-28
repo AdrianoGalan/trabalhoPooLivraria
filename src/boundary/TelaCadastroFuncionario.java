@@ -2,40 +2,28 @@ package boundary;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
-
-import DAO.EnderecoDao;
 import DAO.PessoaDao;
-import control.ControleCliente;
 import control.ControleFuncionario;
 import control.ControleTelas;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import control.GetenciadorPrincipal;
-import entity.Cliente;
 import entity.Endereco;
 import entity.Funcionario;
 import entity.Telefone;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import util.Data;
+import util.Mascaras;
 import util.Mensagens;
 
 public class TelaCadastroFuncionario implements ControleTelas, EventHandler<ActionEvent> {
@@ -44,7 +32,6 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	private Button btCancelar;
 	private TextField tfNome;
 	private TextField tfTelefone;
-	private TextField tfDdd;
 	private TextField tfCpf;
 	private TextField tfRua;
 	private TextField tfNum;
@@ -61,8 +48,6 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	private ComboBox<String> cbCargo;
 	
 
-	private GregorianCalendar data = new GregorianCalendar();
-
 	@Override
 	public void handle(ActionEvent e) {
 		
@@ -75,7 +60,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		}
 
 		if (e.getTarget() == btCancelar) {
-			System.out.println(cbCargo.getSelectionModel().getSelectedItem());
+			
 		}
 	}
 
@@ -104,7 +89,6 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 		vbEs.getChildren().add(new Label("Nome:"));
 		vbEs.getChildren().add(new Label("Telefone tipo:"));
-		vbEs.getChildren().add(new Label("DDD"));
 		vbEs.getChildren().add(new Label("Telefone:"));
 		vbEs.getChildren().add(new Label("CPF:"));
 		vbEs.getChildren().add(new Label("Rua:"));
@@ -121,20 +105,26 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		vbEs.getChildren().add(new Label("Data Adimição: "));
 
 		vbEs.getChildren().add(hbBotao);
+		
+
 
 		tfNome = new TextField();
 		tfNome.setPrefWidth(330);
 		tfTelefone = new TextField();
-		tfDdd = new TextField("11");
+		Mascaras.mascaraTelefone(tfTelefone);
 		tfCpf = new TextField();
+		Mascaras.mascaraCPF(tfCpf);
 		tfRua = new TextField();
 		tfNum = new TextField();
+		Mascaras.mascaraApenasNum(tfNum);
 		tfBairro = new TextField();
 		tfCidade = new TextField();
 		tfComplemento = new TextField();
 		tfCep = new TextField();
+		Mascaras.mascaraCEP(tfCep);
 		tfEmail = new TextField();
 		tfDtnasc = new TextField();
+		Mascaras.mascaraData(tfDtnasc);
 		ObservableList<String> options = 
 			    FXCollections.observableArrayList(
 			        "GERENTE",
@@ -142,8 +132,9 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 			    );
 		cbCargo = new ComboBox<String>(options);
 		tfNumMatricula = new TextField();
+		Mascaras.mascaraApenasNum(tfNumMatricula);
 		tfDataAdmicao = new TextField();
-
+		Mascaras.mascaraData(tfDataAdmicao);
 		cbEstado = new ComboBox<String>();
 		cbEstado.getItems().addAll("SP", "Rj", "MG");
 		cbEstado.setPrefWidth(80);
@@ -156,7 +147,6 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 		vbDi.getChildren().add(tfNome);
 		vbDi.getChildren().add(cbTipoTelefone);
-		vbDi.getChildren().add(tfDdd);
 		vbDi.getChildren().add(tfTelefone);
 		vbDi.getChildren().add(tfCpf);
 		vbDi.getChildren().add(tfRua);
@@ -197,16 +187,17 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		e.setCidade(tfCidade.getText());
 		e.setEstado(cbEstado.getSelectionModel().getSelectedItem());
 		e.setComplemento(tfComplemento.getText());
-		e.setCep(tfCep.getText());
-
+		e.setCep(tfCep.getText().replaceAll("[-]", ""));
 		t.setTipo(cbTipoTelefone.getSelectionModel().getSelectedItem());
-		t.setDdd(tfDdd.getText());
-		t.setNumero(tfTelefone.getText());
+		String telefone = tfTelefone.getText().replaceAll("[()-]", "");
+		t.setDdd(telefone.substring(0,2));
+		t.setNumero(telefone.substring(2,telefone.length()));
 		f.setNome(tfNome.getText());
-		f.setCpf(tfCpf.getText());
+		f.setCpf(tfCpf.getText().replaceAll("[.-]", ""));
 		f.setEmail(tfEmail.getText());
 		f.setCargo(cbCargo.getSelectionModel().getSelectedItem());
 		f.setMatricula(tfNumMatricula.getText());
+		
 
 		try {
 			f.setDataNascimento(Data.parseDate(tfDtnasc.getText()));
@@ -232,19 +223,13 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 			return false;
 
-		} else if (tfCpf.getText().equals("") || tfCpf.getText().length() != 11) {
+		} else if (tfCpf.getText().equals("") || tfCpf.getText().length() != 14) {
 
 			Mensagens.erro("CPF erro", "CPF invalida", "Digite um CPF");
 
 			return false;
 
-		}else if(tfDdd.getText().equals("") || tfDdd.getText().length() != 2) {
-
-			Mensagens.erro("DDD erro", "DDD invalido", "Digite um DDD válido");
-
-			return false;
-			
-		}else if (tfTelefone.getText().equals("") || tfTelefone.getText().length() <= 7) {
+		}else if (tfTelefone.getText().equals("") || tfTelefone.getText().replaceAll("[()-]", "").length() <= 7) {
 
 			Mensagens.erro("Telefone erro", "Telefone invalido", "Digite um Telefone");
 
@@ -274,7 +259,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 			return false;
 
-		}else if(tfCep.getText().equals("") || tfCep.getText().length() != 8){
+		}else if(tfCep.getText().equals("") || tfCep.getText().replaceAll("[-]", "").length() != 8){
 			Mensagens.erro("Cep erro", "Cep invalido", "Digite um Cep");
 
 			return false;

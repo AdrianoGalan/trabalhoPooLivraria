@@ -2,6 +2,7 @@ package boundary;
 
 import java.sql.SQLException;
 
+import DAO.LivroDao;
 import control.ControleAutor;
 import control.ControleLivro;
 import control.ControleTelas;
@@ -44,7 +45,11 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 		if (e.getTarget() == btOk && verificaCampos()) {
 			
-			addLivro();
+			if(verificaDuplicata()) {
+				
+				addLivro();
+				
+			}
 			
 		}
 		if (e.getTarget() == btCancelar) {
@@ -85,17 +90,36 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		
 		
 	}
+	
+	private boolean verificaDuplicata() {
+		try {
+			LivroDao lDao = new LivroDao();
+			if(lDao.verificaDuplicIsbn(tfIsbn.getText())) {
+				Mensagens.erro("ISBN ERRO", "ISBN inválido", "ISBN inválido ou já cadastrado");
+				return false;
+			}else {
+				return true;
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 
 	private boolean verificaCampos() {
 		// TODO Auto-generated method stub
 		
-		if (tfTitulo.getText().equals("")) {
+		if (tfTitulo.getText().equals("") || tfTitulo.getText().length() > 200) {
 
 			Mensagens.erro("TITULO ERRO", "Titulo invalido", "Digite um Titulo");
 
 			return false;
 
-		} else if (tfEdicao.getText().equals("")) {
+		} else if (tfEdicao.getText().equals("") || tfEdicao.getText().length() > 3) {
 
 			Mensagens.erro("EDICAO ERRO", "Edicao invalida", "Digite uma Edicao");
 
@@ -107,13 +131,13 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 			return false;
 
-		} else if (tfIsbn.getText().equals("") || tfIsbn.getText().length() != 13 || (!tfIsbn.getText().matches("\\d+"))) {
+		} else if (tfIsbn.getText().equals("") || tfIsbn.getText().length() > 13 || (!tfIsbn.getText().matches("\\d+"))) {
 
 			Mensagens.erro("ISBN ERRO", "Isbn invalido", "Digite um Isbn: 13 Digitos");
 
 			return false;
 
-		} else if (tfAno.getText().equals("") || (!tfAno.getText().matches("\\d+"))) {
+		} else if (tfAno.getText().equals("") || (!tfAno.getText().matches("\\d+")) || tfAno.getText().length() != 4) {
 
 			Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano");
 
@@ -131,7 +155,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 			return false;
 
-		} else if (tfAutor.getText().equals("") || (!tfAutor.getText().matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$"))) {
+		} else if (tfAutor.getText().equals("") || (!tfAutor.getText().matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$")) || tfAutor.getText().length() > 150) {
 
 			Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
 
@@ -170,13 +194,13 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		vbEs.getChildren().add(new Label("Titulo:"));
 		vbEs.getChildren().add(new Label("ISBN:"));
 		vbEs.getChildren().add(new Label("Autor:"));
-		vbEs.getChildren().add(new Label("Ediï¿½ao:"));
+		vbEs.getChildren().add(new Label("Edicao:"));
 		vbEs.getChildren().add(new Label("Ano:"));
 		vbEs.getChildren().add(new Label("Genero:"));
-		vbEs.getChildren().add(new Label("Descriï¿½ao:"));
+		vbEs.getChildren().add(new Label("Descricao:"));
 		vbEs.getChildren().add(new Label("Quantidade de livros no estoque:"));
 		vbEs.getChildren().add(new Label("Idioma:"));
-		vbEs.getChildren().add(new Label("Preï¿½o:"));
+		vbEs.getChildren().add(new Label("Preco:"));
 
 		vbEs.getChildren().add(hbBotao);
 
@@ -191,7 +215,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		tfPreco = new TextField();
 		
 		cbGenero = new ComboBox<String>();
-		cbGenero.getItems().addAll("Terror", "Aventura", "Romance", "Suspense","Ficï¿½ï¿½o");
+		cbGenero.getItems().addAll("Terror", "Aventura", "Romance", "Suspense","Ficcao");
 		cbGenero.setPrefWidth(80);
 		cbGenero.getSelectionModel().select(0);
 		
