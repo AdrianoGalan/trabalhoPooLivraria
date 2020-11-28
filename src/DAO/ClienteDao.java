@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class ClienteDao {
+	
 	private Connection c;
 
 	public ClienteDao() throws ClassNotFoundException, SQLException {
@@ -76,6 +77,47 @@ public class ClienteDao {
 
 		return lista;
 
+	}
+	
+	public Cliente buscaClienteCpf(String cpf) throws SQLException {
+		
+		Cliente cliente = new Cliente();
+	
+		
+		StringBuilder sql = new StringBuilder();
+		sql.append(" Select c.ID_CLIENTE,p.ID_PESSOA,p.NOME,p.EMAIL,p.CPF,p.DATA_NASCIMENTO, ");
+		sql.append("c.DATA_CADASTRO, c.FK_PESSOA_CLIENTE,p.FK_EDERECO_PESSOA AS FK_ENDERECO ");
+		sql.append(" From CLIENTE c INNER JOIN PESSOA p " );
+		sql.append(" ON C.FK_PESSOA_CLIENTE = P.ID_PESSOA  ");
+		sql.append(" WHERE p.CPF = ? ");
+		
+		
+		PreparedStatement ps = c.prepareStatement(sql.toString());
+		ps.setString(1, cpf);
+		ResultSet rs = ps.executeQuery();
+		
+		while (rs.next()) {
+			
+			
+			cliente.setIdCliente(rs.getInt("ID_CLIENTE"));
+			cliente.setIdPessoa(rs.getInt("ID_PESSOA"));
+			cliente.setNome(rs.getString("NOME"));
+			cliente.setEmail(rs.getString("EMAIL"));
+			cliente.setCpf(rs.getString("CPF"));
+			
+			cliente.setDataNascimento(rs.getDate("DATA_NASCIMENTO"));
+			cliente.setDataCadastro(rs.getDate("DATA_CADASTRO"));
+			
+			cliente.setFkPessoaCliente(rs.getInt("FK_PESSOA_CLIENTE"));
+			cliente.setFkEdetecoPessoa(rs.getInt("FK_ENDERECO"));
+			
+		}
+		
+		rs.close();
+		ps.close();
+		
+		return cliente;
+		
 	}
 
 }

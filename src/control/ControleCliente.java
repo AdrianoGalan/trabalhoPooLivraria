@@ -23,6 +23,16 @@ public class ControleCliente {
 		
 		
 	}
+	
+	public Cliente buscaClienteCpf(String cpf) throws ClassNotFoundException, SQLException{
+		
+		ClienteDao cd = new ClienteDao();
+		
+		
+		return  cd.buscaClienteCpf(cpf);
+		
+		
+	}
 
 	public void addCliente(Cliente c, Endereco e, Telefone t) throws ClassNotFoundException, SQLException {
 

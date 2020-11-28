@@ -8,10 +8,10 @@ public class Livro {
 	private String genero;
 	private String edicao;
 	private String ano;
+	private int precoAtual;
 	private int qtsEstoque;
 	private String idioma;
 	private String descricao;
-	private double preco;
 
 	public Livro() {
 
@@ -65,6 +65,14 @@ public class Livro {
 		this.ano = ano;
 	}
 
+	public int getPrecoAtual() {
+		return precoAtual;
+	}
+
+	public void setPrecoAtual(int precoAtual) {
+		this.precoAtual = precoAtual;
+	}
+
 	public int getQtsEstoque() {
 		return qtsEstoque;
 	}
@@ -89,19 +97,9 @@ public class Livro {
 		this.descricao = descricao;
 	}
 
-	public double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(double preco) {
-		this.preco = preco;
-	}
-
 	@Override
 	public String toString() {
-		return "[idLivro=" + idLivro + ", titulo=" + titulo + ", isbn=" + isbn + ", genero=" + genero + ", edicao="
-				+ edicao + ", ano=" + ano + ", qtsEstoque=" + qtsEstoque + ", idioma=" + idioma + ", descricao="
-				+ descricao + "preco=" + preco + "]";
+		return titulo;
 	}
 
 }

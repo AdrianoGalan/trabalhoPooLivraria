@@ -68,7 +68,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		l.setIsbn(tfIsbn.getText());
 		l.setTitulo(tfTitulo.getText());
 		l.setQtsEstoque(Integer.parseInt(tfQtd.getText()));
-		l.setPreco(Double.parseDouble(tfPreco.getText()));
+	//	l.setPreco(Double.parseDouble(tfPreco.getText()));
 		
 		
 		l.setGenero(cbGenero.getSelectionModel().getSelectedItem());
@@ -170,13 +170,13 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		vbEs.getChildren().add(new Label("Titulo:"));
 		vbEs.getChildren().add(new Label("ISBN:"));
 		vbEs.getChildren().add(new Label("Autor:"));
-		vbEs.getChildren().add(new Label("Ediçao:"));
+		vbEs.getChildren().add(new Label("Ediï¿½ao:"));
 		vbEs.getChildren().add(new Label("Ano:"));
 		vbEs.getChildren().add(new Label("Genero:"));
-		vbEs.getChildren().add(new Label("Descriçao:"));
+		vbEs.getChildren().add(new Label("Descriï¿½ao:"));
 		vbEs.getChildren().add(new Label("Quantidade de livros no estoque:"));
 		vbEs.getChildren().add(new Label("Idioma:"));
-		vbEs.getChildren().add(new Label("Preço:"));
+		vbEs.getChildren().add(new Label("Preï¿½o:"));
 
 		vbEs.getChildren().add(hbBotao);
 
@@ -191,7 +191,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		tfPreco = new TextField();
 		
 		cbGenero = new ComboBox<String>();
-		cbGenero.getItems().addAll("Terror", "Aventura", "Romance", "Suspense","Ficção");
+		cbGenero.getItems().addAll("Terror", "Aventura", "Romance", "Suspense","Ficï¿½ï¿½o");
 		cbGenero.setPrefWidth(80);
 		cbGenero.getSelectionModel().select(0);
 		
