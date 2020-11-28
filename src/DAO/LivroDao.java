@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import tabelaModel.ModelTabelaLivro;
 
 public class LivroDao {
+	
 	private Connection c;
 
 	public LivroDao() throws ClassNotFoundException, SQLException {

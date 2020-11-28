@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import connection.Conexao;
-import entity.Livro;
 import entity.Preco;
 
 public class PrecoDao {
@@ -62,7 +61,6 @@ public class PrecoDao {
 		ResultSet rs = ps.executeQuery();
 		
 		while (rs.next()) {
-			
 			
 			
 			p.setIdPreco(rs.getInt("ID_PRECO"));
