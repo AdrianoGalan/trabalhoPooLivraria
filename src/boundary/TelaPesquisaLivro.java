@@ -1,9 +1,10 @@
 package boundary;
 
-import control.ControlePesquisaLivro;
+import java.sql.SQLException;
+
+import control.ControleLivro;
 import control.ControleTelas;
 import control.GetenciadorPrincipal;
-import entity.Livro;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -21,11 +22,12 @@ import tabelaModel.ModelTabelaLivro;
 
 public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEvent>  {
 
-	private ControlePesquisaLivro controle = new ControlePesquisaLivro();
+	private ControleLivro controle = new ControleLivro();
 	private TableView<ModelTabelaLivro> tbvPesqLivro;
 	private Button btPesquisar;
 	private TextField tfPesquisa;
 	private ComboBox<String> cbOpcPesq;
+	//..
 
 	@Override
 	public Pane render() {
@@ -39,7 +41,7 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 		cbOpcPesq = new ComboBox<String>();
 		cbOpcPesq.getItems().addAll("Titulo","ISBN","Autor");
 		cbOpcPesq.setPrefWidth(200);
-		//Seleciona qual indice vai ficar selecionado, pode dar erro dps (vai saber)
+		//Seleciona qual indice vai ficar selecionado, pode dar erro dps (vai saber...)
 		cbOpcPesq.getSelectionModel().select(0); 
 		
 		hbCombo.getChildren().add(lblPesqCombo);
@@ -76,7 +78,22 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 		carregarTela();
 		
 		painel.getChildren().add(vbEs);
+		
+		tfPesquisa.setOnKeyReleased(new EventHandler<javafx.scene.input.KeyEvent>() {
+			@Override
+			public void handle(javafx.scene.input.KeyEvent event) {
 
+					try {
+						controle.procurarLivro(tfPesquisa.getText(), cbOpcPesq.getSelectionModel().getSelectedIndex());
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					carregarTabela();
+		
+			}
+		});
 
 	
 		return painel;
@@ -86,14 +103,22 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btPesquisar) {
 					
-				controle.procurarLivro(tfPesquisa.getText(), cbOpcPesq.getSelectionModel().getSelectedIndex());
+				try {
+					controle.procurarLivro(tfPesquisa.getText(), cbOpcPesq.getSelectionModel().getSelectedIndex());
+				} catch (ClassNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				carregarTabela();
 				
-				tbvPesqLivro.setItems(controle.getLista());
-			
-			
 			
 		}
 		
+	}
+	
+	private void carregarTabela() {
+		tbvPesqLivro.setItems(controle.getLista());
 	}
 
 	private void carregarTela() {

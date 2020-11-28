@@ -1,6 +1,7 @@
 package control;
 
 import java.sql.SQLException;
+import java.util.GregorianCalendar;
 
 import DAO.ClienteDao;
 import DAO.EnderecoDao;
@@ -9,10 +10,20 @@ import DAO.TelefoneDao;
 import entity.Cliente;
 import entity.Endereco;
 import entity.Telefone;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TextField;
 
 public class ControleCliente {
+	private ObservableList<Cliente> lista;
+	
+	private IntegerProperty idCliente;
+	private StringProperty nome;
+	private StringProperty cpf;
+	private StringProperty email;
+	private ObjectProperty<GregorianCalendar> dataNascimento;
+	private GregorianCalendar dataCadastro;
 	
 	public ObservableList<Cliente> buscaClienteNome(String nome) throws ClassNotFoundException, SQLException{
 		
@@ -32,6 +43,12 @@ public class ControleCliente {
 		return  cd.buscaClienteCpf(cpf);
 		
 		
+	}
+	public void buscaClientesNome(String nome) throws SQLException, ClassNotFoundException {
+		
+			ClienteDao clienteDAO = new ClienteDao();
+			lista = clienteDAO.buscaClienteNome(nome);
+			
 	}
 
 	public void addCliente(Cliente c, Endereco e, Telefone t) throws ClassNotFoundException, SQLException {
@@ -80,6 +97,34 @@ public class ControleCliente {
 	
 	public void deleteCliente (Cliente c, Endereco e, Telefone t) throws ClassNotFoundException, SQLException {
 		
+	}
+	
+	public ObservableList<Cliente> getLista() {
+		return lista;
+	}
+
+	public IntegerProperty getIdCliente() {
+		return idCliente;
+	}
+
+	public StringProperty getNome() {
+		return nome;
+	}
+
+	public StringProperty getCpf() {
+		return cpf;
+	}
+
+	public StringProperty getEmail() {
+		return email;
+	}
+
+	public ObjectProperty<GregorianCalendar> getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public GregorianCalendar getDataCadastro() {
+		return dataCadastro;
 	}
 
 }

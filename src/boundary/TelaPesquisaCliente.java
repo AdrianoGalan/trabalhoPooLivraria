@@ -2,10 +2,10 @@ package boundary;
 
 import control.ControleTelas;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
-
-import control.ControlePesquisaCliente;
+import control.ControleCliente;
 import control.GetenciadorPrincipal;
 import entity.Cliente;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -25,10 +25,11 @@ import javafx.scene.layout.VBox;
 
 public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEvent>  {
 
-	private ControlePesquisaCliente controle = new ControlePesquisaCliente();
+	private ControleCliente controle = new ControleCliente();
 	private Button btPesquisar;
 	private TableView<Cliente> tbvPesqCliente;
 	private TextField tfPesquisa;
+	//a
 	
 	@Override
 	public Pane render() {
@@ -104,8 +105,14 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 			@Override
 			public void handle(javafx.scene.input.KeyEvent event) {
 
-					controle.procurarClientes(tfPesquisa.getText());
-					carregarTabela();;
+					try {
+						controle.buscaClientesNome(tfPesquisa.getText());
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					carregarTabela();
 		
 			}
 		});
@@ -120,7 +127,12 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 	@Override
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btPesquisar) {
-			controle.procurarClientes(tfPesquisa.getText());
+			try {
+				controle.buscaClientesNome(tfPesquisa.getText());
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			carregarTabela();
 		}
 	}

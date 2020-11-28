@@ -9,16 +9,32 @@ import entity.Autor;
 import entity.Cliente;
 import entity.Livro;
 import javafx.collections.ObservableList;
+import tabelaModel.ModelTabelaLivro;
 
 public class ControleLivro {
+
+	private ObservableList<ModelTabelaLivro> lista;
 
 	public void addLivro(Livro l, Autor a) throws ClassNotFoundException, SQLException {
 
 		LivroDao ld = new LivroDao();
 		AutorDao ad = new AutorDao();
 
-		ld.insereLivro(l);
-		ad.insereAutor(a);
+		try {
+			ld.insereLivro(l);
+		} catch (Exception e1) {
+			// TODO: handle exception
+			e1.printStackTrace();
+			System.out.println("1");
+		}
+
+		try {
+			ad.insereAutor(a);
+		} catch (Exception e1) {
+			// TODO: handle exception
+			e1.printStackTrace();
+			System.out.println("2");
+		}
 
 	}
 
@@ -29,5 +45,18 @@ public class ControleLivro {
 		return ld.buscaLivroTitulo(titulo);
 
 	}
+
+	public void procurarLivro(String texto, int meio) throws SQLException, ClassNotFoundException {
+
+		LivroDao livDao = new LivroDao();
+		lista = livDao.buscaLivro(texto, meio);
+
+	}
+
+	public ObservableList<ModelTabelaLivro> getLista() {
+		return lista;
+	}
+	
+	
 
 }
