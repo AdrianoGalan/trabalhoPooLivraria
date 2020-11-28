@@ -1,6 +1,10 @@
 package util;
 
+import java.util.function.UnaryOperator;
+
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.input.KeyEvent;
 
 public class Mascaras {
@@ -208,6 +212,17 @@ public class Mascaras {
         });
 
     }
-
+    
+    public static void mascaraApenasNum(TextField textField) {
+    	UnaryOperator<Change> integerFilter = change -> {
+    	    String input = change.getText();
+    	    if (input.matches("[0-9]*")) { 
+    	        return change;
+    	    }
+    	    return null;
+    	};
+    	
+    	textField.setTextFormatter(new TextFormatter<String>(integerFilter));
+    }
     
 }
