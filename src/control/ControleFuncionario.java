@@ -29,14 +29,15 @@ public class ControleFuncionario {
 			e1.printStackTrace();
 			System.out.println("1");
 		}
-		try {
+		
+		try {	
 			f.setFkPessoaFuncionario(pd.inserePessoa(f));
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 			System.out.println("2");
 		}
-		t.setFkPessoaTelefone(f.getFkPessoaFuncionario());
+			t.setFkPessoaTelefone(f.getFkPessoaFuncionario());
 		try {
 			td.insereTelefone(t);
 		} catch (SQLException e1) {
@@ -52,7 +53,13 @@ public class ControleFuncionario {
 			System.out.println("4");
 		}
 		
+		
+		f.setFkEdetecoPessoa(ed.insereEndereco(e));
+		
 
 	}
+	
+
+	
 
 }

@@ -109,7 +109,7 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 
 			if (event.getTarget() == btNovoUsuario) {
 
-				controleTelaReg.render();
+				controleTelaReg.render(this);
 
 			} else {
 				if (i == -1 || i > tbvPesqCliente.getItems().size()) {
@@ -118,8 +118,7 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 					alertaSelecao.showAndWait();
 				} else {
 					if (event.getTarget() == btAlterar) {
-						controleTelaReg.render(listaUsuarios, tbvPesqCliente);
-
+						controleTelaReg.render(this,listaUsuarios, tbvPesqCliente);
 					} else if (event.getTarget() == btExcluir) {
 
 						Alert alert = new Alert(AlertType.CONFIRMATION);

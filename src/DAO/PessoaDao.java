@@ -48,7 +48,62 @@ public class PessoaDao {
 
 		return id;
 	}
+	
+	public int buscaPessoa(String CPF) throws SQLException {
+		int id = -1;
+		String sql = "select ID_PESSOA,CPF from Pessoa where CPF = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, CPF);
+		ResultSet rs = ps.executeQuery();
+		
+		if(rs.getString("CPF").equals(CPF)) {
+			id = rs.getInt("ID_PESSOA");
+		}
 
+		rs.close();
+		ps.close();
+		return id;
+	}
+
+	public boolean verificaDuplicCpf(String CPF) throws SQLException {
+		boolean u = false;
+		String sql = "select CPF from Pessoa where CPF = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, CPF);
+		
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next() && u == false) {
+			if(rs.getString("CPF").equals(CPF)) {
+				u = true;
+			}
+		}
+		
+		rs.close();
+		ps.close();
+
+		return u;
+	}
+	
+	public boolean verificaDuplicEmail(String Email) throws SQLException {
+		boolean u = false;
+		String sql = "select EMAIL from Pessoa where EMAIL = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, Email);
+		
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next() && u == false) {
+			if(rs.getString("EMAIL").equals(Email)) {
+				u = true;
+			}
+		}
+		
+		rs.close();
+		ps.close();
+
+		return u;
+	}
 
 }
 

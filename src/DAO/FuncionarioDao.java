@@ -26,16 +26,24 @@ public class FuncionarioDao {
 	}
 
 	public void insereFuncionario(Funcionario f) throws SQLException {
-		String sql = "INSERT INTO USUARIO VALUES(?,?,?,?)";
+		
+		java.sql.Date sqlData = new java.sql.Date(f.getDataAdmissao().getTime());
+		
+		String sql = "INSERT INTO FUNCIONARIO VALUES(?,?,?,?)";
 		PreparedStatement ps = c.prepareStatement(sql);
+		
+		System.out.println(f.getCargo());
+		System.out.println(f.getMatricula());
+		System.out.println(sqlData);
+		System.out.println(f.getFkPessoaFuncionario());
+		
 		ps.setString(1, f.getCargo());
 		ps.setString(2, f.getMatricula());
-		ps.setDate(3, f.getDataAsmissao());
+		ps.setDate(3, sqlData);
 		ps.setInt(4, f.getFkPessoaFuncionario());
 		ps.execute();
 		ps.close();
 		
-
 	}
 
 	public Funcionario buscaFuncionarioId(int id) throws SQLException {
@@ -54,7 +62,7 @@ public class FuncionarioDao {
 			f.setIdFuncionario(rs.getInt("ID_FUNCIONARIO"));
 			f.setCargo(rs.getString("CARGO"));
 			f.setMatricula(rs.getString("MATRICULA"));
-			f.setDataAsmissao(rs.getDate("DATA_ADMISSAO"));
+			f.setDataAdmissao(new java.util.Date(rs.getDate("DATA_ADMISSAO").getTime()));
 			f.setFkPessoaFuncionario(rs.getInt("FK_PESSOA_FUNCIONARIO"));
 
 		}
@@ -70,6 +78,7 @@ public class FuncionarioDao {
 
 		
 		ObservableList<Funcionario> lista = FXCollections.observableArrayList();
+		
 
 		String sql = "SELECT p.NOME,f.* "
 				+ " FROM FUNCIONARIO f, PESSOA p where f.FK_PESSOA_fUNCIONARIO = p.ID_PESSOA ";
@@ -81,7 +90,7 @@ public class FuncionarioDao {
 			f.setNome(rs.getString("NOME"));
 			f.setCargo(rs.getString("CARGO"));
 			f.setMatricula(rs.getString("MATRICULA"));
-			f.setDataAsmissao(rs.getDate("DATA_ADMISSAO"));
+			f.setDataAdmissao(new java.util.Date(rs.getDate("DATA_ADMISSAO").getTime()));
 			f.setFkPessoaFuncionario(rs.getInt("FK_PESSOA_FUNCIONARIO"));
 			lista.add(f);
 		}

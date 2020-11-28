@@ -1,6 +1,6 @@
 package entity;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Funcionario extends Pessoa {
@@ -8,7 +8,7 @@ public class Funcionario extends Pessoa {
 	private int idFuncionario;
 	private String cargo;
 	private String matricula;
-	private Date dataAsmissao;
+	private Date dataAdmissao;
 	private int fkPessoaFuncionario;
 	 
 	public Funcionario() {
@@ -39,12 +39,12 @@ public class Funcionario extends Pessoa {
 		this.matricula = matricula;
 	}
 
-	public Date getDataAsmissao() {
-		return dataAsmissao;
+	public Date getDataAdmissao() {
+		return dataAdmissao;
 	}
 
-	public void setDataAsmissao(Date dataAsmissao) {
-		this.dataAsmissao = dataAsmissao;
+	public void setDataAdmissao(Date date) {
+		this.dataAdmissao = date;
 	}
 	
 	
@@ -60,7 +60,7 @@ public class Funcionario extends Pessoa {
 	@Override
 	public String toString() {
 		return "[idFuncionario=" + idFuncionario + ", cargo=" + cargo + ", matricula=" + matricula
-				+ ", dataAsmissao=" + dataAsmissao + "]";
+				+ ", dataAsmissao=" + dataAdmissao + "]";
 	}
 	
 	

@@ -45,6 +45,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	private Pane painel;
 	private Stage stage;
 	private Scene cena;
+	private TelaControleUsuario telaMae;
 
 	TelaControlRegUsuario(ControlUsuario cont) {
 		control = cont;
@@ -55,8 +56,9 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
 	}
 
-	public void render() throws ClassNotFoundException, SQLException {
+	public void render(TelaControleUsuario telaM) throws ClassNotFoundException, SQLException {
 
+		telaMae = telaM;
 		VBox vbDi = new VBox();
 		HBox hbFunc = new HBox();
 		hbFunc.setSpacing(20);
@@ -82,9 +84,10 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
 	}
 
-	public void render(ObservableList<Usuario> lista, TableView<Usuario> tabela)
+	public void render(TelaControleUsuario telaM,ObservableList<Usuario> lista, TableView<Usuario> tabela)
 			throws ClassNotFoundException, SQLException {
 
+		telaMae = telaM;
 		VBox vbDi = new VBox();
 		HBox hbFunc = new HBox();
 		hbFunc.setSpacing(20);
@@ -225,11 +228,13 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 				if (event.getSource() == btnCadastrar) {
 					control.cadastrarUsuario(listaFunc.get(cbFuncionario.getSelectionModel().getSelectedIndex()),
 							txtLogin.getText(), txtSenha.getText());
+					stage.close();
 				} else if (event.getSource() == btnAlterar) {
 					control.alterarUsuario(fun, txtLogin.getText(), txtSenha.getText());
+					stage.close();
 				}
 			}
-
+			telaMae.atualizaTabela();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

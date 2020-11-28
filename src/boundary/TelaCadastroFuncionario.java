@@ -7,10 +7,13 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import DAO.EnderecoDao;
+import DAO.PessoaDao;
 import control.ControleCliente;
 import control.ControleFuncionario;
 import control.ControleTelas;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import control.GetenciadorPrincipal;
 import entity.Cliente;
 import entity.Endereco;
@@ -26,6 +29,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -49,21 +54,28 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	private TextField tfCep;
 	private TextField tfEmail;
 	private TextField tfDtnasc;
+	private TextField tfNumMatricula;
+	private TextField tfDataAdmicao;
 	private ComboBox<String> cbEstado;
 	private ComboBox<String> cbTipoTelefone;
+	private ComboBox<String> cbCargo;
+	
 
 	private GregorianCalendar data = new GregorianCalendar();
 
 	@Override
 	public void handle(ActionEvent e) {
+		
 		if (e.getTarget() == btOk && verificaCampos()) {
-
-			addCliente();
+			if(verificaDuplicata()) {
+				addCliente();
+			}
+			
 
 		}
 
 		if (e.getTarget() == btCancelar) {
-
+			System.out.println(cbCargo.getSelectionModel().getSelectedItem());
 		}
 	}
 
@@ -72,12 +84,12 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		HBox painel = new HBox();
 
 		VBox vbEs = new VBox();
-		vbEs.setPadding(new Insets(30, 12, 15, 12));
-		vbEs.setSpacing(15);
+		vbEs.setPadding(new Insets(17, 12, 15, 12));
+		vbEs.setSpacing(15.3);
 
 		VBox vbDi = new VBox();
 		vbDi.setPadding(new Insets(15, 12, 15, 12));
-		vbDi.setSpacing(6.2);
+		vbDi.setSpacing(7);
 
 		HBox hbBotao = new HBox();
 		hbBotao.setSpacing(40);
@@ -105,6 +117,8 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		vbEs.getChildren().add(new Label("Email:"));
 		vbEs.getChildren().add(new Label("Data de nascimento:"));
 		vbEs.getChildren().add(new Label("Cargo: "));
+		vbEs.getChildren().add(new Label("Numero Matricula: "));
+		vbEs.getChildren().add(new Label("Data Adimição: "));
 
 		vbEs.getChildren().add(hbBotao);
 
@@ -121,6 +135,14 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		tfCep = new TextField();
 		tfEmail = new TextField();
 		tfDtnasc = new TextField();
+		ObservableList<String> options = 
+			    FXCollections.observableArrayList(
+			        "GERENTE",
+			        "FUNCIONARIO"
+			    );
+		cbCargo = new ComboBox<String>(options);
+		tfNumMatricula = new TextField();
+		tfDataAdmicao = new TextField();
 
 		cbEstado = new ComboBox<String>();
 		cbEstado.getItems().addAll("SP", "Rj", "MG");
@@ -146,7 +168,9 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		vbDi.getChildren().add(tfCep);
 		vbDi.getChildren().add(tfEmail);
 		vbDi.getChildren().add(tfDtnasc);
-
+		vbDi.getChildren().add(cbCargo);
+		vbDi.getChildren().add(tfNumMatricula);
+		vbDi.getChildren().add(tfDataAdmicao);
 		painel.getChildren().add(vbEs);
 		painel.getChildren().add(vbDi);
 
@@ -178,12 +202,15 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		t.setTipo(cbTipoTelefone.getSelectionModel().getSelectedItem());
 		t.setDdd(tfDdd.getText());
 		t.setNumero(tfTelefone.getText());
-
 		f.setNome(tfNome.getText());
 		f.setCpf(tfCpf.getText());
 		f.setEmail(tfEmail.getText());
+		f.setCargo(cbCargo.getSelectionModel().getSelectedItem());
+		f.setMatricula(tfNumMatricula.getText());
+
 		try {
 			f.setDataNascimento(Data.parseDate(tfDtnasc.getText()));
+			f.setDataAdmissao(Data.parseDate(tfDataAdmicao.getText()));
 		} catch (ParseException e2) {
 
 		}
@@ -205,13 +232,19 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 			return false;
 
-		} else if (tfCpf.getText().equals("")) {
+		} else if (tfCpf.getText().equals("") || tfCpf.getText().length() != 11) {
 
 			Mensagens.erro("CPF erro", "CPF invalida", "Digite um CPF");
 
 			return false;
 
-		} else if (tfTelefone.getText().equals("")) {
+		}else if(tfDdd.getText().equals("") || tfDdd.getText().length() != 2) {
+
+			Mensagens.erro("DDD erro", "DDD invalido", "Digite um DDD válido");
+
+			return false;
+			
+		}else if (tfTelefone.getText().equals("") || tfTelefone.getText().length() <= 7) {
 
 			Mensagens.erro("Telefone erro", "Telefone invalido", "Digite um Telefone");
 
@@ -223,9 +256,9 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 			return false;
 
-		} else if (tfNum.getText().equals("")) {
-
-			Mensagens.erro("Numero erro", "Numero invalida", "Digite um Numero");
+		} else if (tfNum.getText().equals("") || Integer.parseInt(tfNum.getText()) <= 0){
+			System.out.println(Integer.parseInt(tfNum.getText()) < 0);
+			Mensagens.erro("Numero erro", "Numero invalido", "Digite um Numero");
 
 			return false;
 
@@ -241,23 +274,76 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 			return false;
 
-		} else {
+		}else if(tfCep.getText().equals("") || tfCep.getText().length() != 8){
+			Mensagens.erro("Cep erro", "Cep invalido", "Digite um Cep");
+
+			return false;
+		}else if(cbCargo.getSelectionModel().isEmpty()){
+			Mensagens.erro("Cargo erro", "Cargo invalido", "Selecione um cargo");
+
+			return false;			
+		}else if(tfNumMatricula.getText().equals("") || Integer.parseInt(tfNum.getText()) <= 0){
+			Mensagens.erro("Num de matricula erro", "Matricula invalido", "Insira uma matricula");
+
+			return false;	
+		}else {
 
 			try {
 
 				Date data = Data.parseDate(tfDtnasc.getText());
+				Date dataAtual = new Date(); 
+				if(data.compareTo(dataAtual) > 0) {
+					Mensagens.erro("Data erro", "Data invalida", "Digite uma Data valida");
+					return false;
+				}
 
 			} catch (ParseException e) {
 
 				Mensagens.erro("Data erro", "Data invalida", "Digite uma Data valida");
-
 				return false;
+			}
+			
+			try {
 
+				Date data = Data.parseDate(tfDataAdmicao.getText());
+				Date dataAtual = new Date(); 
+				if(data.compareTo(dataAtual) > 0) {
+					Mensagens.erro("Data erro", "Data de adimissão invalida", "Digite uma Data valida");
+					return false;
+				}
+
+			} catch (ParseException e) {
+
+				Mensagens.erro("Data erro", "Data de adimissão invalida", "Digite uma Data valida");
+				return false;
 			}
 		}
 
 		return true;
 
 	}
+	
+	private boolean verificaDuplicata() {
+		try {
+			PessoaDao pDao = new PessoaDao();
+			if(pDao.verificaDuplicCpf(tfCpf.getText())) {
+				Mensagens.erro("Cpf erro", "Cpf inválido", "Cpf inválido ou já cadastrado");
+				return false;
+			}else if(pDao.verificaDuplicEmail(tfEmail.getText())) {
+				Mensagens.erro("Email erro", "Email inválido", "Email inválido ou já cadastrado");
+				return false;
+			}else {
+				return true;
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
 
 }
