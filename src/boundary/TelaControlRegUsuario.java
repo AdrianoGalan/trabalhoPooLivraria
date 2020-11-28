@@ -26,6 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import util.Mensagens;
 
 public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
@@ -44,7 +45,6 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	private Pane painel;
 	private Stage stage;
 	private Scene cena;
-	private Alert alerta;
 
 	TelaControlRegUsuario(ControlUsuario cont) {
 		control = cont;
@@ -178,16 +178,10 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 				&& !(txtSenha.getText().equals("") || txtNovamSenha.getText().equals(""))) {
 			return true;
 		} else if (txtSenha.getText().equals("") || txtNovamSenha.getText().equals("")) {
-			alerta = new Alert(AlertType.INFORMATION);
-			alerta.setTitle("Digite uma senha");
-			alerta.setHeaderText("Por favor digite uma senha.");
-			alerta.showAndWait();
+			Mensagens.informacao("Digite uma senha", "Por favor digite uma senha.", "");
 			return false;
 		} else {
-			alerta = new Alert(AlertType.INFORMATION);
-			alerta.setTitle("Senhas mão coincidem");
-			alerta.setHeaderText("Por favor digite a mesma senha em ambos os campos.");
-			alerta.showAndWait();
+			Mensagens.informacao("Senhas mão coincidem", "Por favor digite a mesma senha em ambos os campos.", "");
 			return false;
 		}
 	}
@@ -195,20 +189,14 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	private boolean verificaFunc() {
 		if(cbFuncionario == null) {
 			if (txtFuncionario.equals("")){
-				alerta = new Alert(AlertType.INFORMATION);
-				alerta.setTitle("Funcionario não selecionado");
-				alerta.setHeaderText("Por favor selecione algum funcionario.");
-				alerta.showAndWait();
+				Mensagens.informacao("Funcionario não selecionado", "Por favor selecione algum funcionario.", "");
 				return false;
 			}else {
 				return true;
 			}
 		}else {
 			if(cbFuncionario.getSelectionModel().isEmpty()) {
-				alerta = new Alert(AlertType.INFORMATION);
-				alerta.setTitle("Funcionario não selecionado");
-				alerta.setHeaderText("Por favor selecione algum funcionario.");
-				alerta.showAndWait();
+				Mensagens.informacao("Funcionario não selecionado", "Por favor selecione algum funcionario.", "");
 				return false;
 			}else {
 				return true;
@@ -218,16 +206,10 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	
 	private boolean verificaUser() throws ClassNotFoundException, SQLException {
 		if (txtLogin.getText().equals("")) {
-			alerta = new Alert(AlertType.INFORMATION);
-			alerta.setTitle("Digite um login");
-			alerta.setHeaderText("Por favor digite um login.");
-			alerta.showAndWait();
+			Mensagens.informacao("Digite um login", "Por favor digite um login.", "");
 			return false;
 		} else if (control.verificaExistenciaLogin(txtLogin.getText())){
-			alerta = new Alert(AlertType.INFORMATION);
-			alerta.setTitle("Login inválido");
-			alerta.setHeaderText("Login já existe, por favor digite outro.");
-			alerta.showAndWait();
+			Mensagens.informacao("Login inválido", "Login já existe, por favor digite outro.", "");
 			return false;
 		}else {
 			return true;
