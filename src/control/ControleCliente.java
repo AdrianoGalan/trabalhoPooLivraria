@@ -63,5 +63,13 @@ public class ControleCliente {
 		
 
 	}
+	
+	public void updateCliente (Cliente c, Endereco e, Telefone t) throws ClassNotFoundException, SQLException {
+		
+	}
+	
+	public void deleteCliente (Cliente c, Endereco e, Telefone t) throws ClassNotFoundException, SQLException {
+		
+	}
 
 }

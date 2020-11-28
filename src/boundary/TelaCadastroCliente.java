@@ -62,8 +62,30 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		}
 
 		if (e.getTarget() == btCancelar) {
+			
+			limpaCampos();
 
 		}
+	}
+
+	private void limpaCampos() {
+		
+		tfNome.setText(""); 
+		tfNome.setText("");
+		tfTelefone.setText(""); 
+		tfDdd.setText("");
+		tfCpf.setText("");
+		tfRua.setText("");
+		tfNum.setText("");
+		tfBairro.setText("");
+		tfCidade.setText("");
+		tfEstado.setText("");
+		tfComplemento.setText("");
+		tfCep.setText("");
+		tfEmail.setText("");
+		tfDtnasc.setText("");
+		
+		
 	}
 
 	@Override
