@@ -12,7 +12,7 @@ import javafx.collections.ObservableList;
 import tabelaModel.ModelTabelaLivro;
 
 public class LivroDao {
-	
+
 	private Connection c;
 
 	public LivroDao() throws ClassNotFoundException, SQLException {
@@ -41,7 +41,7 @@ public class LivroDao {
 		ObservableList<ModelTabelaLivro> lista = FXCollections.observableArrayList();
 		StringBuilder sql = new StringBuilder();
 		sql.append(
-				"SELECT p.VALOR AS PRECO , l.TITULO, a.NOME AS AUTOR , l.ISBN,l.GENERO, l.EDICAO, l.ANO,l.QTS_ESTOQUE,l.IDIOMA, l.DESCRICAO ");
+				"SELECT l.ID_LIVRO, p.VALOR AS PRECO , l.TITULO, a.NOME AS AUTOR , l.ISBN,l.GENERO, l.EDICAO, l.ANO,l.QTS_ESTOQUE,l.IDIOMA, l.DESCRICAO ");
 		sql.append("FROM LIVRO l INNER JOIN LIVRO_AUTOR la ");
 		sql.append("ON l.ID_LIVRO = la.FK_LIVRO_LIVRO_AUTOR ");
 		sql.append("INNER JOIN AUTOR a ");
@@ -63,7 +63,8 @@ public class LivroDao {
 		while (rs.next()) {
 
 			l = new ModelTabelaLivro();
-
+			
+			l.setIdLivro(rs.getInt("ID_LIVRO"));
 			l.setPreco("R$ " + rs.getDouble("PRECO"));
 			l.setTitulo(rs.getString("TITULO"));
 			l.setAutor(rs.getString("AUTOR"));
@@ -82,27 +83,42 @@ public class LivroDao {
 
 		return lista;
 	}
-	
+
+	public void atualizaEstoque(int idLivro, int qtsEstoque) throws SQLException {
+
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE LIVRO ");
+		sql.append("SET QTS_ESTOQUE = ? ");
+		sql.append("WHERE ID_LIVRO = ? ");
+
+		PreparedStatement ps = c.prepareStatement(sql.toString());
+		ps.setInt(1, qtsEstoque);
+		ps.setInt(2, idLivro);
+
+		ps.executeUpdate();
+
+		ps.close();
+
+	}
+
 	public ObservableList<Livro> buscaLivroTitulo(String titulo) throws SQLException {
-		
+
 		Livro l;
 		ObservableList<Livro> lista = FXCollections.observableArrayList();
-		
-	
+
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT l.ID_LIVRO , l.TITULO , l.ISBN , l.GENERO , l.EDICAO , l.ANO , ");
 		sql.append("l.PRECO_ATUAL, l.QTS_ESTOQUE , l.IDIOMA , l.DESCRICAO ");
 		sql.append("FROM LIVRO l ");
 		sql.append("WHERE l.TITULO LIKE ? ");
-		
-		
+
 		PreparedStatement ps = c.prepareStatement(sql.toString());
 		ps.setString(1, "%" + titulo + "%");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
-			
+
 			l = new Livro();
-			
+
 			l.setIdLivro(rs.getInt("ID_LIVRO"));
 			l.setTitulo(rs.getString("TITULO"));
 			l.setIsbn(rs.getString("ISBN"));
@@ -114,14 +130,13 @@ public class LivroDao {
 			l.setIdioma(rs.getString("IDIOMA"));
 			l.setDescricao(rs.getString("DESCRICAO"));
 			lista.add(l);
-			
+
 		}
 		rs.close();
 		ps.close();
-		
+
 		return lista;
 	}
-
 
 	public boolean verificaDuplicIsbn(String isbn) throws SQLException {
 		// TODO Auto-generated method stub
@@ -129,21 +144,20 @@ public class LivroDao {
 		String sql = "select ISBN from LIVRO where ISBN = ?";
 		PreparedStatement ps = c.prepareStatement(sql);
 		ps.setString(1, isbn);
-		
+
 		ResultSet rs = ps.executeQuery();
 
 		while (rs.next() && u == false) {
-			if(rs.getString("ISBN").equals(isbn)) {
+			if (rs.getString("ISBN").equals(isbn)) {
 				u = true;
 			}
 		}
-		
+
 		rs.close();
 		ps.close();
 
 		return u;
 
-		
 	}
-	
+
 }

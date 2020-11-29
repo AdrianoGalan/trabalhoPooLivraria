@@ -2,6 +2,7 @@ package tabelaModel;
 
 public class ModelTabelaLivro {
 
+	private int idLivro;
 	private String preco;
 	private String titulo;
 	private String autor;
@@ -12,6 +13,14 @@ public class ModelTabelaLivro {
 	private int qtsEstoque;
 	private String idioma;
 	private String descricao;
+
+	public int getIdLivro() {
+		return idLivro;
+	}
+
+	public void setIdLivro(int idLivro) {
+		this.idLivro = idLivro;
+	}
 
 	public String getPreco() {
 		return preco;
@@ -99,7 +108,5 @@ public class ModelTabelaLivro {
 				+ ", genero=" + genero + ", edicao=" + edicao + ", ano=" + ano + ", qtsEstoque=" + qtsEstoque
 				+ ", idioma=" + idioma + ", descricao=" + descricao + "]";
 	}
-	
-	
 
 }

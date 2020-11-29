@@ -18,22 +18,9 @@ public class ControleLivro {
 		LivroDao ld = new LivroDao();
 		AutorDao ad = new AutorDao();
 
-		try {
 			ld.insereLivro(l);
-		} catch (Exception e1) {
-			// TODO: handle exception
-			e1.printStackTrace();
-			System.out.println("1");
-		}
-
-		try {
 			ad.insereAutor(a);
-		} catch (Exception e1) {
-			// TODO: handle exception
-			e1.printStackTrace();
-			System.out.println("2");
-		}
-
+	
 	}
 
 	public ObservableList<Livro> buscaClienteNome(String titulo) throws ClassNotFoundException, SQLException {
@@ -49,6 +36,14 @@ public class ControleLivro {
 		LivroDao livDao = new LivroDao();
 		lista = livDao.buscaLivro(texto, meio);
 
+	}
+	
+	public void atualizaEstoque(int idLivro, int qtsEstoque) throws SQLException, ClassNotFoundException {
+		
+		LivroDao ld = new LivroDao();
+		
+		ld.atualizaEstoque(idLivro, qtsEstoque);
+		
 	}
 
 	public ObservableList<ModelTabelaLivro> getLista() {

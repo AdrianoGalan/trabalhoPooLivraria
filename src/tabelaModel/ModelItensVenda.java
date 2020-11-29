@@ -6,12 +6,11 @@ public class ModelItensVenda {
 	private int iten;
 	private String titulo;
 	private String Isbn;
-	private String genero;
-	private int estoque;
+	private String generoLivro;
+	private int estoqueLivro;
+	private int qtsVenda;
 	private double preco;
 
-	
-	
 	public int getIdLivro() {
 		return idLivro;
 	}
@@ -44,20 +43,20 @@ public class ModelItensVenda {
 		Isbn = isbn;
 	}
 
-	public String getGenero() {
-		return genero;
+	public String getGeneroLivro() {
+		return generoLivro;
 	}
 
-	public void setGenero(String genero) {
-		this.genero = genero;
+	public void setGeneroLivro(String generoLivro) {
+		this.generoLivro = generoLivro;
 	}
 
-	public int getEstoque() {
-		return estoque;
+	public int getEstoqueLivro() {
+		return estoqueLivro;
 	}
 
-	public void setEstoque(int estoque) {
-		this.estoque = estoque;
+	public void setEstoqueLivro(int estoqueLivro) {
+		this.estoqueLivro = estoqueLivro;
 	}
 
 	public double getPreco() {
@@ -66,6 +65,14 @@ public class ModelItensVenda {
 
 	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+
+	public int getQtsVenda() {
+		return qtsVenda;
+	}
+
+	public void setQtsVenda(int qtsVenda) {
+		this.qtsVenda = qtsVenda;
 	}
 
 }

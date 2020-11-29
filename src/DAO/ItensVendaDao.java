@@ -26,11 +26,11 @@ public class ItensVendaDao {
 		PreparedStatement ps = c.prepareStatement(sql);
 
 		for (int i = 0; i < itensVenda.size(); i++) {
+			for (int j = 0; j < itensVenda.get(i).getQtsVenda(); j++) {
 
-			
-			ps.setInt(1, itensVenda.get(i).getIdLivro());
-			ps.executeUpdate();
-
+				ps.setInt(1, itensVenda.get(i).getIdLivro());
+				ps.executeUpdate();
+			}
 		}
 		ps.close();
 

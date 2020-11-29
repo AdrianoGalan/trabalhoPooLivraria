@@ -43,6 +43,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	private TextField tfISBN;
 	private TextField tfPreco;
 	private TextField tfPrecoTotal;
+	private TextField tfQtsLivros;
 
 	private ComboBox<Livro> cbLivro;
 	private ComboBox<Cliente> cbNome;
@@ -52,13 +53,13 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	private Button btnAdd;
 	private Button btnFinalizar;
 	private Button btnRemover;
-	
 
 	private Cliente cliente;
 	private Livro livro;
 	private Preco preco;
-	
+
 	private double precoTotal = 0;
+	private int qtdLivro = 0;
 
 	private ControleCliente cc;
 	private ControleLivro cl;
@@ -91,12 +92,10 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		} else if (e.getTarget() == btnRemover) {
 
 			removeItenLista();
-		}else if(e.getTarget() == btnFinalizar && !listaVenda.isEmpty()) {
-			
+		} else if (e.getTarget() == btnFinalizar && !listaVenda.isEmpty()) {
+
 			finalizarVenda();
 		}
-		
-		
 
 	}
 
@@ -136,18 +135,22 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		colIsbn.setPrefWidth(50);
 
 		TableColumn<ModelItensVenda, String> colGenero = new TableColumn<>("Genero");
-		colGenero.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, String>("genero"));
+		colGenero.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, String>("generoLivro"));
 		colGenero.setPrefWidth(80);
 
 		TableColumn<ModelItensVenda, Integer> colEstoque = new TableColumn<>("Qts Estoque");
-		colEstoque.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, Integer>("estoque"));
-		colEstoque.setPrefWidth(80);
+		colEstoque.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, Integer>("estoqueLivro"));
+		colEstoque.setPrefWidth(100);
+
+		TableColumn<ModelItensVenda, Integer> colQtsVenda = new TableColumn<>("Quantidade");
+		colQtsVenda.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, Integer>("qtsVenda"));
+		colQtsVenda.setPrefWidth(100);
 
 		TableColumn<ModelItensVenda, Double> colPreco = new TableColumn<>("Preço");
 		colPreco.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, Double>("preco"));
 		colPreco.setPrefWidth(100);
 
-		tbItes.getColumns().addAll(colIten, colTitulo, colIsbn, colGenero, colEstoque, colPreco);
+		tbItes.getColumns().addAll(colIten, colTitulo, colIsbn, colGenero, colEstoque, colQtsVenda, colPreco);
 
 		// titulo da tela
 		StackPane stitulo = new StackPane();
@@ -162,6 +165,8 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 		tfISBN = new TextField();
 		tfISBN.setPrefWidth(80);
+		tfQtsLivros = new TextField("1");
+		tfQtsLivros.setPrefWidth(50);
 		tfPreco = new TextField();
 		tfPreco.setPrefWidth(80);
 		tfPrecoTotal = new TextField();
@@ -182,7 +187,6 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		btnFinalizar.setOnAction(this);
 		btnRemover = new Button("Remover");
 		btnRemover.setOnAction(this);
-
 
 		carregaCbCliente("");
 		carregaCbLivro("");
@@ -258,7 +262,6 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		hbCliente1.setSpacing(20);
 		vbPrincipal.getChildren().add(hbCliente1);
 
-	
 		bbBotoes.getChildren().add(btnRemover);
 		bbBotoes.getChildren().add(btnFinalizar);
 
@@ -268,7 +271,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		vbPrincipal.getChildren().add(hbLivro);
 
 		vbPrincipal.getChildren().add(tbItes);
-		
+
 		HBox hbPrecoTotal = new HBox();
 		hbPrecoTotal.setPadding(new Insets(15, 15, 15, 15));
 		hbPrecoTotal.setSpacing(5);
@@ -285,6 +288,8 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		hbLivro.getChildren().add(cbLivro);
 		hbLivro.getChildren().add(new Label("ISBN:"));
 		hbLivro.getChildren().add(tfISBN);
+		hbLivro.getChildren().add(new Label("Qtd:"));
+		hbLivro.getChildren().add(tfQtsLivros);
 		hbLivro.getChildren().add(new Label("Preço:"));
 		hbLivro.getChildren().add(tfPreco);
 		hbLivro.getChildren().add(btnAdd);
@@ -353,39 +358,71 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 			preco = cp.buscaPrecoId(id);
 
 		} catch (ClassNotFoundException | SQLException e) {
-		
+
 			e.printStackTrace();
 		}
 	}
 
 	private void adicionaItemLista() {
 
-		if (cbNome.getValue() != null) {
+		try {
 
-			ModelItensVenda miv = new ModelItensVenda();
+			qtdLivro = Integer.parseInt(tfQtsLivros.getText());
 
-			miv.setIdLivro(livro.getIdLivro());
-			miv.setTitulo(livro.getTitulo());
-			miv.setIsbn(livro.getIsbn());
-			miv.setEstoque(livro.getQtsEstoque());
-			miv.setPreco(preco.getValor());
-			miv.setIten(listaVenda.size() + 1);
-			
-			
-			precoTotal += preco.getValor();
-			
-			listaVenda.add(miv);
+			if ((livro.getQtsEstoque() - qtdLivro) >= 0) {
 
-			limpaCampoLivro();
-			
-			tfPrecoTotal.setEditable(true);
-			tfPrecoTotal.setText(String.valueOf(precoTotal));
-			tfPrecoTotal.setEditable(false);
-			
-			tbItes.setItems(listaVenda);
+				boolean flag = false;
+				int i = 0;
 
-		} else {
-			Mensagens.erro("Erro", "Erro Cliente", "Seleciona um cliente");
+				if (cbNome.getValue() != null) {
+
+					for (i = 0; i < listaVenda.size(); i++) {
+
+						if (listaVenda.get(i).getIdLivro() == livro.getIdLivro()) {
+							flag = true;
+							break;
+						}
+
+					}
+
+					if (!flag) {
+
+						ModelItensVenda miv = new ModelItensVenda();
+
+						miv.setIdLivro(livro.getIdLivro());
+						miv.setTitulo(livro.getTitulo());
+						miv.setIsbn(livro.getIsbn());
+						miv.setEstoqueLivro(livro.getQtsEstoque());
+						miv.setPreco(preco.getValor());
+						miv.setGeneroLivro(livro.getGenero());
+						miv.setIten(listaVenda.size() + 1);
+						miv.setQtsVenda(qtdLivro);
+						listaVenda.add(miv);
+
+						precoTotal += (preco.getValor() * qtdLivro);
+
+						limpaCampoLivro();
+
+						tfPrecoTotal.setEditable(true);
+						tfPrecoTotal.setText(String.valueOf(precoTotal));
+						tfPrecoTotal.setEditable(false);
+
+						tbItes.setItems(listaVenda);
+
+					} else {
+
+						Mensagens.erro("Livro na lista", "Ja contem livro na lista", "Remova o livro da lista");
+
+					}
+
+				} else {
+					Mensagens.erro("Erro", "Erro Cliente", "Seleciona um cliente");
+				}
+			} else {
+				Mensagens.erro("Quantidade", "Quantidade invalida", "Não tem livro no estoque");
+			}
+		} catch (Exception e) {
+			Mensagens.erro("Quantidade", "Quantidade invalida", "Dgite uma quantidade valida");
 		}
 
 	}
@@ -393,57 +430,71 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	private void removeItenLista() {
 
 		if (listaVenda != null && tbItes.getSelectionModel().getSelectedItem() != null) {
-			
-			precoTotal -= tbItes.getSelectionModel().getSelectedItem().getPreco();
+
+			precoTotal -= (tbItes.getSelectionModel().getSelectedItem().getPreco()
+					* tbItes.getSelectionModel().getSelectedItem().getQtsVenda());
 
 			listaVenda.remove(tbItes.getSelectionModel().getSelectedItem());
 
 			ObservableList<ModelItensVenda> lista = FXCollections.observableArrayList();
-			
-			for(int i = 0; i < listaVenda.size() ; i++) {
-				
+
+			for (int i = 0; i < listaVenda.size(); i++) {
+
 				listaVenda.get(i).setIten(i + 1);
 				lista.add(listaVenda.get(i));
 			}
-			
+
 			tfPrecoTotal.setEditable(true);
 			tfPrecoTotal.setText(String.valueOf(precoTotal));
 			tfPrecoTotal.setEditable(false);
-			
+
 			tbItes.setItems(lista);
-			
+
 			lista = null;
 
 		}
 
 	}
-	
+
 	private void finalizarVenda() {
-		
+
 		int idVenda = -1;
-		
+
 		ControleVenda cv = new ControleVenda();
 		ControleItensVenda civ = new ControleItensVenda();
-		
+		cl = new ControleLivro();
+
 		try {
-			
+
 			idVenda = cv.addVenda(cliente.getIdCliente());
-			
-			if(idVenda != -1 ) {
-				
+
+			if (idVenda != -1) {
+
 				civ.addLivro(idVenda, listaVenda);
+				
+				for (int i = 0; i < listaVenda.size(); i++) {
+					cl.atualizaEstoque(listaVenda.get(i).getIdLivro(), listaVenda.get(i).getEstoqueLivro() - listaVenda.get(i).getQtsVenda());
+				}
+				
 				limpaCampoLivro();
 				limpaCliente();
 				limpaTabla();
 				
+				precoTotal = 0;
+				qtdLivro = 0;
+				carregaCbLivro("");
 				
+				
+
+				Mensagens.informacao("Venda", "Venda finalizada", "Venda realizada com sucesso");
+
 			}
-			
+
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private void limpaCampoLivro() {
@@ -453,31 +504,32 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 		tfPreco.setText("");
 		tfISBN.setText("");
-
+		tfQtsLivros.setText("1");
+		
 		tfPreco.setEditable(false);
 		tfISBN.setEditable(true);
 
 		cbLivro.setValue(null);
 
 	}
-	
+
 	private void limpaCliente() {
-		
+
 		tfCpfCliente.setEditable(true);
 		tfCpfCliente.setText("");
-	
+
 		cbNome.setValue(null);
-		
+
 	}
+
 	private void limpaTabla() {
-		
+
 		listaVenda.clear();
 		tbItes.setItems(listaVenda);
-		
+
 		tfPrecoTotal.setEditable(true);
 		tfPrecoTotal.setText("");
-		
-		
+
 	}
 
 	@Override
