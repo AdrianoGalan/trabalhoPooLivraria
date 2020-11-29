@@ -26,9 +26,13 @@ public class ControleLivro {
 	public ObservableList<Livro> buscaClienteNome(String titulo) throws ClassNotFoundException, SQLException {
 
 		LivroDao ld = new LivroDao();
-
 		return ld.buscaLivroTitulo(titulo);
 
+	}
+	
+	public void alteraPrecoLivro(Double preco, int ISBN) throws ClassNotFoundException, SQLException {
+		LivroDao ld = new LivroDao();
+		ld.alteraPrecoLivro(preco, ISBN);
 	}
 
 	public void procurarLivro(String texto, int meio) throws SQLException, ClassNotFoundException {
