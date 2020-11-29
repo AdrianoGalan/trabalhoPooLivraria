@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEvent> {
 
@@ -31,8 +32,17 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 	private Button btAlterar;
 	private Button btExcluir;
 	private ControlUsuario controle = new ControlUsuario();
-	private TelaControlRegUsuario controleTelaReg = new TelaControlRegUsuario(controle);
 	private Alert alertaSelecao;
+	private Stage telaMae;
+	private TelaControlRegUsuario controleTelaReg = new TelaControlRegUsuario(controle,telaMae);
+	
+	public Stage getTelaMae() {
+		return telaMae;
+	}
+
+	TelaControleUsuario(Stage s){
+		telaMae = s;
+	}
 
 	@Override
 	public Pane render() {

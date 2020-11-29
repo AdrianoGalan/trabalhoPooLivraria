@@ -47,7 +47,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private ControleTelas telaControleRelatorio = new TelaControleRelatorio();
 	private ControleTelas telaControleEstoque = new TelaControleEstoque();
 	private ControleTelas telaVendaLivro = new TelaVendaLivro();
-	private ControleTelas telaControleUsuario = new TelaControleUsuario();
+	private ControleTelas telaControleUsuario = new TelaControleUsuario(stage);
 
 	// itens do menu
 	private MenuItem menuInicioTelaInicio = new MenuItem("Tela Inicial");

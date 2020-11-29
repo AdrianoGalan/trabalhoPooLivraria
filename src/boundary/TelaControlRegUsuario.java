@@ -25,6 +25,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.Mensagens;
 
@@ -45,20 +46,22 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	private Pane painel;
 	private Stage stage;
 	private Scene cena;
-	private TelaControleUsuario telaMae;
+	private TelaControleUsuario telaControle;
 
-	TelaControlRegUsuario(ControlUsuario cont) {
+	TelaControlRegUsuario(ControlUsuario cont,Stage telaMae) {
 		control = cont;
 		tela = new BorderPane();
 		cena = new Scene(tela, 500, 250);
 		stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initOwner(telaMae);
 		stage.setScene(cena);
 
 	}
 
 	public void render(TelaControleUsuario telaM) throws ClassNotFoundException, SQLException {
 
-		telaMae = telaM;
+		telaControle = telaM;
 		VBox vbDi = new VBox();
 		HBox hbFunc = new HBox();
 		hbFunc.setSpacing(20);
@@ -80,14 +83,14 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
 		vbDi.getChildren().addAll(hbBotao);
 		tela.setCenter(painel);
-		stage.show();
+		stage.showAndWait();
 
 	}
 
 	public void render(TelaControleUsuario telaM,ObservableList<Usuario> lista, TableView<Usuario> tabela)
 			throws ClassNotFoundException, SQLException {
 
-		telaMae = telaM;
+		telaControle = telaM;
 		VBox vbDi = new VBox();
 		HBox hbFunc = new HBox();
 		hbFunc.setSpacing(20);
@@ -123,7 +126,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
 		vbDi.getChildren().addAll(hbBotao);
 		tela.setCenter(painel);
-		stage.show();
+		stage.showAndWait();
 
 	}
 
@@ -234,7 +237,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 					stage.close();
 				}
 			}
-			telaMae.atualizaTabela();
+			telaControle.atualizaTabela();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
