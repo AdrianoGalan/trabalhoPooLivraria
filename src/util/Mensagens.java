@@ -2,7 +2,22 @@ package util;
 
 import javafx.scene.control.Alert;
 
+/**
+ * Classe de Mensagens 
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
+
 public class Mensagens {
+	
+	/**
+	 * Método que mostra mensagens de erro
+	 * 
+	 * @param titulo
+	 * @param cabecalho
+	 * @param msg
+	 */
 
 	public static void erro(String titulo, String cabecalho, String msg) {
 
@@ -12,6 +27,14 @@ public class Mensagens {
 		dialogoErro.setContentText(msg);
 		dialogoErro.showAndWait();
 	}
+	
+	/**
+	 * Método que mostra informações 
+	 * 
+	 * @param titulo
+	 * @param cabecalho
+	 * @param msg
+	 */
 
 	public static void informacao(String titulo, String cabecalho, String msg) {
 

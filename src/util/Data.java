@@ -4,7 +4,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+/**
+ * Classe Data - converte o formato padrão data para o formato br
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 
 public class Data {
 	

@@ -1,13 +1,25 @@
 package util;
 
 import java.util.function.UnaryOperator;
-
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Classe que faz máscaras para alguns campos das telas do sistema Livraria.
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
+
 public class Mascaras {
+	
+	/**
+	 * Método mascaraCep - faz a máscara do cep
+	 * 
+	 * @param textField
+	 */
 	
     public static void mascaraCEP(TextField textField){
 
@@ -47,6 +59,12 @@ public class Mascaras {
         });
 
     }
+    
+    /**
+     * Método mascaraData - faz a máscara da data
+     * 
+     * @param textField
+     */
     
     public static void mascaraData(TextField textField){
 
@@ -91,6 +109,12 @@ public class Mascaras {
         });
 
     }
+    
+    /**
+     * Método mascaraCPF - faz a máscara do cpf
+     * 
+     * @param textField
+     */
     
     public static void mascaraCPF(TextField textField){
 
@@ -143,6 +167,12 @@ public class Mascaras {
         });
 
     }
+    
+    /**
+     * Método mascaraTelefone - faz a máscara do telefone
+     * 
+     * @param textField
+     */
     
     public static void mascaraTelefone(TextField textField){
 
@@ -212,6 +242,12 @@ public class Mascaras {
         });
 
     }
+    
+    /**
+     * Método mascaraApenasNum - impede que o usuário digite um dado não numérico
+     * 
+     * @param textField
+     */
     
     public static void mascaraApenasNum(TextField textField) {
     	UnaryOperator<Change> integerFilter = change -> {

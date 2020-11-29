@@ -259,6 +259,11 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		}
 
 	}
+	
+	/**
+	 * Método que posiciona tela inicial no centro da cena 
+	 * e aplica a função de sair da aplicação caso o usuário clique no menuInicioSair
+	 */
 
 	@Override
 	public void comando(String cmd) {
@@ -273,6 +278,10 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		}
 
 	}
+	
+	/**
+	 * Método que faz a chamada do logarFuncionario
+	 */
 
 	@Override
 	public void id(int idFuncionario) {
