@@ -64,6 +64,22 @@ public class PessoaDao {
 		ps.close();
 		return id;
 	}
+	
+	public void atualizaPessoa(Pessoa p) throws SQLException {
+		
+
+		String sql = "update PESSOA set NOME = ?,CPF = ?, EMAIL = ?, DATA_NASCIMENTO = ? where ID_PESSOA = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, p.getNome());
+		ps.setString(2, p.getCpf());
+		ps.setString(3, p.getEmail());
+		java.sql.Date sqlData = new java.sql.Date(p.getDataNascimento().getTime());
+		ps.setDate(4, sqlData);
+		ps.setInt(5, p.getIdPessoa());
+		ps.executeUpdate();
+		ps.close();
+		
+	}
 
 	public boolean verificaDuplicCpf(String CPF) throws SQLException {
 		boolean u = false;

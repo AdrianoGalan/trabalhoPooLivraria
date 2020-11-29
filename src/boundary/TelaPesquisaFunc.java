@@ -33,10 +33,10 @@ public class TelaPesquisaFunc implements ControleTelas, EventHandler<ActionEvent
 	private ControleFuncionario control = new ControleFuncionario();
 	private ObservableList<Funcionario> lista;
 	private Button btAlterar;
-	private TelaCadastroFuncionario telaFunci = new TelaCadastroFuncionario();
+	private TelaCadastroFuncionario telaFunci;
 	private BorderPane tela;
 	private Pane painel;
-	private Stage stage;
+	public Stage stage;
 	private Scene cena;
 
 	@Override
@@ -93,6 +93,13 @@ Pane painel = new Pane();
 		
 		tbvFuncionario.getColumns().addAll(colId,colNome,colCpf,colNumMatri,colDataAdm);
 		
+		tfPesquisa.setOnKeyReleased(new EventHandler<javafx.scene.input.KeyEvent>() {
+			@Override
+			public void handle(javafx.scene.input.KeyEvent event) {
+				carregaTabela();
+			}
+		});
+		
 		painel.getChildren().add(vbEs);
 		
 		return painel;
@@ -125,6 +132,8 @@ Pane painel = new Pane();
 		if(event.getSource() == btPesquisar) {
 			carregaTabela();
 		}else if(event.getSource() == btAlterar) {
+			Funcionario f = tbvFuncionario.getSelectionModel().getSelectedItem();
+			telaFunci = new TelaCadastroFuncionario(f,this);
 			abrirTelaFuncio();
 		}
 		

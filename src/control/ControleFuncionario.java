@@ -10,6 +10,7 @@ import DAO.TelefoneDao;
 import entity.Cliente;
 import entity.Endereco;
 import entity.Funcionario;
+import entity.Pessoa;
 import entity.Telefone;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
@@ -60,11 +61,37 @@ public class ControleFuncionario {
 
 	}
 	
+	public void alterarFuncionario(Funcionario f,Endereco e,Telefone t) throws ClassNotFoundException, SQLException {
+		
+		FuncionarioDao fd = new FuncionarioDao();
+		TelefoneDao td = new TelefoneDao();
+		PessoaDao pd = new PessoaDao();
+		EnderecoDao ed = new EnderecoDao();
+		
+		ed.alteraEndereco(e);
+		td.atualizaTelefone(f.getIdPessoa(), t);
+		pd.atualizaPessoa(f);
+		fd.atualizaFuncionario(f);
+		
+	}
+	
 	public ObservableList<Funcionario> buscarFuncionariosNome(String nome) throws SQLException, ClassNotFoundException{
 		FuncionarioDao fd = new FuncionarioDao();
 		ObservableList<Funcionario> lista = fd.buscaFuncionarioNome(nome); 
 		return lista;
 		
+	}
+	
+	public Telefone buscaTelefoneFunc(int idPessoaFunc) throws ClassNotFoundException, SQLException {
+		TelefoneDao td = new TelefoneDao();
+		Telefone t = td.buscaTelefone(idPessoaFunc);
+		return t;
+	}
+	
+	public Endereco buscaEnderecoFunc(int FKEndereco) throws ClassNotFoundException, SQLException {
+		EnderecoDao ed = new EnderecoDao();
+		Endereco e = ed.buscaEndereco(FKEndereco);
+		return e;
 	}
 	
 

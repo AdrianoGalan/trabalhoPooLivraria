@@ -83,14 +83,16 @@ public class FuncionarioDao {
 		while (rs.next()) {
 			Funcionario f = new Funcionario();
 			f.setIdFuncionario(rs.getInt("ID_FUNCIONARIO"));
+			f.setIdPessoa(rs.getInt("ID_PESSOA"));
 			f.setNome(rs.getString("NOME"));
 			f.setCpf(rs.getString("CPF"));
 			f.setFkEdetecoPessoa(rs.getInt("FK_EDERECO_PESSOA"));
 			f.setCargo(rs.getString("CARGO"));
+			f.setEmail(rs.getString("EMAIL"));
 			f.setDataNascimento(rs.getDate("DATA_NASCIMENTO"));
 			f.setCargo(rs.getString("CARGO"));
 			f.setMatricula(rs.getString("MATRICULA"));
-			f.setDataAdmissao(new java.util.Date(rs.getDate("DATA_ADMISSAO").getTime()));
+			f.setDataAdmissao((rs.getDate("DATA_ADMISSAO")));
 			f.setFkPessoaFuncionario(rs.getInt("FK_PESSOA_FUNCIONARIO"));
 			lista.add(f);
 		}
@@ -128,6 +130,19 @@ public class FuncionarioDao {
 
 		return lista;
 
+	}
+	
+	public void atualizaFuncionario(Funcionario f) throws SQLException {
+		String sql = "update FUNCIONARIO set CARGO = ?, MATRICULA = ?, DATA_ADMISSAO = ? where ID_FUNCIONARIO = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, f.getCargo());
+		ps.setString(2, f.getMatricula());
+		java.sql.Date sqlData = new java.sql.Date(f.getDataAdmissao().getTime());
+		ps.setDate(3, sqlData);
+		ps.setInt(4, f.getIdFuncionario());
+		ps.executeUpdate();
+		ps.close();
+		
 	}
 
 	

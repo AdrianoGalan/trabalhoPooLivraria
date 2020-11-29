@@ -68,7 +68,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private MenuItem menuVendaLivro = new MenuItem("Livro");
 
 	private MenuItem menuControleUsuario = new MenuItem("Controle de usuarios");
-	private MenuItem menuPesquisaFuncionario = new MenuItem("Pesquisa Funcionario");
+	private MenuItem menuPesquisaFuncionario = new MenuItem("Funcionario");
 
 
 	@Override

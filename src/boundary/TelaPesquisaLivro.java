@@ -178,7 +178,6 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

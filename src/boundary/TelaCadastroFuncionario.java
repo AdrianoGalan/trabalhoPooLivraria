@@ -2,6 +2,7 @@ package boundary;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import DAO.PessoaDao;
 import control.ControleFuncionario;
@@ -29,6 +30,7 @@ import util.Mensagens;
 public class TelaCadastroFuncionario implements ControleTelas, EventHandler<ActionEvent> {
 
 	private Button btOk;
+	private Button btAlterar;
 	private Button btCancelar;
 	private TextField tfNome;
 	private TextField tfTelefone;
@@ -43,26 +45,60 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	private TextField tfDtnasc;
 	private TextField tfNumMatricula;
 	private TextField tfDataAdmicao;
+	private Funcionario f = null;
+	private Endereco e;
+	private Telefone t;
 	private ComboBox<String> cbEstado;
 	private ComboBox<String> cbTipoTelefone;
 	private ComboBox<String> cbCargo;
-	
+	private ControleFuncionario cf = new ControleFuncionario();
+	private TelaPesquisaFunc telaPesquisaFunc;
+
+	TelaCadastroFuncionario() {
+	}
+
+	TelaCadastroFuncionario(Funcionario f, TelaPesquisaFunc telaPesquisaFunc) {
+		this.f = f;
+		this.telaPesquisaFunc = telaPesquisaFunc;
+	}
 
 	@Override
-	public void handle(ActionEvent e) {
-		
-		if (e.getTarget() == btOk && verificaCampos()) {
-			if(verificaDuplicata()) {
+	public void handle(ActionEvent ev) {
+
+		if (ev.getTarget() == btOk && verificaCampos()) {
+			if (verificaDuplicata()) {
 				addCliente();
 				limpaCampos();
+				Mensagens.informacao("Funcionario cadastrado", "O funcionario foi cadastrado com sucesso", "");
 			}
-			
+
+		} else if (ev.getSource() == btAlterar) {
+			DadosParaEntidades();
+			try {
+				SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+				Date data = formato.parse(tfDtnasc.getText().replaceAll("-", "/"));
+				f.setDataNascimento(data);
+				data = formato.parse(tfDataAdmicao.getText().replaceAll("-", "/"));
+				f.setDataAdmissao(data);
+			} catch (ParseException e2) {
+				e2.printStackTrace();
+			}
+			try {
+				cf.alterarFuncionario(f, e, t);
+
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Mensagens.informacao("Alteracao de funcionario", "O funcionario foi alterado com sucesso", "");
+			telaPesquisaFunc.carregaTabela();
+			telaPesquisaFunc.stage.close();
 
 		}
 
-		if (e.getTarget() == btCancelar) {
-			
-		}
 	}
 
 	@Override
@@ -79,14 +115,6 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 		HBox hbBotao = new HBox();
 		hbBotao.setSpacing(40);
-
-		btOk = new Button("Cadastrar");
-		btOk.addEventHandler(ActionEvent.ACTION, this);
-		btCancelar = new Button("Cancelar");
-		btCancelar.addEventHandler(ActionEvent.ACTION, this);
-
-		hbBotao.getChildren().add(btOk);
-		hbBotao.getChildren().add(btCancelar);
 
 		vbEs.getChildren().add(new Label("Nome:"));
 		vbEs.getChildren().add(new Label("Telefone tipo:"));
@@ -105,10 +133,6 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		vbEs.getChildren().add(new Label("Numero Matricula: "));
 		vbEs.getChildren().add(new Label("Data Adimição: "));
 
-		vbEs.getChildren().add(hbBotao);
-		
-		
-
 		tfNome = new TextField();
 		tfNome.setPrefWidth(330);
 		tfTelefone = new TextField();
@@ -126,11 +150,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		tfEmail = new TextField();
 		tfDtnasc = new TextField();
 		Mascaras.mascaraData(tfDtnasc);
-		ObservableList<String> options = 
-			    FXCollections.observableArrayList(
-			        "GERENTE",
-			        "FUNCIONARIO"
-			    );
+		ObservableList<String> options = FXCollections.observableArrayList("GERENTE", "FUNCIONARIO");
 		cbCargo = new ComboBox<String>(options);
 		tfNumMatricula = new TextField();
 		Mascaras.mascaraApenasNum(tfNumMatricula);
@@ -140,7 +160,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		cbEstado.getItems().addAll("SP", "Rj", "MG");
 		cbEstado.setPrefWidth(80);
 		cbEstado.getSelectionModel().select(0);
-		
+
 		cbTipoTelefone = new ComboBox<String>();
 		cbTipoTelefone.getItems().addAll("CEL", "COM", "RES");
 		cbTipoTelefone.setPrefWidth(80);
@@ -162,6 +182,24 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		vbDi.getChildren().add(cbCargo);
 		vbDi.getChildren().add(tfNumMatricula);
 		vbDi.getChildren().add(tfDataAdmicao);
+
+		// Verifica se a tela está sendo chamada pra cadastrar ou alterar
+		if (f != null) {
+			carregaDadosCampos(f);
+			btAlterar = new Button("Alterar");
+			btAlterar.addEventHandler(ActionEvent.ACTION, this);
+			hbBotao.getChildren().add(btAlterar);
+		} else {
+			btOk = new Button("Cadastrar");
+			btOk.addEventHandler(ActionEvent.ACTION, this);
+			hbBotao.getChildren().add(btOk);
+		}
+
+		btCancelar = new Button("Cancelar");
+		btCancelar.addEventHandler(ActionEvent.ACTION, this);
+		hbBotao.getChildren().add(btCancelar);
+
+		vbEs.getChildren().add(hbBotao);
 		painel.getChildren().add(vbEs);
 		painel.getChildren().add(vbDi);
 
@@ -175,12 +213,31 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	}
 
 	private void addCliente() {
+		f = new Funcionario();
+		t = new Telefone();
+		e = new Endereco();
+		DadosParaEntidades();
+		try {
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+			Date data = formato.parse(tfDtnasc.getText());
+			f.setDataNascimento(data);
+			data = formato.parse(tfDataAdmicao.getText());
+			f.setDataAdmissao(data);
+		} catch (ParseException e2) {
+			e2.printStackTrace();
+		}
+		try {
 
-		ControleFuncionario cf = new ControleFuncionario();
+			cf.addFuncionario(f, e, t);
+			f = null; // não tire isso
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
-		Funcionario f = new Funcionario();
-		Telefone t = new Telefone();
-		Endereco e = new Endereco();
+	}
+
+	private void DadosParaEntidades() {
 
 		e.setNumero(Integer.parseInt(tfNum.getText()));
 		e.setBairro(tfBairro.getText());
@@ -191,27 +248,22 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		e.setCep(tfCep.getText().replaceAll("[-]", ""));
 		t.setTipo(cbTipoTelefone.getSelectionModel().getSelectedItem());
 		String telefone = tfTelefone.getText().replaceAll("[()-]", "");
-		t.setDdd(telefone.substring(0,2));
-		t.setNumero(telefone.substring(2,telefone.length()));
+		t.setDdd(telefone.substring(0, 2));
+		t.setNumero(telefone.substring(2, telefone.length()));
 		f.setNome(tfNome.getText());
 		f.setCpf(tfCpf.getText().replaceAll("[.-]", ""));
 		f.setEmail(tfEmail.getText());
 		f.setCargo(cbCargo.getSelectionModel().getSelectedItem());
 		f.setMatricula(tfNumMatricula.getText());
-		
 
 		try {
-			f.setDataNascimento(Data.parseDate(tfDtnasc.getText()));
-			f.setDataAdmissao(Data.parseDate(tfDataAdmicao.getText()));
+			SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+			Date data = formato.parse(tfDtnasc.getText().replaceAll("-", "/"));
+			f.setDataNascimento(data);
+			data = formato.parse(tfDataAdmicao.getText().replaceAll("-", "/"));
+			f.setDataAdmissao(data);
 		} catch (ParseException e2) {
-
-		}
-
-		try {
-			cf.addFuncionario(f, e, t);
-		} catch (ClassNotFoundException | SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			e2.printStackTrace();
 		}
 
 	}
@@ -230,7 +282,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 			return false;
 
-		}else if (tfTelefone.getText().equals("") || tfTelefone.getText().replaceAll("[()-]", "").length() <= 7) {
+		} else if (tfTelefone.getText().equals("") || tfTelefone.getText().replaceAll("[()-]", "").length() <= 7) {
 
 			Mensagens.erro("Telefone erro", "Telefone invalido", "Digite um Telefone");
 
@@ -242,8 +294,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 			return false;
 
-		} else if (tfNum.getText().equals("") || Integer.parseInt(tfNum.getText()) <= 0){
-			System.out.println(Integer.parseInt(tfNum.getText()) < 0);
+		} else if (tfNum.getText().equals("") || Integer.parseInt(tfNum.getText()) <= 0) {
 			Mensagens.erro("Numero erro", "Numero invalido", "Digite um Numero");
 
 			return false;
@@ -260,25 +311,25 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 			return false;
 
-		}else if(tfCep.getText().equals("") || tfCep.getText().replaceAll("[-]", "").length() != 8){
+		} else if (tfCep.getText().equals("") || tfCep.getText().replaceAll("[-]", "").length() != 8) {
 			Mensagens.erro("Cep erro", "Cep invalido", "Digite um Cep");
 
 			return false;
-		}else if(cbCargo.getSelectionModel().isEmpty()){
+		} else if (cbCargo.getSelectionModel().isEmpty()) {
 			Mensagens.erro("Cargo erro", "Cargo invalido", "Selecione um cargo");
 
-			return false;			
-		}else if(tfNumMatricula.getText().equals("") || Integer.parseInt(tfNum.getText()) <= 0){
+			return false;
+		} else if (tfNumMatricula.getText().equals("") || Integer.parseInt(tfNum.getText()) <= 0) {
 			Mensagens.erro("Num de matricula erro", "Matricula invalido", "Insira uma matricula");
 
-			return false;	
-		}else {
+			return false;
+		} else {
 
 			try {
 
 				Date data = Data.parseDate(tfDtnasc.getText());
-				Date dataAtual = new Date(); 
-				if(data.compareTo(dataAtual) > 0) {
+				Date dataAtual = new Date();
+				if (data.compareTo(dataAtual) > 0) {
 					Mensagens.erro("Data erro", "Data invalida", "Digite uma Data valida");
 					return false;
 				}
@@ -288,12 +339,12 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 				Mensagens.erro("Data erro", "Data invalida", "Digite uma Data valida");
 				return false;
 			}
-			
+
 			try {
 
 				Date data = Data.parseDate(tfDataAdmicao.getText());
-				Date dataAtual = new Date(); 
-				if(data.compareTo(dataAtual) > 0) {
+				Date dataAtual = new Date();
+				if (data.compareTo(dataAtual) > 0) {
 					Mensagens.erro("Data erro", "Data de adimissão invalida", "Digite uma Data valida");
 					return false;
 				}
@@ -304,11 +355,11 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 				return false;
 			}
 		}
-		
+
 		return true;
 
 	}
-	
+
 	public void limpaCampos() {
 		tfNome.setText("");
 		tfTelefone.setText("");
@@ -327,17 +378,45 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		cbEstado.setValue(null);
 		cbTipoTelefone.setValue(null);
 	}
-	
+
+	public void carregaDadosCampos(Funcionario f) {
+
+		try {
+			e = cf.buscaEnderecoFunc(f.getFkEdetecoPessoa());
+			t = cf.buscaTelefoneFunc(f.getIdPessoa());
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		tfNome.setText(f.getNome());
+		tfTelefone.setText(t.getDdd() + t.getNumero());
+		tfCpf.setText(f.getCpf());
+		tfRua.setText(e.getRua());
+		tfNum.setText(Integer.toString(e.getNumero()));
+		tfBairro.setText(e.getBairro());
+		tfCidade.setText(e.getCidade());
+		tfComplemento.setText(e.getComplemento());
+		tfCep.setText(e.getCep());
+		tfEmail.setText(f.getEmail());
+		tfDtnasc.setText(f.getDataNascimento().toString());
+		tfNumMatricula.setText(f.getMatricula());
+		tfDataAdmicao.setText(f.getDataAdmissao().toString());
+		cbTipoTelefone.setValue(t.getTipo());
+		cbCargo.setValue(f.getCargo());
+
+	}
+
 	private boolean verificaDuplicata() {
 		try {
 			PessoaDao pDao = new PessoaDao();
-			if(pDao.verificaDuplicCpf(tfCpf.getText())) {
+			if (pDao.verificaDuplicCpf(tfCpf.getText())) {
 				Mensagens.erro("Cpf erro", "Cpf inválido", "Cpf inválido ou já cadastrado");
 				return false;
-			}else if(pDao.verificaDuplicEmail(tfEmail.getText())) {
+			} else if (pDao.verificaDuplicEmail(tfEmail.getText())) {
 				Mensagens.erro("Email erro", "Email inválido", "Email inválido ou já cadastrado");
 				return false;
-			}else {
+			} else {
 				return true;
 			}
 		} catch (ClassNotFoundException e) {
@@ -347,8 +426,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 			e.printStackTrace();
 			return false;
 		}
-		
+
 	}
-	
 
 }
