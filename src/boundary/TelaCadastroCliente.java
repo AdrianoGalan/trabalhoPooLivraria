@@ -54,6 +54,8 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	private ComboBox<String> cbTipoTelefone;
 
 	private GregorianCalendar data = new GregorianCalendar();
+	
+	private Date dataAtual = new Date();
 
 	@Override
 	public void handle(ActionEvent e) {
@@ -194,8 +196,8 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 	private void addCliente() {
 
-		ControleCliente cc = new ControleCliente();
-
+		ControleCliente cc = new ControleCliente(); 
+		
 		Cliente c = new Cliente();
 		Telefone t = new Telefone();
 		Endereco e = new Endereco();
@@ -217,8 +219,11 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		c.setNome(tfNome.getText());
 		c.setCpf(tfCpf.getText());
 		c.setEmail(tfEmail.getText());
+		c.setDataCadastro(dataAtual);
+		
 		try {
 			c.setDataNascimento(Data.parseDate(tfDtnasc.getText()));
+			
 		} catch (ParseException e2) {
 
 		}
@@ -335,7 +340,11 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 			try {
 
 				Date data = Data.parseDate(tfDtnasc.getText());
+				if(data.compareTo(dataAtual) > 0) {
+					Mensagens.erro("Data erro", "Data invalida", "Digite uma Data valida");
+					return false;
 
+				}
 			} catch (ParseException e) {
 
 				Mensagens.erro("DATA ERRO", "Data invalida", "Digite uma Data valida");
