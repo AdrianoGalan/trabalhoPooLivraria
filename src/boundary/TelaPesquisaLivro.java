@@ -62,7 +62,7 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 		Label lblPesquisa = new Label("Digite:");
 		tfPesquisa = new TextField();
 		btPesquisar = new Button("Pesquisar");
-		btAlteraPreco = new Button("Altera preco");
+		btAlteraPreco = new Button("Alterar preco");
 		btPesquisar.addEventHandler(ActionEvent.ACTION, this);
 		btAlteraPreco.addEventHandler(ActionEvent.ACTION, this);
 		tbvPesqLivro = new TableView<ModelTabelaLivro>();

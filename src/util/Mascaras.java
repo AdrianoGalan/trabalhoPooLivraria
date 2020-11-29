@@ -224,5 +224,6 @@ public class Mascaras {
     	
     	textField.setTextFormatter(new TextFormatter<String>(integerFilter));
     }
+	
     
 }

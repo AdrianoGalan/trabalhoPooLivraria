@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import util.Mascaras;
 import util.Mensagens;
 
 public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEvent> {
@@ -27,17 +28,16 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 	private Button btOk;
 	private Button btCancelar;
 	private TextField tfTitulo; 
-	private TextField tfIsbn;                                                                  
-	private TextField tfAutor;                                                                   
+	private TextField tfIsbn;                                                                                                                                     
 	private TextField tfEdicao;                                                                    
-	private TextField tfAno;                                                                   
-	private ComboBox<String> cbGenero;                                                                    
+	private TextField tfAno;                                                                                                                                      
 	private TextField tfDescricao;                                                                   
-	private TextField tfQtd;                                                                  
-	private ComboBox<String> cbIdioma;                                                                    
-	private TextField tfPreco;                                                                  
+	private TextField tfQtd;                                                                                                                                      
+	private TextField tfPreco; 
 	
-	
+//	private ComboBox<String> cbAutor;
+	private ComboBox<String> cbIdioma;
+	private ComboBox<String> cbGenero;
 	
 
 	@Override
@@ -45,11 +45,15 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 		if (e.getTarget() == btOk && verificaCampos()) {
 			
-			if(verificaDuplicata()) {
+			addLivro();
+			
+			System.out.println("Funciona o botão");
+			
+	//		if(verificaDuplicata()) {
 				
-				addLivro();
+		//		addLivro();
 				
-			}
+		//	}
 			
 		}
 		if (e.getTarget() == btCancelar) {
@@ -70,7 +74,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		l.setAno(tfAno.getText());
 		l.setDescricao(tfDescricao.getText());
 		l.setEdicao(tfEdicao.getText());
-		l.setIsbn(tfIsbn.getText());
+		l.setIsbn(tfIsbn.getText()); //.replaceAll("[-]", ""));
 		l.setTitulo(tfTitulo.getText());
 		l.setQtsEstoque(Integer.parseInt(tfQtd.getText()));
 	//	l.setPreco(Double.parseDouble(tfPreco.getText()));
@@ -79,7 +83,8 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		l.setGenero(cbGenero.getSelectionModel().getSelectedItem());
 		l.setIdioma(cbIdioma.getSelectionModel().getSelectedItem());
 		
-		a.setNome(tfAutor.getText());
+//		a.setNome(cbAutor.getSelectionModel().getSelectedItem());
+//		a.setNacionalidade(cbAutor.getSelectionModel().getSelectedItem());
 		
 		try {
 			cl.addLivro(l, a);
@@ -113,21 +118,9 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 	private boolean verificaCampos() {
 		// TODO Auto-generated method stub
 		
-		if (tfTitulo.getText().equals("") || tfTitulo.getText().length() > 200) {
+		if (tfTitulo.getText().equals("") || tfTitulo.getText().length() > 200) { 
 
 			Mensagens.erro("TITULO ERRO", "Titulo invalido", "Digite um Titulo");
-
-			return false;
-
-		} else if (tfEdicao.getText().equals("") || tfEdicao.getText().length() > 3) {
-
-			Mensagens.erro("EDICAO ERRO", "Edicao invalida", "Digite uma Edicao");
-
-			return false;
-
-		} else if (tfDescricao.getText().equals("")) {
-
-			Mensagens.erro("DESCRICAO ERRO", "Descricao invalida", "Digite uma Descricao");
 
 			return false;
 
@@ -137,13 +130,31 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 			return false;
 
-		} else if (tfAno.getText().equals("") || (!tfAno.getText().matches("\\d+")) || tfAno.getText().length() != 4) {
+		}/* else if(cbAutor.getSelectionModel().isEmpty()){
+			
+			Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
+
+			return false;	
+			
+		}*/ else if (tfEdicao.getText().equals("") || tfEdicao.getText().length() > 3) {
+
+			Mensagens.erro("EDICAO ERRO", "Edicao invalida", "Digite uma Edicao");
+
+			return false;
+
+		}  else if (tfAno.getText().equals("") || (!tfAno.getText().matches("\\d+")) || tfAno.getText().length() != 4 ) {
 
 			Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano");
 
 			return false;
 
-		} else if (tfQtd.getText().equals("") || (!tfQtd.getText().matches("\\d+"))) {
+		} else if (tfDescricao.getText().equals("")) {
+
+			Mensagens.erro("DESCRICAO ERRO", "Descricao invalida", "Digite uma Descricao");
+
+			return false;
+
+		}  else if (tfQtd.getText().equals("") || (!tfQtd.getText().matches("\\d+"))) {
 
 			Mensagens.erro("ESTOQUE ERRO", "Estoque invalido", "Digite uma Quantidade");
 
@@ -155,13 +166,13 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 			return false;
 
-		} else if (tfAutor.getText().equals("") || (!tfAutor.getText().matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$")) || tfAutor.getText().length() > 150) {
+		} /*else if (tfAutor.getText().equals("") || (!tfAutor.getText().matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$")) || tfAutor.getText().length() > 150) {
 
 			Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
 
 			return false;
 
-		}
+		}*/
 
 		
 		return true;
@@ -193,7 +204,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 		vbEs.getChildren().add(new Label("Titulo:"));
 		vbEs.getChildren().add(new Label("ISBN:"));
-		vbEs.getChildren().add(new Label("Autor:"));
+//		vbEs.getChildren().add(new Label("Autor:"));
 		vbEs.getChildren().add(new Label("Edicao:"));
 		vbEs.getChildren().add(new Label("Ano:"));
 		vbEs.getChildren().add(new Label("Genero:"));
@@ -204,15 +215,20 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 		vbEs.getChildren().add(hbBotao);
 
-		TextField tfTitulo = new TextField();
+		tfTitulo = new TextField();
 		tfTitulo.setPrefWidth(330);
 		tfIsbn = new TextField();
-		tfAutor = new TextField();
+//		Mascaras.mascaraIsbn(tfIsbn);
 		tfEdicao = new TextField();
 		tfAno = new TextField();
 		tfDescricao = new TextField();
 		tfQtd = new TextField();
 		tfPreco = new TextField();
+		
+/*		cbAutor = new ComboBox<String>();
+		cbAutor.getItems().addAll("Nome: ", "Nacionalidade: ");
+		cbAutor.setPrefWidth(80);
+		cbAutor.getSelectionModel().select(0); */
 		
 		cbGenero = new ComboBox<String>();
 		cbGenero.getItems().addAll("Terror", "Aventura", "Romance", "Suspense","Ficcao");
@@ -226,7 +242,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 		vbDi.getChildren().add(tfTitulo);
 		vbDi.getChildren().add(tfIsbn);
-		vbDi.getChildren().add(tfAutor);
+//		vbDi.getChildren().add(cbAutor);
 		vbDi.getChildren().add(tfEdicao);
 		vbDi.getChildren().add(tfAno);
 		vbDi.getChildren().add(cbGenero);
