@@ -45,8 +45,8 @@ public class LivroDao {
 		sql.append("ON l.ID_LIVRO = la.FK_LIVRO_LIVRO_AUTOR ");
 		sql.append("INNER JOIN AUTOR a ");
 		sql.append("ON a.ID_AUTOR = la.FK_AUTOR_LIVRO_AUTOR ");
-		// sql.append("INNER JOIN PRECO p ");
-		// sql.append("ON p.FK_LIVRO_PRECO = l.ID_LIVRO ");
+		sql.append("INNER JOIN PRECO p ");
+		sql.append("ON p.FK_LIVRO_PRECO = l.ID_LIVRO ");
 
 		if (meio == 0) {
 			sql.append("WHERE l.TITULO LIKE  ?");
