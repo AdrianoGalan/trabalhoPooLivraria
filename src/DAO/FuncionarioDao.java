@@ -69,6 +69,39 @@ public class FuncionarioDao {
 
 	}
 	
+	public ObservableList<Funcionario> buscaFuncionarioNome(String nome) throws SQLException {
+
+		ObservableList<Funcionario> lista = FXCollections.observableArrayList();
+
+		String sql = "select * from FUNCIONARIO f, PESSOA p "
+				+ "where f.FK_PESSOA_fUNCIONARIO = p.ID_PESSOA and NOME like ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, nome+"%");
+
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			Funcionario f = new Funcionario();
+			f.setIdFuncionario(rs.getInt("ID_FUNCIONARIO"));
+			f.setNome(rs.getString("NOME"));
+			f.setCpf(rs.getString("CPF"));
+			f.setFkEdetecoPessoa(rs.getInt("FK_EDERECO_PESSOA"));
+			f.setCargo(rs.getString("CARGO"));
+			f.setDataNascimento(rs.getDate("DATA_NASCIMENTO"));
+			f.setCargo(rs.getString("CARGO"));
+			f.setMatricula(rs.getString("MATRICULA"));
+			f.setDataAdmissao(new java.util.Date(rs.getDate("DATA_ADMISSAO").getTime()));
+			f.setFkPessoaFuncionario(rs.getInt("FK_PESSOA_FUNCIONARIO"));
+			lista.add(f);
+		}
+
+		rs.close();
+		ps.close();
+
+		return lista;
+
+	}
+	
 	public ObservableList<Funcionario> getListaFuncionario() throws SQLException {
 
 		

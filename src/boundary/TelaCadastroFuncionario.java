@@ -107,7 +107,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 		vbEs.getChildren().add(hbBotao);
 		
-
+		
 
 		tfNome = new TextField();
 		tfNome.setPrefWidth(330);

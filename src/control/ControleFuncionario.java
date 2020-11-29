@@ -11,6 +11,7 @@ import entity.Cliente;
 import entity.Endereco;
 import entity.Funcionario;
 import entity.Telefone;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
 
 public class ControleFuncionario {
@@ -59,7 +60,12 @@ public class ControleFuncionario {
 
 	}
 	
-
+	public ObservableList<Funcionario> buscarFuncionariosNome(String nome) throws SQLException, ClassNotFoundException{
+		FuncionarioDao fd = new FuncionarioDao();
+		ObservableList<Funcionario> lista = fd.buscaFuncionarioNome(nome); 
+		return lista;
+		
+	}
 	
 
 }
