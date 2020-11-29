@@ -80,7 +80,7 @@ public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEv
 		hbBotao.getChildren().add(tfPesquisa);
 		hbBotao.getChildren().add(btPesquisar);
 
-		hbBtnAtualizar.getChildren().add(new Label("Digite a quqntiadde de livros:"));
+		hbBtnAtualizar.getChildren().add(new Label("Digite a quantidade de livros:"));
 		hbBtnAtualizar.getChildren().add(tfQtsLivros);
 		hbBtnAtualizar.getChildren().add(btAtualizar);
 
