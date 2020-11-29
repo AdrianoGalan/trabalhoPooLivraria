@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import connection.Conexao;
 import entity.Livro;
+import entity.Preco;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tabelaModel.ModelTabelaLivro;
@@ -46,7 +47,7 @@ public class LivroDao {
 		sql.append("INNER JOIN AUTOR a ");
 		sql.append("ON a.ID_AUTOR = la.FK_AUTOR_LIVRO_AUTOR ");
 		sql.append("INNER JOIN PRECO p ");
-		sql.append("ON p.FK_LIVRO_PRECO = l.ID_LIVRO ");
+		sql.append("ON p.ID_PRECO = l.PRECO_ATUAL  ");
 
 		if (meio == 0) {
 			sql.append("WHERE l.TITULO LIKE  ?");
@@ -159,11 +160,11 @@ public class LivroDao {
 
 	}
 
-	public void alteraPrecoLivro(Double preco, int ISBN) throws SQLException {
-		String sql = "update LIVRO set Preco_Atual = ? where ISBN = ?";
+	public void alteraPrecoLivro(Preco p) throws SQLException {
+		String sql = "update LIVRO set Preco_Atual = ? where ID_LIVRO = ?";
 		PreparedStatement ps = c.prepareStatement(sql);
-		ps.setDouble(1, preco);
-		ps.setInt(2, ISBN);
+		ps.setDouble(1, p.getIdPreco());
+		ps.setInt(2, p.getFkLivroPreco());
 
 		ps.execute();
 		ps.close();

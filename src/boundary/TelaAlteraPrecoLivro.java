@@ -3,6 +3,8 @@ package boundary;
 import java.sql.SQLException;
 
 import control.ControleLivro;
+import control.ControlePreco;
+import entity.Preco;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -18,9 +20,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tabelaModel.ModelTabelaLivro;
+import util.Mensagens;
 
-public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent>{
-	
+public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent> {
+
 	private BorderPane tela;
 	private Pane painel;
 	private Stage stage;
@@ -32,7 +35,11 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent>{
 	private ModelTabelaLivro livro;
 	private TelaPesquisaLivro telaMae;
 	
-	TelaAlteraPrecoLivro(TableView<ModelTabelaLivro> tbvPesqLivro,ControleLivro controle, TelaPesquisaLivro telaM){
+	private Preco p;
+
+	
+
+	TelaAlteraPrecoLivro(TableView<ModelTabelaLivro> tbvPesqLivro, ControleLivro controle, TelaPesquisaLivro telaM) {
 
 		telaMae = telaM;
 		this.controle = controle;
@@ -43,7 +50,7 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent>{
 		stage.setScene(cena);
 		tbvLivro = tbvPesqLivro;
 	}
-	
+
 	public void render(ModelTabelaLivro livro) {
 		painel = new Pane();
 		this.livro = livro;
@@ -59,7 +66,7 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent>{
 		btnAlterar.setTranslateX(115);
 		btnAlterar.setTranslateY(20);
 		btnAlterar.addEventHandler(ActionEvent.ACTION, this);
-		vbDi.getChildren().addAll(hBox,btnAlterar);
+		vbDi.getChildren().addAll(hBox, btnAlterar);
 		vbDi.setPadding(new Insets(5, 0, 15, 5));
 		vbDi.setSpacing(8);
 		painel.getChildren().add(vbDi);
@@ -68,12 +75,46 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent>{
 		stage.show();
 	}
 
+	private void criaPreco() {
+
+		ControlePreco cp = new ControlePreco();
+		p = new Preco();
+
+		try {
+
+			p.setValor(Double.parseDouble(txtPreco.getText()));
+
+			if (p.getValor() >= 0) {
+			
+				p.setFkLivroPreco(livro.getIdLivro());
+				p.setIdPreco( cp.addPreco(p));
+
+			} else {
+				Mensagens.erro("Erro Preço", "Preço invalido", "Digite um preço maior que 0");
+			}
+
+		} catch (Exception e) {
+
+			Mensagens.erro("Erro Preço", "Preço invalido", "Digite um preço valido");
+		}
+
+	}
+
 	@Override
 	public void handle(ActionEvent event) {
-		if(event.getSource() == btnAlterar) {
-			
+		if (event.getSource() == btnAlterar) {
+
 			try {
-				controle.alteraPrecoLivro(Double.parseDouble(txtPreco.getText()), Integer.parseInt(livro.getIsbn()));
+
+				criaPreco();
+
+				if (p.getFkLivroPreco() != 0) {
+
+					controle.alteraPrecoLivro(p);
+				} else {
+					Mensagens.erro("Erro", "Erro alterar", "Erro a alterar preço");
+				}
+				
 				telaMae.carregarTabela();
 				stage.close();
 			} catch (NumberFormatException e) {
@@ -83,9 +124,8 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent>{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
-			
+
 		}
 	}
-	
+
 }

@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import tabelaModel.ModelTabelaLivro;
+import util.Mensagens;
 
 public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEvent> {
 
@@ -105,16 +106,18 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 
 		int i = tbvPesqLivro.getSelectionModel().getSelectedIndex();
 		if (e.getSource() == btPesquisar) {
+			
 			carregarTabela();
+			
 		} else if (e.getSource() == btAlteraPreco) {
+			
 			if (i == -1 || i > tbvPesqLivro.getItems().size()) {
-				Alert alertaSelecao = new Alert(AlertType.INFORMATION);
-				alertaSelecao.setTitle("SeleÁ„o");
-				alertaSelecao.setHeaderText("Por favor selecione um livro antes de realizar essa aÁ„o.");
-				alertaSelecao.showAndWait();
+	
+				Mensagens.informacao("Sele√ß√£o", "Sele√ß√£o ", "Por favor selecione um livro antes de realizar essa a√ß√£o.");
 
 			} else {
 				telaPreco.render(tbvPesqLivro.getSelectionModel().getSelectedItem());
+				
 				carregarTabela();
 			}
 		}

@@ -6,6 +6,7 @@ import DAO.AutorDao;
 import DAO.LivroDao;
 import entity.Autor;
 import entity.Livro;
+import entity.Preco;
 import javafx.collections.ObservableList;
 import tabelaModel.ModelTabelaLivro;
 
@@ -30,9 +31,9 @@ public class ControleLivro {
 
 	}
 	
-	public void alteraPrecoLivro(Double preco, int ISBN) throws ClassNotFoundException, SQLException {
+	public void alteraPrecoLivro(Preco p) throws ClassNotFoundException, SQLException {
 		LivroDao ld = new LivroDao();
-		ld.alteraPrecoLivro(preco, ISBN);
+		ld.alteraPrecoLivro(p);
 	}
 
 	public void procurarLivro(String texto, int meio) throws SQLException, ClassNotFoundException {
