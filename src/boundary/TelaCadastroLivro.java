@@ -29,82 +29,75 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 	private Button btOk;
 	private Button btCancelar;
-	private TextField tfTitulo; 
-	private TextField tfIsbn;                                                                                                                                     
-	private TextField tfEdicao;                                                                    
-	private TextField tfAno;                                                                                                                                      
-	private TextField tfDescricao;                                                                   
-	private TextField tfQtd;                                                                                                                                      
-	private TextField tfPreco; 
-	
-//	private ComboBox<String> cbAutor;
+	private TextField tfTitulo;
+	private TextField tfIsbn;
+	private TextField tfEdicao;
+	private TextField tfAno;
+	private TextField tfDescricao;
+	private TextField tfQtd;
+	private TextField tfPreco;
+
+	private ComboBox<String> cbAutor;
 	private ComboBox<String> cbIdioma;
 	private ComboBox<String> cbGenero;
-	
 
 	@Override
 	public void handle(ActionEvent e) {
-
+		System.out.println(verificaCampos());
 		if (e.getTarget() == btOk && verificaCampos()) {
-			
-			addLivro();
-			
-			System.out.println("Funciona o botão");
-			
-	//		if(verificaDuplicata()) {
-				
-		//		addLivro();
-				
-		//	}
-			
+
+
+			if (verificaDuplicata()) {
+
+				addLivro();
+
+			}
+
 		}
 		if (e.getTarget() == btCancelar) {
-			
+
 		}
 
 	}
 
 	private void addLivro() {
 		// TODO Auto-generated method stub
-		
+
 		ControleLivro cl = new ControleLivro();
-	
-		
+
 		Livro l = new Livro();
-		Autor a = new Autor();
-		
+//		Autor a = new Autor();
+
 		l.setAno(tfAno.getText());
 		l.setDescricao(tfDescricao.getText());
 		l.setEdicao(tfEdicao.getText());
-		l.setIsbn(tfIsbn.getText()); //.replaceAll("[-]", ""));
+		l.setIsbn(tfIsbn.getText()); // .replaceAll("[-]", ""));
 		l.setTitulo(tfTitulo.getText());
 		l.setQtsEstoque(Integer.parseInt(tfQtd.getText()));
-	//	l.setPreco(Double.parseDouble(tfPreco.getText()));
-		
-		
+		// l.setPreco(Double.parseDouble(tfPreco.getText()));
+
 		l.setGenero(cbGenero.getSelectionModel().getSelectedItem());
 		l.setIdioma(cbIdioma.getSelectionModel().getSelectedItem());
-		
+
 //		a.setNome(cbAutor.getSelectionModel().getSelectedItem());
 //		a.setNacionalidade(cbAutor.getSelectionModel().getSelectedItem());
-		
+
 		try {
-			cl.addLivro(l, a);
+			cl.addLivro(l);
 		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO: handle exception
 			e1.printStackTrace();
 		}
-		
-		
+
 	}
-	
+
 	private boolean verificaDuplicata() {
 		try {
 			LivroDao lDao = new LivroDao();
-			if(lDao.verificaDuplicIsbn(tfIsbn.getText())) {
+			if (lDao.verificaDuplicIsbn(tfIsbn.getText())) {
 				Mensagens.erro("ISBN ERRO", "ISBN inválido", "ISBN inválido ou já cadastrado");
 				return false;
-			}else {
+			} else {
 				return true;
 			}
 		} catch (ClassNotFoundException e) {
@@ -114,70 +107,52 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 			e.printStackTrace();
 			return false;
 		}
-		
+
 	}
 
 	private boolean verificaCampos() {
 		// TODO Auto-generated method stub
-		
-		if (tfTitulo.getText().equals("") || tfTitulo.getText().length() > 200) { 
+
+		if (tfTitulo.getText().equals("") || tfTitulo.getText().length() > 200) {
 
 			Mensagens.erro("TITULO ERRO", "Titulo invalido", "Digite um Titulo");
 
 			return false;
 
-		} else if (tfIsbn.getText().equals("") || tfIsbn.getText().length() > 13 || (!tfIsbn.getText().matches("\\d+"))) {
+		} else if (tfIsbn.getText().equals("") || tfIsbn.getText().length() > 13
+				|| (!tfIsbn.getText().matches("\\d+"))) {
 
 			Mensagens.erro("ISBN ERRO", "Isbn invalido", "Digite um Isbn: 13 Digitos");
 
 			return false;
 
-		}/* else if(cbAutor.getSelectionModel().isEmpty()){
-			
-			Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
-
-			return false;	
-			
-		}*/ else if (tfEdicao.getText().equals("") || tfEdicao.getText().length() > 3) {
+		} /*
+			 * else if(cbAutor.getSelectionModel().isEmpty()){
+			 * 
+			 * Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
+			 * 
+			 * return false;
+			 * 
+			 * }
+			 */ else if (tfEdicao.getText().equals("") || tfEdicao.getText().length() > 3) {
 
 			Mensagens.erro("EDICAO ERRO", "Edicao invalida", "Digite uma Edicao");
 
 			return false;
 
-		}  else if (tfAno.getText().equals("") || (!tfAno.getText().matches("\\d+")) || tfAno.getText().length() != 4 ) {
+		} else if (tfAno.getText().equals("") || (!tfAno.getText().matches("\\d+")) || tfAno.getText().length() != 4 || !validaData()) {
 
 			Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano");
 
 			return false;
-
-		} else if (!tfAno.getText().equals("")) {
-			try {
 			
-					    	
-				Calendar hoje = Calendar.getInstance();
-
-				int anoAtual = hoje.get(Calendar.YEAR);
-				
-				int ano = Integer.parseInt(tfAno.getText());
-			
-			if(ano > anoAtual) {
-				Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano válido");
-				return false;
-			}
-			
-			} catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-				Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano válido");
-			}
-		
-		}else if (tfDescricao.getText().equals("")) {
+		} else if (tfDescricao.getText().equals("")){
 
 			Mensagens.erro("DESCRICAO ERRO", "Descricao invalida", "Digite uma Descricao");
 
 			return false;
 
-		}  else if (tfQtd.getText().equals("") || (!tfQtd.getText().matches("\\d+"))) {
+		} else if (tfQtd.getText().equals("") || (!tfQtd.getText().matches("\\d+"))) {
 
 			Mensagens.erro("ESTOQUE ERRO", "Estoque invalido", "Digite uma Quantidade");
 
@@ -189,16 +164,35 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 			return false;
 
-		} /*else if (tfAutor.getText().equals("") || (!tfAutor.getText().matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$")) || tfAutor.getText().length() > 150) {
+		} else {
 
-			Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
+			return true;
+		}
 
+	}
+
+	private boolean validaData() {
+		try {
+
+			Calendar hoje = Calendar.getInstance();
+
+			int anoAtual = hoje.get(Calendar.YEAR);
+
+			int ano = Integer.parseInt(tfAno.getText());
+
+			if (ano >= anoAtual) {
+				Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano válido");
+				return false;
+			} else {
+				return true;
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano válido");
 			return false;
-
-		}*/
-
-		
-		return true;
+		}
 	}
 
 	@Override
@@ -247,17 +241,18 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		tfDescricao = new TextField();
 		tfQtd = new TextField();
 		tfPreco = new TextField();
-		
-/*		cbAutor = new ComboBox<String>();
-		cbAutor.getItems().addAll("Nome: ", "Nacionalidade: ");
-		cbAutor.setPrefWidth(80);
-		cbAutor.getSelectionModel().select(0); */
-		
+
+	
+		  cbAutor = new ComboBox<String>(); cbAutor.getItems().addAll("Nome: ",
+		  "Nacionalidade: "); cbAutor.setPrefWidth(80);
+		  cbAutor.getSelectionModel().select(0);
+		 
+
 		cbGenero = new ComboBox<String>();
-		cbGenero.getItems().addAll("Terror", "Aventura", "Romance", "Suspense","Ficcao");
+		cbGenero.getItems().addAll("Terror", "Aventura", "Romance", "Suspense", "Ficcao");
 		cbGenero.setPrefWidth(80);
 		cbGenero.getSelectionModel().select(0);
-		
+
 		cbIdioma = new ComboBox<String>();
 		cbIdioma.getItems().addAll("Portugues", "Ingles", "Espanhol", "Frances");
 		cbIdioma.setPrefWidth(80);
@@ -285,5 +280,17 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		// TODO Auto-generated method stub
 
 	}
+
+	/*
+	 * else if (tfAutor.getText().equals("") || (!tfAutor.getText().
+	 * matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$")) ||
+	 * tfAutor.getText().length() > 150) {
+	 * 
+	 * Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
+	 * 
+	 * return false;
+	 * 
+	 * }
+	 */
 
 }

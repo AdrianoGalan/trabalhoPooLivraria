@@ -14,13 +14,10 @@ public class ControleLivro {
 
 	private ObservableList<ModelTabelaLivro> lista;
 
-	public void addLivro(Livro l, Autor a) throws ClassNotFoundException, SQLException {
+	public void addLivro(Livro l) throws ClassNotFoundException, SQLException {
 
 		LivroDao ld = new LivroDao();
-		AutorDao ad = new AutorDao();
-
-			ld.insereLivro(l);
-			ad.insereAutor(a);
+//		AutorDao ad = new AutorDao();
 			
 			try {
 				ld.insereLivro(l);
@@ -33,7 +30,7 @@ public class ControleLivro {
 
 
 			try {
-				ad.insereAutor(a);
+//				ad.insereAutor(a);
 			} catch (Exception e1) {
 				// TODO: handle exception
 				e1.printStackTrace();
