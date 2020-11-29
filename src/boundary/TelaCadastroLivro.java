@@ -1,6 +1,8 @@
 package boundary;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import DAO.LivroDao;
 import control.ControleAutor;
@@ -148,7 +150,28 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 			return false;
 
-		} else if (tfDescricao.getText().equals("")) {
+		} else if (!tfAno.getText().equals("")) {
+			try {
+			
+					    	
+				Calendar hoje = Calendar.getInstance();
+
+				int anoAtual = hoje.get(Calendar.YEAR);
+				
+				int ano = Integer.parseInt(tfAno.getText());
+			
+			if(ano > anoAtual) {
+				Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano válido");
+				return false;
+			}
+			
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano válido");
+			}
+		
+		}else if (tfDescricao.getText().equals("")) {
 
 			Mensagens.erro("DESCRICAO ERRO", "Descricao invalida", "Digite uma Descricao");
 
