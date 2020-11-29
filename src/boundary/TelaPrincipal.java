@@ -21,26 +21,38 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * Classe Tela Principal que gerencia as outras telas. 
+ * 
+ * @author Adriano, Gustavo e Roberto.
+ *
+ */
+
 public class TelaPrincipal extends Application implements GetenciadorPrincipal, EventHandler<ActionEvent> {
 
 	Funcionario fLogado;
 
-	// painel
+/**
+ * Painel login e Principal.
+ */
 	private BorderPane painelLogin = new BorderPane();
 	private BorderPane painelPrincipal = new BorderPane();
 
-	// cena
+/**
+ * Cena Login, principal e suas dimensões.
+ */
 	private Scene login = new Scene(painelLogin, 350, 140);
 	private Scene principal = new Scene(painelPrincipal, 1000, 600);
 
 	private Stage stage = new Stage();
 
-	// telas
+/**
+ * Telas do sistema.
+ */
 	private ControleTelas telaLogin = new TelaLogi();
 	private ControleTelas telaInicial = new TelaInicial();
 	private ControleTelas telaCadastroCliente = new TelaCadastroCliente();
 	private ControleTelas telaCadastroLivro = new TelaCadastroLivro();
-	private ControleTelas telaCadastroAutor = new TelaCadastroAutor();
 	private ControleTelas telaCadastroFuncionario = new TelaCadastroFuncionario();
 	private ControleTelas telaPesquisaCliente = new TelaPesquisaCliente();
 	private ControleTelas telaPesquisaLivro = new TelaPesquisaLivro();
@@ -50,7 +62,9 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private ControleTelas telaControleUsuario = new TelaControleUsuario(stage);
 	private ControleTelas telaPesquisaFuncionario = new TelaPesquisaFunc();
 
-	// itens do menu
+/**
+ * Itens do menu.
+ */
 	private MenuItem menuInicioTelaInicio = new MenuItem("Tela Inicial");
 	private MenuItem menuInicioSair = new MenuItem("Sair");
 
@@ -71,6 +85,10 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private MenuItem menuPesquisaFuncionario = new MenuItem("Funcionario");
 
 
+	/**
+	 * Método start que mostrará a tela
+	 */
+	
 	@Override
 	public void start(Stage stage) throws Exception {
 
@@ -95,7 +113,6 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 		telaCadastroCliente.setGerenciadorPrincipal(this);
 		telaCadastroLivro.setGerenciadorPrincipal(this);
-		telaCadastroAutor.setGerenciadorPrincipal(this);
 		telaCadastroFuncionario.setGerenciadorPrincipal(this);
 
 		telaPesquisaCliente.setGerenciadorPrincipal(this);
@@ -114,11 +131,20 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		stage.show();
 
 	}
+	
+	/**
+	 * Iniciando a aplicação
+	 * @param args
+	 */
 
 	public static void main(String[] args) {
 		Application.launch(TelaPrincipal.class, args);
 	}
 
+	/**
+	 * MenuBar
+	 */
+	
 	private void setTelaPrincipal() {
 
 		MenuBar menuPrincipal = new MenuBar();
@@ -173,11 +199,16 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		this.stage.setResizable(false);
 		this.stage.setX(50);
 		this.stage.setY(50);
-		this.stage.setTitle("Sistema Livraria");
+		this.stage.setTitle("SISTEMA LIVRARIA");
 
 		this.stage.show();
 
 	}
+	
+	/**
+	 * Método que loga um funcionário
+	 * @param idFuncionario
+	 */
 
 	private void logarFuncionario(int idFuncionario) {
 
@@ -193,7 +224,11 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		}
 
 	}
-
+	
+	/**
+	 * Método que aciona ação a tela Principal  
+	 */
+	
 	@Override
 	public void handle(ActionEvent e) {
 
@@ -203,8 +238,6 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 			this.painelPrincipal.setCenter(telaCadastroLivro.render());
 		} else if (e.getTarget() == menuCadastrarFuncionario) {
 			this.painelPrincipal.setCenter(telaCadastroFuncionario.render());
-		} else if (e.getTarget() == menuCadastrarAutor) {
-			this.painelPrincipal.setCenter(telaCadastroAutor.render());
 		} else if (e.getTarget() == menuPesquuisarCliente) {
 			this.painelPrincipal.setCenter(telaPesquisaCliente.render());
 		} else if (e.getTarget() == menuPesquuisarLivro) {
