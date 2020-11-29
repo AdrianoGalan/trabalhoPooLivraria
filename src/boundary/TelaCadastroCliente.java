@@ -30,15 +30,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import util.Data;
+import util.Mascaras;
 import util.Mensagens;
 
 public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEvent> {
 
 	private Button btOk;
 	private Button btCancelar;
+	private Button btUpd;
 	private TextField tfNome;
 	private TextField tfTelefone;
-	private TextField tfDdd;
 	private TextField tfCpf;
 	private TextField tfRua;
 	private TextField tfNum;
@@ -69,13 +70,16 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 			limpaCampos();
 
 		}
+		
+		if (e.getTarget() == btUpd) {
+			
+		}
 	}
 
 	private void limpaCampos() {
 		
 		tfNome.setText(""); 
 		tfTelefone.setText(""); 
-		tfDdd.setText("11");
 		tfCpf.setText("");
 		tfRua.setText("");
 		tfNum.setText("");
@@ -109,13 +113,15 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		btOk.addEventHandler(ActionEvent.ACTION, this);
 		btCancelar = new Button("Cancelar");
 		btCancelar.addEventHandler(ActionEvent.ACTION, this);
+		btUpd = new Button("Atualizar");
+		btUpd.addEventHandler(ActionEvent.ACTION, this);
 
 		hbBotao.getChildren().add(btOk);
 		hbBotao.getChildren().add(btCancelar);
+		hbBotao.getChildren().add(btUpd);
 
 		vbEs.getChildren().add(new Label("Nome:"));
 		vbEs.getChildren().add(new Label("Telefone tipo:"));
-		vbEs.getChildren().add(new Label("DDD"));
 		vbEs.getChildren().add(new Label("Telefone:"));
 		vbEs.getChildren().add(new Label("CPF:"));
 		vbEs.getChildren().add(new Label("Rua:"));
@@ -133,17 +139,21 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		tfNome = new TextField();
 		tfNome.setPrefWidth(330);
 		tfTelefone = new TextField();
-		tfDdd = new TextField("11");
+		Mascaras.mascaraTelefone(tfTelefone);
 		tfCpf = new TextField();
+		Mascaras.mascaraCPF(tfCpf);
 		tfRua = new TextField();
 		tfNum = new TextField();
+		Mascaras.mascaraApenasNum(tfNum);
 		tfBairro = new TextField();
 		tfCidade = new TextField();
 		tfEstado = new TextField();
 		tfComplemento = new TextField();
 		tfCep = new TextField();
+		Mascaras.mascaraCEP(tfCep);
 		tfEmail = new TextField();
 		tfDtnasc = new TextField();
+		Mascaras.mascaraData(tfDtnasc);
 
 /*		cbEstado = new ComboBox<String>();
 		cbEstado.getItems().addAll("SP", "Rj", "MG");
@@ -157,7 +167,6 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 		vbDi.getChildren().add(tfNome);
 		vbDi.getChildren().add(cbTipoTelefone);
-		vbDi.getChildren().add(tfDdd);
 		vbDi.getChildren().add(tfTelefone);
 		vbDi.getChildren().add(tfCpf);
 		vbDi.getChildren().add(tfRua);
@@ -196,12 +205,14 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		e.setRua(tfRua.getText());
 		e.setCidade(tfCidade.getText());
 	//	e.setEstado(cbEstado.getSelectionModel().getSelectedItem());
+		e.setEstado(tfEstado.getText());
 		e.setComplemento(tfComplemento.getText());
-		e.setCep(tfCep.getText());
+		e.setCep(tfCep.getText().replaceAll("[-]", ""));
 
 		t.setTipo(cbTipoTelefone.getSelectionModel().getSelectedItem());
-		t.setDdd(tfDdd.getText());
-		t.setNumero(tfTelefone.getText());
+		String telefone = tfTelefone.getText().replaceAll("[()-]", "");
+		t.setDdd(telefone.substring(0,2));
+		t.setNumero(telefone.substring(2,telefone.length()));
 
 		c.setNome(tfNome.getText());
 		c.setCpf(tfCpf.getText());
@@ -245,7 +256,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 	private boolean verificaCampos() {
 
-		if (tfNome.getText().equals("") || (!tfNome.getText().matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$"))) {  //"^[a-zA-Z]+$"
+		if (tfNome.getText().equals("") || (!tfNome.getText().matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$")) || tfNome.getText().length() > 200) {  //"^[a-zA-Z]+$"
 
 			Mensagens.erro("NOME ERRO", "Nome invalido", "Digite um nome");
 
@@ -253,27 +264,19 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 		} else 
 			
-			if (tfDdd.getText().equals("") || (!tfDdd.getText().matches("\\d+")) || tfDdd.getText().length() != 2) {
-
-			Mensagens.erro("DDD ERRO", "DDD invalido", "Digite um DDD");
-
-			return false;
-
-		}else 
-			
-			if (tfTelefone.getText().equals("") || tfTelefone.getText().length() <=7 || (!tfTelefone.getText().matches("\\d+"))) {
+			if (tfTelefone.getText().equals("") || tfTelefone.getText().replaceAll("[()-]", "").length() <= 7 ) {
 
 			Mensagens.erro("TELEFONE ERRO", "Telefone invalido", "Digite um Telefone");
 
 			return false;
 
-		}else if (tfCpf.getText().equals("") || tfCpf.getText().length() != 11 || (!tfCpf.getText().matches("\\d+"))) {
+		}else if (tfCpf.getText().equals("") || tfCpf.getText().length() != 14 ) {
 
 			Mensagens.erro("CPF ERRO", "CPF invalida", "Digite um CPF");
 
 			return false;
 
-		}  else if (tfRua.getText().equals("") || (!tfRua.getText().matches("^(/w|/W|[^<>+?$%{}&])+$"))) {
+		}  else if (tfRua.getText().equals("") || (!tfRua.getText().matches("^(/w|/W|[^<>+?$%{}&])+$")) || tfRua.getText().length() > 200) {
 
 			Mensagens.erro("RUA ERRO", "Rua invalida", "Digite uma Rua");
 
@@ -285,7 +288,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 			return false;
 
-		} else if (tfBairro.getText().equals("")) {
+		} else if (tfBairro.getText().equals("") || tfBairro.getText().length() > 150) {
 
 			Mensagens.erro("BAIRRO ERRO", "Bairro invalida", "Digite um Bairro");
 
@@ -293,7 +296,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 		}else 
 			
-			if (tfCidade.getText().equals("")) {
+			if (tfCidade.getText().equals("") || tfCidade.getText().length() > 150) {
 
 			Mensagens.erro("CIDADE ERRO", "Cidade invalida", "Digite uma Cidade");
 
@@ -309,19 +312,19 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 		}else 
 			
-			if (tfComplemento.getText().equals("")) {
+			if (tfComplemento.getText().equals("") || tfComplemento.getText().length() > 100) {
 
 			Mensagens.erro("COMPLEMENTO ERRO", "Complemento invalido", "Digite um Complemento");
 
 			return false;
 
-		}else if (tfCep.getText().equals("") || tfCep.getText().length() != 8 || (!tfCep.getText().matches("\\d+"))) {
+		}else if (tfCep.getText().equals("") || tfCep.getText().replaceAll("[-]", "").length() != 8) {
 
 			Mensagens.erro("CEP ERRO", "CEP invalido", "Digite um CEP");
 
 			return false;
 
-		} else if (tfEmail.getText().equals("") || (!tfEmail.getText().matches("^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+(?:[a-zA-Z]{2}|aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel)$"))) {
+		} else if (tfEmail.getText().equals("") || tfEmail.getText().length() > 100 || (!tfEmail.getText().matches("^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+(?:[a-zA-Z]{2}|aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel)$"))) {
 
 			Mensagens.erro("EMAIL ERRO", "Email invalido", "Digite um Email");
 
