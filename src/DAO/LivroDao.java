@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import connection.Conexao;
 import entity.Livro;
@@ -21,16 +22,35 @@ public class LivroDao {
 		c = con.getConnection();
 	}
 
-	public void insereLivro(Livro livro) throws SQLException {
+public int insereLivro(Livro livro) throws SQLException {
+		
+		int id = -1;
 
-		String sql = "INSERT INTO LIVRO VALUES ( ?, ?)";
+		String sql = "INSERT INTO LIVRO VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-		PreparedStatement ps = c.prepareStatement(sql);
-		ps.setInt(1, livro.getIdLivro());
+		PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		ps.setString(1, livro.getTitulo());
+		ps.setString(2, livro.getIsbn());
+		ps.setString(3, livro.getGenero());
+		ps.setString(4, livro.getEdicao());
+		ps.setString(5, livro.getAno());
+		ps.setInt(6, livro.getPrecoAtual());
+		ps.setInt(7, livro.getQtsEstoque());
+		ps.setString(8, livro.getIdioma());
+		ps.setString(9, livro.getDescricao());
 
+		ResultSet rs = ps.getGeneratedKeys();
+
+		if (rs.next()) {
+			id = rs.getInt(1);
+		}
+
+		
 		ps.executeUpdate();
 
 		ps.close();
+		
+		return id;
 
 	}
 

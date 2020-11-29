@@ -20,6 +20,25 @@ public class ControleLivro {
 
 			ld.insereLivro(l);
 			ad.insereAutor(a);
+			
+			try {
+				ld.insereLivro(l);
+			} catch (Exception e1) {
+
+				// TODO: handle exception
+				e1.printStackTrace();
+				System.out.println("1");
+			}
+
+
+			try {
+				ad.insereAutor(a);
+			} catch (Exception e1) {
+				// TODO: handle exception
+				e1.printStackTrace();
+				System.out.println("2");
+			}
+
 	
 	}
 
