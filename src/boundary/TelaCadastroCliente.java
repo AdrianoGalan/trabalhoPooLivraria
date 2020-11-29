@@ -217,7 +217,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		t.setNumero(telefone.substring(2,telefone.length()));
 
 		c.setNome(tfNome.getText());
-		c.setCpf(tfCpf.getText());
+		c.setCpf(tfCpf.getText().replaceAll("[.-]", ""));
 		c.setEmail(tfEmail.getText());
 		c.setDataCadastro(dataAtual);
 		
