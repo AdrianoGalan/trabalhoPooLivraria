@@ -41,13 +41,13 @@ public class LivroDao {
 		ObservableList<ModelTabelaLivro> lista = FXCollections.observableArrayList();
 		StringBuilder sql = new StringBuilder();
 		sql.append(
-				"SELECT p.VALOR AS PRECO , l.TITULO, a.NOME AS AUTOR , l.ISBN,l.GENERO, l.EDICAO, l.ANO,l.QTS_ESTOQUE,l.IDIOMA, l.DESCRICAO ");
+				"SELECT l.PRECO_ATUAL AS PRECO , l.TITULO, a.NOME AS AUTOR , l.ISBN,l.GENERO, l.EDICAO, l.ANO,l.QTS_ESTOQUE,l.IDIOMA, l.DESCRICAO ");
 		sql.append("FROM LIVRO l INNER JOIN LIVRO_AUTOR la ");
 		sql.append("ON l.ID_LIVRO = la.FK_LIVRO_LIVRO_AUTOR ");
 		sql.append("INNER JOIN AUTOR a ");
 		sql.append("ON a.ID_AUTOR = la.FK_AUTOR_LIVRO_AUTOR ");
-		sql.append("INNER JOIN PRECO p ");
-		sql.append("ON p.FK_LIVRO_PRECO = l.ID_LIVRO ");
+		//sql.append("INNER JOIN PRECO p ");
+		//sql.append("ON p.FK_LIVRO_PRECO = l.ID_LIVRO ");
 
 		if (meio == 0) {
 			sql.append("WHERE l.TITULO LIKE  ?");
@@ -143,6 +143,17 @@ public class LivroDao {
 
 		return u;
 
+		
+	}
+	
+	public void alteraPrecoLivro(Double preco, int ISBN) throws SQLException {
+		String sql = "update LIVRO set Preco_Atual = ? where ISBN = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setDouble(1, preco);
+		ps.setInt(2, ISBN);
+
+		ps.execute();
+		ps.close();
 		
 	}
 	
