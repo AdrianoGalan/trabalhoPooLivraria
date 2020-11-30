@@ -74,6 +74,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 			if(verificaDuplicata()) {
 				addCliente();
+				limpaCampos();
 			}
 
 		}
@@ -268,7 +269,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
+		Mensagens.informacao("Cliente cadastrado", "O cliente foi cadastrado com sucesso", "");
 	}
 	
 	private boolean verificaDuplicata() {

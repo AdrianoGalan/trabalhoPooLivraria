@@ -53,6 +53,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private ControleTelas telaInicial = new TelaInicial();
 	private ControleTelas telaCadastroCliente = new TelaCadastroCliente();
 	private ControleTelas telaCadastroLivro = new TelaCadastroLivro();
+	private ControleTelas telaCadastroAutor = new TelaCadastroAutor();
 	private ControleTelas telaCadastroFuncionario = new TelaCadastroFuncionario();
 	private ControleTelas telaPesquisaCliente = new TelaPesquisaCliente();
 	private ControleTelas telaPesquisaLivro = new TelaPesquisaLivro();
@@ -114,7 +115,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		telaCadastroCliente.setGerenciadorPrincipal(this);
 		telaCadastroLivro.setGerenciadorPrincipal(this);
 		telaCadastroFuncionario.setGerenciadorPrincipal(this);
-
+		telaCadastroAutor.setGerenciadorPrincipal(this);
 		telaPesquisaCliente.setGerenciadorPrincipal(this);
 		telaPesquisaLivro.setGerenciadorPrincipal(this);
 		telaPesquisaFuncionario.setGerenciadorPrincipal(this);
@@ -254,6 +255,8 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 			this.painelPrincipal.setCenter(telaControleUsuario.render());
 		} else if(e.getTarget() == menuPesquisaFuncionario) {
 			this.painelPrincipal.setCenter(telaPesquisaFuncionario.render());
+		} else if(e.getTarget() == menuCadastrarAutor) {
+			this.painelPrincipal.setCenter(telaCadastroAutor.render());
 		} else if (e.getTarget() == menuInicioSair) {
 			comando("sair");
 		}

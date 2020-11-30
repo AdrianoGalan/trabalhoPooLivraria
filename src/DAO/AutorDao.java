@@ -2,10 +2,13 @@ package DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import connection.Conexao;
 import entity.Autor;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class AutorDao {
 	private Connection c;
@@ -33,6 +36,23 @@ public class AutorDao {
 		ps.close();
 		
 		
+	}
+	
+	public ObservableList<Autor> listarAutores() throws SQLException{
+		ObservableList<Autor> lista = FXCollections.observableArrayList();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * from AUTOR");
+		PreparedStatement ps = c.prepareStatement(sql.toString());
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			Autor a = new Autor();
+			a.setIdAutor(rs.getInt("ID_AUTOR"));
+			a.setNome(rs.getString("NOME"));
+			a.setNacionalidade(rs.getString("NACIONALIDADE"));
+			lista.add(a);
+		}
+		
+		return lista;
 	}
 
 }

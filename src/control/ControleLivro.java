@@ -66,6 +66,11 @@ public class ControleLivro {
 		ld.atualizaEstoque(idLivro, qtsEstoque);
 		
 	}
+	
+	public ObservableList<Autor> listarAutores() throws ClassNotFoundException, SQLException{
+		AutorDao ld = new AutorDao();
+		return ld.listarAutores();
+	}
 
 	public ObservableList<ModelTabelaLivro> getLista() {
 		return lista;

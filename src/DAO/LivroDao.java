@@ -157,6 +157,8 @@ public int insereLivro(Livro livro) throws SQLException {
 
 		return lista;
 	}
+	
+
 
 	public boolean verificaDuplicIsbn(String isbn) throws SQLException {
 		

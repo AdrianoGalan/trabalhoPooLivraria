@@ -11,6 +11,8 @@ import control.ControleTelas;
 import control.GetenciadorPrincipal;
 import entity.Autor;
 import entity.Livro;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -36,7 +38,8 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 	private TextField tfDescricao;
 	private TextField tfQtd;
 	private TextField tfPreco;
-
+	private ObservableList<Autor> listaAutores;
+	private ControleLivro control = new ControleLivro();
 	private ComboBox<String> cbAutor;
 	private ComboBox<String> cbIdioma;
 	private ComboBox<String> cbGenero;
@@ -48,9 +51,8 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 
 			if (verificaDuplicata()) {
-
 				addLivro();
-
+				limpaCampos();
 			}
 
 		}
@@ -88,7 +90,8 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 			// TODO: handle exception
 			e1.printStackTrace();
 		}
-
+		
+		Mensagens.informacao("Livro cadastrado", "O livro foi cadastrado com sucesso", "");
 	}
 
 	private boolean verificaDuplicata() {
@@ -170,6 +173,16 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		}
 
 	}
+	
+	private void limpaCampos() {
+		tfTitulo.setText("");
+		tfIsbn.setText("");
+		tfEdicao.setText("");
+		tfAno.setText("");
+		tfDescricao.setText("");
+		tfQtd.setText("");
+		tfPreco.setText("");
+	}
 
 	private boolean validaData() {
 		try {
@@ -221,7 +234,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 		vbEs.getChildren().add(new Label("Titulo:"));
 		vbEs.getChildren().add(new Label("ISBN:"));
-//		vbEs.getChildren().add(new Label("Autor:"));
+		vbEs.getChildren().add(new Label("Autor:"));
 		vbEs.getChildren().add(new Label("Edicao:"));
 		vbEs.getChildren().add(new Label("Ano:"));
 		vbEs.getChildren().add(new Label("Genero:"));
@@ -243,9 +256,13 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		tfPreco = new TextField();
 
 	
-		  cbAutor = new ComboBox<String>(); cbAutor.getItems().addAll("Nome: ",
-		  "Nacionalidade: "); cbAutor.setPrefWidth(80);
-		  cbAutor.getSelectionModel().select(0);
+		cbAutor = new ComboBox<String>();
+		try {
+			listaAutores = control.listarAutores();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		cbAutor.setItems(criarListaStringAutores(listaAutores));
 		 
 
 		cbGenero = new ComboBox<String>();
@@ -260,7 +277,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 		vbDi.getChildren().add(tfTitulo);
 		vbDi.getChildren().add(tfIsbn);
-//		vbDi.getChildren().add(cbAutor);
+		vbDi.getChildren().add(cbAutor);
 		vbDi.getChildren().add(tfEdicao);
 		vbDi.getChildren().add(tfAno);
 		vbDi.getChildren().add(cbGenero);
@@ -279,6 +296,16 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	//Cria uma ObservableList<String> a partir de uma lista de autores
+	private ObservableList<String> criarListaStringAutores(ObservableList<Autor> autores){
+		ObservableList<String> listaNomes = FXCollections.observableArrayList();
+		for(Autor a:autores) {
+			listaNomes.add(a.getNome());
+		}
+		
+		return listaNomes;
 	}
 
 	/*
