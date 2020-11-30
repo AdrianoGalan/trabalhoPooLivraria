@@ -1,5 +1,12 @@
 package tabelaModel;
 
+/**
+ * Classe tabela livro
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
+
 public class ModelTabelaLivro {
 
 	private int idLivro;
@@ -102,6 +109,10 @@ public class ModelTabelaLivro {
 		this.descricao = descricao;
 	}
 
+	/**
+	 * Método toString
+	 */
+	
 	@Override
 	public String toString() {
 		return "ModelTabelaLivro [preco=" + preco + ", titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn

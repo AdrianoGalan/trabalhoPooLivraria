@@ -1,5 +1,12 @@
 package tabelaModel;
 
+/**
+ * Classe ModelItensVenda - tabela venda 
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
+
 public class ModelItensVenda {
 
 	private int idLivro;
