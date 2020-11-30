@@ -22,13 +22,25 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 	private Button btCancelar;
 	private TextField tfNome;
 	private TextField tfNa;
-	private TextField tfDtnasc;
+	private ControleAutor control = new ControleAutor();
 
 	@Override
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btOk && verificaCampos()) {
-
-			addAutor();
+			
+			try {
+				
+				if(!control.verificaDuplicata(tfNome.getText())) {
+					addAutor();
+					limpaCampos();
+				}else {
+					Mensagens.erro("Erro nome autor", "Por favor insira um nome diferente", "Nome de autor já cadastrado");
+				}
+				
+			} catch (ClassNotFoundException | SQLException e1) {
+				e1.printStackTrace();
+			}
+			
 
 		}
 		if (e.getTarget() == btCancelar) {
@@ -44,7 +56,7 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 
 		a.setNome(tfNome.getText());
 		a.setNacionalidade(tfNa.getText());
-
+		
 
 		try {
 			aa.addAutor(a);
@@ -70,9 +82,11 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 
 			return false;
 
+		}else {
+			return true;
 		}
 
-		return true;
+		
 	}
 
 	@Override
@@ -101,18 +115,15 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 
 		vbEs.getChildren().add(new Label("Nome:"));
 		vbEs.getChildren().add(new Label("Nacionalidade:"));
-		vbEs.getChildren().add(new Label("Data de nascimento:"));
 
 		vbEs.getChildren().add(hbBotao);
 
-		TextField tfNome = new TextField();
+		tfNome = new TextField();
 		tfNome.setPrefWidth(330);
 		tfNa = new TextField();
-		tfDtnasc = new TextField();
 
 		vbDi.getChildren().add(tfNome);
 		vbDi.getChildren().add(tfNa);
-		vbDi.getChildren().add(tfDtnasc);
 
 		painel.getChildren().add(vbEs);
 		painel.getChildren().add(vbDi);
@@ -120,6 +131,11 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 		return painel;
 	}
 
+	
+	private void limpaCampos() {
+		tfNome.setText("");
+		tfNa.setText("");
+	}
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub

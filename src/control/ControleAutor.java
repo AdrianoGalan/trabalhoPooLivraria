@@ -17,4 +17,9 @@ public class ControleAutor {
 				System.out.println("1");
 			} 
 		}
+		
+		public boolean verificaDuplicata(String nome) throws SQLException, ClassNotFoundException {
+			AutorDao ad = new AutorDao();
+			return ad.verificaDuplicNome(nome);
+		}
 }
