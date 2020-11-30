@@ -30,8 +30,9 @@ public class ControleRelatorio {
 	}
 
 	/**
+	 * Método que busca os livros menos vendidos chamando o método livroMenosVendido() da classe Dao. 
 	 * 
-	 * @return
+	 * @return rd.livroMenosVendido()
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
@@ -43,6 +44,13 @@ public class ControleRelatorio {
 
 	}
 
+	/**
+	 * Método que busca livros com estoque menor que 5 chamando o método livroEstoqueBaixo() da classe Dao.
+	 * 
+	 * @return rd.livroEstoqueBaixo()
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public ObservableList<ModelTabelaLivro> livroEstoqueBaixo() throws ClassNotFoundException, SQLException {
 
 		RelatorioDao rd = new RelatorioDao();
@@ -50,6 +58,13 @@ public class ControleRelatorio {
 		return rd.livroEstoqueBaixo();
 	}
 
+	/**
+	 * Método que busca a data dos ultimos livros vendidos chamando o método dataVenda() da classe Dao.
+	 * 
+	 * @return rd.dataVenda()
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public ObservableList<ModelTabelaLivro> dataVenda() throws ClassNotFoundException, SQLException {
 
 		RelatorioDao rd = new RelatorioDao();
@@ -57,6 +72,13 @@ public class ControleRelatorio {
 		return rd.dataVenda();
 	}
 
+	/**
+	 * Método que mostra o melhor dia da semana para vendas chamando o método melhorDiaSemana() da classe Dao.
+	 * 
+	 * @return rd.melhorDiaSemana()
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public int melhorDiaSemana() throws ClassNotFoundException, SQLException {
 
 		RelatorioDao rd = new RelatorioDao();
