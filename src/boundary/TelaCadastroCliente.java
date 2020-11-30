@@ -314,7 +314,8 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		tfComplemento.setText(e.getComplemento());
 		tfCep.setText(e.getCep());
 		tfEmail.setText(c.getEmail());
-		tfDtnasc.setText(c.getDataNascimento().toString());
+		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+		tfDtnasc.setText(formatador.format(c.getDataNascimento()));
 		tfEstado.setText(e.getEstado());
 		cbTipoTelefone.setValue(t.getTipo());
 		
@@ -338,7 +339,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		c.setEmail(tfEmail.getText());
 
 		try {
-			SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 			Date data = formato.parse(tfDtnasc.getText().replaceAll("-", "/"));
 			c.setDataNascimento(data);
 		} catch (ParseException e2) {

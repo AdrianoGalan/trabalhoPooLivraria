@@ -67,7 +67,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 		if (ev.getTarget() == btOk && verificaCampos()) {
 			if (verificaDuplicata()) {
-				addCliente();
+				addFuncio();
 				limpaCampos();
 				Mensagens.informacao("Funcionario cadastrado", "O funcionario foi cadastrado com sucesso", "");
 			}
@@ -75,7 +75,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		} else if (ev.getSource() == btAlterar) {
 			DadosParaEntidades();
 			try {
-				SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+				SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 				Date data = formato.parse(tfDtnasc.getText().replaceAll("-", "/"));
 				f.setDataNascimento(data);
 				data = formato.parse(tfDataAdmicao.getText().replaceAll("-", "/"));
@@ -212,7 +212,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 	}
 
-	private void addCliente() {
+	private void addFuncio() {
 		f = new Funcionario();
 		t = new Telefone();
 		e = new Endereco();
@@ -388,7 +388,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
 		tfNome.setText(f.getNome());
 		tfTelefone.setText(t.getDdd() + t.getNumero());
 		tfCpf.setText(f.getCpf());
@@ -399,9 +399,9 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		tfComplemento.setText(e.getComplemento());
 		tfCep.setText(e.getCep());
 		tfEmail.setText(f.getEmail());
-		tfDtnasc.setText(f.getDataNascimento().toString());
+		tfDtnasc.setText(formatador.format(f.getDataNascimento()));
 		tfNumMatricula.setText(f.getMatricula());
-		tfDataAdmicao.setText(f.getDataAdmissao().toString());
+		tfDataAdmicao.setText(formatador.format(f.getDataAdmissao()));
 		cbTipoTelefone.setValue(t.getTipo());
 		cbCargo.setValue(f.getCargo());
 

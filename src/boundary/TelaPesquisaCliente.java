@@ -115,13 +115,6 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 			@Override
 			public void handle(javafx.scene.input.KeyEvent event) {
 
-					try {
-						controle.buscaClientesNome(tfPesquisa.getText());
-					} catch (ClassNotFoundException e) {
-						e.printStackTrace();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
 					carregarTabela();
 		
 			}
