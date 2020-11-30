@@ -12,9 +12,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
+
 
 public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 
+	
 	@Override
 	public void handle(ActionEvent event) {
 		// TODO Auto-generated method stub
@@ -25,20 +28,24 @@ public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 	public Pane render() {
 		Pane painel = new Pane();
 
-		Label lblUser = new Label("Integrantes do Grupo: ");
-		lblUser.relocate(750, 15);
+		Label lblGrupo = new Label("Integrantes do Grupo: ");
+		lblGrupo.relocate(750, 15);
+		lblGrupo.setFont(new Font("Chilanka", 20));
 		
 		Label lblAdriano = new Label("Adriano Galan RA: ....");
 		lblAdriano.relocate(750, 75);
+		lblAdriano.setFont(new Font("Chilanka", 15));
 
 		Label lblGustavo = new Label("Gustavo Narciso RA: ...");
 		lblGustavo.relocate(750, 125);
+		lblGustavo.setFont(new Font("Chilanka", 15));
 
 		Label lblRoberto = new Label("Roberto Mitsunari RA: ...");
 		lblRoberto.relocate(750, 175);
+		lblRoberto.setFont(new Font("Chilanka", 15));
 
 
-		painel.getChildren().addAll(lblUser, lblAdriano, lblGustavo, lblRoberto);
+		painel.getChildren().addAll(lblGrupo, lblAdriano, lblGustavo, lblRoberto);
 
 		
 		InputStream is = getClass().getResourceAsStream("/images/Dino.jpg");
@@ -48,6 +55,8 @@ public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 		Canvas canvas = new Canvas(imgSpace.getWidth(), imgSpace.getHeight());
 		GraphicsContext ctx = canvas.getGraphicsContext2D();
 		
+	
+		
 		new AnimationTimer() {
 
 			@Override
@@ -55,9 +64,8 @@ public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 				
 				ctx.drawImage(imgSpace, 0, 0);
 				
-			} 
 			
-		}.start();
+		}}.start();
 		
 		
 		painel.getChildren().add(canvas); 
