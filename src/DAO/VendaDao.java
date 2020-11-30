@@ -12,10 +12,23 @@ import entity.Preco;
 import javafx.collections.ObservableList;
 import tabelaModel.ModelItensVenda;
 
+/**
+ * Classe Dao da Venda
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class VendaDao {
 	
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public VendaDao() throws ClassNotFoundException, SQLException {
 		
 		Conexao con = new Conexao();
@@ -23,6 +36,12 @@ public class VendaDao {
 		c = con.getConnection();
 	}
 	
+	/**
+	 * Método que insere dados na tabela venda do Banco de dados.
+	 * @param idCliente
+	 * @return id
+	 * @throws SQLException
+	 */
 	public int inserirVenda(int idCliente) throws SQLException {
 		
 		int id = -1;

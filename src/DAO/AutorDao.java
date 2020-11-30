@@ -10,9 +10,22 @@ import entity.Autor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Classe Dao do Autor
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class AutorDao {
+	
+	/** Conexao c. */
 	private Connection c;
 	
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public AutorDao() throws ClassNotFoundException, SQLException {
 
 		Conexao con = new Conexao();
@@ -20,6 +33,11 @@ public class AutorDao {
 	}
 
 
+	/**
+	 * Método que insere os dados do autor no Banco de dados.
+	 * @param autor
+	 * @throws SQLException
+	 */
 	public void insereAutor(Autor autor) throws SQLException {
 		
 		String sql = "INSERT INTO AUTOR VALUES (?,?)";
@@ -37,6 +55,11 @@ public class AutorDao {
 		
 	}
 	
+	/**
+	 * Método que altera (atualiza) os dados do autor no Banco de Dados.
+	 * @param a
+	 * @throws SQLException
+	 */
 	public void alteraAutor(Autor a) throws SQLException {
 		String sql = "UPDATE AUTOR SET NOME = ?, NACIONALIDADE = ? where ID_AUTOR = ? ";
 		
@@ -52,6 +75,12 @@ public class AutorDao {
 		ps.close();
 	}
 	
+	/**
+	 *Método que lista os autores inseridos no Banco de dados.
+	 * 
+	 * @return lista de autores
+	 * @throws SQLException
+	 */
 	public ObservableList<Autor> listarAutores() throws SQLException{
 		ObservableList<Autor> lista = FXCollections.observableArrayList();
 		StringBuilder sql = new StringBuilder();
@@ -69,6 +98,13 @@ public class AutorDao {
 		return lista;
 	}
 	
+	/**
+	 * Método que verifica se tem um nome duplicado no Banco de dados.
+	 * 
+	 * @param Nome
+	 * @return true or false
+	 * @throws SQLException
+	 */
 	public boolean verificaDuplicNome(String Nome) throws SQLException {
 		boolean u = false;
 		String sql = "select NOME from AUTOR where NOME = ?";
@@ -89,6 +125,13 @@ public class AutorDao {
 		return u;
 	}
 	
+	/**
+	 * Método que faz a busca(pesquisa) dos autores que foram inseridos no Banco de dados. 
+	 * 
+	 * @param nome
+	 * @return lista
+	 * @throws SQLException
+	 */
 	public ObservableList<Autor> pesquisarAutores(String nome) throws SQLException{
 		ObservableList<Autor> lista = FXCollections.observableArrayList();
 		StringBuilder sql = new StringBuilder();

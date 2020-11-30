@@ -13,18 +13,37 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tabelaModel.ModelTabelaLivro;
 
+/**
+ * Classe Dao do Livro
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class LivroDao {
 
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public LivroDao() throws ClassNotFoundException, SQLException {
 
 		Conexao con = new Conexao();
 		c = con.getConnection();
 	}
 
-public int insereLivro(Livro livro) throws SQLException {
-		
+	/**
+	 * Método que insere dados do livro na tabela LIVRO do Banco de dados.
+	 * @param livro
+	 * @return id
+	 * @throws SQLException
+	 */
+	public int insereLivro(Livro livro) throws SQLException {
+
 		int id = -1;
 		String sql = "INSERT INTO LIVRO VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -39,22 +58,29 @@ public int insereLivro(Livro livro) throws SQLException {
 		ps.setString(8, livro.getIdioma());
 		ps.setString(9, livro.getDescricao());
 		ps.executeUpdate();
-		
+
 		ResultSet rs = ps.getGeneratedKeys();
 
 		if (rs.next()) {
 			id = rs.getInt(1);
 		}
-		
 
 		ps.close();
-		
+
 		return id;
 
 	}
 
-	public int insereLivroAutor(int idLivro,int idAutor) throws SQLException {
-		
+	/**
+	 * Método que insere as fk na tabela associativa LIVRO_AUTOR do Banco de dados.
+	 * 
+	 * @param idLivro
+	 * @param idAutor
+	 * @return id
+	 * @throws SQLException
+	 */
+	public int insereLivroAutor(int idLivro, int idAutor) throws SQLException {
+
 		int id = -1;
 		String sql = "insert into LIVRO_AUTOR values(?,?)";
 		PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -62,24 +88,33 @@ public int insereLivro(Livro livro) throws SQLException {
 		ps.setInt(2, idAutor);
 		ResultSet rs = ps.getGeneratedKeys();
 		ps.executeUpdate();
-		
+
 		if (rs.next()) {
 			id = rs.getInt(1);
 		}
 
 		ps.close();
-		
+
 		return id;
-		
+
 	}
 
+	/**
+	 * Método que faz a busca(pesquisa) de livro. 
+	 * 
+	 * @param texto
+	 * @param meio
+	 * @return lista
+	 * @throws SQLException
+	 */
 	public ObservableList<ModelTabelaLivro> buscaLivro(String texto, int meio) throws SQLException {
 
 		ModelTabelaLivro l;
 
 		ObservableList<ModelTabelaLivro> lista = FXCollections.observableArrayList();
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT l.ID_LIVRO, p.VALOR AS PRECO , l.TITULO, a.NOME AS AUTOR , l.ISBN,l.GENERO, l.EDICAO, l.ANO,l.QTS_ESTOQUE,l.IDIOMA, l.DESCRICAO ");
+		sql.append(
+				"SELECT l.ID_LIVRO, p.VALOR AS PRECO , l.TITULO, a.NOME AS AUTOR , l.ISBN,l.GENERO, l.EDICAO, l.ANO,l.QTS_ESTOQUE,l.IDIOMA, l.DESCRICAO ");
 		sql.append("FROM LIVRO l INNER JOIN LIVRO_AUTOR la ");
 		sql.append("ON l.ID_LIVRO = la.FK_LIVRO_LIVRO_AUTOR ");
 		sql.append("INNER JOIN AUTOR a ");
@@ -122,6 +157,13 @@ public int insereLivro(Livro livro) throws SQLException {
 		return lista;
 	}
 
+	/**
+	 * Método que altera(atualiza) a quantidade de livros no estoque
+	 * 
+	 * @param idLivro
+	 * @param qtsEstoque
+	 * @throws SQLException
+	 */
 	public void atualizaEstoque(int idLivro, int qtsEstoque) throws SQLException {
 
 		StringBuilder sql = new StringBuilder();
@@ -139,6 +181,13 @@ public int insereLivro(Livro livro) throws SQLException {
 
 	}
 
+	/**
+	 * Método que faz a busca(pesquisa) de livro por titulo.
+	 * 
+	 * @param titulo
+	 * @return lista
+	 * @throws SQLException
+	 */
 	public ObservableList<Livro> buscaLivroTitulo(String titulo) throws SQLException {
 
 		Livro l;
@@ -175,11 +224,16 @@ public int insereLivro(Livro livro) throws SQLException {
 
 		return lista;
 	}
-	
 
-
+	/**
+	 * Método que verifica se o isbn digitado já esta no Banco de dados. Evitando entrada de dados duplicados.
+	 * 
+	 * @param isbn
+	 * @return true or false
+	 * @throws SQLException
+	 */
 	public boolean verificaDuplicIsbn(String isbn) throws SQLException {
-		
+
 		boolean u = false;
 		String sql = "select ISBN from LIVRO where ISBN = ?";
 		PreparedStatement ps = c.prepareStatement(sql);
@@ -200,6 +254,12 @@ public int insereLivro(Livro livro) throws SQLException {
 
 	}
 
+	/**
+	 * Método que altera(atualiza) preço do livro 
+	 * 
+	 * @param p
+	 * @throws SQLException
+	 */
 	public void alteraPrecoLivro(Preco p) throws SQLException {
 		String sql = "update LIVRO set Preco_Atual = ? where ID_LIVRO = ?";
 		PreparedStatement ps = c.prepareStatement(sql);

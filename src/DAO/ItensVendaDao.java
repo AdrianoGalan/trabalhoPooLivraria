@@ -9,16 +9,36 @@ import entity.Livro;
 import javafx.collections.ObservableList;
 import tabelaModel.ModelItensVenda;
 
+/**
+ * Classe Dao de itens venda
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class ItensVendaDao {
 
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public ItensVendaDao() throws ClassNotFoundException, SQLException {
 
 		Conexao con = new Conexao();
 		c = con.getConnection();
 	}
 
+	/**
+	 * Método insere um livro na tabela ITENS_VENDA do Banco de dados
+	 * 
+	 * @param idVenda
+	 * @param itensVenda
+	 * @throws SQLException
+	 */
 	public void insereLivro(int idVenda, ObservableList<ModelItensVenda> itensVenda) throws SQLException {
 
 		String sql = "INSERT INTO ITENS_VENDA VALUES (" + idVenda + ", ?)";

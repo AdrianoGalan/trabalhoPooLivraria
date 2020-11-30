@@ -9,10 +9,23 @@ import java.sql.Statement;
 import connection.Conexao;
 import entity.Preco;
 
+/**
+ * Classe Dao do Preço
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class PrecoDao {
 
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public PrecoDao() throws ClassNotFoundException, SQLException {
 		
 		Conexao con = new Conexao();
@@ -20,6 +33,13 @@ public class PrecoDao {
 		c = con.getConnection();
 	}
 	
+	/**
+	 * Método que insere dados na tabela PRECO no Banco de dados.
+	 * 
+	 * @param p
+	 * @return id do preco
+	 * @throws SQLException
+	 */
 	public int inserirPreco(Preco p) throws SQLException {
 	
 		int id = -1;
@@ -44,6 +64,13 @@ public class PrecoDao {
 		
 	}
 	
+	/**
+	 * Método que busca preco pelo id.
+	 * 
+	 * @param id
+	 * @return preco
+	 * @throws SQLException
+	 */
 	public Preco buscaPrecoId(int id) throws SQLException {
 		
 		Preco p = new Preco();

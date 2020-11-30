@@ -9,16 +9,35 @@ import java.sql.SQLException;
 import connection.Conexao;
 import entity.Telefone;
 
+/**
+ * Classe Dao do Telefone
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelefoneDao {
 
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public TelefoneDao() throws ClassNotFoundException, SQLException {
 		Conexao con = new Conexao();
 
 		c = con.getConnection();
 	}
 
+	/**
+	 * Método que insere dados na tabela TELEFONE do banco de dados.
+	 * 
+	 * @param t
+	 * @throws SQLException
+	 */
 	public void insereTelefone(Telefone t) throws SQLException {
 
 
@@ -36,6 +55,13 @@ public class TelefoneDao {
 
 	}
 	
+	/**
+	 * Método que faz busca(pesquisa) de telefone de uma pessoa atraves do id.
+	 * 
+	 * @param idPessoa
+	 * @return telefone
+	 * @throws SQLException
+	 */
 	public Telefone buscaTelefone(int idPessoa) throws SQLException {
 		Telefone t = new Telefone();
 		String sql = "select * from TELEFONE where FK_PESSOA_TELEFONE = ?";
@@ -51,6 +77,12 @@ public class TelefoneDao {
 		return t;
 	}
 	
+	/**
+	 * Método que altera(atualiza) telefone de uma pessoa.
+	 * @param idPessoa
+	 * @param telefone
+	 * @throws SQLException
+	 */
 	public void atualizaTelefone(int idPessoa,Telefone t) throws SQLException {
 		String sql = "update TELEFONE set TIPO = ?,DDD = ?, TELEFONE = ? WHERE FK_PESSOA_TELEFONE = ?";
 		PreparedStatement ps = c.prepareStatement(sql);

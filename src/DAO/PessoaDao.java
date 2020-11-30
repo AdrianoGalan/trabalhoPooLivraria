@@ -9,17 +9,36 @@ import java.sql.Statement;
 import connection.Conexao;
 import entity.Pessoa;
 
-
+/**
+ * Classe Dao de Pessoa
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class PessoaDao {
 	
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public PessoaDao() throws ClassNotFoundException, SQLException {
 		Conexao con = new Conexao();
 
 		c = con.getConnection();
 	}
 
+	/**
+	 * Método que insere dados na tabela PESSOA do Banco de dados.
+	 * 
+	 * @param p
+	 * @return id de pessoa
+	 * @throws SQLException
+	 */
 	public int inserePessoa(Pessoa p) throws SQLException {
 		
 		   
@@ -49,6 +68,13 @@ public class PessoaDao {
 		return id;
 	}
 	
+	/**
+	 * Método que busca(pesquisa) pessoa por cpf.
+	 * 
+	 * @param CPF
+	 * @return id de pessoa
+	 * @throws SQLException
+	 */
 	public int buscaPessoa(String CPF) throws SQLException {
 		int id = -1;
 		String sql = "select ID_PESSOA,CPF from Pessoa where CPF = ?";
@@ -65,6 +91,12 @@ public class PessoaDao {
 		return id;
 	}
 	
+	/**
+	 * Método que altera(atualiza) pessoa
+	 * 
+	 * @param p
+	 * @throws SQLException
+	 */
 	public void atualizaPessoa(Pessoa p) throws SQLException {
 		
 
@@ -81,6 +113,13 @@ public class PessoaDao {
 		
 	}
 
+	/**
+	 * Método que verifica se o cpf digitado já está registrado no banco. Evita cpf duplicado.
+	 * 
+	 * @param CPF
+	 * @return true or false
+	 * @throws SQLException
+	 */
 	public boolean verificaDuplicCpf(String CPF) throws SQLException {
 		boolean u = false;
 		String sql = "select CPF from Pessoa where CPF = ?";
@@ -101,6 +140,13 @@ public class PessoaDao {
 		return u;
 	}
 	
+	/**
+	 * Método que verifica se o email digitado já está registrado no Banco. Evita email duplicado.
+	 * 
+	 * @param Email
+	 * @return true or false
+	 * @throws SQLException
+	 */
 	public boolean verificaDuplicEmail(String Email) throws SQLException {
 		boolean u = false;
 		String sql = "select EMAIL from Pessoa where EMAIL = ?";

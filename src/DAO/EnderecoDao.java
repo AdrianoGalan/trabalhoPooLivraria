@@ -1,3 +1,4 @@
+
 package DAO;
 
 import java.sql.Connection;
@@ -9,16 +10,34 @@ import java.sql.Statement;
 import connection.Conexao;
 import entity.Endereco;
 
+/**
+ * Classe Dao do Endereço
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class EnderecoDao {
 
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public EnderecoDao() throws ClassNotFoundException, SQLException {
 		Conexao con = new Conexao();
 
 		c = con.getConnection();
 	}
 
+	/**
+	 * Método que insere dados do endereço na tabela ENDERECO do Banco de dados.
+	 * @param e
+	 * @return id
+	 * @throws SQLException
+	 */
 	public int insereEndereco(Endereco e) throws SQLException {
 
 		int id = -1;
@@ -48,6 +67,13 @@ public class EnderecoDao {
 
 	}
 
+	/**
+	 * Método que busca endereço da tabela ENDERECO do banco de dados.
+	 * 
+	 * @param FkEndereco
+	 * @return endereço
+	 * @throws SQLException
+	 */
 	public Endereco buscaEndereco(int FkEndereco) throws SQLException {
 		Endereco e = new Endereco();
 		String sql = "select * from ENDERECO where ID_ENDERECO = ?";
@@ -67,6 +93,12 @@ public class EnderecoDao {
 		return e;
 	}
 
+	/**
+	 * Método que altera(atualiza) endereco
+	 * 
+	 * @param e
+	 * @throws SQLException
+	 */
 	public void alteraEndereco(Endereco e) throws SQLException {
 		String sql = "update ENDERECO set RUA = ?,NUMERO = ?,BAIRRO = ?, CIDADE = ?, ESTADO = ?, COMPLEMENTO = ?, CEP = ? "
 				+ "where ID_ENDERECO = ?";
