@@ -26,7 +26,6 @@ public class LivroDao {
 public int insereLivro(Livro livro) throws SQLException {
 		
 		int id = -1;
-
 		String sql = "INSERT INTO LIVRO VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -39,20 +38,39 @@ public int insereLivro(Livro livro) throws SQLException {
 		ps.setInt(7, livro.getQtsEstoque());
 		ps.setString(8, livro.getIdioma());
 		ps.setString(9, livro.getDescricao());
-
+		ps.executeUpdate();
+		
 		ResultSet rs = ps.getGeneratedKeys();
 
 		if (rs.next()) {
 			id = rs.getInt(1);
 		}
-
 		
-		ps.executeUpdate();
 
 		ps.close();
 		
 		return id;
 
+	}
+
+	public int insereLivroAutor(int idLivro,int idAutor) throws SQLException {
+		
+		int id = -1;
+		String sql = "insert into LIVRO_AUTOR values(?,?)";
+		PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		ps.setInt(1, idLivro);
+		ps.setInt(2, idAutor);
+		ResultSet rs = ps.getGeneratedKeys();
+		ps.executeUpdate();
+		
+		if (rs.next()) {
+			id = rs.getInt(1);
+		}
+
+		ps.close();
+		
+		return id;
+		
 	}
 
 	public ObservableList<ModelTabelaLivro> buscaLivro(String texto, int meio) throws SQLException {

@@ -14,30 +14,17 @@ public class ControleLivro {
 
 	private ObservableList<ModelTabelaLivro> lista;
 
-	public void addLivro(Livro l) throws ClassNotFoundException, SQLException {
+	public void addLivro(Livro l, int idAutor) throws ClassNotFoundException, SQLException {
 
 		LivroDao ld = new LivroDao();
-//		AutorDao ad = new AutorDao();
-			
-			try {
-				ld.insereLivro(l);
-			} catch (Exception e1) {
 
-				// TODO: handle exception
-				e1.printStackTrace();
-				System.out.println("1");
-			}
+		try {
+			int idlivro = ld.insereLivro(l);
+			ld.insereLivroAutor(idlivro, idAutor);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 
-
-			try {
-//				ad.insereAutor(a);
-			} catch (Exception e1) {
-				// TODO: handle exception
-				e1.printStackTrace();
-				System.out.println("2");
-			}
-
-	
 	}
 
 	public ObservableList<Livro> buscaClienteNome(String titulo) throws ClassNotFoundException, SQLException {
@@ -46,7 +33,7 @@ public class ControleLivro {
 		return ld.buscaLivroTitulo(titulo);
 
 	}
-	
+
 	public void alteraPrecoLivro(Preco p) throws ClassNotFoundException, SQLException {
 		LivroDao ld = new LivroDao();
 		ld.alteraPrecoLivro(p);
@@ -58,16 +45,16 @@ public class ControleLivro {
 		lista = livDao.buscaLivro(texto, meio);
 
 	}
-	
+
 	public void atualizaEstoque(int idLivro, int qtsEstoque) throws SQLException, ClassNotFoundException {
-		
+
 		LivroDao ld = new LivroDao();
-		
+
 		ld.atualizaEstoque(idLivro, qtsEstoque);
-		
+
 	}
-	
-	public ObservableList<Autor> listarAutores() throws ClassNotFoundException, SQLException{
+
+	public ObservableList<Autor> listarAutores() throws ClassNotFoundException, SQLException {
 		AutorDao ld = new AutorDao();
 		return ld.listarAutores();
 	}
@@ -75,7 +62,5 @@ public class ControleLivro {
 	public ObservableList<ModelTabelaLivro> getLista() {
 		return lista;
 	}
-	
-	
 
 }
