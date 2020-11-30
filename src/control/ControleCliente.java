@@ -91,9 +91,31 @@ public class ControleCliente {
 
 	}
 	
-	public void updateCliente (Cliente c, Endereco e, Telefone t) throws ClassNotFoundException, SQLException {
+	public void alterarCliente(Cliente c,Endereco e,Telefone t) throws ClassNotFoundException, SQLException {
+		
+		TelefoneDao td = new TelefoneDao();
+		PessoaDao pd = new PessoaDao();
+		EnderecoDao ed = new EnderecoDao();
+		
+		ed.alteraEndereco(e);
+		td.atualizaTelefone(c.getIdPessoa(), t);
+		pd.atualizaPessoa(c);
+		
 		
 	}
+	
+	public Telefone buscaTelefoneClient(int idPessoaFunc) throws ClassNotFoundException, SQLException {
+		TelefoneDao td = new TelefoneDao();
+		Telefone t = td.buscaTelefone(idPessoaFunc);
+		return t;
+	}
+	
+	public Endereco buscaEnderecoClient(int FKEndereco) throws ClassNotFoundException, SQLException {
+		EnderecoDao ed = new EnderecoDao();
+		Endereco e = ed.buscaEndereco(FKEndereco);
+		return e;
+	}
+	
 	
 	public void deleteCliente (Cliente c, Endereco e, Telefone t) throws ClassNotFoundException, SQLException {
 		

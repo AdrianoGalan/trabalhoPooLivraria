@@ -52,14 +52,25 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	private TextField tfEstado;
 //	private ComboBox<String> cbEstado;
 	private ComboBox<String> cbTipoTelefone;
+	private Cliente c = null;
+	private Telefone t;
+	private Endereco e;
+	private ControleCliente controle = new ControleCliente();
+	private TelaPesquisaCliente tela;
 
-	private GregorianCalendar data = new GregorianCalendar();
 	
 	private Date dataAtual = new Date();
+	
+	TelaCadastroCliente(){}
+	
+	TelaCadastroCliente(Cliente c, TelaPesquisaCliente tela){
+		this.c = c;
+		this.tela = tela;
+	}
 
 	@Override
-	public void handle(ActionEvent e) {
-		if (e.getTarget() == btOk && verificaCampos()) {
+	public void handle(ActionEvent evt) {
+		if (evt.getTarget() == btOk && verificaCampos()) {
 
 			if(verificaDuplicata()) {
 				addCliente();
@@ -67,14 +78,24 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 		}
 
-		if (e.getTarget() == btCancelar) {
+		if (evt.getTarget() == btCancelar) {
 			
 			limpaCampos();
 
 		}
 		
-		if (e.getTarget() == btUpd) {
-			
+		if (evt.getTarget() == btUpd) {
+			try {
+				DadosParaEntidades();
+				controle.alterarCliente(c, e, t);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			Mensagens.informacao("Alteracao de funcionario", "O funcionario foi alterado com sucesso", "");
+			tela.carregarTabela();
+			tela.stage.close();
 		}
 	}
 
@@ -111,16 +132,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		HBox hbBotao = new HBox();
 		hbBotao.setSpacing(40);
 
-		btOk = new Button("Cadastrar");
-		btOk.addEventHandler(ActionEvent.ACTION, this);
-		btCancelar = new Button("Cancelar");
-		btCancelar.addEventHandler(ActionEvent.ACTION, this);
-		btUpd = new Button("Atualizar");
-		btUpd.addEventHandler(ActionEvent.ACTION, this);
-
-		hbBotao.getChildren().add(btOk);
-		hbBotao.getChildren().add(btCancelar);
-		hbBotao.getChildren().add(btUpd);
+		
 
 		vbEs.getChildren().add(new Label("Nome:"));
 		vbEs.getChildren().add(new Label("Telefone tipo:"));
@@ -136,7 +148,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		vbEs.getChildren().add(new Label("Email:"));
 		vbEs.getChildren().add(new Label("Data de nascimento:"));
 
-		vbEs.getChildren().add(hbBotao);
+		
 
 		tfNome = new TextField();
 		tfNome.setPrefWidth(330);
@@ -182,8 +194,30 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		vbDi.getChildren().add(tfEmail);
 		vbDi.getChildren().add(tfDtnasc);
 
+		
+		//verifica se a tela vai ser usada para cadastrar ou alterar
+		if(c != null) {
+			btUpd = new Button("Alterar");
+			btUpd.addEventHandler(ActionEvent.ACTION, this);
+			carregaDadosCampos();
+			hbBotao.getChildren().add(btUpd);
+		}else {
+			btOk = new Button("Cadastrar");
+			btOk.addEventHandler(ActionEvent.ACTION, this);
+			hbBotao.getChildren().add(btOk);
+		}
+		
+		
+		btCancelar = new Button("Cancelar");
+		btCancelar.addEventHandler(ActionEvent.ACTION, this);
+
+		
+		hbBotao.getChildren().add(btCancelar);
+		vbEs.getChildren().add(hbBotao);
 		painel.getChildren().add(vbEs);
 		painel.getChildren().add(vbDi);
+		
+
 
 		return painel;
 	}
@@ -257,6 +291,60 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 			return false;
 		}
 		
+	}
+	
+	private void carregaDadosCampos() {
+		
+		try {
+			e = controle.buscaEnderecoClient(c.getFkEdetecoPessoa());
+			t = controle.buscaTelefoneClient(c.getIdPessoa());
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		tfNome.setText(c.getNome());
+		tfTelefone.setText(t.getDdd()+t.getNumero());
+		tfCpf.setText(c.getCpf());
+		tfRua.setText(e.getRua());
+		tfNum.setText(Integer.toString(e.getNumero()));
+		tfBairro.setText(e.getBairro());
+		tfCidade.setText(e.getCidade());
+		tfComplemento.setText(e.getComplemento());
+		tfCep.setText(e.getCep());
+		tfEmail.setText(c.getEmail());
+		tfDtnasc.setText(c.getDataNascimento().toString());
+		tfEstado.setText(e.getEstado());
+		cbTipoTelefone.setValue(t.getTipo());
+		
+	}
+	
+	private void DadosParaEntidades() {
+
+		e.setNumero(Integer.parseInt(tfNum.getText()));
+		e.setBairro(tfBairro.getText());
+		e.setRua(tfRua.getText());
+		e.setCidade(tfCidade.getText());
+		e.setEstado(tfEstado.getText());
+		e.setComplemento(tfComplemento.getText());
+		e.setCep(tfCep.getText().replaceAll("[-]", ""));
+		t.setTipo(cbTipoTelefone.getSelectionModel().getSelectedItem());
+		String telefone = tfTelefone.getText();
+		t.setDdd(telefone.substring(0, 2));
+		t.setNumero(telefone.substring(2, telefone.length()));
+		c.setNome(tfNome.getText());
+		c.setCpf(tfCpf.getText());
+		c.setEmail(tfEmail.getText());
+
+		try {
+			SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
+			Date data = formato.parse(tfDtnasc.getText().replaceAll("-", "/"));
+			c.setDataNascimento(data);
+		} catch (ParseException e2) {
+			e2.printStackTrace();
+		}
+
 	}
 
 	private boolean verificaCampos() {
@@ -357,5 +445,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		return true;
 
 	}
+	
+	
 
 }

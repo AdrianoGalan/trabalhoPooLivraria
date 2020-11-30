@@ -12,23 +12,31 @@ import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEvent>  {
 
 	private ControleCliente controle = new ControleCliente();
 	private Button btPesquisar;
+	private Button btAlterar;
 	private TableView<Cliente> tbvPesqCliente;
 	private TextField tfPesquisa;
+	private BorderPane tela;
+	public Stage stage;
+	private Scene cena;
+	private TelaCadastroCliente telaCliente;
 
 	
 	@Override
@@ -46,7 +54,9 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 		Label lblPesquisa = new Label("Digite:");
 		tfPesquisa = new TextField();
 		btPesquisar = new Button("Pesquisar");
+		btAlterar = new Button("Alterar");
 		btPesquisar.addEventHandler(ActionEvent.ACTION,this);
+		btAlterar.addEventHandler(ActionEvent.ACTION, this);
 		tbvPesqCliente = new TableView<Cliente>();
 		tbvPesqCliente.setPrefWidth(800);
 		
@@ -56,6 +66,7 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 		tfPesquisa.setPrefWidth(250);
 		hbBotao.getChildren().add(tfPesquisa);
 		hbBotao.getChildren().add(btPesquisar);
+		hbBotao.getChildren().add(btAlterar);
 		vbEs.getChildren().add(hbBotao);
 		vbEs.getChildren().add(tbvPesqCliente);
 		
@@ -126,20 +137,34 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 	@Override
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btPesquisar) {
-			try {
-				controle.buscaClientesNome(tfPesquisa.getText());
-			} catch (ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
 			carregarTabela();
+			carregarTabela();
+		}else if(e.getTarget() == btAlterar) {
+			Cliente c = tbvPesqCliente.getSelectionModel().getSelectedItem();
+			telaCliente = new TelaCadastroCliente(c,this);
+			abrirTelaClient();
 		}
 	}
 
-	private void carregarTabela() {
-		
-	
+	public void carregarTabela() {
+		try {
+			controle.buscaClientesNome(tfPesquisa.getText());
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		tbvPesqCliente.setItems(controle.getLista());
+	}
+	
+	private void abrirTelaClient() {
+		tela = new BorderPane();
+		cena = new Scene(tela, 680, 570);
+		stage = new Stage();
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.setScene(cena);
+		tela.setCenter(telaCliente.render());
+		stage.show();
 	}
 
 	@Override

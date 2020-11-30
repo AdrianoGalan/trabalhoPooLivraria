@@ -41,7 +41,7 @@ public class TelaPesquisaFunc implements ControleTelas, EventHandler<ActionEvent
 
 	@Override
 	public Pane render() {
-Pane painel = new Pane();
+		Pane painel = new Pane();
 		
 		HBox hbBotao = new HBox();
 		hbBotao.setSpacing(20);

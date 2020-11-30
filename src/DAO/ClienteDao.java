@@ -43,7 +43,10 @@ public class ClienteDao {
 		ps.executeUpdate();
 		
 		ps.close();
+		
 	}
+	
+
 	
 	public void excluiCliente(Cliente cliente) throws SQLException {
 		

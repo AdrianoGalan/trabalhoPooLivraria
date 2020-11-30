@@ -180,7 +180,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 			int ano = Integer.parseInt(tfAno.getText());
 
-			if (ano >= anoAtual) {
+			if (ano > anoAtual) {
 				Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano válido");
 				return false;
 			} else {
