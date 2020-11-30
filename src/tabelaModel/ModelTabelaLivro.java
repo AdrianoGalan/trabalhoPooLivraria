@@ -20,6 +20,8 @@ public class ModelTabelaLivro {
 	private int qtsEstoque;
 	private String idioma;
 	private String descricao;
+	private int qdtVenda;
+	private String dataUltimaVenda;
 
 	public int getIdLivro() {
 		return idLivro;
@@ -109,10 +111,24 @@ public class ModelTabelaLivro {
 		this.descricao = descricao;
 	}
 
-	/**
-	 * Método toString
-	 */
-	
+
+	public int getQdtVenda() {
+		return qdtVenda;
+	}
+
+	public void setQdtVenda(int qdtVenda) {
+		this.qdtVenda = qdtVenda;
+	}
+
+	public String getDataUltimaVenda() {
+		return dataUltimaVenda;
+	}
+
+	public void setDataUltimaVenda(String dataUltimaVenda) {
+		this.dataUltimaVenda = dataUltimaVenda;
+	}
+
+
 	@Override
 	public String toString() {
 		return "ModelTabelaLivro [preco=" + preco + ", titulo=" + titulo + ", autor=" + autor + ", isbn=" + isbn
