@@ -97,6 +97,8 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 			telaPesquisaFunc.carregaTabela();
 			telaPesquisaFunc.stage.close();
 
+		} else if (ev.getTarget() == btCancelar) {
+			limpaCampos();
 		}
 
 	}

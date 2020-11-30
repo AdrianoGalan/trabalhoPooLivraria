@@ -113,7 +113,7 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 			
 			if (i == -1 || i > tbvPesqLivro.getItems().size()) {
 	
-				Mensagens.informacao("Seleção", "Seleção ", "Por favor selecione um livro antes de realizar essa ação.");
+				Mensagens.informacao("Selecao", "Selecao ", "Por favor selecione um livro antes de realizar essa acao.");
 
 			} else {
 				telaPreco.render(tbvPesqLivro.getSelectionModel().getSelectedItem());

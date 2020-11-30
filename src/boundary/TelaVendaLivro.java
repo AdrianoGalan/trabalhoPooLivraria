@@ -146,7 +146,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		colQtsVenda.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, Integer>("qtsVenda"));
 		colQtsVenda.setPrefWidth(100);
 
-		TableColumn<ModelItensVenda, Double> colPreco = new TableColumn<>("Preço");
+		TableColumn<ModelItensVenda, Double> colPreco = new TableColumn<>("Preco");
 		colPreco.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, Double>("preco"));
 		colPreco.setPrefWidth(100);
 
@@ -422,7 +422,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 				Mensagens.erro("Quantidade", "Quantidade invalida", "Não tem livro no estoque");
 			}
 		} catch (Exception e) {
-			Mensagens.erro("Quantidade", "Quantidade invalida", "Dgite uma quantidade valida");
+			Mensagens.erro("Quantidade", "Quantidade invalida", "Digite uma quantidade valida");
 		}
 
 	}

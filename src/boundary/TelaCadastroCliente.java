@@ -93,7 +93,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			Mensagens.informacao("Alteracao de funcionario", "O funcionario foi alterado com sucesso", "");
+			Mensagens.informacao("Alteracao de cliente", "O cliente foi alterado com sucesso", "");
 			tela.carregarTabela();
 			tela.stage.close();
 		}
