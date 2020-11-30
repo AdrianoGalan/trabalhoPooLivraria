@@ -37,6 +37,21 @@ public class AutorDao {
 		
 	}
 	
+	public void alteraAutor(Autor a) throws SQLException {
+		String sql = "UPDATE AUTOR SET NOME = ?, NACIONALIDADE = ? where ID_AUTOR = ? ";
+		
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, a.getNome());
+		ps.setString(2, a.getNacionalidade());
+		ps.setInt(3, a.getIdAutor());
+
+		ps.executeUpdate();
+
+		ps.execute();
+
+		ps.close();
+	}
+	
 	public ObservableList<Autor> listarAutores() throws SQLException{
 		ObservableList<Autor> lista = FXCollections.observableArrayList();
 		StringBuilder sql = new StringBuilder();
@@ -72,6 +87,24 @@ public class AutorDao {
 		ps.close();
 
 		return u;
+	}
+	
+	public ObservableList<Autor> pesquisarAutores(String nome) throws SQLException{
+		ObservableList<Autor> lista = FXCollections.observableArrayList();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * from AUTOR where NOME like ?");
+		PreparedStatement ps = c.prepareStatement(sql.toString());
+		ps.setString(1, nome+"%");
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			Autor a = new Autor();
+			a.setIdAutor(rs.getInt("ID_AUTOR"));
+			a.setNome(rs.getString("NOME"));
+			a.setNacionalidade(rs.getString("NACIONALIDADE"));
+			lista.add(a);
+		}
+		
+		return lista;
 	}
 
 }

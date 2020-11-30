@@ -20,9 +20,20 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 
 	private Button btOk;
 	private Button btCancelar;
+	private Button btAlterar;
 	private TextField tfNome;
 	private TextField tfNa;
+	private Autor a = null;
+	private TelaPesquisaAutor tela;
 	private ControleAutor control = new ControleAutor();
+	
+	TelaCadastroAutor(){
+	}
+	
+	TelaCadastroAutor(Autor a,TelaPesquisaAutor telaA){
+		this.a = a;
+		tela = telaA;
+	}
 
 	@Override
 	public void handle(ActionEvent e) {
@@ -33,6 +44,7 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 				if(!control.verificaDuplicata(tfNome.getText())) {
 					addAutor();
 					limpaCampos();
+					Mensagens.informacao("Autor cadastro", "Autor cadastrado com sucesso", "");
 				}else {
 					Mensagens.erro("Erro nome autor", "Por favor insira um nome diferente", "Nome de autor já cadastrado");
 				}
@@ -42,9 +54,17 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 			}
 			
 
-		}
-		if (e.getTarget() == btCancelar) {
-
+		}else if(e.getSource() == btAlterar) {
+			DadosParaEntidades();
+			try {
+				control.alterarAutor(a);
+			} catch (ClassNotFoundException | SQLException e1) {
+				e1.printStackTrace();
+			}
+			Mensagens.informacao("Autor cadastro", "Autor alterado com sucesso", "");
+			tela.carregarTabela();
+			tela.stage.close();
+			
 		}
 	}
 
@@ -105,30 +125,54 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 		HBox hbBotao = new HBox();
 		hbBotao.setSpacing(40);
 
-		btOk = new Button("Cadastrar");
-		btOk.addEventHandler(ActionEvent.ACTION, this);
-		btCancelar = new Button("Cancelar");
-		btCancelar.addEventHandler(ActionEvent.ACTION, this);
+		
 
-		hbBotao.getChildren().add(btOk);
-		hbBotao.getChildren().add(btCancelar);
+
 
 		vbEs.getChildren().add(new Label("Nome:"));
 		vbEs.getChildren().add(new Label("Nacionalidade:"));
-
-		vbEs.getChildren().add(hbBotao);
-
+		
 		tfNome = new TextField();
 		tfNome.setPrefWidth(330);
 		tfNa = new TextField();
 
 		vbDi.getChildren().add(tfNome);
 		vbDi.getChildren().add(tfNa);
+		
+		
+		if(a == null) {
+			btOk = new Button("Cadastrar");
+			btOk.addEventHandler(ActionEvent.ACTION, this);
+			hbBotao.getChildren().add(btOk);
+		}else {
+			btAlterar = new Button("Alterar");
+			btAlterar.addEventHandler(ActionEvent.ACTION, this);
+			hbBotao.getChildren().add(btAlterar);
+			carregaDadosCampos();
+		}
+		
+
+		btCancelar = new Button("Cancelar");
+		btCancelar.addEventHandler(ActionEvent.ACTION, this);
+		
+		
+		hbBotao.getChildren().add(btCancelar);
+		vbEs.getChildren().add(hbBotao);
 
 		painel.getChildren().add(vbEs);
 		painel.getChildren().add(vbDi);
 
 		return painel;
+	}
+	
+	private void carregaDadosCampos(){
+		tfNome.setText(a.getNome());
+		tfNa.setText(a.getNacionalidade());
+	}
+	
+	private void DadosParaEntidades() {
+		a.setNome(tfNome.getText());
+		a.setNacionalidade(tfNa.getText());
 	}
 
 	
