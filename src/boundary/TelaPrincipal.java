@@ -57,6 +57,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private ControleTelas telaCadastroFuncionario = new TelaCadastroFuncionario();
 	private ControleTelas telaPesquisaCliente = new TelaPesquisaCliente();
 	private ControleTelas telaPesquisaLivro = new TelaPesquisaLivro();
+	private ControleTelas telaPesquisaAutor = new TelaPesquisaAutor();
 	private ControleTelas telaControleRelatorio = new TelaControleRelatorio();
 	private ControleTelas telaControleEstoque = new TelaControleEstoque();
 	private ControleTelas telaVendaLivro = new TelaVendaLivro();
@@ -76,7 +77,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 	private MenuItem menuPesquuisarCliente = new MenuItem("Cliente");
 	private MenuItem menuPesquuisarLivro = new MenuItem("Livro");
-
+	private MenuItem menuPesquisarAutor = new MenuItem("Autor");
 	private MenuItem menuControleEstoque = new MenuItem("Estoque");
 	private MenuItem menuControleRelatorio = new MenuItem("Relatorio");
 
@@ -108,10 +109,11 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		menuVendaLivro.setOnAction(this);
 		menuControleUsuario.setOnAction(this);
 		menuPesquisaFuncionario.setOnAction(this);
+		menuPesquisarAutor.setOnAction(this);
 
 		telaLogin.setGerenciadorPrincipal(this);
 		telaInicial.setGerenciadorPrincipal(this);
-
+		telaPesquisaAutor.setGerenciadorPrincipal(this);
 		telaCadastroCliente.setGerenciadorPrincipal(this);
 		telaCadastroLivro.setGerenciadorPrincipal(this);
 		telaCadastroFuncionario.setGerenciadorPrincipal(this);
@@ -166,7 +168,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		}
 
 		Menu menuPesquisar = new Menu("Pesquisar");
-		menuPesquisar.getItems().addAll(menuPesquuisarCliente, menuPesquuisarLivro,menuPesquisaFuncionario);
+		menuPesquisar.getItems().addAll(menuPesquuisarCliente, menuPesquuisarLivro,menuPesquisaFuncionario,menuPesquisarAutor);
 
 		Menu menuControle = new Menu("Controle");
 		menuControle.getItems().addAll(menuControleEstoque, menuControleRelatorio);
@@ -257,6 +259,8 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 			this.painelPrincipal.setCenter(telaPesquisaFuncionario.render());
 		} else if(e.getTarget() == menuCadastrarAutor) {
 			this.painelPrincipal.setCenter(telaCadastroAutor.render());
+		} else if(e.getTarget() == menuPesquisarAutor) {
+			this.painelPrincipal.setCenter(telaPesquisaAutor.render());
 		} else if (e.getTarget() == menuInicioSair) {
 			comando("sair");
 		}

@@ -50,7 +50,6 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	private TextField tfEmail;
 	private TextField tfDtnasc;
 	private TextField tfEstado;
-//	private ComboBox<String> cbEstado;
 	private ComboBox<String> cbTipoTelefone;
 	private Cliente c = null;
 	private Telefone t;

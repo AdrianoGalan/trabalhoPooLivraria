@@ -4,7 +4,6 @@ import control.ControleTelas;
 
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 import control.ControleCliente;
 import control.GetenciadorPrincipal;
 import entity.Cliente;
@@ -25,6 +24,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import util.Mensagens;
 
 public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEvent>  {
 
@@ -131,11 +131,15 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btPesquisar) {
 			carregarTabela();
-			carregarTabela();
 		}else if(e.getTarget() == btAlterar) {
-			Cliente c = tbvPesqCliente.getSelectionModel().getSelectedItem();
-			telaCliente = new TelaCadastroCliente(c,this);
-			abrirTelaClient();
+			if(tbvPesqCliente.getSelectionModel().getSelectedIndex() != -1) {
+				Cliente c = tbvPesqCliente.getSelectionModel().getSelectedItem();
+				telaCliente = new TelaCadastroCliente(c,this);
+				abrirTelaClient();
+			}else {
+				Mensagens.informacao("Selecione um indice", "Selecione algum cliente antes de continuar", "");
+			}
+			
 		}
 	}
 
