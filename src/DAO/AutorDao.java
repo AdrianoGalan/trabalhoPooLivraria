@@ -22,12 +22,11 @@ public class AutorDao {
 
 	public void insereAutor(Autor autor) throws SQLException {
 		
-		String sql = "INSERT INTO AUTOR VALUES (?,?,?)";
+		String sql = "INSERT INTO AUTOR VALUES (?,?)";
 		
 		PreparedStatement ps = c.prepareStatement(sql);
-		ps.setInt(1, autor.getIdAutor());
-		ps.setString(2, autor.getNome());
-		ps.setString(3, autor.getNacionalidade());
+		ps.setString(1, autor.getNome());
+		ps.setString(2, autor.getNacionalidade());
 
 		ps.executeUpdate();
 
@@ -53,6 +52,26 @@ public class AutorDao {
 		}
 		
 		return lista;
+	}
+	
+	public boolean verificaDuplicNome(String Nome) throws SQLException {
+		boolean u = false;
+		String sql = "select NOME from AUTOR where NOME = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, Nome);
+		
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next() && u == false) {
+			if(rs.getString("NOME").equals(Nome)) {
+				u = true;
+			}
+		}
+		
+		rs.close();
+		ps.close();
+
+		return u;
 	}
 
 }
