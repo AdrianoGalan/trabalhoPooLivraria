@@ -1,5 +1,12 @@
 package tabelaModel;
 
+/**
+ * Classe tabela livro
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
+
 public class ModelTabelaLivro {
 
 	private int idLivro;
@@ -104,6 +111,7 @@ public class ModelTabelaLivro {
 		this.descricao = descricao;
 	}
 
+
 	public int getQdtVenda() {
 		return qdtVenda;
 	}
@@ -119,6 +127,7 @@ public class ModelTabelaLivro {
 	public void setDataUltimaVenda(String dataUltimaVenda) {
 		this.dataUltimaVenda = dataUltimaVenda;
 	}
+
 
 	@Override
 	public String toString() {

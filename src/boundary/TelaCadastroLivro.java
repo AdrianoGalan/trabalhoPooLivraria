@@ -46,10 +46,8 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 	@Override
 	public void handle(ActionEvent e) {
-		System.out.println(verificaCampos());
+		
 		if (e.getTarget() == btOk && verificaCampos()) {
-
-
 			if (verificaDuplicata()) {
 				addLivro();
 				limpaCampos();
@@ -57,18 +55,17 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 		}
 		if (e.getTarget() == btCancelar) {
-
+			System.out.println(listaAutores.get(cbAutor.getSelectionModel().getSelectedIndex()).getIdAutor());
 		}
 
 	}
 
 	private void addLivro() {
-		// TODO Auto-generated method stub
 
 		ControleLivro cl = new ControleLivro();
 
 		Livro l = new Livro();
-//		Autor a = new Autor();
+		Autor a;
 
 		l.setAno(tfAno.getText());
 		l.setDescricao(tfDescricao.getText());
@@ -76,21 +73,19 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		l.setIsbn(tfIsbn.getText()); // .replaceAll("[-]", ""));
 		l.setTitulo(tfTitulo.getText());
 		l.setQtsEstoque(Integer.parseInt(tfQtd.getText()));
-		// l.setPreco(Double.parseDouble(tfPreco.getText()));
-
+		l.setPrecoAtual(Integer.parseInt(tfPreco.getText()));
 		l.setGenero(cbGenero.getSelectionModel().getSelectedItem());
 		l.setIdioma(cbIdioma.getSelectionModel().getSelectedItem());
+		a = listaAutores.get(cbAutor.getSelectionModel().getSelectedIndex());
 
-//		a.setNome(cbAutor.getSelectionModel().getSelectedItem());
-//		a.setNacionalidade(cbAutor.getSelectionModel().getSelectedItem());
 
 		try {
-			cl.addLivro(l);
+			cl.addLivro(l,a.getIdAutor());
+			
 		} catch (ClassNotFoundException | SQLException e1) {
-			// TODO: handle exception
 			e1.printStackTrace();
 		}
-		
+
 		Mensagens.informacao("Livro cadastrado", "O livro foi cadastrado com sucesso", "");
 	}
 

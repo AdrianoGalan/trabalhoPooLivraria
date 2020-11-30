@@ -22,12 +22,11 @@ public class AutorDao {
 
 	public void insereAutor(Autor autor) throws SQLException {
 		
-		String sql = "INSERT INTO AUTOR VALUES (?,?,?)";
+		String sql = "INSERT INTO AUTOR VALUES (?,?)";
 		
 		PreparedStatement ps = c.prepareStatement(sql);
-		ps.setInt(1, autor.getIdAutor());
-		ps.setString(2, autor.getNome());
-		ps.setString(3, autor.getNacionalidade());
+		ps.setString(1, autor.getNome());
+		ps.setString(2, autor.getNacionalidade());
 
 		ps.executeUpdate();
 
@@ -38,11 +37,64 @@ public class AutorDao {
 		
 	}
 	
+	public void alteraAutor(Autor a) throws SQLException {
+		String sql = "UPDATE AUTOR SET NOME = ?, NACIONALIDADE = ? where ID_AUTOR = ? ";
+		
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, a.getNome());
+		ps.setString(2, a.getNacionalidade());
+		ps.setInt(3, a.getIdAutor());
+
+		ps.executeUpdate();
+
+		ps.execute();
+
+		ps.close();
+	}
+	
 	public ObservableList<Autor> listarAutores() throws SQLException{
 		ObservableList<Autor> lista = FXCollections.observableArrayList();
 		StringBuilder sql = new StringBuilder();
 		sql.append("select * from AUTOR");
 		PreparedStatement ps = c.prepareStatement(sql.toString());
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {
+			Autor a = new Autor();
+			a.setIdAutor(rs.getInt("ID_AUTOR"));
+			a.setNome(rs.getString("NOME"));
+			a.setNacionalidade(rs.getString("NACIONALIDADE"));
+			lista.add(a);
+		}
+		
+		return lista;
+	}
+	
+	public boolean verificaDuplicNome(String Nome) throws SQLException {
+		boolean u = false;
+		String sql = "select NOME from AUTOR where NOME = ?";
+		PreparedStatement ps = c.prepareStatement(sql);
+		ps.setString(1, Nome);
+		
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next() && u == false) {
+			if(rs.getString("NOME").equals(Nome)) {
+				u = true;
+			}
+		}
+		
+		rs.close();
+		ps.close();
+
+		return u;
+	}
+	
+	public ObservableList<Autor> pesquisarAutores(String nome) throws SQLException{
+		ObservableList<Autor> lista = FXCollections.observableArrayList();
+		StringBuilder sql = new StringBuilder();
+		sql.append("select * from AUTOR where NOME like ?");
+		PreparedStatement ps = c.prepareStatement(sql.toString());
+		ps.setString(1, nome+"%");
 		ResultSet rs = ps.executeQuery();
 		while (rs.next()) {
 			Autor a = new Autor();
