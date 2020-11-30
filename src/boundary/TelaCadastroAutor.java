@@ -16,25 +16,55 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import util.Mensagens;
 
+/**
+ * Classe tela que cadastra autor e implementa a interface ControleTelas do package control
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade btOK */
 	private Button btOk;
+	
+	/** Propriedade btCancelar */
 	private Button btCancelar;
+	
+	/** Propriedade btAlterar */
 	private Button btAlterar;
+	
+	/** Propriedade tfNome */
 	private TextField tfNome;
+	
+	/** Propriedade tfNa */
 	private TextField tfNa;
+	
+	/** Propriedade Autor a */
 	private Autor a = null;
+	
+	/** Propriedade TelaPesquisaAutor tela */
 	private TelaPesquisaAutor tela;
+	
+	/** Propriedade ControleAutor control */
 	private ControleAutor control = new ControleAutor();
 	
 	TelaCadastroAutor(){
 	}
 	
+	/**
+	 * TelaCadastroAutor
+	 * 
+	 * @param a
+	 * @param telaA
+	 */
 	TelaCadastroAutor(Autor a,TelaPesquisaAutor telaA){
 		this.a = a;
 		tela = telaA;
 	}
 
+	/**
+	 * Método handle - acao aos botoes - adicionar e alterar autor
+	 */
 	@Override
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btOk && verificaCampos()) {
@@ -68,6 +98,9 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 		}
 	}
 
+	/**
+	 * Método que adiciona dados do autor.
+	 */
 	private void addAutor() {
 
 		ControleAutor aa = new ControleAutor();
@@ -87,6 +120,11 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 
 	}
 
+	/**
+	 * Método que verifica se os campos foram preenchidos corretamente.
+	 * 
+	 * @return true or false
+	 */
 	private boolean verificaCampos() {
 		// TODO Auto-generated method stub
 
@@ -109,6 +147,9 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 		
 	}
 
+	/**
+	 * Painel Render
+	 */
 	@Override
 	public Pane render() {
 
@@ -165,21 +206,33 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 		return painel;
 	}
 	
+	/**
+	 * Método CarregaDadosCampos
+	 */
 	private void carregaDadosCampos(){
 		tfNome.setText(a.getNome());
 		tfNa.setText(a.getNacionalidade());
 	}
 	
+	/**
+	 * Método DadosParaEntidades
+	 */
 	private void DadosParaEntidades() {
 		a.setNome(tfNome.getText());
 		a.setNacionalidade(tfNa.getText());
 	}
 
-	
+	/**
+	 * Método limpaCampos
+	 */
 	private void limpaCampos() {
 		tfNome.setText("");
 		tfNa.setText("");
 	}
+	
+	/**
+	 * Gerenciador Principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub

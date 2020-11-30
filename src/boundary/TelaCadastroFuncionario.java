@@ -27,41 +27,104 @@ import util.Data;
 import util.Mascaras;
 import util.Mensagens;
 
+/**
+ * Classe tela que cadastra funcionario e implementa a interface ControleTelas do package control
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaCadastroFuncionario implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade btOk */
 	private Button btOk;
+	
+	/** Propriedade btAlterar */
 	private Button btAlterar;
+	
+	/** Propriedade btCancelar */
 	private Button btCancelar;
+	
+	/** Propriedade tfNome */
 	private TextField tfNome;
+	
+	/** Propriedade tfTelefone */
 	private TextField tfTelefone;
+	
+	/** Propriedade tfCpf */
 	private TextField tfCpf;
+	
+	/** Propriedade tfRua */
 	private TextField tfRua;
+	
+	/** Propriedade tfNum */
 	private TextField tfNum;
+	
+	/** Propriedade tfBairro */
 	private TextField tfBairro;
+	
+	/** Propriedade tfCidade */
 	private TextField tfCidade;
+	
+	/** Propriedade tfComplemento */
 	private TextField tfComplemento;
+	
+	/** Propriedade tfCep */
 	private TextField tfCep;
+	
+	/** Propriedade tfEmail */
 	private TextField tfEmail;
+	
+	/** Propriedade tfDtnasc */
 	private TextField tfDtnasc;
+	
+	/** Propriedade tfNumMatricula */
 	private TextField tfNumMatricula;
+	
+	/** Propriedade tfDataAdmicao */
 	private TextField tfDataAdmicao;
+	
+	/** Propriedade Funcionario f */
 	private Funcionario f = null;
+	
+	/** Propriedade Endereco e */
 	private Endereco e;
+	
+	/** Propriedade Telefone t */
 	private Telefone t;
+	
+	/** Propriedade ComboBox cbEstado */
 	private ComboBox<String> cbEstado;
+	
+	/** Propriedade ComboBox cbTipoTelefone */
 	private ComboBox<String> cbTipoTelefone;
+	
+	/** Propriedade ComboBox cbCargo*/
 	private ComboBox<String> cbCargo;
+	
+	/** Propriedade ControleFuncionario cf */
 	private ControleFuncionario cf = new ControleFuncionario();
+	
+	/** Propriedade TelaPesquisaFunc telaPesquisaFunc */
 	private TelaPesquisaFunc telaPesquisaFunc;
 
+	
 	TelaCadastroFuncionario() {
 	}
 
+	/**
+	 * TelaCadastroFuncionario
+	 * 
+	 * @param f
+	 * @param telaPesquisaFunc
+	 */
 	TelaCadastroFuncionario(Funcionario f, TelaPesquisaFunc telaPesquisaFunc) {
 		this.f = f;
 		this.telaPesquisaFunc = telaPesquisaFunc;
 	}
 
+	/**
+	 * Método handle - acao aos botoes - adicionar e alterar funcionario e cancelar acao
+	 */
 	@Override
 	public void handle(ActionEvent ev) {
 
@@ -103,6 +166,9 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 	}
 
+	/**
+	 * Painel Render
+	 */
 	@Override
 	public Pane render() {
 		HBox painel = new HBox();
@@ -208,12 +274,18 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		return painel;
 	}
 
+	/**
+	 * Gerenciador Principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Método que adiciona dados do funcionario
+	 */
 	private void addFuncio() {
 		f = new Funcionario();
 		t = new Telefone();
@@ -239,6 +311,9 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 	}
 
+	/**
+	 * Método DadosParaEntidades
+	 */
 	private void DadosParaEntidades() {
 
 		e.setNumero(Integer.parseInt(tfNum.getText()));
@@ -270,6 +345,11 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 	}
 
+	/**
+	 * Método que verifica se os campos foram preenchidos corretamente.
+	 * 
+	 * @return true or false 
+	 */
 	private boolean verificaCampos() {
 
 		if (tfNome.getText().equals("")) {
@@ -362,6 +442,9 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 	}
 
+	/**
+	 * Método que limpa os campos
+	 */
 	public void limpaCampos() {
 		tfNome.setText("");
 		tfTelefone.setText("");
@@ -381,6 +464,11 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		cbTipoTelefone.setValue(null);
 	}
 
+	/**
+	 * Método que carrega os dados do funcionario
+	 * 
+	 * @param f
+	 */
 	public void carregaDadosCampos(Funcionario f) {
 
 		try {
@@ -409,6 +497,10 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 	}
 
+	/**
+	 * Método que verifica se tem dados duplicados. 
+	 * @return true or false
+	 */
 	private boolean verificaDuplicata() {
 		try {
 			PessoaDao pDao = new PessoaDao();

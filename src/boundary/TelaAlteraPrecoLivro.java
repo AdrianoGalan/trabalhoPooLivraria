@@ -22,24 +22,57 @@ import javafx.stage.Stage;
 import tabelaModel.ModelTabelaLivro;
 import util.Mensagens;
 
+/**
+ * Classe tela que altera o preco do livro
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent> {
 
+	/** Propriedade BorderPane tela */
 	private BorderPane tela;
+	
+	/** Propriedade Pane painel */
 	private Pane painel;
+	
+	/** Propriedade Stage stage */
 	private Stage stage;
+	
+	/** Propriedade Scene cena */
 	private Scene cena;
+	
+	/** Propriedade TextField txtPreco */
 	private TextField txtPreco;
+	
+	/** Propriedade Button btnAlterar */
 	private Button btnAlterar;
+	
+	/** Propriedade TableView tbvLivro*/
 	private TableView<ModelTabelaLivro> tbvLivro;
+	
+	/** Propriedade ControleLivro controle */
 	private ControleLivro controle;
+	
+	/** Propriedade ModelTabelaLivro livro */
 	private ModelTabelaLivro livro;
+	
+	/** Propriedade TelaPesquisaLivro telaMae */
 	private TelaPesquisaLivro telaMae;
 	
+	/** Propriedade Preco p */
 	private Preco p;
 
-	
 
+	/**
+	 * TelaAlteraPrecoLivro
+	 * 
+	 * @param tbvPesqLivro
+	 * @param controle
+	 * @param telaM
+	 */
 	TelaAlteraPrecoLivro(TableView<ModelTabelaLivro> tbvPesqLivro, ControleLivro controle, TelaPesquisaLivro telaM) {
+
 
 		telaMae = telaM;
 		this.controle = controle;
@@ -51,6 +84,11 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent> {
 		tbvLivro = tbvPesqLivro;
 	}
 
+	/**
+	 * Painel Render
+	 * 
+	 * @param livro
+	 */
 	public void render(ModelTabelaLivro livro) {
 		painel = new Pane();
 		this.livro = livro;
@@ -75,6 +113,10 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent> {
 		stage.show();
 	}
 
+	
+	/**
+	 * Método criaPreco()
+	 */
 	private void criaPreco() {
 
 		ControlePreco cp = new ControlePreco();
@@ -100,6 +142,9 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent> {
 
 	}
 
+	/**
+	 * Método handle - acao ao botao - alterar preco do livro
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		if (event.getSource() == btnAlterar) {

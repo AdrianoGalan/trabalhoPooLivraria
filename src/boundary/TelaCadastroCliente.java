@@ -33,40 +33,97 @@ import util.Data;
 import util.Mascaras;
 import util.Mensagens;
 
+/**
+ * Classe tela que cadastra cliente e implementa a interface ControleTelas do package control
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade btOk */
 	private Button btOk;
+	
+	/** Propriedade btCancelar */
 	private Button btCancelar;
+	
+	/** Propriedade btUpd */
 	private Button btUpd;
+	
+	/** Propriedade tfNome */
 	private TextField tfNome;
+	
+	/** Propriedade tfTelefone */
 	private TextField tfTelefone;
+	
+	/** Propriedade tfCpf */
 	private TextField tfCpf;
+	
+	/** Propriedade tfRua */
 	private TextField tfRua;
+	
+	/** Propriedade tfNum */
 	private TextField tfNum;
+	
+	/** Propriedade tfBairro */
 	private TextField tfBairro;
+	
+	/** Propriedade tfCidade */
 	private TextField tfCidade;
+	
+	/** Propriedade tfComplemento */
 	private TextField tfComplemento;
+	
+	/** Propriedade tfCep */
 	private TextField tfCep;
+	
+	/** Propriedade tfEmail */
 	private TextField tfEmail;
+	
+	/** Propriedade tfDtnasc */
 	private TextField tfDtnasc;
+	
+	/** Propriedade tfEstado */
 	private TextField tfEstado;
+	
+	/** Propriedade ComboBox cbTipoTelefone */
 	private ComboBox<String> cbTipoTelefone;
+	
+	/** Propriedade Cliente c */
 	private Cliente c = null;
+	
+	/** Propriedade Telefone t */
 	private Telefone t;
+	
+	/** Propriedade Endereco e */
 	private Endereco e;
+	
+	/** Propriedade ControleCliente controle */
 	private ControleCliente controle = new ControleCliente();
+	
+	/** Propriedade TelaPesquisaCliente tela */
 	private TelaPesquisaCliente tela;
 
-	
+	/** Propriedade Date dataAtual */
 	private Date dataAtual = new Date();
+	
 	
 	TelaCadastroCliente(){}
 	
+	/**
+	 * TelaCadastroCliente
+	 * 
+	 * @param c
+	 * @param tela
+	 */
 	TelaCadastroCliente(Cliente c, TelaPesquisaCliente tela){
 		this.c = c;
 		this.tela = tela;
 	}
 
+	/**
+	 * Método handle - acao aos botoes - adicionar e alterar cliente e cancelar acao
+	 */
 	@Override
 	public void handle(ActionEvent evt) {
 		if (evt.getTarget() == btOk && verificaCampos()) {
@@ -99,6 +156,9 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		}
 	}
 
+	/**
+	 * Método que limpa os campos
+	 */
 	private void limpaCampos() {
 		
 		tfNome.setText(""); 
@@ -117,6 +177,9 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		
 	}
 
+	/**
+	 * Painel Render
+	 */
 	@Override
 	public Pane render() {
 		HBox painel = new HBox();
@@ -222,12 +285,18 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		return painel;
 	}
 
+	/**
+	 * Gerenciador Principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Método que adiciona dados do cliente
+	 */
 	private void addCliente() {
 
 		ControleCliente cc = new ControleCliente(); 
@@ -271,6 +340,10 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		Mensagens.informacao("Cliente cadastrado", "O cliente foi cadastrado com sucesso", "");
 	}
 	
+	/**
+	 * Método que verifica dados duplicados - email e cpf devem ser únicos
+	 * @return true or false
+	 */
 	private boolean verificaDuplicata() {
 		try {
 			PessoaDao pDao = new PessoaDao();
@@ -293,6 +366,9 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		
 	}
 	
+	/**
+	 * Método carregaDadosCampos()
+	 */
 	private void carregaDadosCampos() {
 		
 		try {
@@ -321,6 +397,9 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		
 	}
 	
+	/**
+	 * Método DadosParaEntidades()
+	 */
 	private void DadosParaEntidades() {
 
 		e.setNumero(Integer.parseInt(tfNum.getText()));
@@ -348,6 +427,10 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 
 	}
 
+	/**
+	 * Método que verifica se os campos foram preenchidos corretamente
+	 * @return true or false
+	 */
 	private boolean verificaCampos() {
 
 		if (tfNome.getText().equals("") || (!tfNome.getText().matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$")) || tfNome.getText().length() > 200) {  //"^[a-zA-Z]+$"
