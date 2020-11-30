@@ -6,8 +6,21 @@ import DAO.RelatorioDao;
 import javafx.collections.ObservableList;
 import tabelaModel.ModelTabelaLivro;
 
+/**
+ * Classe controle do Relatorio.
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class ControleRelatorio {
 
+	/**
+	 * Método que busca os livros mais vendidos chamando o método livroMaisVendido() da classe Dao.
+	 * 
+	 * @return rd.livroMaisVendido()
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public ObservableList<ModelTabelaLivro> livroMaisVendido() throws SQLException, ClassNotFoundException {
 
 		RelatorioDao rd = new RelatorioDao();
@@ -16,6 +29,12 @@ public class ControleRelatorio {
 
 	}
 
+	/**
+	 * 
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public ObservableList<ModelTabelaLivro> livroMenosVendido() throws SQLException, ClassNotFoundException {
 
 		RelatorioDao rd = new RelatorioDao();
