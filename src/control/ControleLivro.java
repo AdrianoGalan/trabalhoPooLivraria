@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import DAO.AutorDao;
 import DAO.LivroDao;
+import DAO.PrecoDao;
 import entity.Autor;
 import entity.Livro;
 import entity.Preco;
@@ -29,13 +30,20 @@ public class ControleLivro {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public void addLivro(Livro l, int idAutor) throws ClassNotFoundException, SQLException {
+	
+
+	public void addLivro(Livro l, int idAutor,Preco p) throws ClassNotFoundException, SQLException {
+
 
 		LivroDao ld = new LivroDao();
-
+		l.setPrecoAtual(0);
+		PrecoDao pd = new PrecoDao();
 		try {
 			int idlivro = ld.insereLivro(l);
+			p.setFkLivroPreco(idlivro);
+			p.setIdPreco(pd.inserirPreco(p));
 			ld.insereLivroAutor(idlivro, idAutor);
+			ld.alteraPrecoLivro(p);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

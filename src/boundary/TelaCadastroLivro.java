@@ -11,6 +11,7 @@ import control.ControleTelas;
 import control.GetenciadorPrincipal;
 import entity.Autor;
 import entity.Livro;
+import entity.Preco;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -66,6 +67,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 		Livro l = new Livro();
 		Autor a;
+		Preco p = new Preco();
 
 		l.setAno(tfAno.getText());
 		l.setDescricao(tfDescricao.getText());
@@ -73,14 +75,14 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		l.setIsbn(tfIsbn.getText()); // .replaceAll("[-]", ""));
 		l.setTitulo(tfTitulo.getText());
 		l.setQtsEstoque(Integer.parseInt(tfQtd.getText()));
-		l.setPrecoAtual(Integer.parseInt(tfPreco.getText()));
+		p.setValor(Double.parseDouble(tfPreco.getText()));
 		l.setGenero(cbGenero.getSelectionModel().getSelectedItem());
 		l.setIdioma(cbIdioma.getSelectionModel().getSelectedItem());
 		a = listaAutores.get(cbAutor.getSelectionModel().getSelectedIndex());
 
 
 		try {
-			cl.addLivro(l,a.getIdAutor());
+			cl.addLivro(l,a.getIdAutor(),p);
 			
 		} catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
