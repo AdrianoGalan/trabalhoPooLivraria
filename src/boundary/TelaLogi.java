@@ -57,9 +57,6 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 		txtSenha.relocate(100, 40);
 		txtSenha.setPrefColumnCount(15);
 
-		// para não digitar todo hora
-		txtUser.setText("JOAO");
-		txtSenha.setText("senha");
 
 		Button btnEntrar = new Button("Entrar");
 		btnEntrar.relocate(100, 80);
