@@ -19,12 +19,26 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import util.Mensagens;
 
+/**
+ * Classe tela de login e implementa a interface ControleTelas do package control
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade txtUser*/
 	private TextField txtUser = new TextField();
+	
+	/** Propriedade txtSenha*/
 	private PasswordField txtSenha = new PasswordField();
+	
+	/** Propriedade gp*/
 	private GetenciadorPrincipal gp;
 
+	/**
+	 * Painel render 
+	 */
 	@Override
 	public Pane render() {
 
@@ -73,6 +87,9 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 		return painel;
 	}
 
+	/**
+	 * Gerenciador principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal gp) {
 
@@ -80,6 +97,9 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 
 	}
 
+	/**
+	 * Método handle - acao aos botoes - entrar e esqueceu a senha
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 
@@ -96,6 +116,9 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 
 	}
 
+	/**
+	 * Método fazerLogin().
+	 */
 	private void fazerLogin() {
 
 		if (veridicaCampos()) {
@@ -121,7 +144,10 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 
 	}
 
-	// verifica se os campos foram preenchidos
+	/** Método que verifica se os campos foram preenchidos.
+	 * 
+	 * @return true or false
+	 */
 	private boolean veridicaCampos() {
 
 		if (txtUser.getText().equals("")) {
@@ -138,6 +164,11 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 		return true;
 	}
 
+	/**
+	 * Método Usuario boundaryParaUsuario(),
+	 * 
+	 * @return usuario
+	 */
 	private Usuario boundaryParaUsuario() {
 		Usuario u = new Usuario();
 		u.setLogin(txtUser.getText());

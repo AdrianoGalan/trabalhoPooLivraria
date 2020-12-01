@@ -26,19 +26,50 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Classe tela pesquisa de funcionario e implementa a interface ControleTelas do package control.
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaPesquisaFunc implements ControleTelas, EventHandler<ActionEvent>{
+	
+	/** Propriedade btPesquisar */
 	private Button btPesquisar;
+	
+	/** Propriedade tfPesquisa */
 	private TextField tfPesquisa;
+	
+	/** Propriedade tbvFuncionario */
 	private TableView<Funcionario> tbvFuncionario;
+	
+	/** Propriedade control */
 	private ControleFuncionario control = new ControleFuncionario();
+	
+	/** Propriedade lista */
 	private ObservableList<Funcionario> lista;
+	
+	/** Propriedade btAlterar */
 	private Button btAlterar;
+	
+	/** Propriedade telaFunci */
 	private TelaCadastroFuncionario telaFunci;
+	
+	/** Propriedade tela */
 	private BorderPane tela;
+	
+	/** Propriedade painel */
 	private Pane painel;
+	
+	/** Propriedade stage */
 	public Stage stage;
+	
+	/** Propriedade cena */
 	private Scene cena;
 
+	/**
+	 * Painel render
+	 */
 	@Override
 	public Pane render() {
 		Pane painel = new Pane();
@@ -107,6 +138,9 @@ public class TelaPesquisaFunc implements ControleTelas, EventHandler<ActionEvent
 		
 	}
 	
+	/**
+	 * Método que carrega a tabela.
+	 */
 	public void carregaTabela() {
 		try {
 			lista = control.buscarFuncionariosNome(tfPesquisa.getText());
@@ -117,6 +151,9 @@ public class TelaPesquisaFunc implements ControleTelas, EventHandler<ActionEvent
 		tbvFuncionario.setItems(lista);
 	}
 	
+	/**
+	 * Método que abre a tela funcionario para alteracao.
+	 */
 	private void abrirTelaFuncio() {
 		tela = new BorderPane();
 		cena = new Scene(tela, 680, 570);
@@ -127,6 +164,9 @@ public class TelaPesquisaFunc implements ControleTelas, EventHandler<ActionEvent
 		stage.show();
 	}
 	
+	/**
+	 * Método handle - acao aos botoes - pesquisar e alterar funcionario.
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		if(event.getSource() == btPesquisar) {
@@ -139,6 +179,9 @@ public class TelaPesquisaFunc implements ControleTelas, EventHandler<ActionEvent
 		
 	}
 
+	/**
+	 * Gerenciador principal.
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub

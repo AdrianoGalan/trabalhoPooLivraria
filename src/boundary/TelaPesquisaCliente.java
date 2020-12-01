@@ -26,19 +26,44 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.Mensagens;
 
+/**
+ * Classe tela pesquisa de cliente e implementa a interface ControleTelas do package control
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEvent>  {
 
+	/** Propriedade controle */
 	private ControleCliente controle = new ControleCliente();
+	
+	/** Propriedade btPesquisar */
 	private Button btPesquisar;
+	
+	/** Propriedade btAlterar */
 	private Button btAlterar;
+	
+	/** Propriedade tbvPesqCliente */
 	private TableView<Cliente> tbvPesqCliente;
+	
+	/** Propriedade tfPesquisa */
 	private TextField tfPesquisa;
+	
+	/** Propriedade tela */
 	private BorderPane tela;
+	
+	/** Propriedade stage */
 	public Stage stage;
+	
+	/** Propriedade cena */
 	private Scene cena;
+	
+	/** Propriedade telaCliente */
 	private TelaCadastroCliente telaCliente;
 
-	
+	/**
+	 * Painel render
+	 */
 	@Override
 	public Pane render() {
 		Pane painel = new Pane();
@@ -127,6 +152,9 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 		return painel;
 	}
 	
+	/**
+	 * Método handle - acao aos botoes - pesquisar e alterar cliente.
+	 */
 	@Override
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btPesquisar) {
@@ -143,6 +171,9 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 		}
 	}
 
+	/**
+	 * Método que carrega tabela com os clientes
+	 */
 	public void carregarTabela() {
 		try {
 			controle.buscaClientesNome(tfPesquisa.getText());
@@ -154,6 +185,9 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 		tbvPesqCliente.setItems(controle.getLista());
 	}
 	
+	/**
+	 * Método que abre tela cliente para alteracao
+	 */
 	private void abrirTelaClient() {
 		tela = new BorderPane();
 		cena = new Scene(tela, 680, 570);
@@ -164,6 +198,9 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 		stage.show();
 	}
 
+	/**
+	 * Gerenciador Principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub

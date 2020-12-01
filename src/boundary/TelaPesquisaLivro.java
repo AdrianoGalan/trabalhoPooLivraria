@@ -23,16 +23,39 @@ import javafx.scene.layout.VBox;
 import tabelaModel.ModelTabelaLivro;
 import util.Mensagens;
 
+/**
+ * Classe tela pesquisa de livro e implementa a interface ControleTelas do package control.
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade controle */
 	private ControleLivro controle = new ControleLivro();
+	
+	/** Propriedade tbvPesqLivro */
 	private TableView<ModelTabelaLivro> tbvPesqLivro;
+	
+	/** Propriedade btPesquisar */
 	private Button btPesquisar;
+	
+	/** Propriedade btAlteraPreco */
 	private Button btAlteraPreco;
+	
+	/** Propriedade tfPesquisa */
 	private TextField tfPesquisa;
+	
+	/** Propriedade cbOpcPesq */
 	private ComboBox<String> cbOpcPesq;
+	
+	/** Propriedade telaPreco */
 	private TelaAlteraPrecoLivro telaPreco = new TelaAlteraPrecoLivro(tbvPesqLivro, controle, this);
 
+	
+	/**
+	 * Painel render 
+	 */
 	@Override
 	public Pane render() {
 		Pane painel = new Pane();
@@ -101,6 +124,9 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 		return painel;
 	}
 
+	/**
+	 * Método handle - acao aos botoes - pesquisar livro e alterar preco.
+	 */
 	@Override
 	public void handle(ActionEvent e) {
 
@@ -124,6 +150,9 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 
 	}
 
+	/**
+	 * Método que carrega tabela de livro
+	 */
 	public void carregarTabela() {
 		try {
 			controle.procurarLivro(tfPesquisa.getText(), cbOpcPesq.getSelectionModel().getSelectedIndex());
@@ -134,6 +163,9 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 		tbvPesqLivro.setItems(controle.getLista());
 	}
 
+	/**
+	 * Método que carrega a tela
+	 */
 	private void carregarTela() {
 
 		TableColumn<ModelTabelaLivro, String> colPreco = new TableColumn<>("Preco");
@@ -175,6 +207,9 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 
 	}
 
+	/**
+	 * Gerenciador principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub
