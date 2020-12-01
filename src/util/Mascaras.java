@@ -260,6 +260,18 @@ public class Mascaras {
     	
     	textField.setTextFormatter(new TextFormatter<String>(integerFilter));
     }
+    
+    public static void mascaraApenasNumComPonto(TextField textField) {
+    	UnaryOperator<Change> integerFilter = change -> {
+    	    String input = change.getText();
+    	    if (input.matches("[0-9.]*")) { 
+    	        return change;
+    	    }
+    	    return null;
+    	};
+    	
+    	textField.setTextFormatter(new TextFormatter<String>(integerFilter));
+    }
 	
     
 }

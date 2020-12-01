@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import util.Mascaras;
 import util.Mensagens;
 
 /**
@@ -190,7 +191,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 			return false;
 
-		} else if (tfPreco.getText().equals("") || (!tfPreco.getText().matches("^\\$?\\d+(\\.(\\d{2}))?$"))) {
+		} else if (tfPreco.getText().equals("") || (!tfPreco.getText().matches("^\\d{0,2}(.\\d{1,2})?$"))) {
 
 			Mensagens.erro("PRECO ERRO", "Preco invalido", "Digite um valor");
 
@@ -288,12 +289,14 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		tfTitulo = new TextField();
 		tfTitulo.setPrefWidth(330);
 		tfIsbn = new TextField();
-//		Mascaras.mascaraIsbn(tfIsbn);
+		Mascaras.mascaraApenasNum(tfIsbn);
 		tfEdicao = new TextField();
 		tfAno = new TextField();
+		Mascaras.mascaraApenasNum(tfAno);
 		tfDescricao = new TextField();
 		tfQtd = new TextField();
 		tfPreco = new TextField();
+		Mascaras.mascaraApenasNumComPonto(tfPreco);
 
 	
 		cbAutor = new ComboBox<String>();

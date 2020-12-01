@@ -387,7 +387,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 
 			return false;
 
-		} else if (tfEmail.getText().equals("")) {
+		} else if (tfEmail.getText().equals("") || (!tfEmail.getText().matches("^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\\.)+(?:[a-zA-Z]{2}|aero|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel)$"))) {
 
 			Mensagens.erro("Email erro", "Email invalida", "Digite um Email");
 

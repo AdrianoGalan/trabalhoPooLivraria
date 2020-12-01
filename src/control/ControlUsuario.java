@@ -27,7 +27,7 @@ public class ControlUsuario {
 	
 
 	/**
-	 * Método que busca usuario no sistema chamando o método buscaUsuarioUsuario() 
+	 * Método que busca usuario no sistema chamando o metodo buscaUsuarioUsuario() 
 	 * da classe Dao e faz login caso ele seja encontrado  
 	 * 
 	 * @param u
@@ -46,12 +46,12 @@ public class ControlUsuario {
 			return uBanco;
 		}
 		
-		Mensagens.erro("Erro login", "Usuario ou senha invalido", "Digite usuari e senha valido");
+		Mensagens.erro("Erro login", "Usuario ou senha invalido", "Digite usuario e senha valido");
 		return null;
 	}
 	
 	/**
-	 * Método que cadastra dados do usuario chamando o método insereUsuario() da classe Dao.
+	 * Metodo que cadastra dados do usuario chamando o metodo insereUsuario() da classe Dao.
 	 * 
 	 * @param f
 	 * @param login
@@ -69,7 +69,7 @@ public class ControlUsuario {
 	}
 	
 	/**
-	 * Método que altera usuario chamando o método alteraUsuario() da classe Dao.
+	 * Metodo que altera usuario chamando o metodo alteraUsuario() da classe Dao.
 	 * 
 	 * @param f
 	 * @param login
@@ -139,7 +139,7 @@ public class ControlUsuario {
 	}
 	
 	/**
-	 * Método que verifica se o login existe chamando o método buscaUsuario() da classe Dao.
+	 * Metodo que verifica se o login existe chamando o metodo buscaUsuario() da classe Dao.
 	 * 
 	 * @param login
 	 * @returnusuDao.buscaUsuario(login)

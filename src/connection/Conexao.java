@@ -25,10 +25,10 @@ public class Conexao {
 	
 	public Connection getConnection() throws ClassNotFoundException, SQLException {
 		
-		String hostName = "localhost";
+		String hostName = "192.168.99.100";
 		String dbName = "LIVRARIA";
 		String user = "sa";
-		String senha = "P4ssw0rd";
+		String senha = "Roberto@123";
 		
 		Class.forName("net.sourceforge.jtds.jdbc.Driver");
 
