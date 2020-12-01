@@ -51,7 +51,7 @@ public class ControleLivro {
 	}
 
 	/**
-	 * Método que busca livro por titulo chamando o método buscaLivroTitulo() da classe Dao.
+	 * Metodo que busca livro por titulo chamando o método buscaLivroTitulo() da classe Dao.
 	 * 
 	 * @param titulo
 	 * @return buscaLivroTitulo(titulo)
@@ -66,7 +66,7 @@ public class ControleLivro {
 	}
 
 	/**
-	 * Método que altera preco do livro chamando o método alteraPrecoLivro() da classe Dao. 
+	 * Metodo que altera preco do livro chamando o método alteraPrecoLivro() da classe Dao. 
 	 * 
 	 * @param p
 	 * @throws ClassNotFoundException
@@ -78,7 +78,7 @@ public class ControleLivro {
 	}
 
 	/**
-	 * Método que busca lirvo chamando o método buscaLivro() da classe Dao. 
+	 * Metodo que busca lirvo chamando o metodo buscaLivro() da classe Dao. 
 	 * 
 	 * @param texto
 	 * @param meio
@@ -93,7 +93,7 @@ public class ControleLivro {
 	}
 
 	/**
-	 * Método que atualiza a quantidade de livros no estoque chamando o método atualizaEstoque() da classe Dao.
+	 * Metodo que atualiza a quantidade de livros no estoque chamando o metodo atualizaEstoque() da classe Dao.
 	 * 
 	 * @param idLivro
 	 * @param qtsEstoque
@@ -109,7 +109,7 @@ public class ControleLivro {
 	}
 
 	/**
-	 * Método que lista os autores chamando o método listarAutores() da classe Dao. 
+	 * Metodo que lista os autores chamando o metodo listarAutores() da classe Dao. 
 	 * 
 	 * @return ld.listarAutores()
 	 * @throws ClassNotFoundException

@@ -1,7 +1,7 @@
 package entity;
 
 /**
- * Classe concreta que representa Endereço
+ * Classe concreta que representa Endereco
  * 
  * @author Adriano, Gustavo, Roberto
  *
@@ -32,7 +32,7 @@ public class Endereco {
 	/** Propriedade cep. */
 	private String cep;
 
-	/** Construtor padrão */
+	/** Construtor padrao */
 	public Endereco() {
 
 	}
@@ -40,7 +40,7 @@ public class Endereco {
 	/**
 	 * Recupera a propriedade idEndereco.
 	 * 
-	 * @return id do Endereço
+	 * @return id do Endereco
 	 */
 	public int getIdEndereco() {
 		return idEndereco;
@@ -50,7 +50,7 @@ public class Endereco {
 	 * Configura a propriedade IdEndereco.
 	 * 
 	 * @param IdEndereco
-	 * 				Id do endereço Informado.
+	 * 				Id do endereco Informado.
 	 */
 	public void setIdEndereco(int idEndereco) {
 		this.idEndereco = idEndereco;
@@ -190,7 +190,7 @@ public class Endereco {
 	}
 
 	/**
-	 * Método toString
+	 * Metodo toString
 	 */
 	@Override
 	public String toString() {

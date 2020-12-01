@@ -18,7 +18,7 @@ public class Autor {
 	/** Propriedade nacionalidade. */
 	private String nacionalidade;
 	
-	/** Construtor padrão */
+	/** Construtor padrao */
 	public Autor() {
 		
 	}
@@ -83,7 +83,7 @@ public class Autor {
 	}
 
 	/**
-	 * Método toString
+	 * Metodo toString
 	 */
 	@Override
 	public String toString() {

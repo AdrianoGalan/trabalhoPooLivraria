@@ -22,7 +22,7 @@ public class AutorDao {
 	private Connection c;
 	
 	/**
-	 * Classe que recupera a conex�o com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
@@ -34,7 +34,7 @@ public class AutorDao {
 
 
 	/**
-	 * M�todo que insere os dados do autor no Banco de dados.
+	 * Metodo que insere os dados do autor no Banco de dados.
 	 * @param autor
 	 * @throws SQLException
 	 */
@@ -55,7 +55,7 @@ public class AutorDao {
 	}
 	
 	/**
-	 * M�todo que altera (atualiza) os dados do autor no Banco de Dados.
+	 * Metodo que altera (atualiza) os dados do autor no Banco de Dados.
 	 * @param a
 	 * @throws SQLException
 	 */
@@ -74,7 +74,7 @@ public class AutorDao {
 	}
 	
 	/**
-	 *M�todo que lista os autores inseridos no Banco de dados.
+	 *Metodo que lista os autores inseridos no Banco de dados.
 	 * 
 	 * @return lista de autores
 	 * @throws SQLException
@@ -97,7 +97,7 @@ public class AutorDao {
 	}
 	
 	/**
-	 * M�todo que verifica se tem um nome duplicado no Banco de dados.
+	 * Metodo que verifica se tem um nome duplicado no Banco de dados.
 	 * 
 	 * @param Nome
 	 * @return true or false
@@ -124,7 +124,7 @@ public class AutorDao {
 	}
 	
 	/**
-	 * M�todo que faz a busca(pesquisa) dos autores que foram inseridos no Banco de dados. 
+	 * Metodo que faz a busca(pesquisa) dos autores que foram inseridos no Banco de dados. 
 	 * 
 	 * @param nome
 	 * @return lista

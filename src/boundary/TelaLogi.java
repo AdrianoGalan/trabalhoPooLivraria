@@ -98,7 +98,7 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * M�todo handle - acao aos botoes - entrar e esqueceu a senha
+	 * Metodo handle - acao aos botoes - entrar e esqueceu a senha
 	 */
 	@Override
 	public void handle(ActionEvent event) {
@@ -117,7 +117,7 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * M�todo fazerLogin().
+	 * Metodo fazerLogin().
 	 */
 	private void fazerLogin() {
 
@@ -144,7 +144,7 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 
 	}
 
-	/** M�todo que verifica se os campos foram preenchidos.
+	/** Metodo que verifica se os campos foram preenchidos.
 	 * 
 	 * @return true or false
 	 */
@@ -165,7 +165,7 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * M�todo Usuario boundaryParaUsuario(),
+	 * Metodo Usuario boundaryParaUsuario(),
 	 * 
 	 * @return usuario
 	 */

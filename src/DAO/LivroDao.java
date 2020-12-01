@@ -72,7 +72,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * M�todo que insere as fk na tabela associativa LIVRO_AUTOR do Banco de dados.
+	 * Metodo que insere as fk na tabela associativa LIVRO_AUTOR do Banco de dados.
 	 * 
 	 * @param idLivro
 	 * @param idAutor
@@ -100,7 +100,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * M�todo que faz a busca(pesquisa) de livro. 
+	 * Metodo que faz a busca(pesquisa) de livro. 
 	 * 
 	 * @param texto
 	 * @param meio
@@ -158,7 +158,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * M�todo que altera(atualiza) a quantidade de livros no estoque
+	 * Metodo que altera(atualiza) a quantidade de livros no estoque
 	 * 
 	 * @param idLivro
 	 * @param qtsEstoque
@@ -182,7 +182,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * M�todo que faz a busca(pesquisa) de livro por titulo.
+	 * Metodo que faz a busca(pesquisa) de livro por titulo.
 	 * 
 	 * @param titulo
 	 * @return lista
@@ -226,7 +226,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * M�todo que verifica se o isbn digitado j� esta no Banco de dados. Evitando entrada de dados duplicados.
+	 * Metodo que verifica se o isbn digitado ja esta no Banco de dados. Evitando entrada de dados duplicados.
 	 * 
 	 * @param isbn
 	 * @return true or false
@@ -255,7 +255,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * M�todo que altera(atualiza) pre�o do livro 
+	 * Metodo que altera(atualiza) preco do livro 
 	 * 
 	 * @param p
 	 * @throws SQLException

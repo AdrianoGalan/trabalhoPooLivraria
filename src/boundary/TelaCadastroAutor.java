@@ -63,7 +63,7 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 	}
 
 	/**
-	 * Método handle - acao aos botoes - adicionar e alterar autor
+	 * Metodo handle - acao aos botoes - adicionar e alterar autor
 	 */
 	@Override
 	public void handle(ActionEvent e) {
@@ -76,7 +76,7 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 					limpaCampos();
 					Mensagens.informacao("Autor cadastro", "Autor cadastrado com sucesso", "");
 				}else {
-					Mensagens.erro("Erro nome autor", "Por favor insira um nome diferente", "Nome de autor já cadastrado");
+					Mensagens.erro("Erro nome autor", "Por favor insira um nome diferente", "Nome de autor jï¿½ cadastrado");
 				}
 				
 			} catch (ClassNotFoundException | SQLException e1) {
@@ -99,7 +99,7 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 	}
 
 	/**
-	 * Método que adiciona dados do autor.
+	 * Metodo que adiciona dados do autor.
 	 */
 	private void addAutor() {
 
@@ -121,7 +121,7 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 	}
 
 	/**
-	 * Método que verifica se os campos foram preenchidos corretamente.
+	 * Metodo que verifica se os campos foram preenchidos corretamente.
 	 * 
 	 * @return true or false
 	 */
@@ -207,7 +207,7 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 	}
 	
 	/**
-	 * Método CarregaDadosCampos
+	 * Metodo CarregaDadosCampos
 	 */
 	private void carregaDadosCampos(){
 		tfNome.setText(a.getNome());
@@ -215,7 +215,7 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 	}
 	
 	/**
-	 * Método DadosParaEntidades
+	 * Metodo DadosParaEntidades
 	 */
 	private void DadosParaEntidades() {
 		a.setNome(tfNome.getText());
@@ -223,7 +223,7 @@ public class TelaCadastroAutor implements ControleTelas, EventHandler<ActionEven
 	}
 
 	/**
-	 * Método limpaCampos
+	 * Metodo limpaCampos
 	 */
 	private void limpaCampos() {
 		tfNome.setText("");

@@ -12,7 +12,7 @@ import javafx.scene.control.Alert;
 public class Mensagens {
 	
 	/**
-	 * Método que mostra mensagens de erro
+	 * Metodo que mostra mensagens de erro
 	 * 
 	 * @param titulo
 	 * @param cabecalho
@@ -29,7 +29,7 @@ public class Mensagens {
 	}
 	
 	/**
-	 * Método que mostra informações 
+	 * Metodo que mostra informacoes 
 	 * 
 	 * @param titulo
 	 * @param cabecalho

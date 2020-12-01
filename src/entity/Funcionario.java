@@ -33,7 +33,7 @@ public class Funcionario extends Pessoa {
 	/**
 	 * Recupera a propriedade idFuncionario.
 	 * 
-	 * @return id do Funcionário
+	 * @return id do Funcionario
 	 */
 	public int getIdFuncionario() {
 		return idFuncionario;
@@ -127,7 +127,7 @@ public class Funcionario extends Pessoa {
 	}
 
 	/**
-	 * Método toString
+	 * Metodo toString
 	 */
 	@Override
 	public String toString() {

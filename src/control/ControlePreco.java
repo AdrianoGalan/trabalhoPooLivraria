@@ -14,7 +14,7 @@ import entity.Preco;
 public class ControlePreco {
 	
 	/**
-	 * Método que busca preco do livro pelo id chamando o método buscaPrecoId() da classe Dao.
+	 * Metodo que busca preco do livro pelo id chamando o metodo buscaPrecoId() da classe Dao.
 	 * 
 	 * @param id
 	 * @return pd.buscaPrecoId(id)
@@ -30,7 +30,7 @@ public class ControlePreco {
 	}
 	
 	/**
-	 * Método que adiciona preco chamando o método inserirPreco() da classe Dao.
+	 * Metodo que adiciona preco chamando o metodo inserirPreco() da classe Dao.
 	 * 
 	 * @param p
 	 * @return pd.inserirPreco(p)

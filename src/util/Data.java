@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Classe Data - converte o formato padrão data para o formato br
+ * Classe Data - converte o formato padrao data para o formato br
  * 
  * @author Adriano, Gustavo, Roberto
  *
@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class Data {
 	/**
-	 * Método de conversão do formato data
+	 * Metodo de conversao do formato data
 	 * @param data
 	 * @return sdf.parse(data)
 	 * @throws ParseException

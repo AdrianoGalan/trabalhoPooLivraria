@@ -10,7 +10,7 @@ import connection.Conexao;
 import entity.Preco;
 
 /**
- * Classe Dao do Preço
+ * Classe Dao do Preco
  * 
  * @author Adriano, Gustavo, Roberto
  *
@@ -21,7 +21,7 @@ public class PrecoDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -34,7 +34,7 @@ public class PrecoDao {
 	}
 	
 	/**
-	 * Método que insere dados na tabela PRECO no Banco de dados.
+	 * Metodo que insere dados na tabela PRECO no Banco de dados.
 	 * 
 	 * @param p
 	 * @return id do preco
@@ -65,7 +65,7 @@ public class PrecoDao {
 	}
 	
 	/**
-	 * Método que busca preco pelo id.
+	 * Metodo que busca preco pelo id.
 	 * 
 	 * @param id
 	 * @return preco

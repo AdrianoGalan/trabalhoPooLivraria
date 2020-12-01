@@ -114,7 +114,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método handle - acao aos botoes - adicionar e alterar cliente e cancelar acao
+	 * Metodo handle - acao aos botoes - adicionar e alterar cliente e cancelar acao
 	 */
 	@Override
 	public void handle(ActionEvent evt) {
@@ -149,7 +149,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método que limpa os campos
+	 * Metodo que limpa os campos
 	 */
 	private void limpaCampos() {
 		
@@ -224,10 +224,6 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		tfDtnasc = new TextField();
 		Mascaras.mascaraData(tfDtnasc);
 
-/*		cbEstado = new ComboBox<String>();
-		cbEstado.getItems().addAll("SP", "Rj", "MG");
-		cbEstado.setPrefWidth(80);
-		cbEstado.getSelectionModel().select(0);   */
 		
 		cbTipoTelefone = new ComboBox<String>();
 		cbTipoTelefone.getItems().addAll("CEL", "COM", "RES");
@@ -242,7 +238,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		vbDi.getChildren().add(tfNum);
 		vbDi.getChildren().add(tfBairro);
 		vbDi.getChildren().add(tfCidade);
-//		vbDi.getChildren().add(cbEstado);
+
 		vbDi.getChildren().add(tfEstado);
 		vbDi.getChildren().add(tfComplemento);
 		vbDi.getChildren().add(tfCep);
@@ -287,7 +283,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método que adiciona dados do cliente
+	 * Metodo que adiciona dados do cliente
 	 */
 	private void addCliente() {
 
@@ -301,7 +297,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 		e.setBairro(tfBairro.getText());
 		e.setRua(tfRua.getText());
 		e.setCidade(tfCidade.getText());
-	//	e.setEstado(cbEstado.getSelectionModel().getSelectedItem());
+
 		e.setEstado(tfEstado.getText());
 		e.setComplemento(tfComplemento.getText());
 		e.setCep(tfCep.getText().replaceAll("[-]", ""));
@@ -333,17 +329,17 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	}
 	
 	/**
-	 * Método que verifica dados duplicados - email e cpf devem ser únicos
+	 * Metodo que verifica dados duplicados - email e cpf devem ser unicos
 	 * @return true or false
 	 */
 	private boolean verificaDuplicata() {
 		try {
 			PessoaDao pDao = new PessoaDao();
 			if(pDao.verificaDuplicCpf(tfCpf.getText())) {
-				Mensagens.erro("Cpf erro", "Cpf inválido", "Cpf inválido ou já cadastrado");
+				Mensagens.erro("Cpf erro", "Cpf invï¿½lido", "Cpf invï¿½lido ou jï¿½ cadastrado");
 				return false;
 			}else if(pDao.verificaDuplicEmail(tfEmail.getText())) {
-				Mensagens.erro("Email erro", "Email inválido", "Email inválido ou já cadastrado");
+				Mensagens.erro("Email erro", "Email invï¿½lido", "Email invï¿½lido ou jï¿½ cadastrado");
 				return false;
 			}else {
 				return true;
@@ -359,7 +355,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	}
 	
 	/**
-	 * Método carregaDadosCampos()
+	 * Metodo carregaDadosCampos()
 	 */
 	private void carregaDadosCampos() {
 		
@@ -390,7 +386,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	}
 	
 	/**
-	 * Método DadosParaEntidades()
+	 * Metodo DadosParaEntidades()
 	 */
 	private void DadosParaEntidades() {
 
@@ -420,7 +416,7 @@ public class TelaCadastroCliente implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método que verifica se os campos foram preenchidos corretamente
+	 * Metodo que verifica se os campos foram preenchidos corretamente
 	 * @return true or false
 	 */
 	private boolean verificaCampos() {

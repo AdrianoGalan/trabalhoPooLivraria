@@ -123,7 +123,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	}
 
 	/**
-	 * Método handle - acao aos botoes - adicionar e alterar funcionario e cancelar acao
+	 * Metodo handle - acao aos botoes - adicionar e alterar funcionario e cancelar acao
 	 */
 	@Override
 	public void handle(ActionEvent ev) {
@@ -199,7 +199,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		vbEs.getChildren().add(new Label("Data de nascimento:"));
 		vbEs.getChildren().add(new Label("Cargo: "));
 		vbEs.getChildren().add(new Label("Numero Matricula: "));
-		vbEs.getChildren().add(new Label("Data Adimição: "));
+		vbEs.getChildren().add(new Label("Data Adimiï¿½ï¿½o: "));
 
 		tfNome = new TextField();
 		tfNome.setPrefWidth(330);
@@ -251,7 +251,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		vbDi.getChildren().add(tfNumMatricula);
 		vbDi.getChildren().add(tfDataAdmicao);
 
-		// Verifica se a tela está sendo chamada pra cadastrar ou alterar
+		// Verifica se a tela estï¿½ sendo chamada pra cadastrar ou alterar
 		if (f != null) {
 			carregaDadosCampos(f);
 			btAlterar = new Button("Alterar");
@@ -284,7 +284,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	}
 
 	/**
-	 * Método que adiciona dados do funcionario
+	 * Mï¿½todo que adiciona dados do funcionario
 	 */
 	private void addFuncio() {
 		f = new Funcionario();
@@ -303,7 +303,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 		try {
 
 			cf.addFuncionario(f, e, t);
-			f = null; // não tire isso
+			f = null; // nï¿½o tire isso
 		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -312,7 +312,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	}
 
 	/**
-	 * Método DadosParaEntidades
+	 * Mï¿½todo DadosParaEntidades
 	 */
 	private void DadosParaEntidades() {
 
@@ -346,7 +346,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	}
 
 	/**
-	 * Método que verifica se os campos foram preenchidos corretamente.
+	 * Mï¿½todo que verifica se os campos foram preenchidos corretamente.
 	 * 
 	 * @return true or false 
 	 */
@@ -427,13 +427,13 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 				Date data = Data.parseDate(tfDataAdmicao.getText());
 				Date dataAtual = new Date();
 				if (data.compareTo(dataAtual) > 0) {
-					Mensagens.erro("Data erro", "Data de adimissão invalida", "Digite uma Data valida");
+					Mensagens.erro("Data erro", "Data de adimissï¿½o invalida", "Digite uma Data valida");
 					return false;
 				}
 
 			} catch (ParseException e) {
 
-				Mensagens.erro("Data erro", "Data de adimissão invalida", "Digite uma Data valida");
+				Mensagens.erro("Data erro", "Data de adimissï¿½o invalida", "Digite uma Data valida");
 				return false;
 			}
 		}
@@ -443,7 +443,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	}
 
 	/**
-	 * Método que limpa os campos
+	 * Mï¿½todo que limpa os campos
 	 */
 	public void limpaCampos() {
 		tfNome.setText("");
@@ -465,7 +465,7 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	}
 
 	/**
-	 * Método que carrega os dados do funcionario
+	 * Mï¿½todo que carrega os dados do funcionario
 	 * 
 	 * @param f
 	 */
@@ -498,17 +498,17 @@ public class TelaCadastroFuncionario implements ControleTelas, EventHandler<Acti
 	}
 
 	/**
-	 * Método que verifica se tem dados duplicados. 
+	 * Mï¿½todo que verifica se tem dados duplicados. 
 	 * @return true or false
 	 */
 	private boolean verificaDuplicata() {
 		try {
 			PessoaDao pDao = new PessoaDao();
 			if (pDao.verificaDuplicCpf(tfCpf.getText())) {
-				Mensagens.erro("Cpf erro", "Cpf inválido", "Cpf inválido ou já cadastrado");
+				Mensagens.erro("Cpf erro", "Cpf invï¿½lido", "Cpf invï¿½lido ou jï¿½ cadastrado");
 				return false;
 			} else if (pDao.verificaDuplicEmail(tfEmail.getText())) {
-				Mensagens.erro("Email erro", "Email inválido", "Email inválido ou já cadastrado");
+				Mensagens.erro("Email erro", "Email invï¿½lido", "Email invï¿½lido ou jï¿½ cadastrado");
 				return false;
 			} else {
 				return true;

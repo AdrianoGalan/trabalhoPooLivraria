@@ -19,7 +19,7 @@ public class ItensVendaDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -31,7 +31,7 @@ public class ItensVendaDao {
 	}
 
 	/**
-	 * Método insere um livro na tabela ITENS_VENDA do Banco de dados
+	 * Metodo insere um livro na tabela ITENS_VENDA do Banco de dados
 	 * 
 	 * @param idVenda
 	 * @param itensVenda

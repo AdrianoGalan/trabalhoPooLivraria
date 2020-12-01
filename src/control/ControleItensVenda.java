@@ -15,7 +15,7 @@ import tabelaModel.ModelItensVenda;
 public class ControleItensVenda {
 	
 	/**
-	 * Método que insere livro na tabela ITENS_VENDA  chamando o método insereLivro() da classe Dao
+	 * Metodo que insere livro na tabela ITENS_VENDA  chamando o metodo insereLivro() da classe Dao
 	 * 
 	 * @param idVenda
 	 * @param itensVenda

@@ -21,7 +21,7 @@ public class FuncionarioDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -35,7 +35,7 @@ public class FuncionarioDao {
 	}
 
 	/**
-	 * Método que insere dados do funcionario na tabela FUNCIONARIO do Banco de dados.
+	 * Metodo que insere dados do funcionario na tabela FUNCIONARIO do Banco de dados.
 	 * 
 	 * @param f
 	 * @throws SQLException
@@ -57,7 +57,7 @@ public class FuncionarioDao {
 	}
 
 	/**
-	 * Método que faz busca do funcionario por id.
+	 * Metodo que faz busca do funcionario por id.
 	 * 
 	 * @param id
 	 * @return funcionario
@@ -92,7 +92,7 @@ public class FuncionarioDao {
 	}
 	
 	/**
-	 * Método que faz busca do funcionario por nome.
+	 * Metodo que faz busca do funcionario por nome.
 	 * 
 	 * @param nome
 	 * @return lista
@@ -134,7 +134,7 @@ public class FuncionarioDao {
 	}
 	
 	/**
-	 * Método que busca lista de funcionario.
+	 * Metodo que busca lista de funcionario.
 	 * 
 	 * @return lista
 	 * @throws SQLException
@@ -168,7 +168,7 @@ public class FuncionarioDao {
 	}
 	
 	/**
-	 * Método que altera(atualiza) funcionario.
+	 * Metodo que altera(atualiza) funcionario.
 	 * 
 	 * @param f
 	 * @throws SQLException

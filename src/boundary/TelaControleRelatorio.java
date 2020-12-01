@@ -108,7 +108,7 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 	}
 
 	/**
-	 * Método handle - acao aos botoes - exibir relatorio
+	 * Mï¿½todo handle - acao aos botoes - exibir relatorio
 	 */
 	@Override
 	public void handle(ActionEvent e) {
@@ -121,7 +121,7 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 	}
 
 	/**
-	 * Método selecao relatorio
+	 * Metodo selecao relatorio
 	 */
 	private void selecaoRelatorio() {
 
@@ -151,7 +151,7 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 	}
 
 	/**
-	 * Método que pega a data da ultima venda.
+	 * Metodo que pega a data da ultima venda.
 	 */
 	private void dataUltimaVenda() {
 
@@ -170,7 +170,7 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 	}
 
 	/**
-	 * Método que pega livros com estoque baixo - menor que 5.
+	 * Mï¿½todo que pega livros com estoque baixo - menor que 5.
 	 */
 	private void baixoEstoque() {
 
@@ -189,7 +189,7 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 	}
 
 	/**
-	 * Método que pega os livros menos vendidos
+	 * Metodo que pega os livros menos vendidos
 	 */
 	private void menoVendido() {
 
@@ -208,7 +208,7 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 	}
 
 	/**
-	 * Método que pega os livros mais vendidos
+	 * Metodo que pega os livros mais vendidos
 	 */
 	private void maisVendido() {
 
@@ -227,7 +227,7 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 	}
 
 	/**
-	 * método que carrega os livros mais e menos vendidos
+	 * mï¿½todo que carrega os livros mais e menos vendidos
 	 */
 	private void carregarMaisMenos() {
 
@@ -257,7 +257,7 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 	}
 
 	/**
-	 * Método que carrega os livros com estoque baixo
+	 * Metodo que carrega os livros com estoque baixo
 	 */
 	private void carregarEstoqueBaixo() {
 
@@ -287,7 +287,7 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 	
 
 	/**
-	 * Método que carrega a ultima data da venda 
+	 * Metodo que carrega a ultima data da venda 
 	 */
 	private void carregarDataVenda() {
 
@@ -316,7 +316,7 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 	}
 
 	/**
-	 * Método que carrega o melhor dia da semana para venda de livros
+	 * Mï¿½todo que carrega o melhor dia da semana para venda de livros
 	 */
 	private void melhorDiarSemana() {
 

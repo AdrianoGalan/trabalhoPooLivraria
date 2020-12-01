@@ -27,7 +27,7 @@ public class ControlUsuario {
 	
 
 	/**
-	 * Método que busca usuario no sistema chamando o método buscaUsuarioUsuario() 
+	 * Metodo que busca usuario no sistema chamando o metodo buscaUsuarioUsuario() 
 	 * da classe Dao e faz login caso ele seja encontrado  
 	 * 
 	 * @param u
@@ -51,7 +51,7 @@ public class ControlUsuario {
 	}
 	
 	/**
-	 * Método que cadastra dados do usuario chamando o método insereUsuario() da classe Dao.
+	 * Metodo que cadastra dados do usuario chamando o metodo insereUsuario() da classe Dao.
 	 * 
 	 * @param f
 	 * @param login
@@ -69,7 +69,7 @@ public class ControlUsuario {
 	}
 	
 	/**
-	 * Método que altera usuario chamando o método alteraUsuario() da classe Dao.
+	 * Metodo que altera usuario chamando o metodo alteraUsuario() da classe Dao.
 	 * 
 	 * @param f
 	 * @param login
@@ -87,7 +87,7 @@ public class ControlUsuario {
 	}
 	
 	/**
-	 * Método que exclui usuario chamando o método deletarUsuario() da classe Dao.
+	 * Metodo que exclui usuario chamando o metodo deletarUsuario() da classe Dao.
 	 * 
 	 * @param idUsu
 	 * @throws SQLException
@@ -100,7 +100,7 @@ public class ControlUsuario {
 	
 	
 	/**
-	 * Método que busca a lista de usuarios chamando o método buscaListaUsuarios() da classe Dao.
+	 * Metodo que busca a lista de usuarios chamando o metodo buscaListaUsuarios() da classe Dao.
 	 * 
 	 * @return listaUsuarios
 	 * @throws ClassNotFoundException
@@ -114,7 +114,7 @@ public class ControlUsuario {
 	}
 
 	/**
-	 * Método que busca a lista de funcionarios chamando o método getListaFuncionario() da classe Dao. 
+	 * Metodo que busca a lista de funcionarios chamando o metodo getListaFuncionario() da classe Dao. 
 	 * 
 	 * @return listaFunc
 	 * @throws ClassNotFoundException
@@ -127,7 +127,7 @@ public class ControlUsuario {
 	}
 
 	/**
-	 * Método que retorna a lista de usuarios
+	 * Metodo que retorna a lista de usuarios
 	 * 
 	 * @return listaUsuarios
 	 * @throws ClassNotFoundException
@@ -139,7 +139,7 @@ public class ControlUsuario {
 	}
 	
 	/**
-	 * Método que verifica se o login existe chamando o método buscaUsuario() da classe Dao.
+	 * Metodo que verifica se o login existe chamando o metodo buscaUsuario() da classe Dao.
 	 * 
 	 * @param login
 	 * @returnusuDao.buscaUsuario(login)

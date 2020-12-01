@@ -20,7 +20,7 @@ public class Usuario extends Funcionario {
 	/** Propriedade fKFuncionario. */
 	private int fKFuncionario;
 
-	/** Construtor padrão */
+	/** Construtor padrao */
 	public Usuario() {
 
 	}
@@ -127,7 +127,7 @@ public class Usuario extends Funcionario {
 	}
 
 	/**
-	 * Método toString
+	 * Metodo toString
 	 */
 	@Override
 	public String toString() {

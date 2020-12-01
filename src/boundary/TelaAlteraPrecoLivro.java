@@ -48,8 +48,6 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent> {
 	/** Propriedade Button btnAlterar */
 	private Button btnAlterar;
 	
-	/** Propriedade TableView tbvLivro*/
-	private TableView<ModelTabelaLivro> tbvLivro;
 	
 	/** Propriedade ControleLivro controle */
 	private ControleLivro controle;
@@ -81,7 +79,7 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent> {
 		stage = new Stage();
 		stage.initModality(Modality.APPLICATION_MODAL);
 		stage.setScene(cena);
-		tbvLivro = tbvPesqLivro;
+	
 	}
 
 	/**
@@ -115,7 +113,7 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent> {
 
 	
 	/**
-	 * Método criaPreco()
+	 * Metodo criaPreco()
 	 */
 	private void criaPreco() {
 
@@ -143,7 +141,7 @@ public class TelaAlteraPrecoLivro implements EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * Método handle - acao ao botao - alterar preco do livro
+	 * Mï¿½todo handle - acao ao botao - alterar preco do livro
 	 */
 	@Override
 	public void handle(ActionEvent event) {

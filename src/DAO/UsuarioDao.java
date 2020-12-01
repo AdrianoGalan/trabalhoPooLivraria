@@ -22,7 +22,7 @@ public class UsuarioDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -35,7 +35,7 @@ public class UsuarioDao {
 	}
 
 	/**
-	 * Método que insere dados na tabela USUARIO do Banco de dados.
+	 * Metodo que insere dados na tabela USUARIO do Banco de dados.
 	 * 
 	 * @param u
 	 * @throws SQLException
@@ -54,7 +54,7 @@ public class UsuarioDao {
 	}
 	
 	/**
-	 *  Método que altera(atualiza) usuario.
+	 *  Metodo que altera(atualiza) usuario.
 	 * 
 	 * @param u
 	 * @throws SQLException
@@ -74,7 +74,7 @@ public class UsuarioDao {
 	}
 	
 	/**
-	 * Método que exclui usuario.
+	 * Metodo que exclui usuario.
 	 * 
 	 * @param IdUsu
 	 * @throws SQLException
@@ -91,7 +91,7 @@ public class UsuarioDao {
 	}
 
 	/**
-	 * Método que busca(pesquisa) usuario no Banco de dados.
+	 * Metodo que busca(pesquisa) usuario no Banco de dados.
 	 * 
 	 * @param usuario
 	 * @return usuario
@@ -124,7 +124,7 @@ public class UsuarioDao {
 	}
 	
 	/**
-	 * Método que busca usuario.
+	 * Metodo que busca usuario.
 	 * 
 	 * @param usuario
 	 * @return true or false
@@ -152,7 +152,7 @@ public class UsuarioDao {
 	}
 
 	/**
-	 * Método que busca a lista de usuarios.
+	 * Metodo que busca a lista de usuarios.
 	 * 
 	 * @return lista de usuarios
 	 * @throws SQLException
@@ -182,7 +182,7 @@ public class UsuarioDao {
 	}
 
 	/**
-	 * Método que altera(atualiza) senha do usuario. 
+	 * Metodo que altera(atualiza) senha do usuario. 
 	 */
 	public void atualizarSenha(int idUsuario, String senhaNova) throws SQLException {
 

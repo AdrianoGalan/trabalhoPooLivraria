@@ -23,7 +23,7 @@ public class RelatorioDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conex�o com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -36,7 +36,7 @@ public class RelatorioDao {
 	}
 
 	/**
-	 * M�todo que busca os livros mais vendidos.
+	 * Metodo que busca os livros mais vendidos.
 	 * 
 	 * @return lista de livros
 	 * @throws SQLException
@@ -73,7 +73,7 @@ public class RelatorioDao {
 	}
 
 	/**
-	 * M�todo que busca os livros menos vendidos.
+	 * Metodo que busca os livros menos vendidos.
 	 * 
 	 * @return lista de livros
 	 * @throws SQLException
@@ -110,7 +110,7 @@ public class RelatorioDao {
 	}
 
 	/**
-	 * M�todo que busca livros com estoque inferior a 5.
+	 * Metodo que busca livros com estoque inferior a 5.
 	 * 
 	 * @return lista de livros
 	 * @throws SQLException
@@ -145,7 +145,7 @@ public class RelatorioDao {
 	}
 
 	/**
-	 * M�todo que busca data e os ultimos livros vendidos.
+	 * Metodo que busca data e os ultimos livros vendidos.
 	 * 
 	 * @return lista
 	 * @throws SQLException
@@ -184,7 +184,7 @@ public class RelatorioDao {
 	}
 
 	/**
-	 * M�todo que mostra o melhor dia da semana para venda.
+	 * Metodo que mostra o melhor dia da semana para venda.
 	 * 
 	 * @return dia da semana
 	 * @throws SQLException

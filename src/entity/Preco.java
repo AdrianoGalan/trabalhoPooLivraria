@@ -3,7 +3,7 @@ package entity;
 import java.util.Date;
 
 /**
- * Classe concreta que representa Preço
+ * Classe concreta que representa Preco
  * 
  * @author Adriano, Gustavo, Roberto
  *
@@ -100,7 +100,7 @@ public class Preco {
 	}
 
 	/**
-	 * Método toString
+	 * Metodo toString
 	 */
 	@Override
 	public String toString() {

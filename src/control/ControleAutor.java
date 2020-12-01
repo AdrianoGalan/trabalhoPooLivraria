@@ -15,7 +15,7 @@ import javafx.collections.ObservableList;
 public class ControleAutor {
 
 	/**
-	 * Método que adiciona autor chamando o método insereAutor da classe Dao 
+	 * Metodo que adiciona autor chamando o metodo insereAutor da classe Dao 
 	 * 
 	 * @param a
 	 * @throws ClassNotFoundException
@@ -34,7 +34,7 @@ public class ControleAutor {
 	}
 
 	/**
-	 * Método que verifica se tem um nome duplicado no Banco de dados chamando o método verificaDuplicNome da classe Dao
+	 * Metodo que verifica se tem um nome duplicado no Banco de dados chamando o metodo verificaDuplicNome da classe Dao
 	 * 
 	 * @param nome
 	 * @return ad.verificaDuplicNome(nome)
@@ -47,7 +47,7 @@ public class ControleAutor {
 	}
 
 	/**
-	 * Método que busca autores chamando o método alteraAutor da classe Dao 
+	 * Metodo que busca autores chamando o metodo alteraAutor da classe Dao 
 	 * 
 	 * @param nome
 	 * @return ad.pesquisarAutores(nome)
@@ -63,7 +63,7 @@ public class ControleAutor {
 	}
 
 	/**
-	 * Método que altera autor chamando o método alteraAutor da Classe Dao
+	 * Metodo que altera autor chamando o metodo alteraAutor da Classe Dao
 	 * 
 	 * @param a
 	 * @throws ClassNotFoundException

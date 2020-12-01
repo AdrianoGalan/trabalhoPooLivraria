@@ -19,7 +19,7 @@ public class VendaDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -32,7 +32,7 @@ public class VendaDao {
 	}
 	
 	/**
-	 * Método que insere dados na tabela venda do Banco de dados.
+	 * Metodo que insere dados na tabela venda do Banco de dados.
 	 * @param idCliente
 	 * @return id
 	 * @throws SQLException

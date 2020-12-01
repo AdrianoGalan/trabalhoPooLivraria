@@ -11,7 +11,7 @@ import connection.Conexao;
 import entity.Endereco;
 
 /**
- * Classe Dao do Endereço
+ * Classe Dao do Endereco
  * 
  * @author Adriano, Gustavo, Roberto
  *
@@ -22,7 +22,7 @@ public class EnderecoDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
@@ -33,7 +33,7 @@ public class EnderecoDao {
 	}
 
 	/**
-	 * Método que insere dados do endereço na tabela ENDERECO do Banco de dados.
+	 * Metodo que insere dados do endereco na tabela ENDERECO do Banco de dados.
 	 * @param e
 	 * @return id
 	 * @throws SQLException
@@ -68,10 +68,10 @@ public class EnderecoDao {
 	}
 
 	/**
-	 * Método que busca endereço da tabela ENDERECO do banco de dados.
+	 * Metodo que busca endereco da tabela ENDERECO do banco de dados.
 	 * 
 	 * @param FkEndereco
-	 * @return endereço
+	 * @return endereco
 	 * @throws SQLException
 	 */
 	public Endereco buscaEndereco(int FkEndereco) throws SQLException {
@@ -94,7 +94,7 @@ public class EnderecoDao {
 	}
 
 	/**
-	 * Método que altera(atualiza) endereco
+	 * Metodo que altera(atualiza) endereco
 	 * 
 	 * @param e
 	 * @throws SQLException

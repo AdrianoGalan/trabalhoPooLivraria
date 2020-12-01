@@ -13,7 +13,7 @@ import DAO.VendaDao;
 public class ControleVenda {
 	
 	/**
-	 * Método que adiciona dados na tabela venda chamando o método inserirVenda() da classe Dao.
+	 * Metodo que adiciona dados na tabela venda chamando o metodo inserirVenda() da classe Dao.
 	 * 
 	 * @param idCliente
 	 * @return vd.inserirVenda(idCliente)

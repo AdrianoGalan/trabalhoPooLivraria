@@ -21,7 +21,7 @@ public class PessoaDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -33,7 +33,7 @@ public class PessoaDao {
 	}
 
 	/**
-	 * Método que insere dados na tabela PESSOA do Banco de dados.
+	 * Metodo que insere dados na tabela PESSOA do Banco de dados.
 	 * 
 	 * @param p
 	 * @return id de pessoa
@@ -69,7 +69,7 @@ public class PessoaDao {
 	}
 	
 	/**
-	 * Método que busca(pesquisa) pessoa por cpf.
+	 * Metodo que busca(pesquisa) pessoa por cpf.
 	 * 
 	 * @param CPF
 	 * @return id de pessoa
@@ -92,7 +92,7 @@ public class PessoaDao {
 	}
 	
 	/**
-	 * Método que altera(atualiza) pessoa
+	 * Metodo que altera(atualiza) pessoa
 	 * 
 	 * @param p
 	 * @throws SQLException
@@ -114,7 +114,7 @@ public class PessoaDao {
 	}
 
 	/**
-	 * Método que verifica se o cpf digitado já está registrado no banco. Evita cpf duplicado.
+	 * Metodo que verifica se o cpf digitado ja este registrado no banco. Evita cpf duplicado.
 	 * 
 	 * @param CPF
 	 * @return true or false
@@ -141,7 +141,7 @@ public class PessoaDao {
 	}
 	
 	/**
-	 * Método que verifica se o email digitado já está registrado no Banco. Evita email duplicado.
+	 * Metodo que verifica se o email digitado ja este registrado no Banco. Evita email duplicado.
 	 * 
 	 * @param Email
 	 * @return true or false

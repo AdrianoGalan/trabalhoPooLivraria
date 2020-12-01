@@ -153,7 +153,7 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 	}
 	
 	/**
-	 * Método handle - acao aos botoes - pesquisar e alterar cliente.
+	 * Metodo handle - acao aos botoes - pesquisar e alterar cliente.
 	 */
 	@Override
 	public void handle(ActionEvent e) {
@@ -172,7 +172,7 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método que carrega tabela com os clientes
+	 * Metodo que carrega tabela com os clientes
 	 */
 	public void carregarTabela() {
 		try {
@@ -186,7 +186,7 @@ public class TelaPesquisaCliente implements ControleTelas, EventHandler<ActionEv
 	}
 	
 	/**
-	 * Método que abre tela cliente para alteracao
+	 * Metodo que abre tela cliente para alteracao
 	 */
 	private void abrirTelaClient() {
 		tela = new BorderPane();

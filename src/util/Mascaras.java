@@ -7,7 +7,7 @@ import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.input.KeyEvent;
 
 /**
- * Classe que faz máscaras para alguns campos das telas do sistema Livraria.
+ * Classe que faz mascaras para alguns campos das telas do sistema Livraria.
  * 
  * @author Adriano, Gustavo, Roberto
  *
@@ -16,7 +16,7 @@ import javafx.scene.input.KeyEvent;
 public class Mascaras {
 	
 	/**
-	 * Método mascaraCep - faz a máscara do cep
+	 * Metodo mascaraCep - faz a mascara do cep
 	 * 
 	 * @param textField
 	 */
@@ -61,7 +61,7 @@ public class Mascaras {
     }
     
     /**
-     * Método mascaraData - faz a máscara da data
+     * Metodo mascaraData - faz a mascara da data
      * 
      * @param textField
      */
@@ -111,7 +111,7 @@ public class Mascaras {
     }
     
     /**
-     * Método mascaraCPF - faz a máscara do cpf
+     * Metodo mascaraCPF - faz a mascara do cpf
      * 
      * @param textField
      */
@@ -169,7 +169,7 @@ public class Mascaras {
     }
     
     /**
-     * Método mascaraTelefone - faz a máscara do telefone
+     * Metodo mascaraTelefone - faz a mascara do telefone
      * 
      * @param textField
      */
@@ -244,7 +244,7 @@ public class Mascaras {
     }
     
     /**
-     * Método mascaraApenasNum - impede que o usuário digite um dado não numérico
+     * Metodo mascaraApenasNum - impede que o usuario digite um dado nao numerico
      * 
      * @param textField
      */

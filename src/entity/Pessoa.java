@@ -148,7 +148,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * Método toString
+	 * Metodo toString
 	 */
 	@Override
 	public String toString() {

@@ -94,7 +94,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 	}
 
 	/**
-	 * Método que adiciona dados do livro
+	 * Metodo que adiciona dados do livro
 	 */
 	private void addLivro() {
 

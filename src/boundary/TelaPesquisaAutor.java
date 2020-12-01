@@ -124,7 +124,7 @@ Pane painel = new Pane();
 	}
 	
 	/**
-	 * Método que abre tela cliente.
+	 * Metodo que abre tela cliente.
 	 */
 	private void abrirTelaClient() {
 		tela = new BorderPane();
@@ -137,7 +137,7 @@ Pane painel = new Pane();
 	}
 	
 	/**
-	 * Método que carrega tabela.
+	 * Metodo que carrega tabela.
 	 */
 	public void carregarTabela(){
 		try {
@@ -148,7 +148,7 @@ Pane painel = new Pane();
 	}
 
 	/**
-	 * Método handle - acao aos botoes - Pesquisar e alterar
+	 * Metodo handle - acao aos botoes - Pesquisar e alterar
 	 */
 	@Override
 	public void handle(ActionEvent event) {

@@ -96,11 +96,11 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 		tbvPesqCliente = new TableView<Usuario>();
 		tbvPesqCliente.setPrefWidth(600);
 
-		btNovoUsuario = new Button("Novo usuário");
+		btNovoUsuario = new Button("Novo usuï¿½rio");
 		btNovoUsuario.addEventHandler(ActionEvent.ACTION, this);
-		btAlterar = new Button("Alterar usuário");
+		btAlterar = new Button("Alterar usuï¿½rio");
 		btAlterar.addEventFilter(ActionEvent.ACTION, this);
-		btExcluir = new Button("Excluir usuário");
+		btExcluir = new Button("Excluir usuï¿½rio");
 		btExcluir.addEventHandler(ActionEvent.ACTION, this);
 		hbBotao.getChildren().addAll(btNovoUsuario, btAlterar, btExcluir);
 
@@ -115,7 +115,7 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método que cria tabela do usuario.
+	 * Mï¿½todo que cria tabela do usuario.
 	 */
 	private void criaTabela() {
 
@@ -134,7 +134,7 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método que atualiza tabela.
+	 * Mï¿½todo que atualiza tabela.
 	 */
 	public void atualizaTabela() {
 		try {
@@ -157,7 +157,7 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método handle - acao aos botoes - adicionar, pesquisar, alterar e excluir usuario.
+	 * Mï¿½todo handle - acao aos botoes - adicionar, pesquisar, alterar e excluir usuario.
 	 */
 	@Override
 	public void handle(ActionEvent event) {
@@ -171,8 +171,8 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 
 			} else {
 				if (i == -1 || i > tbvPesqCliente.getItems().size()) {
-					alertaSelecao.setTitle("Seleção");
-					alertaSelecao.setHeaderText("Por favor selecione um usuário antes de realizar essa ação.");
+					alertaSelecao.setTitle("Selexcao");
+					alertaSelecao.setHeaderText("Por favor selecione um usuario antes de realizar essa acao.");
 					alertaSelecao.showAndWait();
 				} else {
 					if (event.getTarget() == btAlterar) {
@@ -180,9 +180,9 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 					} else if (event.getTarget() == btExcluir) {
 
 						Alert alert = new Alert(AlertType.CONFIRMATION);
-						alert.setTitle("Confirmação de exclusão");
-						alert.setHeaderText("A operação de exclusão não pode ser desfeita");
-						alert.setContentText("Escolha uma opção:");
+						alert.setTitle("Confirmacao de exclusao");
+						alert.setHeaderText("A operacao de exclusao nao pode ser desfeita");
+						alert.setContentText("Escolha uma opcao:");
 						ButtonType buttonConfirma = new ButtonType("Sim");
 						ButtonType buttonCancela = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
 						alert.getButtonTypes().setAll(buttonConfirma, buttonCancela);
@@ -190,8 +190,8 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 						if (result.get() == buttonConfirma) {
 							controle.deletarUsuario(listaUsuarios
 									.get(tbvPesqCliente.getSelectionModel().getSelectedIndex()).getIdUsuario());
-							alertaSelecao.setTitle("Exclusão");
-							alertaSelecao.setHeaderText("Usuário excluido com sucesso.");
+							alertaSelecao.setTitle("Exclusao");
+							alertaSelecao.setHeaderText("Usuario excluido com sucesso.");
 							alertaSelecao.showAndWait();
 						}
 					}

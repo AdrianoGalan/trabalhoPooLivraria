@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Classe de conexão com o Banco.sql.
+ * Classe de conexao com o Banco.sql.
  * 
  * @author Adriano, Gustavo, Roberto
  *
@@ -17,7 +17,7 @@ public class Conexao {
 	private Connection c;
 	
 	/**
-	 * Método que retorna a conexao com o banco
+	 * Metodo que retorna a conexao com o banco
 	 * @return a conexao
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -40,7 +40,7 @@ public class Conexao {
 	}
 	
 	/**
-	 * Método que fecha a conexão com o Banco.sql.
+	 * Metodo que fecha a conexao com o Banco.sql.
 	 * @throws SQLException
 	 */
 	

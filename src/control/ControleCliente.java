@@ -44,7 +44,7 @@ public class ControleCliente {
 	private GregorianCalendar dataCadastro;
 	
 	/**
-	 * Método que busca Cliente por nome chamando o método buscaClienteNome() da classe Dao
+	 * Metodo que busca Cliente por nome chamando o metodo buscaClienteNome() da classe Dao
 	 * 
 	 * @param nome
 	 * @return cd.buscaClienteNome(nome)
@@ -62,7 +62,7 @@ public class ControleCliente {
 	}
 	
 	/**
-	 * Método que busca cliente por cpf chamando o método buscaClienteCpf() da classse Dao
+	 * Metodo que busca cliente por cpf chamando o metodo buscaClienteCpf() da classse Dao
 	 * 
 	 * @param cpf
 	 * @return buscaClienteCpf(cpf)
@@ -80,7 +80,7 @@ public class ControleCliente {
 	}
 	
 	/**
-	 * Método que busca aa lista de clientes por nome chamando o método buscaClienteNome() da classe Dao
+	 * Metodo que busca aa lista de clientes por nome chamando o metodo buscaClienteNome() da classe Dao
 	 * 
 	 * @param nome
 	 * @throws SQLException
@@ -94,7 +94,7 @@ public class ControleCliente {
 	}
 
 	/**
-	 * Método que adiciona dados do cliente, endereco e telefone chamando métodos de inserção da classes Dao.
+	 * Metodo que adiciona dados do cliente, endereco e telefone chamando metodos de insercao da classes Dao.
 	 * 
 	 * @param c
 	 * @param e
@@ -143,7 +143,7 @@ public class ControleCliente {
 	}
 	
 	/**
-	 * Método que altera cliente, endereco e telefone chamando métodos de alteração(atualização) das Classes Dao.
+	 * Metodo que altera cliente, endereco e telefone chamando metodos de alteracao(atualizacao) das Classes Dao.
 	 * 
 	 * @param c
 	 * @param e
@@ -165,7 +165,7 @@ public class ControleCliente {
 	}
 	
 	/**
-	 * Método que busca telefone chamando método buscaTelefone() da classe Dao.
+	 * Metodo que busca telefone chamando metodo buscaTelefone() da classe Dao.
 	 * 
 	 * @param idPessoaFunc
 	 * @return td.buscaTelefone(idPessoaFunc)
@@ -179,7 +179,7 @@ public class ControleCliente {
 	}
 	
 	/**
-	 * Método que busca endereco chamando o método buscaEndereco() da classe Dao.
+	 * Metodo que busca endereco chamando o metodo buscaEndereco() da classe Dao.
 	 * 
 	 * @param FKEndereco
 	 * @return ed.buscaEndereco(FKEndereco)
@@ -193,7 +193,7 @@ public class ControleCliente {
 	}
 	
 	/**
-	 * Método que deleta cliente
+	 * Metodo que deleta cliente
 	 * 
 	 * @param c
 	 * @param e

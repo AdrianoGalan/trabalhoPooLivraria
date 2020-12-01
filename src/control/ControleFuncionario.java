@@ -20,7 +20,7 @@ import javafx.collections.ObservableList;
 public class ControleFuncionario {
 
 	/**
-	 * Método que adiciona funcionario, endereco e telefone chamando métodos de inserção da classe Dao.
+	 * Metodo que adiciona funcionario, endereco e telefone chamando metodos de insercao da classe Dao.
 	 * 
 	 * @param f
 	 * @param e
@@ -73,7 +73,7 @@ public class ControleFuncionario {
 	}
 	
 	/**
-	 * Método que altera funcionario, endereco e telefone chamando métodos de alteração(atualização) das classes Dao.
+	 * Metodo que altera funcionario, endereco e telefone chamando metodos de alteracao(atualizacao) das classes Dao.
 	 * 
 	 * @param f
 	 * @param e
@@ -96,7 +96,7 @@ public class ControleFuncionario {
 	}
 	
 	/**
-	 * Método que busca nome do funcionario chamando o método buscaFuncionarioNome() da classe Dao.
+	 * Metodo que busca nome do funcionario chamando o mï¿½todo buscaFuncionarioNome() da classe Dao.
 	 * 
 	 * @param nome
 	 * @return lista
@@ -111,7 +111,7 @@ public class ControleFuncionario {
 	}
 	
 	/**
-	 * Método que busca telefone do funcionario chamando o método buscaTelefone() da classe Dao.
+	 * Metodo que busca telefone do funcionario chamando o mï¿½todo buscaTelefone() da classe Dao.
 	 * 
 	 * @param idPessoaFunc
 	 * @return telefone
@@ -125,7 +125,7 @@ public class ControleFuncionario {
 	}
 	
 	/**
-	 * Método que busca endereco do funcionario chamando o método buscaEndereco() da classe Dao.
+	 * Mï¿½todo que busca endereco do funcionario chamando o mï¿½todo buscaEndereco() da classe Dao.
 	 * 
 	 * @param FKEndereco
 	 * @return endereco

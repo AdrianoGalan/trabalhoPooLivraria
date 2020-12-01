@@ -111,7 +111,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	private ObservableList<ModelItensVenda> listaVenda;
 
 	/**
-	 * Método handle - acao aos botoes e eventos da tela venda de livro.
+	 * Mï¿½todo handle - acao aos botoes e eventos da tela venda de livro.
 	 */
 	@Override
 	public void handle(ActionEvent e) {
@@ -351,7 +351,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/**
-	 * Método que busca informacoes do cliente
+	 * Mï¿½todo que busca informacoes do cliente
 	 */
 	private void alimentaCamposCliente() {
 
@@ -363,7 +363,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/**
-	 * Método que busca informações do livro
+	 * Metodo que busca informacoes do livro
 	 */
 	private void alimentaCamposLivro() {
 
@@ -381,7 +381,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/**
-	 * Método que carrega comboBox do cliente.
+	 * Mï¿½todo que carrega comboBox do cliente.
 	 * 
 	 * @param nome
 	 */
@@ -399,7 +399,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/**
-	 * Método que carrega a combobox do livro.
+	 * Metodo que carrega a combobox do livro.
 	 * 
 	 * @param titulo
 	 */
@@ -417,7 +417,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/**
-	 * Método que carrega preco.
+	 * Metodo que carrega preco.
 	 * 
 	 * @param id
 	 */
@@ -434,7 +434,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/**
-	 * Método que adiciona um livro ma lista.
+	 * Mï¿½todo que adiciona um livro ma lista.
 	 */
 	private void adicionaItemLista() {
 
@@ -501,7 +501,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/**
-	 * Método que remove um livro da lista.
+	 * Mï¿½todo que remove um livro da lista.
 	 */
 	private void removeItenLista() {
 
@@ -533,7 +533,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/**
-	 * Método que finaliza a venda dos livros.
+	 * Metodo que finaliza a venda dos livros.
 	 */
 	private void finalizarVenda() {
 
@@ -577,7 +577,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/** 
-	 * Método que limpa os campos.
+	 * Metodo que limpa os campos.
 	 */
 	private void limpaCampoLivro() {
 
@@ -596,7 +596,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/**
-	 * Método que limpa campo do cliente.
+	 * Metodo que limpa campo do cliente.
 	 */
 	private void limpaCliente() {
 
@@ -608,7 +608,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 	}
 
 	/**
-	 * Método que limpa tabela.
+	 * Mï¿½todo que limpa tabela.
 	 */
 	private void limpaTabla() {
 

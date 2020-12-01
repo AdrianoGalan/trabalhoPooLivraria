@@ -15,7 +15,7 @@ import tabelaModel.ModelTabelaLivro;
 public class ControleRelatorio {
 
 	/**
-	 * Método que busca os livros mais vendidos chamando o método livroMaisVendido() da classe Dao.
+	 * Metodo que busca os livros mais vendidos chamando o metodo livroMaisVendido() da classe Dao.
 	 * 
 	 * @return rd.livroMaisVendido()
 	 * @throws SQLException
@@ -30,7 +30,7 @@ public class ControleRelatorio {
 	}
 
 	/**
-	 * Método que busca os livros menos vendidos chamando o método livroMenosVendido() da classe Dao. 
+	 * Metodo que busca os livros menos vendidos chamando o metodo livroMenosVendido() da classe Dao. 
 	 * 
 	 * @return rd.livroMenosVendido()
 	 * @throws SQLException
@@ -45,7 +45,7 @@ public class ControleRelatorio {
 	}
 
 	/**
-	 * Método que busca livros com estoque menor que 5 chamando o método livroEstoqueBaixo() da classe Dao.
+	 * Metodo que busca livros com estoque menor que 5 chamando o metodo livroEstoqueBaixo() da classe Dao.
 	 * 
 	 * @return rd.livroEstoqueBaixo()
 	 * @throws ClassNotFoundException
@@ -59,7 +59,7 @@ public class ControleRelatorio {
 	}
 
 	/**
-	 * Método que busca a data dos ultimos livros vendidos chamando o método dataVenda() da classe Dao.
+	 * Metodo que busca a data dos ultimos livros vendidos chamando o metodo dataVenda() da classe Dao.
 	 * 
 	 * @return rd.dataVenda()
 	 * @throws ClassNotFoundException
@@ -73,7 +73,7 @@ public class ControleRelatorio {
 	}
 
 	/**
-	 * Método que mostra o melhor dia da semana para vendas chamando o método melhorDiaSemana() da classe Dao.
+	 * Metodo que mostra o melhor dia da semana para vendas chamando o metodo melhorDiaSemana() da classe Dao.
 	 * 
 	 * @return rd.melhorDiaSemana()
 	 * @throws ClassNotFoundException

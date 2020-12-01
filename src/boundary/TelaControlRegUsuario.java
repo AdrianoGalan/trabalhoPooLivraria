@@ -99,7 +99,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * Método render
+	 * Metodo render
 	 * 
 	 * @param telaM
 	 * @throws ClassNotFoundException
@@ -134,7 +134,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * Método render
+	 * Mï¿½todo render
 	 * 
 	 * @param telaM
 	 * @param lista
@@ -186,7 +186,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * Método criarTela
+	 * Metodo criarTela
 	 * 
 	 * @param vbDi
 	 * @throws ClassNotFoundException
@@ -225,7 +225,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * Método que carrega a comboBox.
+	 * Metodo que carrega a comboBox.
 	 * 
 	 * @return listaFuncStr
 	 * @throws ClassNotFoundException
@@ -241,7 +241,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * Método que verifica se os campos estão corretos.
+	 * Metodo que verifica se os campos estao corretos.
 	 * 
 	 * @return true or false
 	 * @throws ClassNotFoundException
@@ -256,7 +256,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * Método que verifica o campo senha.
+	 * Metodo que verifica o campo senha.
 	 * 
 	 * @return true or false
 	 */
@@ -268,27 +268,27 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 			Mensagens.informacao("Digite uma senha", "Por favor digite uma senha.", "");
 			return false;
 		} else {
-			Mensagens.informacao("Senhas mão coincidem", "Por favor digite a mesma senha em ambos os campos.", "");
+			Mensagens.informacao("Senhas mï¿½o coincidem", "Por favor digite a mesma senha em ambos os campos.", "");
 			return false;
 		}
 	}
 
 	/**
-	 * Método que verifica se o funcionario foi selecionado na comboBox
+	 * Metodo que verifica se o funcionario foi selecionado na comboBox
 	 * 
 	 * @return true or false
 	 */
 	private boolean verificaFunc() {
 		if(cbFuncionario == null) {
 			if (txtFuncionario.equals("")){
-				Mensagens.informacao("Funcionario não selecionado", "Por favor selecione algum funcionario.", "");
+				Mensagens.informacao("Funcionario nï¿½o selecionado", "Por favor selecione algum funcionario.", "");
 				return false;
 			}else {
 				return true;
 			}
 		}else {
 			if(cbFuncionario.getSelectionModel().isEmpty()) {
-				Mensagens.informacao("Funcionario não selecionado", "Por favor selecione algum funcionario.", "");
+				Mensagens.informacao("Funcionario nï¿½o selecionado", "Por favor selecione algum funcionario.", "");
 				return false;
 			}else {
 				return true;
@@ -297,7 +297,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	}
 	
 	/**
-	 * Método que verifica o campo login.
+	 * Metodo que verifica o campo login.
 	 * 
 	 * @return
 	 * @throws ClassNotFoundException
@@ -308,7 +308,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 			Mensagens.informacao("Digite um login", "Por favor digite um login.", "");
 			return false;
 		} else if (control.verificaExistenciaLogin(txtLogin.getText())){
-			Mensagens.informacao("Login inválido", "Login já existe, por favor digite outro.", "");
+			Mensagens.informacao("Login invï¿½lido", "Login jï¿½ existe, por favor digite outro.", "");
 			return false;
 		}else {
 			return true;
@@ -317,7 +317,7 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	
 
 	/**
-	 * Método handle - acao aos botoes - cadastrar e alterar
+	 * Mï¿½todo handle - acao aos botoes - cadastrar e alterar
 	 */
 	@Override
 	public void handle(ActionEvent event) {

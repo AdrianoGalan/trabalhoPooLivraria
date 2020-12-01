@@ -19,7 +19,7 @@ public class Cliente extends Pessoa {
 	/** Propriedade fkPessoaCliente. */
 	private int fkPessoaCliente;
 
-	/** Construtor padrão */
+	/** Construtor padrao */
 	public Cliente() {
 
 	}
@@ -82,7 +82,7 @@ public class Cliente extends Pessoa {
 	}
 
 	/**
-	 * Método toString
+	 * Metodo toString
 	 */
 	@Override
 	public String toString() {

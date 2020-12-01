@@ -123,7 +123,7 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 	}
 
 	/**
-	 * Método handle - acao aos botoes - pesquisar livro e alterar preco.
+	 * Metodo handle - acao aos botoes - pesquisar livro e alterar preco.
 	 */
 	@Override
 	public void handle(ActionEvent e) {
@@ -149,7 +149,7 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 	}
 
 	/**
-	 * Método que carrega tabela de livro
+	 * Mï¿½todo que carrega tabela de livro
 	 */
 	public void carregarTabela() {
 		try {
@@ -162,7 +162,7 @@ public class TelaPesquisaLivro implements ControleTelas, EventHandler<ActionEven
 	}
 
 	/**
-	 * Método que carrega a tela
+	 * Metodo que carrega a tela
 	 */
 	private void carregarTela() {
 

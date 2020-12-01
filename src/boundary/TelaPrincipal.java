@@ -36,7 +36,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private BorderPane painelPrincipal = new BorderPane();
 
 	/**
-	 * Cena Login, principal e suas dimens�es.
+	 * Cena Login, principal e suas dimensoes.
 	 */
 	private Scene login = new Scene(painelLogin, 350, 140);
 	private Scene principal = new Scene(painelPrincipal, 1000, 600);
@@ -84,7 +84,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private MenuItem menuPesquisaFuncionario = new MenuItem("Funcionario");
 
 	/**
-	 * M�todo start que mostrar� a tela
+	 * Metodo start que mostrar a tela
 	 */
 
 	@Override
@@ -132,7 +132,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	}
 
 	/**
-	 * Iniciando a aplica��o
+	 * Iniciando a aplicacao
 	 * 
 	 * @param args
 	 */
@@ -209,7 +209,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	}
 
 	/**
-	 * M�todo que loga um funcion�rio
+	 * Metodo que loga um funcionario
 	 * 
 	 * @param idFuncionario
 	 */
@@ -230,7 +230,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	}
 
 	/**
-	 * M�todo que aciona a��o a tela Principal
+	 * Metodo que aciona acao a tela Principal
 	 */
 
 	@Override
@@ -269,8 +269,8 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	}
 
 	/**
-	 * M�todo que posiciona tela inicial no centro da cena e aplica a fun��o de sair
-	 * da aplica��o caso o usu�rio clique no menuInicioSair
+	 * Metodo que posiciona tela inicial no centro da cena e aplica a funcao de sair
+	 * da aplicacao caso o usuario clique no menuInicioSair
 	 */
 
 	@Override
@@ -288,7 +288,7 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	}
 
 	/**
-	 * M�todo que faz a chamada do logarFuncionario
+	 * Metodo que faz a chamada do logarFuncionario
 	 */
 
 	@Override

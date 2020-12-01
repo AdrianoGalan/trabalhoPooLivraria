@@ -23,7 +23,7 @@ import javafx.scene.text.Font;
 public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 
 	/**
-	 * M�todo handle
+	 * Metodo handle
 	 */
 	@Override
 	public void handle(ActionEvent event) {

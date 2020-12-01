@@ -38,7 +38,7 @@ public class Livro {
 	/** Propriedade descricao. */
 	private String descricao;
 
-	/** Construtor padrão */
+	/** Construtor padrao */
 	public Livro() {
 
 	}
@@ -217,7 +217,7 @@ public class Livro {
 	/**
 	 * Recupera a propriedade descricao.
 	 * 
-	 * @return descrição do livro
+	 * @return descricao do livro
 	 */
 	public String getDescricao() {
 		return descricao;
@@ -227,14 +227,14 @@ public class Livro {
 	 * Configura a propriedade descricao.
 	 * 
 	 * @param descricao
-	 * 				descrição do livro informado.
+	 * 				descricao do livro informado.
 	 */
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
 	/**
-	 * Método toString
+	 * Metodo toString
 	 */
 	@Override
 	public String toString() {

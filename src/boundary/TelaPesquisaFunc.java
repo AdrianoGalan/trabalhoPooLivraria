@@ -139,7 +139,7 @@ public class TelaPesquisaFunc implements ControleTelas, EventHandler<ActionEvent
 	}
 	
 	/**
-	 * Método que carrega a tabela.
+	 * Metodo que carrega a tabela.
 	 */
 	public void carregaTabela() {
 		try {
@@ -152,7 +152,7 @@ public class TelaPesquisaFunc implements ControleTelas, EventHandler<ActionEvent
 	}
 	
 	/**
-	 * Método que abre a tela funcionario para alteracao.
+	 * Metodo que abre a tela funcionario para alteracao.
 	 */
 	private void abrirTelaFuncio() {
 		tela = new BorderPane();
@@ -165,7 +165,7 @@ public class TelaPesquisaFunc implements ControleTelas, EventHandler<ActionEvent
 	}
 	
 	/**
-	 * Método handle - acao aos botoes - pesquisar e alterar funcionario.
+	 * Metodo handle - acao aos botoes - pesquisar e alterar funcionario.
 	 */
 	@Override
 	public void handle(ActionEvent event) {

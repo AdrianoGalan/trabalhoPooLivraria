@@ -21,7 +21,7 @@ public class TelefoneDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -33,7 +33,7 @@ public class TelefoneDao {
 	}
 
 	/**
-	 * Método que insere dados na tabela TELEFONE do banco de dados.
+	 * Metodo que insere dados na tabela TELEFONE do banco de dados.
 	 * 
 	 * @param t
 	 * @throws SQLException
@@ -56,7 +56,7 @@ public class TelefoneDao {
 	}
 	
 	/**
-	 * Método que faz busca(pesquisa) de telefone de uma pessoa atraves do id.
+	 * Metodo que faz busca(pesquisa) de telefone de uma pessoa atraves do id.
 	 * 
 	 * @param idPessoa
 	 * @return telefone
@@ -78,7 +78,7 @@ public class TelefoneDao {
 	}
 	
 	/**
-	 * Método que altera(atualiza) telefone de uma pessoa.
+	 * Metodo que altera(atualiza) telefone de uma pessoa.
 	 * @param idPessoa
 	 * @param telefone
 	 * @throws SQLException

@@ -125,7 +125,7 @@ public class Telefone {
 	}
 
 	/**
-	 * Método toString
+	 * Metodo toString
 	 */
 	@Override
 	public String toString() {

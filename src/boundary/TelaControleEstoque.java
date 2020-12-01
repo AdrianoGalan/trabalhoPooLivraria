@@ -127,7 +127,7 @@ public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método handle - acao aos botoes - pesquisar e atualizar estoque
+	 * Metodo handle - acao aos botoes - pesquisar e atualizar estoque
 	 */
 	@Override
 	public void handle(ActionEvent e) {
@@ -144,7 +144,7 @@ public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método que atualiza a quantidade de livros no estoque
+	 * Metodo que atualiza a quantidade de livros no estoque
 	 */
 	private void atualizaEstoque() {
 
@@ -171,14 +171,14 @@ public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método que carrega a tabela
+	 * Metodo que carrega a tabela
 	 */
 	private void carregarTabela() {
 		tbvPesqLivro.setItems(controle.getLista());
 	}
 
 	/**
-	 * Método que carrega a tela
+	 * Mï¿½todo que carrega a tela
 	 */
 	private void carregarTela() {
 
@@ -203,7 +203,7 @@ public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEv
 	}
 
 	/**
-	 * Método que faz a busca(pesquisa) de livros
+	 * Mï¿½todo que faz a busca(pesquisa) de livros
 	 */
 	private void buscaLivro() {
 
