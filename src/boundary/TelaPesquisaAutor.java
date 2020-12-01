@@ -24,18 +24,44 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.Mensagens;
 
+/**
+ * Classe tela de pesquisa de autor e implementa a interface ControleTelas do package control.
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaPesquisaAutor implements ControleTelas, EventHandler<ActionEvent> {
 	
+	/** Propriedade control*/
 	private ControleAutor control = new ControleAutor();
+	
+	/** Propriedade btPesquisar */
 	private Button btPesquisar;
+	
+	/** Propriedade btAlterar */
 	private Button btAlterar;
+	
+	/** Propriedade tbvPesqAutor */
 	private TableView<Autor> tbvPesqAutor;
+	
+	/** Propriedade tfPesquisa */
 	private TextField tfPesquisa;
+	
+	/** Propriedade tela */
 	private BorderPane tela;
+	
+	/** Propriedade stage */
 	public Stage stage;
+	
+	/** Propriedade cena */
 	private Scene cena;
+	
+	/** Propriedade telaAutor */
 	private TelaCadastroAutor telaAutor;
 
+	/**
+	 * Painel render
+	 */
 	@Override
 	public Pane render() {
 Pane painel = new Pane();
@@ -97,6 +123,9 @@ Pane painel = new Pane();
 		
 	}
 	
+	/**
+	 * Método que abre tela cliente.
+	 */
 	private void abrirTelaClient() {
 		tela = new BorderPane();
 		cena = new Scene(tela, 680, 130);
@@ -107,6 +136,9 @@ Pane painel = new Pane();
 		stage.show();
 	}
 	
+	/**
+	 * Método que carrega tabela.
+	 */
 	public void carregarTabela(){
 		try {
 			tbvPesqAutor.setItems(control.buscaClienteNome(tfPesquisa.getText()));
@@ -115,6 +147,9 @@ Pane painel = new Pane();
 		}
 	}
 
+	/**
+	 * Método handle - acao aos botoes - Pesquisar e alterar
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		if(event.getSource() == btPesquisar) {
@@ -131,6 +166,10 @@ Pane painel = new Pane();
 		}
 		
 	}
+	
+	/**
+	 * Gerenciador Principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub

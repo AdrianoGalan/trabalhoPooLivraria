@@ -10,10 +10,24 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tabelaModel.ModelTabelaLivro;
 
+
+/**
+ * Classe Dao do Relatorio
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class RelatorioDao {
 
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public RelatorioDao() throws ClassNotFoundException, SQLException {
 
 		Conexao con = new Conexao();
@@ -21,6 +35,12 @@ public class RelatorioDao {
 		c = con.getConnection();
 	}
 
+	/**
+	 * Método que busca os livros mais vendidos.
+	 * 
+	 * @return lista de livros
+	 * @throws SQLException
+	 */
 	public ObservableList<ModelTabelaLivro> livroMaisVendido() throws SQLException {
 
 		ModelTabelaLivro l;
@@ -52,6 +72,12 @@ public class RelatorioDao {
 		return lista;
 	}
 
+	/**
+	 * Método que busca os livros menos vendidos.
+	 * 
+	 * @return lista de livros
+	 * @throws SQLException
+	 */
 	public ObservableList<ModelTabelaLivro> livroMenosVendido() throws SQLException {
 
 		ModelTabelaLivro l;
@@ -83,6 +109,12 @@ public class RelatorioDao {
 		return lista;
 	}
 
+	/**
+	 * Método que busca livros com estoque inferior a 5.
+	 * 
+	 * @return lista de livros
+	 * @throws SQLException
+	 */
 	public ObservableList<ModelTabelaLivro> livroEstoqueBaixo() throws SQLException {
 
 		ModelTabelaLivro l;
@@ -112,6 +144,12 @@ public class RelatorioDao {
 		return lista;
 	}
 
+	/**
+	 * Método que busca data e os ultimos livros vendidos.
+	 * 
+	 * @return lista
+	 * @throws SQLException
+	 */
 	public ObservableList<ModelTabelaLivro> dataVenda() throws SQLException {
 
 		ModelTabelaLivro l;
@@ -144,6 +182,12 @@ public class RelatorioDao {
 		return lista;
 	}
 
+	/**
+	 * Método que mostra o melhor dia da semana para venda.
+	 * 
+	 * @return dia da semana
+	 * @throws SQLException
+	 */
 	public int melhorDiaSemana() throws SQLException {
 		
 		int dia = -1;

@@ -23,16 +23,38 @@ import javafx.scene.layout.VBox;
 import tabelaModel.ModelTabelaLivro;
 import util.Mensagens;
 
+/**
+ * Classe tela de controle do estoque e implementa a interface ControleTelas do package control
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade controle */
 	private ControleLivro controle = new ControleLivro();
+	
+	/** Propriedade tbvPesqLivro */
 	private TableView<ModelTabelaLivro> tbvPesqLivro;
+	
+	/** Propriedade btPesquisar */
 	private Button btPesquisar;
+	
+	/** Propriedade btAtualizar */
 	private Button btAtualizar;
+	
+	/** Propriedade tfPesquisa */
 	private TextField tfPesquisa;
+	
+	/** Propriedade tfQtsLivros */
 	private TextField tfQtsLivros;
+	
+	/** Propriedade cbOpcPesq */
 	private ComboBox<String> cbOpcPesq;
 
+	/**
+	 * Painel Render
+	 */
 	@Override
 	public Pane render() {
 		Pane painel = new Pane();
@@ -106,6 +128,9 @@ public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEv
 		return painel;
 	}
 
+	/**
+	 * Método handle - acao aos botoes - pesquisar e atualizar estoque
+	 */
 	@Override
 	public void handle(ActionEvent e) {
 		if (e.getTarget() == btPesquisar) {
@@ -120,6 +145,9 @@ public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEv
 
 	}
 
+	/**
+	 * Método que atualiza a quantidade de livros no estoque
+	 */
 	private void atualizaEstoque() {
 
 		try {
@@ -144,10 +172,16 @@ public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEv
 
 	}
 
+	/**
+	 * Método que carrega a tabela
+	 */
 	private void carregarTabela() {
 		tbvPesqLivro.setItems(controle.getLista());
 	}
 
+	/**
+	 * Método que carrega a tela
+	 */
 	private void carregarTela() {
 
 		TableColumn<ModelTabelaLivro, String> colTitulo = new TableColumn<>("Titulo");
@@ -170,6 +204,9 @@ public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEv
 
 	}
 
+	/**
+	 * Método que faz a busca(pesquisa) de livros
+	 */
 	private void buscaLivro() {
 
 		try {
@@ -183,6 +220,9 @@ public class TelaControleEstoque implements ControleTelas, EventHandler<ActionEv
 
 	}
 
+	/**
+	 * Gerenciador principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub

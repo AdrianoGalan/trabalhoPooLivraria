@@ -10,10 +10,22 @@ import entity.Cliente;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Classe Dao do Cliente
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class ClienteDao {
 	
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public ClienteDao() throws ClassNotFoundException, SQLException {
 
 		Conexao con = new Conexao();
@@ -21,6 +33,12 @@ public class ClienteDao {
 	}
 
 
+	/**
+	 * Método que insere os dados do cliente no Banco de dados.
+	 * 
+	 * @param cliente
+	 * @throws SQLException
+	 */
 	public void insereCliente(Cliente cliente) throws SQLException {
 		
 		String sql = "INSERT INTO CLIENTE VALUES ( GETDATE(), ?)";
@@ -33,6 +51,12 @@ public class ClienteDao {
 		ps.close();
 	}
 	
+	/**
+	 * Método que altera(atualiza) os dados do cliente no Banco de dados.
+	 * 
+	 * @param cliente
+	 * @throws SQLException
+	 */
 	public void atualizaCliente(Cliente cliente) throws SQLException {
 		
 		String sql = "UPDATE CLIENTE c SET nome = ? WHERE c.FK_PESSOA_CLIENTE = ?";
@@ -48,6 +72,12 @@ public class ClienteDao {
 	
 
 	
+	/**
+	 * Método que exclui dados do cliente no Banco de dados.
+	 * 
+	 * @param cliente
+	 * @throws SQLException
+	 */
 	public void excluiCliente(Cliente cliente) throws SQLException {
 		
 		String sql = "DELETE CLIENTE c WHERE c.FK_PESSOA_CLIENTE = ?";
@@ -59,6 +89,13 @@ public class ClienteDao {
 		ps.close();
 	}
 
+	/**
+	 * Método que faz busca (pesquisa) de cliente por nome.
+	 * 
+	 * @param nome
+	 * @return lista
+	 * @throws SQLException
+	 */
 	public ObservableList<Cliente> buscaClienteNome(String nome) throws SQLException {
 
 		Cliente cliente;
@@ -100,6 +137,12 @@ public class ClienteDao {
 
 	}
 	
+	/**
+	 * Método que faz a busca(pesquisa) de um cliente por cpf.
+	 * @param cpf
+	 * @return cliente
+	 * @throws SQLException
+	 */
 	public Cliente buscaClienteCpf(String cpf) throws SQLException {
 		
 		Cliente cliente = new Cliente();

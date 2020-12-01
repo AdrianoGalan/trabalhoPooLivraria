@@ -37,36 +37,84 @@ import javafx.util.StringConverter;
 import tabelaModel.ModelItensVenda;
 import util.Mensagens;
 
+/**
+ * Classe tela venda livro e implementa a interface ControleTelas do package control.
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade tfCpfCliente */
 	private TextField tfCpfCliente;
+	
+	/** Propriedade tfISBN */
 	private TextField tfISBN;
+	
+	/** Propriedade tfPreco */
 	private TextField tfPreco;
+	
+	/** Propriedade tfPrecoTotal */
 	private TextField tfPrecoTotal;
+	
+	/** Propriedade tfQtsLivros */
 	private TextField tfQtsLivros;
 
+	
+	/** Propriedade cbLivro */
 	private ComboBox<Livro> cbLivro;
+	
+	/** Propriedade cbNome */
 	private ComboBox<Cliente> cbNome;
 
+	
+	/** Propriedade tbItes */
 	private TableView<ModelItensVenda> tbItes;
 
+	
+	/** Propriedade btnAdd */
 	private Button btnAdd;
+	
+	/** Propriedade btnFinalizar */
 	private Button btnFinalizar;
+	
+	/** Propriedade btnRemover */
 	private Button btnRemover;
 
+	
+	/** Propriedade cliente */
 	private Cliente cliente;
+	
+	/** Propriedade livro */
 	private Livro livro;
+	
+	/** Propriedade preco */
 	private Preco preco;
 
+	
+	/** Propriedade precoTotal */
 	private double precoTotal = 0;
+	
+	/** Propriedade qtdLivro */
 	private int qtdLivro = 0;
 
+	
+	/** Propriedade cc */
 	private ControleCliente cc;
+	
+	/** Propriedade cl */
 	private ControleLivro cl;
+	
+	/** Propriedade cp */
 	private ControlePreco cp;
 
+	
+	/** Propriedade listaVenda */
 	private ObservableList<ModelItensVenda> listaVenda;
 
+	/**
+	 * Método handle - acao aos botoes e eventos da tela venda de livro.
+	 */
 	@Override
 	public void handle(ActionEvent e) {
 
@@ -99,6 +147,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 	}
 
+	/**
+	 * Painel render
+	 */
 	@Override
 	public Pane render() {
 
@@ -146,7 +197,7 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		colQtsVenda.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, Integer>("qtsVenda"));
 		colQtsVenda.setPrefWidth(100);
 
-		TableColumn<ModelItensVenda, Double> colPreco = new TableColumn<>("PreÃ§o");
+		TableColumn<ModelItensVenda, Double> colPreco = new TableColumn<>("Preco");
 		colPreco.setCellValueFactory(new PropertyValueFactory<ModelItensVenda, Double>("preco"));
 		colPreco.setPrefWidth(100);
 
@@ -301,6 +352,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		return painel;
 	}
 
+	/**
+	 * Método que busca informacoes do cliente
+	 */
 	private void alimentaCamposCliente() {
 
 		tfCpfCliente.setEditable(true);
@@ -310,6 +364,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		tfCpfCliente.setEditable(false);
 	}
 
+	/**
+	 * Método que busca informações do livro
+	 */
 	private void alimentaCamposLivro() {
 
 		carregaPreco(livro.getPrecoAtual());
@@ -325,6 +382,11 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 	}
 
+	/**
+	 * Método que carrega comboBox do cliente.
+	 * 
+	 * @param nome
+	 */
 	private void carregaCbCliente(String nome) {
 
 		try {
@@ -338,6 +400,11 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 	}
 
+	/**
+	 * Método que carrega a combobox do livro.
+	 * 
+	 * @param titulo
+	 */
 	private void carregaCbLivro(String titulo) {
 
 		try {
@@ -351,6 +418,11 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 	}
 
+	/**
+	 * Método que carrega preco.
+	 * 
+	 * @param id
+	 */
 	private void carregaPreco(int id) {
 
 		try {
@@ -363,6 +435,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 		}
 	}
 
+	/**
+	 * Método que adiciona um livro ma lista.
+	 */
 	private void adicionaItemLista() {
 
 		try {
@@ -422,11 +497,14 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 				Mensagens.erro("Quantidade", "Quantidade invalida", "NÃ£o tem livro no estoque");
 			}
 		} catch (Exception e) {
-			Mensagens.erro("Quantidade", "Quantidade invalida", "Dgite uma quantidade valida");
+			Mensagens.erro("Quantidade", "Quantidade invalida", "Digite uma quantidade valida");
 		}
 
 	}
 
+	/**
+	 * Método que remove um livro da lista.
+	 */
 	private void removeItenLista() {
 
 		if (listaVenda != null && tbItes.getSelectionModel().getSelectedItem() != null) {
@@ -456,6 +534,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 	}
 
+	/**
+	 * Método que finaliza a venda dos livros.
+	 */
 	private void finalizarVenda() {
 
 		int idVenda = -1;
@@ -497,6 +578,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 	}
 
+	/** 
+	 * Método que limpa os campos.
+	 */
 	private void limpaCampoLivro() {
 
 		tfISBN.setEditable(true);
@@ -513,6 +597,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 	}
 
+	/**
+	 * Método que limpa campo do cliente.
+	 */
 	private void limpaCliente() {
 
 		tfCpfCliente.setEditable(true);
@@ -522,6 +609,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 	}
 
+	/**
+	 * Método que limpa tabela.
+	 */
 	private void limpaTabla() {
 
 		listaVenda.clear();
@@ -532,6 +622,9 @@ public class TelaVendaLivro implements ControleTelas, EventHandler<ActionEvent> 
 
 	}
 
+	/**
+	 * Gerenciador Principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 

@@ -22,7 +22,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- * Classe Tela Principal que gerencia as outras telas. 
+ * Classe Tela Principal que gerencia as outras telas e implementa a interface GetenciadorPrincipal. 
  * 
  * @author Adriano, Gustavo e Roberto.
  *

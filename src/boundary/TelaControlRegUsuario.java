@@ -29,25 +29,68 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.Mensagens;
 
+/**
+ * Classe tela de controle Usuario.
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
+	/** Propriedade control */
 	private ControlUsuario control;
-	private ComboBox<String> cbFuncionario; 
+	
+	/** Propriedade cbFuncionario */
+	private ComboBox<String> cbFuncionario;
+	
+	/** Propriedade txtFuncionario */
 	private TextField txtFuncionario;
+	
+	/** Propriedade listaFunc */
 	private ObservableList<Funcionario> listaFunc;
+	
+	/** Propriedade listaFuncStr */
 	private ObservableList<String> listaFuncStr;
+	
+	/** Propriedade fun */
 	private Funcionario fun;
+	
+	/** Propriedade txtSenha */
 	private PasswordField txtSenha;
+	
+	/** Propriedade txtNovamSenha */
 	private PasswordField txtNovamSenha;
+	
+	/** Propriedade txtLogin */
 	private TextField txtLogin;
+	
+	/** Propriedade btnCadastrar */
 	private Button btnCadastrar;
+	
+	/** Propriedade btnAlterar */
 	private Button btnAlterar;
+	
+	/** Propriedade tela */
 	private BorderPane tela;
+	
+	/** Propriedade painel */
 	private Pane painel;
+	
+	/** Propriedade stage */
 	private Stage stage;
+	
+	/** Propriedade cena */
 	private Scene cena;
+	
+	/** Propriedade telaControle */
 	private TelaControleUsuario telaControle;
 
+	/**
+	 * TelaControlRegUsuario
+	 * 
+	 * @param cont
+	 * @param telaMae
+	 */
 	TelaControlRegUsuario(ControlUsuario cont,Stage telaMae) {
 		control = cont;
 		tela = new BorderPane();
@@ -59,6 +102,13 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
 	}
 
+	/**
+	 * Método render
+	 * 
+	 * @param telaM
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public void render(TelaControleUsuario telaM) throws ClassNotFoundException, SQLException {
 
 		telaControle = telaM;
@@ -87,6 +137,15 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
 	}
 
+	/**
+	 * Método render
+	 * 
+	 * @param telaM
+	 * @param lista
+	 * @param tabela
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public void render(TelaControleUsuario telaM,ObservableList<Usuario> lista, TableView<Usuario> tabela)
 			throws ClassNotFoundException, SQLException {
 
@@ -130,6 +189,13 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
 	}
 
+	/**
+	 * Método criarTela
+	 * 
+	 * @param vbDi
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	private void criarTela(VBox vbDi) throws ClassNotFoundException, SQLException {
 
 		painel = new Pane();
@@ -162,6 +228,13 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 
 	}
 
+	/**
+	 * Método que carrega a comboBox.
+	 * 
+	 * @return listaFuncStr
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	private ObservableList<String> carregaComboBox() throws ClassNotFoundException, SQLException {
 		listaFunc = control.getListaFuncionarios();
 		listaFuncStr = FXCollections.observableArrayList();
@@ -171,6 +244,13 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 		return listaFuncStr;
 	}
 
+	/**
+	 * Método que verifica se os campos estão corretos.
+	 * 
+	 * @return true or false
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	private boolean verificarCampos() throws ClassNotFoundException, SQLException {
 		if(verificaFunc() && verificaSenhas() && verificaUser() ) {
 			return true;
@@ -179,6 +259,11 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 		}
 	}
 
+	/**
+	 * Método que verifica o campo senha.
+	 * 
+	 * @return true or false
+	 */
 	private boolean verificaSenhas() {
 		if ((txtSenha.getText().equals(txtNovamSenha.getText()))
 				&& !(txtSenha.getText().equals("") || txtNovamSenha.getText().equals(""))) {
@@ -192,6 +277,11 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 		}
 	}
 
+	/**
+	 * Método que verifica se o funcionario foi selecionado na comboBox
+	 * 
+	 * @return true or false
+	 */
 	private boolean verificaFunc() {
 		if(cbFuncionario == null) {
 			if (txtFuncionario.equals("")){
@@ -210,6 +300,13 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 		}
 	}
 	
+	/**
+	 * Método que verifica o campo login.
+	 * 
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	private boolean verificaUser() throws ClassNotFoundException, SQLException {
 		if (txtLogin.getText().equals("")) {
 			Mensagens.informacao("Digite um login", "Por favor digite um login.", "");
@@ -223,6 +320,9 @@ public class TelaControlRegUsuario implements EventHandler<ActionEvent> {
 	}
 	
 
+	/**
+	 * Método handle - acao aos botoes - cadastrar e alterar
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		

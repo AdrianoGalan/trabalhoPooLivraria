@@ -10,10 +10,23 @@ import entity.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Classe Dao do Usuario
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class UsuarioDao {
 
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public UsuarioDao() throws ClassNotFoundException, SQLException {
 
 		Conexao con = new Conexao();
@@ -21,6 +34,12 @@ public class UsuarioDao {
 
 	}
 
+	/**
+	 * Método que insere dados na tabela USUARIO do Banco de dados.
+	 * 
+	 * @param u
+	 * @throws SQLException
+	 */
 	public void insereUsuario(Usuario u) throws SQLException {
 		String sql = "INSERT INTO USUARIO VALUES(?,?,?)";
 		PreparedStatement ps = c.prepareStatement(sql);
@@ -34,6 +53,12 @@ public class UsuarioDao {
 
 	}
 	
+	/**
+	 *  Método que altera(atualiza) usuario.
+	 * 
+	 * @param u
+	 * @throws SQLException
+	 */
 	public void alteraUsuario(Usuario u)throws SQLException {
 		
 		String sql = "update USUARIO set LOGIN = ?,SENHA = ? WHERE FK_FUNCIONARIO_USUARIO = ?";
@@ -48,6 +73,12 @@ public class UsuarioDao {
 
 	}
 	
+	/**
+	 * Método que exclui usuario.
+	 * 
+	 * @param IdUsu
+	 * @throws SQLException
+	 */
 	public void deletarUsuario(int IdUsu)throws SQLException {
 		
 		String sql = "Delete from USUARIO where ID_USUARIO = ?";
@@ -59,6 +90,13 @@ public class UsuarioDao {
 		
 	}
 
+	/**
+	 * Método que busca(pesquisa) usuario no Banco de dados.
+	 * 
+	 * @param usuario
+	 * @return usuario
+	 * @throws SQLException
+	 */
 	public Usuario buscaUsuarioUsuario(String usuario) throws SQLException {
 
 		Usuario u = new Usuario();
@@ -85,6 +123,13 @@ public class UsuarioDao {
 
 	}
 	
+	/**
+	 * Método que busca usuario.
+	 * 
+	 * @param usuario
+	 * @return true or false
+	 * @throws SQLException
+	 */
 	public boolean buscaUsuario(String usuario) throws SQLException {
 
 		boolean u = false;
@@ -105,7 +150,13 @@ public class UsuarioDao {
 		return u;
 
 	}
-	
+
+	/**
+	 * Método que busca a lista de usuarios.
+	 * 
+	 * @return lista de usuarios
+	 * @throws SQLException
+	 */
 	public ObservableList<Usuario> buscaListaUsuarios() throws SQLException{
 		
 		ObservableList<Usuario> lista = FXCollections.observableArrayList();
@@ -130,6 +181,9 @@ public class UsuarioDao {
 		
 	}
 
+	/**
+	 * Método que altera(atualiza) senha do usuario. 
+	 */
 	public void atualizarSenha(int idUsuario, String senhaNova) throws SQLException {
 
 		String sql = "UPDATE USUARIO SET SENHA = ? WHERE ID_USUARIO = ?";

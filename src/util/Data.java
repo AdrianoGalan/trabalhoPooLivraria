@@ -12,7 +12,13 @@ import java.util.Date;
  */
 
 public class Data {
-	
+	/**
+	 * Método de conversão do formato data
+	 * @param data
+	 * @return sdf.parse(data)
+	 * @throws ParseException
+	 * @throws java.text.ParseException
+	 */
 	 public static Date parseDate(String data) throws ParseException, java.text.ParseException {
 	        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	        sdf.setLenient(false);

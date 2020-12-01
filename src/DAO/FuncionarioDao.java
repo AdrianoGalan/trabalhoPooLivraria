@@ -11,12 +11,23 @@ import entity.Usuario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
+/**
+ * Classe Dao do Funcionario
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class FuncionarioDao {
 	
-
+	/** Conexao c. */
 	private Connection c;
 
+	/**
+	 * Classe que recupera a conexão com o Banco.
+	 * 
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public FuncionarioDao() throws ClassNotFoundException, SQLException {
 
 		Conexao con = new Conexao();
@@ -25,6 +36,12 @@ public class FuncionarioDao {
 
 	}
 
+	/**
+	 * Método que insere dados do funcionario na tabela FUNCIONARIO do Banco de dados.
+	 * 
+	 * @param f
+	 * @throws SQLException
+	 */
 	public void insereFuncionario(Funcionario f) throws SQLException {
 		
 		java.sql.Date sqlData = new java.sql.Date(f.getDataAdmissao().getTime());
@@ -41,6 +58,13 @@ public class FuncionarioDao {
 		
 	}
 
+	/**
+	 * Método que faz busca do funcionario por id.
+	 * 
+	 * @param id
+	 * @return funcionario
+	 * @throws SQLException
+	 */
 	public Funcionario buscaFuncionarioId(int id) throws SQLException {
 
 		Funcionario f = new Funcionario();
@@ -69,6 +93,13 @@ public class FuncionarioDao {
 
 	}
 	
+	/**
+	 * Método que faz busca do funcionario por nome.
+	 * 
+	 * @param nome
+	 * @return lista
+	 * @throws SQLException
+	 */
 	public ObservableList<Funcionario> buscaFuncionarioNome(String nome) throws SQLException {
 
 		ObservableList<Funcionario> lista = FXCollections.observableArrayList();
@@ -104,6 +135,12 @@ public class FuncionarioDao {
 
 	}
 	
+	/**
+	 * Método que busca lista de funcionario.
+	 * 
+	 * @return lista
+	 * @throws SQLException
+	 */
 	public ObservableList<Funcionario> getListaFuncionario() throws SQLException {
 
 		
@@ -132,6 +169,12 @@ public class FuncionarioDao {
 
 	}
 	
+	/**
+	 * Método que altera(atualiza) funcionario.
+	 * 
+	 * @param f
+	 * @throws SQLException
+	 */
 	public void atualizaFuncionario(Funcionario f) throws SQLException {
 		String sql = "update FUNCIONARIO set CARGO = ?, MATRICULA = ?, DATA_ADMISSAO = ? where ID_FUNCIONARIO = ?";
 		PreparedStatement ps = c.prepareStatement(sql);
