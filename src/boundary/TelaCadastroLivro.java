@@ -11,6 +11,7 @@ import control.ControleTelas;
 import control.GetenciadorPrincipal;
 import entity.Autor;
 import entity.Livro;
+import entity.Preco;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,23 +28,59 @@ import javafx.scene.layout.VBox;
 import util.Mascaras;
 import util.Mensagens;
 
+/**
+ * Classe tela que cadastro livro e implementa a interface ControleTelas do package control
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade btOk */
 	private Button btOk;
+	
+	/** Propriedade btCancelar */
 	private Button btCancelar;
+	
+	/** Propriedade tfTitulo */
 	private TextField tfTitulo;
+	
+	/** Propriedade tfIsbn */
 	private TextField tfIsbn;
+	
+	/** Propriedade tfEdicao */
 	private TextField tfEdicao;
+	
+	/** Propriedade tfAno */
 	private TextField tfAno;
+	
+	/** Propriedade tfDescricao */
 	private TextField tfDescricao;
+	
+	/** Propriedade tfQtd */
 	private TextField tfQtd;
+	
+	/** Propriedade tfPreco */
 	private TextField tfPreco;
+	
+	/** Propriedade ObservableList listaAutores */
 	private ObservableList<Autor> listaAutores;
+	
+	/** Propriedade ControleLivro control */
 	private ControleLivro control = new ControleLivro();
+	
+	/** Propriedade ComboBox cbAutor */
 	private ComboBox<String> cbAutor;
+	
+	/** Propriedade ComboBox cbIdioma */
 	private ComboBox<String> cbIdioma;
+	
+	/** Propriedade ComboBox cbGenero */
 	private ComboBox<String> cbGenero;
 
+	/**
+	 * Método handle - acao aos botoes - adicionar livro e cancelar 
+	 */
 	@Override
 	public void handle(ActionEvent e) {
 		
@@ -60,12 +97,16 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 	}
 
+	/**
+	 * Método que adiciona dados do livro
+	 */
 	private void addLivro() {
 
 		ControleLivro cl = new ControleLivro();
 
 		Livro l = new Livro();
 		Autor a;
+		Preco p = new Preco();
 
 		l.setAno(tfAno.getText());
 		l.setDescricao(tfDescricao.getText());
@@ -73,14 +114,14 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		l.setIsbn(tfIsbn.getText()); // .replaceAll("[-]", ""));
 		l.setTitulo(tfTitulo.getText());
 		l.setQtsEstoque(Integer.parseInt(tfQtd.getText()));
-		l.setPrecoAtual(Integer.parseInt(tfPreco.getText()));
+		p.setValor(Double.parseDouble(tfPreco.getText()));
 		l.setGenero(cbGenero.getSelectionModel().getSelectedItem());
 		l.setIdioma(cbIdioma.getSelectionModel().getSelectedItem());
 		a = listaAutores.get(cbAutor.getSelectionModel().getSelectedIndex());
 
 
 		try {
-			cl.addLivro(l,a.getIdAutor());
+			cl.addLivro(l,a.getIdAutor(),p);
 			
 		} catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
@@ -93,7 +134,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		try {
 			LivroDao lDao = new LivroDao();
 			if (lDao.verificaDuplicIsbn(tfIsbn.getText())) {
-				Mensagens.erro("ISBN ERRO", "ISBN inv�lido", "ISBN inv�lido ou j� cadastrado");
+				Mensagens.erro("ISBN ERRO", "ISBN inválido", "ISBN inválido ou já cadastrado");
 				return false;
 			} else {
 				return true;
@@ -108,6 +149,11 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 	}
 
+	/**
+	 * Método que verifica se os campos foram preenchidos corretamente.
+	 * 
+	 * @return true or false
+	 */
 	private boolean verificaCampos() {
 		// TODO Auto-generated method stub
 
@@ -124,15 +170,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 			return false;
 
-		} /*
-			 * else if(cbAutor.getSelectionModel().isEmpty()){
-			 * 
-			 * Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
-			 * 
-			 * return false;
-			 * 
-			 * }
-			 */ else if (tfEdicao.getText().equals("") || tfEdicao.getText().length() > 3) {
+		} else if (tfEdicao.getText().equals("") || tfEdicao.getText().length() > 3) {
 
 			Mensagens.erro("EDICAO ERRO", "Edicao invalida", "Digite uma Edicao");
 
@@ -169,6 +207,9 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 	}
 	
+	/**
+	 * Método limpaCampos()
+	 */
 	private void limpaCampos() {
 		tfTitulo.setText("");
 		tfIsbn.setText("");
@@ -179,6 +220,11 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		tfPreco.setText("");
 	}
 
+	/**
+	 * Método que valida data
+	 * 
+	 * @return true or false
+	 */
 	private boolean validaData() {
 		try {
 
@@ -189,7 +235,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 			int ano = Integer.parseInt(tfAno.getText());
 
 			if (ano > anoAtual) {
-				Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano v�lido");
+				Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano válido");
 				return false;
 			} else {
 				return true;
@@ -198,11 +244,14 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano v�lido");
+			Mensagens.erro("ANO ERRO", "Ano invalido", "Digite um Ano válido");
 			return false;
 		}
 	}
 
+	/**
+	 * Painel Render
+	 */
 	@Override
 	public Pane render() {
 
@@ -287,13 +336,20 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		return painel;
 	}
 
+	/**
+	 * Gerenciador principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub
 
 	}
 	
-	//Cria uma ObservableList<String> a partir de uma lista de autores
+	/** Cria uma ObservableList<String> a partir de uma lista de autores
+	 * 
+	 * @param autores
+	 * @return listaNomes
+	 */
 	private ObservableList<String> criarListaStringAutores(ObservableList<Autor> autores){
 		ObservableList<String> listaNomes = FXCollections.observableArrayList();
 		for(Autor a:autores) {
@@ -302,17 +358,5 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		
 		return listaNomes;
 	}
-
-	/*
-	 * else if (tfAutor.getText().equals("") || (!tfAutor.getText().
-	 * matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$")) ||
-	 * tfAutor.getText().length() > 150) {
-	 * 
-	 * Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
-	 * 
-	 * return false;
-	 * 
-	 * }
-	 */
 
 }
