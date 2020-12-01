@@ -2,18 +2,14 @@ package control;
 
 import java.sql.SQLException;
 
-import DAO.ClienteDao;
 import DAO.EnderecoDao;
 import DAO.FuncionarioDao;
 import DAO.PessoaDao;
 import DAO.TelefoneDao;
-import entity.Cliente;
 import entity.Endereco;
 import entity.Funcionario;
-import entity.Pessoa;
 import entity.Telefone;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TextField;
 
 /**
  * Classe controle do Funcionario
