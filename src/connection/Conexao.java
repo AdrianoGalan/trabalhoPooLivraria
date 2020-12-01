@@ -16,19 +16,13 @@ public class Conexao {
 	/** Conexao c. */
 	private Connection c;
 	
-	/**
-	 * Metodo que retorna a conexao com o banco
-	 * @return a conexao
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
 	
 	public Connection getConnection() throws ClassNotFoundException, SQLException {
 		
-		String hostName = "192.168.99.100";
+		String hostName = "localhost";
 		String dbName = "LIVRARIA";
 		String user = "sa";
-		String senha = "Roberto@123";
+		String senha = "P4ssw0rd";
 		
 		Class.forName("net.sourceforge.jtds.jdbc.Driver");
 
@@ -39,10 +33,7 @@ public class Conexao {
 		
 	}
 	
-	/**
-	 * Metodo que fecha a conexao com o Banco.sql.
-	 * @throws SQLException
-	 */
+	
 	
 	public void closeConnection() throws SQLException {
 		c.close();
