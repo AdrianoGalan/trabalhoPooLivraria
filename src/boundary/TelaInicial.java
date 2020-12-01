@@ -14,16 +14,26 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 
-
+/**
+ * Classe tela Inicial implementa a interface ControleTelas do package control.
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 
-	
+	/**
+	 * Método handle
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Painel render 
+	 */
 	@Override
 	public Pane render() {
 		Pane painel = new Pane();
@@ -59,6 +69,7 @@ public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 		
 		new AnimationTimer() {
 
+			
 			@Override
 			public void handle(long time) {
 				
@@ -74,6 +85,9 @@ public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 
 	}
 
+	/**
+	 * Gerenciador Principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub
