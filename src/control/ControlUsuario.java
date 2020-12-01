@@ -46,7 +46,7 @@ public class ControlUsuario {
 			return uBanco;
 		}
 		
-		Mensagens.erro("Erro login", "Usuario ou senha invalido", "Digite usuari e senha valido");
+		Mensagens.erro("Erro login", "Usuario ou senha invalido", "Digite usuario e senha valido");
 		return null;
 	}
 	
