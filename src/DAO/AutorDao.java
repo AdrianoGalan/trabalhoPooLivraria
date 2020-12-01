@@ -22,7 +22,7 @@ public class AutorDao {
 	private Connection c;
 	
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexï¿½o com o Banco.
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
@@ -34,7 +34,7 @@ public class AutorDao {
 
 
 	/**
-	 * Método que insere os dados do autor no Banco de dados.
+	 * Mï¿½todo que insere os dados do autor no Banco de dados.
 	 * @param autor
 	 * @throws SQLException
 	 */
@@ -48,7 +48,6 @@ public class AutorDao {
 
 		ps.executeUpdate();
 
-		ps.execute();
 
 		ps.close();
 		
@@ -56,7 +55,7 @@ public class AutorDao {
 	}
 	
 	/**
-	 * Método que altera (atualiza) os dados do autor no Banco de Dados.
+	 * Mï¿½todo que altera (atualiza) os dados do autor no Banco de Dados.
 	 * @param a
 	 * @throws SQLException
 	 */
@@ -70,13 +69,12 @@ public class AutorDao {
 
 		ps.executeUpdate();
 
-		ps.execute();
 
 		ps.close();
 	}
 	
 	/**
-	 *Método que lista os autores inseridos no Banco de dados.
+	 *Mï¿½todo que lista os autores inseridos no Banco de dados.
 	 * 
 	 * @return lista de autores
 	 * @throws SQLException
@@ -99,7 +97,7 @@ public class AutorDao {
 	}
 	
 	/**
-	 * Método que verifica se tem um nome duplicado no Banco de dados.
+	 * Mï¿½todo que verifica se tem um nome duplicado no Banco de dados.
 	 * 
 	 * @param Nome
 	 * @return true or false
@@ -126,7 +124,7 @@ public class AutorDao {
 	}
 	
 	/**
-	 * Método que faz a busca(pesquisa) dos autores que foram inseridos no Banco de dados. 
+	 * Mï¿½todo que faz a busca(pesquisa) dos autores que foram inseridos no Banco de dados. 
 	 * 
 	 * @param nome
 	 * @return lista

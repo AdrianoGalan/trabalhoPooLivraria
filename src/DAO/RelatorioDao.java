@@ -23,7 +23,7 @@ public class RelatorioDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexï¿½o com o Banco.
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -36,7 +36,7 @@ public class RelatorioDao {
 	}
 
 	/**
-	 * Método que busca os livros mais vendidos.
+	 * Mï¿½todo que busca os livros mais vendidos.
 	 * 
 	 * @return lista de livros
 	 * @throws SQLException
@@ -73,7 +73,7 @@ public class RelatorioDao {
 	}
 
 	/**
-	 * Método que busca os livros menos vendidos.
+	 * Mï¿½todo que busca os livros menos vendidos.
 	 * 
 	 * @return lista de livros
 	 * @throws SQLException
@@ -110,7 +110,7 @@ public class RelatorioDao {
 	}
 
 	/**
-	 * Método que busca livros com estoque inferior a 5.
+	 * Mï¿½todo que busca livros com estoque inferior a 5.
 	 * 
 	 * @return lista de livros
 	 * @throws SQLException
@@ -145,7 +145,7 @@ public class RelatorioDao {
 	}
 
 	/**
-	 * Método que busca data e os ultimos livros vendidos.
+	 * Mï¿½todo que busca data e os ultimos livros vendidos.
 	 * 
 	 * @return lista
 	 * @throws SQLException
@@ -162,6 +162,7 @@ public class RelatorioDao {
 		sql.append("INNER JOIN VENDA v  ");
 		sql.append("ON v.ID_VENDA = iv.FK_VENDA_ITENSVENDA ");
 		sql.append("GROUP BY l.ISBN , l.TITULO ");
+		sql.append("ORDER BY DAtAV ");
 
 		PreparedStatement ps = c.prepareStatement(sql.toString());
 
@@ -183,7 +184,7 @@ public class RelatorioDao {
 	}
 
 	/**
-	 * Método que mostra o melhor dia da semana para venda.
+	 * Mï¿½todo que mostra o melhor dia da semana para venda.
 	 * 
 	 * @return dia da semana
 	 * @throws SQLException

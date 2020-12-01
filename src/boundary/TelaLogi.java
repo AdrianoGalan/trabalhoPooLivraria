@@ -63,15 +63,15 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 
 		Button btnEntrar = new Button("Entrar");
 		btnEntrar.relocate(100, 80);
-		Hyperlink hplEsqueci = new Hyperlink("Esqueceu a senha?");
+		
 
-		hplEsqueci.relocate(180, 80);
+	
 
-		painel.getChildren().addAll(lblUser, txtUser, lblSenha, txtSenha, btnEntrar, hplEsqueci);
+		painel.getChildren().addAll(lblUser, txtUser, lblSenha, txtSenha, btnEntrar);
 
 		// coloca uma aÃ§Ã£o aos botÃµes
 		btnEntrar.addEventHandler(ActionEvent.ACTION, this);
-		hplEsqueci.addEventHandler(ActionEvent.ACTION, this);
+
 
 		txtSenha.setOnKeyPressed(new EventHandler<javafx.scene.input.KeyEvent>() {
 
@@ -98,7 +98,7 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * Método handle - acao aos botoes - entrar e esqueceu a senha
+	 * Mï¿½todo handle - acao aos botoes - entrar e esqueceu a senha
 	 */
 	@Override
 	public void handle(ActionEvent event) {
@@ -117,7 +117,7 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * Método fazerLogin().
+	 * Mï¿½todo fazerLogin().
 	 */
 	private void fazerLogin() {
 
@@ -144,7 +144,7 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 
 	}
 
-	/** Método que verifica se os campos foram preenchidos.
+	/** Mï¿½todo que verifica se os campos foram preenchidos.
 	 * 
 	 * @return true or false
 	 */
@@ -165,7 +165,7 @@ public class TelaLogi implements ControleTelas, EventHandler<ActionEvent> {
 	}
 
 	/**
-	 * Método Usuario boundaryParaUsuario(),
+	 * Mï¿½todo Usuario boundaryParaUsuario(),
 	 * 
 	 * @return usuario
 	 */

@@ -23,7 +23,7 @@ import javafx.scene.text.Font;
 public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 
 	/**
-	 * Método handle
+	 * Mï¿½todo handle
 	 */
 	@Override
 	public void handle(ActionEvent event) {
@@ -39,19 +39,19 @@ public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 		Pane painel = new Pane();
 
 		Label lblGrupo = new Label("Integrantes do Grupo: ");
-		lblGrupo.relocate(750, 15);
+		lblGrupo.relocate(650, 15);
 		lblGrupo.setFont(new Font("Chilanka", 20));
 		
-		Label lblAdriano = new Label("Adriano Galan RA: ....");
-		lblAdriano.relocate(750, 75);
+		Label lblAdriano = new Label("Adriano Galan RA: 1110481912055");
+		lblAdriano.relocate(650, 75);
 		lblAdriano.setFont(new Font("Chilanka", 15));
 
-		Label lblGustavo = new Label("Gustavo Narciso RA: ...");
-		lblGustavo.relocate(750, 125);
+		Label lblGustavo = new Label("Gustavo Narciso RA: 1110481912045");
+		lblGustavo.relocate(650, 125);
 		lblGustavo.setFont(new Font("Chilanka", 15));
 
-		Label lblRoberto = new Label("Roberto Mitsunari RA: ...");
-		lblRoberto.relocate(750, 175);
+		Label lblRoberto = new Label("Roberto Mitsunari RA: 1110481912027");
+		lblRoberto.relocate(650, 175);
 		lblRoberto.setFont(new Font("Chilanka", 15));
 
 
@@ -65,18 +65,8 @@ public class TelaInicial implements ControleTelas, EventHandler<ActionEvent> {
 		Canvas canvas = new Canvas(imgSpace.getWidth(), imgSpace.getHeight());
 		GraphicsContext ctx = canvas.getGraphicsContext2D();
 		
-	
+		ctx.drawImage(imgSpace, 0, 0);
 		
-		new AnimationTimer() {
-
-			
-			@Override
-			public void handle(long time) {
-				
-				ctx.drawImage(imgSpace, 0, 0);
-				
-			
-		}}.start();
 		
 		
 		painel.getChildren().add(canvas); 
