@@ -1,11 +1,9 @@
 package boundary;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 
 import DAO.LivroDao;
-import control.ControleAutor;
 import control.ControleLivro;
 import control.ControleTelas;
 import control.GetenciadorPrincipal;
@@ -17,7 +15,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -25,7 +22,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import util.Mascaras;
 import util.Mensagens;
 
 /**

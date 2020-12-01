@@ -1,7 +1,5 @@
 package control;
 
-import entity.Usuario;
-
 /**
  * Interface Gerenciador Principal
  * 

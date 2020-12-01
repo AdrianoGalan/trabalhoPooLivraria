@@ -2,7 +2,6 @@ package boundary;
 
 import java.sql.SQLException;
 
-import control.ControleLivro;
 import control.ControleRelatorio;
 import control.ControleTelas;
 import control.GetenciadorPrincipal;

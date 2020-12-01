@@ -2,8 +2,6 @@ package boundary;
 
 import java.sql.SQLException;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
-
 import control.ControleLivro;
 import control.ControleTelas;
 import control.GetenciadorPrincipal;

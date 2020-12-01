@@ -5,12 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-
 import connection.Conexao;
-import entity.Preco;
-import javafx.collections.ObservableList;
-import tabelaModel.ModelItensVenda;
 
 /**
  * Classe Dao da Venda

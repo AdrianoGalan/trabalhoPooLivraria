@@ -1,7 +1,6 @@
 package entity;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 /**
  * Classe concreta que representa Cliente e extends a classe Pessoa

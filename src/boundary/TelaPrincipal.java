@@ -2,12 +2,8 @@ package boundary;
 
 import control.GetenciadorPrincipal;
 import entity.Funcionario;
-import entity.Usuario;
 
-import java.awt.Dimension;
 import java.sql.SQLException;
-
-import com.sun.javafx.tk.Toolkit;
 
 import DAO.FuncionarioDao;
 import control.ControleTelas;
