@@ -24,26 +24,62 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Classe tela de controle de usuario e implementa a interface ControleTelas do package control.
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade tbvPesqCliente */
 	private TableView<Usuario> tbvPesqCliente;
+	
+	/** Propriedade listaUsuarios */
 	ObservableList<Usuario> listaUsuarios;
+	
+	/** Propriedade btNovoUsuario */
 	private Button btNovoUsuario;
+	
+	/** Propriedade btAlterar */
 	private Button btAlterar;
+	
+	/** Propriedade btExcluir */
 	private Button btExcluir;
+	
+	/** Propriedade controle */
 	private ControlUsuario controle = new ControlUsuario();
+	
+	/** Propriedade alertaSelecao */
 	private Alert alertaSelecao;
+	
+	/** Propriedade telaMae */
 	private Stage telaMae;
+	
+	/** Propriedade controleTelaReg */
 	private TelaControlRegUsuario controleTelaReg = new TelaControlRegUsuario(controle,telaMae);
 	
+	/**
+	 * Recupera a propriedade telaMae.
+	 * 
+	 * @return telaMae
+	 */
 	public Stage getTelaMae() {
 		return telaMae;
 	}
 
+	/**
+	 * TelaControleUsuario.
+	 * 
+	 * @param s
+	 */
 	TelaControleUsuario(Stage s){
 		telaMae = s;
 	}
 
+	/**
+	 * Painel Render. 
+	 */
 	@Override
 	public Pane render() {
 
@@ -78,6 +114,9 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 		return painel;
 	}
 
+	/**
+	 * Método que cria tabela do usuario.
+	 */
 	private void criaTabela() {
 
 		TableColumn<Usuario, Integer> colId = new TableColumn<>("id_Usuario");
@@ -94,6 +133,9 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 
 	}
 
+	/**
+	 * Método que atualiza tabela.
+	 */
 	public void atualizaTabela() {
 		try {
 			listaUsuarios = controle.procurarUsuarios();
@@ -105,12 +147,18 @@ public class TelaControleUsuario implements ControleTelas, EventHandler<ActionEv
 		}
 	}
 
+	/**
+	 * Gerenciador Principal.
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub
 
 	}
 
+	/**
+	 * Método handle - acao aos botoes - adicionar, pesquisar, alterar e excluir usuario.
+	 */
 	@Override
 	public void handle(ActionEvent event) {
 		int i = tbvPesqCliente.getSelectionModel().getSelectedIndex();

@@ -28,23 +28,59 @@ import javafx.scene.layout.VBox;
 import util.Mascaras;
 import util.Mensagens;
 
+/**
+ * Classe tela que cadastro livro e implementa a interface ControleTelas do package control
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade btOk */
 	private Button btOk;
+	
+	/** Propriedade btCancelar */
 	private Button btCancelar;
+	
+	/** Propriedade tfTitulo */
 	private TextField tfTitulo;
+	
+	/** Propriedade tfIsbn */
 	private TextField tfIsbn;
+	
+	/** Propriedade tfEdicao */
 	private TextField tfEdicao;
+	
+	/** Propriedade tfAno */
 	private TextField tfAno;
+	
+	/** Propriedade tfDescricao */
 	private TextField tfDescricao;
+	
+	/** Propriedade tfQtd */
 	private TextField tfQtd;
+	
+	/** Propriedade tfPreco */
 	private TextField tfPreco;
+	
+	/** Propriedade ObservableList listaAutores */
 	private ObservableList<Autor> listaAutores;
+	
+	/** Propriedade ControleLivro control */
 	private ControleLivro control = new ControleLivro();
+	
+	/** Propriedade ComboBox cbAutor */
 	private ComboBox<String> cbAutor;
+	
+	/** Propriedade ComboBox cbIdioma */
 	private ComboBox<String> cbIdioma;
+	
+	/** Propriedade ComboBox cbGenero */
 	private ComboBox<String> cbGenero;
 
+	/**
+	 * Método handle - acao aos botoes - adicionar livro e cancelar 
+	 */
 	@Override
 	public void handle(ActionEvent e) {
 		
@@ -61,6 +97,9 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 	}
 
+	/**
+	 * Método que adiciona dados do livro
+	 */
 	private void addLivro() {
 
 		ControleLivro cl = new ControleLivro();
@@ -110,6 +149,11 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 	}
 
+	/**
+	 * Método que verifica se os campos foram preenchidos corretamente.
+	 * 
+	 * @return true or false
+	 */
 	private boolean verificaCampos() {
 		// TODO Auto-generated method stub
 
@@ -126,15 +170,7 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 			return false;
 
-		} /*
-			 * else if(cbAutor.getSelectionModel().isEmpty()){
-			 * 
-			 * Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
-			 * 
-			 * return false;
-			 * 
-			 * }
-			 */ else if (tfEdicao.getText().equals("") || tfEdicao.getText().length() > 3) {
+		} else if (tfEdicao.getText().equals("") || tfEdicao.getText().length() > 3) {
 
 			Mensagens.erro("EDICAO ERRO", "Edicao invalida", "Digite uma Edicao");
 
@@ -171,6 +207,9 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 
 	}
 	
+	/**
+	 * Método limpaCampos()
+	 */
 	private void limpaCampos() {
 		tfTitulo.setText("");
 		tfIsbn.setText("");
@@ -181,6 +220,11 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		tfPreco.setText("");
 	}
 
+	/**
+	 * Método que valida data
+	 * 
+	 * @return true or false
+	 */
 	private boolean validaData() {
 		try {
 
@@ -205,6 +249,9 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		}
 	}
 
+	/**
+	 * Painel Render
+	 */
 	@Override
 	public Pane render() {
 
@@ -289,13 +336,20 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		return painel;
 	}
 
+	/**
+	 * Gerenciador principal
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub
 
 	}
 	
-	//Cria uma ObservableList<String> a partir de uma lista de autores
+	/** Cria uma ObservableList<String> a partir de uma lista de autores
+	 * 
+	 * @param autores
+	 * @return listaNomes
+	 */
 	private ObservableList<String> criarListaStringAutores(ObservableList<Autor> autores){
 		ObservableList<String> listaNomes = FXCollections.observableArrayList();
 		for(Autor a:autores) {
@@ -304,17 +358,5 @@ public class TelaCadastroLivro implements ControleTelas, EventHandler<ActionEven
 		
 		return listaNomes;
 	}
-
-	/*
-	 * else if (tfAutor.getText().equals("") || (!tfAutor.getText().
-	 * matches("^[a-zA-Z]+(([\\'\\,\\.\\- ][a-zA-Z ])?[a-zA-Z]*)*$")) ||
-	 * tfAutor.getText().length() > 150) {
-	 * 
-	 * Mensagens.erro("AUTOR ERRO", "Nome invalido", "Digite um Nome");
-	 * 
-	 * return false;
-	 * 
-	 * }
-	 */
 
 }

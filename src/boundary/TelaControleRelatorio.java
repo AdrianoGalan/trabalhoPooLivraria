@@ -24,15 +24,35 @@ import javafx.scene.layout.VBox;
 import tabelaModel.ModelTabelaLivro;
 import util.Mensagens;
 
+/**
+ * Classe tela de controle Relatorio e implementa a interface ControleTelas do package control
+ * 
+ * @author Adriano, Gustavo, Roberto
+ *
+ */
 public class TelaControleRelatorio implements ControleTelas, EventHandler<ActionEvent> {
 
+	/** Propriedade cR */
 	private ControleRelatorio cR;
+	
+	/** Propriedade tbvPesqLivro */
 	private TableView<ModelTabelaLivro> tbvPesqLivro;
+	
+	/** Propriedade btnExibir */
 	private Button btnExibir;
+	
+	/** Propriedade cbTipoRelat */
 	private ComboBox<String> cbTipoRelat;
+	
+	/** Propriedade melhorDia */
 	private TextField melhorDia;
+	
+	/** Propriedade lista */
 	private ObservableList<ModelTabelaLivro> lista;
 
+	/**
+	 * Painel Render
+	 */
 	@Override
 	public Pane render() {
 
@@ -88,6 +108,9 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 		return painel;
 	}
 
+	/**
+	 * Método handle - acao aos botoes - exibir relatorio
+	 */
 	@Override
 	public void handle(ActionEvent e) {
 
@@ -98,6 +121,9 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 		}
 	}
 
+	/**
+	 * Método selecao relatorio
+	 */
 	private void selecaoRelatorio() {
 
 		switch (cbTipoRelat.getSelectionModel().getSelectedIndex()) {
@@ -118,13 +144,16 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 			break;
 
 		default:
-			Mensagens.informacao("SeleÃ§Ã£o", "SeleÃ§Ã£o invalida", "Seleciona uma opÃ§Ã£o");
+			Mensagens.informacao("Selecao", "Selecao invalida", "Selecione uma opcao");
 			break;
 
 		}
 
 	}
 
+	/**
+	 * Método que pega a data da ultima venda.
+	 */
 	private void dataUltimaVenda() {
 
 		lista = FXCollections.observableArrayList();
@@ -141,6 +170,9 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 
 	}
 
+	/**
+	 * Método que pega livros com estoque baixo - menor que 5.
+	 */
 	private void baixoEstoque() {
 
 		lista = FXCollections.observableArrayList();
@@ -157,6 +189,9 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 
 	}
 
+	/**
+	 * Método que pega os livros menos vendidos
+	 */
 	private void menoVendido() {
 
 		lista = FXCollections.observableArrayList();
@@ -173,6 +208,9 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 
 	}
 
+	/**
+	 * Método que pega os livros mais vendidos
+	 */
 	private void maisVendido() {
 
 		lista = FXCollections.observableArrayList();
@@ -189,6 +227,9 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 
 	}
 
+	/**
+	 * método que carrega os livros mais e menos vendidos
+	 */
 	private void carregarMaisMenos() {
 
 		if (tbvPesqLivro.getColumns().isEmpty()
@@ -216,6 +257,9 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 
 	}
 
+	/**
+	 * Método que carrega os livros com estoque baixo
+	 */
 	private void carregarEstoqueBaixo() {
 
 		if (tbvPesqLivro.getColumns().isEmpty()
@@ -241,7 +285,11 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 		tbvPesqLivro.setItems(lista);
 
 	}
+	
 
+	/**
+	 * Método que carrega a ultima data da venda 
+	 */
 	private void carregarDataVenda() {
 
 		if (tbvPesqLivro.getColumns().isEmpty()
@@ -268,6 +316,9 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 
 	}
 
+	/**
+	 * Método que carrega o melhor dia da semana para venda de livros
+	 */
 	private void melhorDiarSemana() {
 
 		int dia = 0;
@@ -312,6 +363,9 @@ public class TelaControleRelatorio implements ControleTelas, EventHandler<Action
 		melhorDia.setEditable(false);
 	}
 
+	/**
+	 * Gerenciador principal 
+	 */
 	@Override
 	public void setGerenciadorPrincipal(GetenciadorPrincipal cat) {
 		// TODO Auto-generated method stub
