@@ -22,7 +22,7 @@ public class ClienteDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexï¿½o com o Banco.
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
@@ -34,7 +34,7 @@ public class ClienteDao {
 
 
 	/**
-	 * Método que insere os dados do cliente no Banco de dados.
+	 * Mï¿½todo que insere os dados do cliente no Banco de dados.
 	 * 
 	 * @param cliente
 	 * @throws SQLException
@@ -52,7 +52,7 @@ public class ClienteDao {
 	}
 	
 	/**
-	 * Método que altera(atualiza) os dados do cliente no Banco de dados.
+	 * Mï¿½todo que altera(atualiza) os dados do cliente no Banco de dados.
 	 * 
 	 * @param cliente
 	 * @throws SQLException
@@ -73,7 +73,7 @@ public class ClienteDao {
 
 	
 	/**
-	 * Método que exclui dados do cliente no Banco de dados.
+	 * Mï¿½todo que exclui dados do cliente no Banco de dados.
 	 * 
 	 * @param cliente
 	 * @throws SQLException
@@ -90,7 +90,7 @@ public class ClienteDao {
 	}
 
 	/**
-	 * Método que faz busca (pesquisa) de cliente por nome.
+	 * Metodo que faz busca (pesquisa) de cliente por nome.
 	 * 
 	 * @param nome
 	 * @return lista
@@ -138,7 +138,7 @@ public class ClienteDao {
 	}
 	
 	/**
-	 * Método que faz a busca(pesquisa) de um cliente por cpf.
+	 * Mï¿½todo que faz a busca(pesquisa) de um cliente por cpf.
 	 * @param cpf
 	 * @return cliente
 	 * @throws SQLException

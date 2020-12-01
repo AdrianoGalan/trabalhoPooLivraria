@@ -25,7 +25,7 @@ public class LivroDao {
 	private Connection c;
 
 	/**
-	 * Classe que recupera a conexão com o Banco.
+	 * Classe que recupera a conexao com o Banco.
 	 * 
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
@@ -37,7 +37,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * Método que insere dados do livro na tabela LIVRO do Banco de dados.
+	 * Metodo que insere dados do livro na tabela LIVRO do Banco de dados.
 	 * @param livro
 	 * @return id
 	 * @throws SQLException
@@ -72,7 +72,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * Método que insere as fk na tabela associativa LIVRO_AUTOR do Banco de dados.
+	 * Mï¿½todo que insere as fk na tabela associativa LIVRO_AUTOR do Banco de dados.
 	 * 
 	 * @param idLivro
 	 * @param idAutor
@@ -100,7 +100,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * Método que faz a busca(pesquisa) de livro. 
+	 * Mï¿½todo que faz a busca(pesquisa) de livro. 
 	 * 
 	 * @param texto
 	 * @param meio
@@ -158,7 +158,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * Método que altera(atualiza) a quantidade de livros no estoque
+	 * Mï¿½todo que altera(atualiza) a quantidade de livros no estoque
 	 * 
 	 * @param idLivro
 	 * @param qtsEstoque
@@ -182,7 +182,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * Método que faz a busca(pesquisa) de livro por titulo.
+	 * Mï¿½todo que faz a busca(pesquisa) de livro por titulo.
 	 * 
 	 * @param titulo
 	 * @return lista
@@ -226,7 +226,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * Método que verifica se o isbn digitado já esta no Banco de dados. Evitando entrada de dados duplicados.
+	 * Mï¿½todo que verifica se o isbn digitado jï¿½ esta no Banco de dados. Evitando entrada de dados duplicados.
 	 * 
 	 * @param isbn
 	 * @return true or false
@@ -255,7 +255,7 @@ public class LivroDao {
 	}
 
 	/**
-	 * Método que altera(atualiza) preço do livro 
+	 * Mï¿½todo que altera(atualiza) preï¿½o do livro 
 	 * 
 	 * @param p
 	 * @throws SQLException

@@ -18,7 +18,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- * Classe Tela Principal que gerencia as outras telas e implementa a interface GetenciadorPrincipal. 
+ * Classe Tela Principal que gerencia as outras telas e implementa a interface
+ * GetenciadorPrincipal.
  * 
  * @author Adriano, Gustavo e Roberto.
  *
@@ -28,23 +29,23 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 
 	Funcionario fLogado;
 
-/**
- * Painel login e Principal.
- */
+	/**
+	 * Painel login e Principal.
+	 */
 	private BorderPane painelLogin = new BorderPane();
 	private BorderPane painelPrincipal = new BorderPane();
 
-/**
- * Cena Login, principal e suas dimensões.
- */
+	/**
+	 * Cena Login, principal e suas dimensï¿½es.
+	 */
 	private Scene login = new Scene(painelLogin, 350, 140);
 	private Scene principal = new Scene(painelPrincipal, 1000, 600);
 
 	private Stage stage = new Stage();
 
-/**
- * Telas do sistema.
- */
+	/**
+	 * Telas do sistema.
+	 */
 	private ControleTelas telaLogin = new TelaLogi();
 	private ControleTelas telaInicial = new TelaInicial();
 	private ControleTelas telaCadastroCliente = new TelaCadastroCliente();
@@ -60,9 +61,9 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private ControleTelas telaControleUsuario = new TelaControleUsuario(stage);
 	private ControleTelas telaPesquisaFuncionario = new TelaPesquisaFunc();
 
-/**
- * Itens do menu.
- */
+	/**
+	 * Itens do menu.
+	 */
 	private MenuItem menuInicioTelaInicio = new MenuItem("Tela Inicial");
 	private MenuItem menuInicioSair = new MenuItem("Sair");
 
@@ -82,11 +83,10 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	private MenuItem menuControleUsuario = new MenuItem("Controle de usuarios");
 	private MenuItem menuPesquisaFuncionario = new MenuItem("Funcionario");
 
-
 	/**
-	 * Método start que mostrará a tela
+	 * Mï¿½todo start que mostrarï¿½ a tela
 	 */
-	
+
 	@Override
 	public void start(Stage stage) throws Exception {
 
@@ -130,9 +130,10 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		stage.show();
 
 	}
-	
+
 	/**
-	 * Iniciando a aplicação
+	 * Iniciando a aplicaï¿½ï¿½o
+	 * 
 	 * @param args
 	 */
 
@@ -143,28 +144,37 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 	/**
 	 * MenuBar
 	 */
-	
+
 	private void setTelaPrincipal() {
 
 		MenuBar menuPrincipal = new MenuBar();
 
 		Menu menuInicio = new Menu("Inicio");
 		menuInicio.getItems().addAll(menuInicioTelaInicio, menuInicioSair);
-		
+
 		Menu menuCadastrar = new Menu("Cadastrar");
-		
-		if(fLogado.getCargo().equals("GERENTE")) {
-			
-		
-			menuCadastrar.getItems().addAll(menuCadastrarCliente,menuCadastrarFuncionario, menuCadastrarLivro, menuCadastrarAutor);
-			
-		}else {
-			
+
+		if (fLogado.getCargo().equals("GERENTE")) {
+
+			menuCadastrar.getItems().addAll(menuCadastrarCliente, menuCadastrarFuncionario, menuCadastrarLivro,
+					menuCadastrarAutor);
+
+		} else {
+
 			menuCadastrar.getItems().addAll(menuCadastrarCliente, menuCadastrarLivro, menuCadastrarAutor);
 		}
 
 		Menu menuPesquisar = new Menu("Pesquisar");
-		menuPesquisar.getItems().addAll(menuPesquuisarCliente, menuPesquuisarLivro,menuPesquisaFuncionario,menuPesquisarAutor);
+
+		if (fLogado.getCargo().equals("GERENTE")) {
+
+			menuPesquisar.getItems().addAll(menuPesquuisarCliente, menuPesquuisarLivro, menuPesquisaFuncionario,
+					menuPesquisarAutor);
+
+		} else {
+			menuPesquisar.getItems().addAll(menuPesquuisarCliente, menuPesquuisarLivro, menuPesquisarAutor);
+
+		}
 
 		Menu menuControle = new Menu("Controle");
 		menuControle.getItems().addAll(menuControleEstoque, menuControleRelatorio);
@@ -172,28 +182,22 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		Menu menuVenda = new Menu("Venda");
 		menuVenda.getItems().addAll(menuVendaLivro);
 
-		
-
 		if (fLogado.getCargo().equals("GERENTE")) {
 			Menu menuUsuario = new Menu("Usuario");
 			menuUsuario.getItems().addAll(menuControleUsuario);
-			menuPrincipal.getMenus().addAll(menuInicio, menuCadastrar, menuPesquisar, menuControle, menuVenda, menuUsuario);
+			menuPrincipal.getMenus().addAll(menuInicio, menuCadastrar, menuPesquisar, menuControle, menuVenda,
+					menuUsuario);
 
 		} else {
 			menuPrincipal.getMenus().addAll(menuInicio, menuCadastrar, menuPesquisar, menuControle, menuVenda);
 
 		}
-		
-		
 
-		
 		painelPrincipal.setTop(menuPrincipal);
 		painelPrincipal.setCenter(telaInicial.render());
 //		painelPrincipal.setLeft(telaCadastroAutor.render());
 
-	
-
-		//this.stage.setMaximized(true);
+		// this.stage.setMaximized(true);
 		this.stage.setScene(principal);
 		this.stage.setResizable(false);
 		this.stage.setX(50);
@@ -203,9 +207,10 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		this.stage.show();
 
 	}
-	
+
 	/**
-	 * Método que loga um funcionário
+	 * Mï¿½todo que loga um funcionï¿½rio
+	 * 
 	 * @param idFuncionario
 	 */
 
@@ -223,11 +228,11 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		}
 
 	}
-	
+
 	/**
-	 * Método que aciona ação a tela Principal  
+	 * Mï¿½todo que aciona aï¿½ï¿½o a tela Principal
 	 */
-	
+
 	@Override
 	public void handle(ActionEvent e) {
 
@@ -251,21 +256,21 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 			this.painelPrincipal.setCenter(telaInicial.render());
 		} else if (e.getTarget() == menuControleUsuario) {
 			this.painelPrincipal.setCenter(telaControleUsuario.render());
-		} else if(e.getTarget() == menuPesquisaFuncionario) {
+		} else if (e.getTarget() == menuPesquisaFuncionario) {
 			this.painelPrincipal.setCenter(telaPesquisaFuncionario.render());
-		} else if(e.getTarget() == menuCadastrarAutor) {
+		} else if (e.getTarget() == menuCadastrarAutor) {
 			this.painelPrincipal.setCenter(telaCadastroAutor.render());
-		} else if(e.getTarget() == menuPesquisarAutor) {
+		} else if (e.getTarget() == menuPesquisarAutor) {
 			this.painelPrincipal.setCenter(telaPesquisaAutor.render());
 		} else if (e.getTarget() == menuInicioSair) {
 			comando("sair");
 		}
 
 	}
-	
+
 	/**
-	 * Método que posiciona tela inicial no centro da cena 
-	 * e aplica a função de sair da aplicação caso o usuário clique no menuInicioSair
+	 * Mï¿½todo que posiciona tela inicial no centro da cena e aplica a funï¿½ï¿½o de sair
+	 * da aplicaï¿½ï¿½o caso o usuï¿½rio clique no menuInicioSair
 	 */
 
 	@Override
@@ -281,9 +286,9 @@ public class TelaPrincipal extends Application implements GetenciadorPrincipal, 
 		}
 
 	}
-	
+
 	/**
-	 * Método que faz a chamada do logarFuncionario
+	 * Mï¿½todo que faz a chamada do logarFuncionario
 	 */
 
 	@Override
